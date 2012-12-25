@@ -1,6 +1,5 @@
 package se.tdt.bobby.wodcc.data;
 
-import se.tdt.bobby.wodcc.db.Proxy;
 import se.tdt.bobby.wodcc.proxy.interfaces.RetrievalDB;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class MinimumToFullRolesIterator implements Iterator<Role> {
 
     public MinimumToFullRolesIterator(List<Role> pMinimumRoles) throws SQLException, RemoteException {
         mMinimumRoles = pMinimumRoles;
-        mRetrievalDb = Proxy.getRetrievalDB();
+        //mRetrievalDb = Proxy.getRetrievalDB();
         mIterator = mMinimumRoles.iterator();
     }
 

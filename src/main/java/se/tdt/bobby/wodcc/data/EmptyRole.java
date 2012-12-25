@@ -1,6 +1,5 @@
 package se.tdt.bobby.wodcc.data;
 
-import se.tdt.bobby.wodcc.db.AppPreferences;
 
 import java.util.*;
 import java.text.DateFormat;
@@ -187,7 +186,7 @@ public class EmptyRole {
     }
 
     public Domain getDomain() {
-        return AppPreferences.getPreferredDomain();
+        return null; //AppPreferences.getPreferredDomain();
     }
 
     public String getSelfControlORinstinct() {

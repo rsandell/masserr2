@@ -1,6 +1,5 @@
 package se.tdt.bobby.wodcc.data;
 
-import se.tdt.bobby.wodcc.db.AppPreferences;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -784,15 +783,15 @@ public class Role implements Serializable {
      * @see Player
      */
     public int getExperience() {
-        if (AppPreferences.getReadXPFrom() == AppPreferences.XP_ROLE) {
+        //if (AppPreferences.getReadXPFrom() == AppPreferences.XP_ROLE) {
             return mExperience;
-        }
-        else if (mPlayer != null) {
-            return mPlayer.getXP();
-        }
-        else {
-            return 0;
-        }
+        //}
+        //else if (mPlayer != null) {
+        //    return mPlayer.getXP();
+        //}
+        //else {
+        //    return 0;
+        //}
     }
 
     /**

@@ -1,8 +1,6 @@
 package se.tdt.bobby.wodcc.data;
 
-import se.tdt.bobby.wodcc.proxy.interfaces.RetrievalDB;
 import se.tdt.bobby.wodcc.proxy.interfaces.TemplateDB;
-import se.tdt.bobby.wodcc.db.Proxy;
 
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +25,7 @@ public class MinimumToFullTemplatesIterator implements Iterator<Role> {
 
     public MinimumToFullTemplatesIterator(List<Role> pMinimumRoles) throws SQLException, RemoteException {
         mMinimumRoles = pMinimumRoles;
-        mTemplateDb = Proxy.getTemplateDB();
+        //mTemplateDb = Proxy.getTemplateDB();
         mIterator = mMinimumRoles.iterator();
     }
 
