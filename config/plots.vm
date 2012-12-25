@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>Plots</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+td {
+	border: 1px solid black;
+}
+
+table {
+	border-collapse: collapse;
+}
+.stdTable {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 9pt;
+	border: 1px solid #000000;
+	margin 2px;
+}
+.smallComment {
+    font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 8pt;
+	font-style: italic;
+}
+.outsideStdTable {
+	border: 1px solid #000000;
+	margin-bottom: 4px;
+}
+
+br.pageEnd {
+    page-break-after: always;
+}
+
+.paper {
+	/*height: 297mm; width: 210mm*/
+	height: 287mm;
+	width: 200mm;
+	padding: 1cm;
+	padding-top: 0.5cm;
+	text-align: center;
+	/*page-break-after: always;*/
+	z-index: 2;
+}
+.headingTitle {
+	font-family: "French Script MT", Georgia, "Times New Roman", Times, serif;
+	font-size: 26pt;
+	font-style: italic;
+	font-weight: bold;
+}
+.noteId {
+ 	vertical-align: super;
+ 	font-size: 8pt;
+ 	/*margin-top: -4px;
+ 	padding: 0px;*/
+}
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 9pt;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+.clanSymbol {
+    font-size: 42pt;
+}
+.roleName {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 11pt;
+    font-style: italic;
+}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000">
+
+<div class="paper">
+#foreach($plot in $plots)
+    <table class="outsideStdTable" align="center" width="100%">
+	<tr><td>
+	<table border="0" cellspacing="0" cellpadding="2" width="100%" class="stdTable">
+	<tr>
+	    <td style="font-size: 14pt; font-weight: bold; border-right: none; padding-left: 4px;" align="left" colspan="2">
+	        $plot.Id : $plot.Domain
+	    </td>
+	    <!--<td style="border-left: none;">&nbsp;</td> -->
+	</tr>
+	<tr>
+	    <td valign="top" width="10%"><b>Title</b></td>
+	    <td>$plot.Title</td>
+	</tr>
+	<!--<tr>
+	    <td valign="top" width="10%"><b>Domain</b></td>
+	    <td>$plot.Domain</td>
+	</tr>-->
+	<tr>
+	    <td valign="top" width="10%"><b>Created</b></td>
+	    <td>$plot.Created</td>
+	</tr>
+	<tr>
+	    <td valign="top" width="10%"><b>Description</b></td>
+	    <td>$!util.toHTML($plot.Description)</td>
+	</tr>
+	<tr>
+	    <td valign="top" width="10%"><b>SL-Description</b></td>
+	    <td>$!util.toHTML($plot.SLdescription)</td>
+	</tr>
+	<tr>
+	    <td valign="top" width="10%"><b>Positive</b></td>
+	    <td>$!util.toHTML($plot.Positive)</td>
+	</tr>
+	<tr>
+	    <td valign="top" width="10%"><b>Negative</b></td>
+	    <td>$!util.toHTML($plot.Negative)</td>
+	</tr>
+	#if($assignmentMap)
+	<tr>
+	    <td><b>Assigned&nbsp;To</b></td>
+	    <td>
+	        #set($list = "")
+	        #set($list = $assignmentMap.get($plot.Id))
+	        #foreach($role in $list)
+	            $role.String
+
+	        #end
+	    </td>
+	</tr>
+	#end
+	<tr>
+	    <td valign="top" width="10%"><b>Done</b></td>
+	    <td>
+	        #if( $plot.Done )
+	        Yes
+	        #else
+	        No
+	        #end
+	    </td>
+	</tr>
+	</table>
+    </td></tr>
+    </table>
+    #if($velocityCount % 3 == 0)
+    <br class="pageEnd">
+    #end
+#end
+</div>
+</body>
+</html>

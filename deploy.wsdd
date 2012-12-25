@@ -1,0 +1,81 @@
+<deployment xmlns="http://xml.apache.org/axis/wsdd/"
+	xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+    <beanMapping qname="myNS:Ability" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Ability"/>
+    <beanMapping qname="myNS:BankAccount" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.BankAccount"/>
+    <beanMapping qname="myNS:Clan" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Clan"/>
+    <beanMapping qname="myNS:ClanFontSymbol" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.ClanFontSymbol"/>
+    <beanMapping qname="myNS:CreateRule" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.CreateRule"/>
+    <beanMapping qname="myNS:Discipline" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Discipline"/>
+    <beanMapping qname="myNS:Domain" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Domain"/>
+    <beanMapping qname="myNS:EmptyRole" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.EmptyRole"/>
+    <beanMapping qname="myNS:Experience" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Experience"/>
+    <beanMapping qname="myNS:FightOrFlight" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.FightOrFlight"/>
+    <beanMapping qname="myNS:Generation" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Generation"/>
+    <beanMapping qname="myNS:Group" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Group"/>
+    <beanMapping qname="myNS:Influence" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Influence"/>
+    <beanMapping qname="myNS:IntWithString" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.IntWithString"/>
+    <beanMapping qname="myNS:MeritORflaw" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.MeritORflaw"/>
+    <beanMapping qname="myNS:OtherTrait" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.OtherTrait"/>
+    <beanMapping qname="myNS:Path" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Path"/>
+    <beanMapping qname="myNS:Player" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Player"/>
+    <beanMapping qname="myNS:Plot" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Plot"/>
+    <beanMapping qname="myNS:Profession" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Profession"/>
+    <beanMapping qname="myNS:Resource" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Resource"/>
+    <beanMapping qname="myNS:Ritual" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Ritual"/>
+    <beanMapping qname="myNS:RitualType" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.RitualType"/>
+    <beanMapping qname="myNS:Role" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Role"/>
+    <beanMapping qname="myNS:RolesGroup" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.RolesGroup"/>
+    <beanMapping qname="myNS:TreeNode" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.TreeNode"/>
+    <beanMapping qname="myNS:Vitals" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Vitals"/>
+    <beanMapping qname="myNS:Withdrawal" xmlns:myNS="Masserr" languageSpecificType="java:se.tdt.bobby.wodcc.data.Withdrawal"/>
+    <beanMapping qname="myNS:User" xmlns:myNS="Masserr.Mgm" languageSpecificType="java:se.tdt.bobby.wodcc.data.mgm.User"/>
+    <beanMapping qname="myNS:UserRights" xmlns:myNS="Masserr.Mgm" languageSpecificType="java:se.tdt.bobby.wodcc.data.mgm.UserRights"/>
+
+	<service name="Masserr.AdminDB" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.AdminDBImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+
+    <service name="Masserr.BankingDB" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.BankingDBImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+
+    <service name="Masserr.CreateRules" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.CreateRulesImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+
+    <service name="Masserr.GroupsDB" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.GroupsDBImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+
+    <service name="Masserr.InfluenceDB" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.InfluenceDBImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+
+    <service name="Masserr.ManipulationDB" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.ManipulationDBImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+
+    <service name="Masserr.RetrievalDB" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.RetrievalDBImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+
+    <service name="Masserr.TemplateDB" provider="java:RPC">
+        <parameter name="scope" value="session"/>
+		<parameter name="className" value="se.tdt.bobby.wodcc.server.db.TemplateDBImpl"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
+</deployment>

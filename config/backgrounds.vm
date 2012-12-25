@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>Background / Will for $roleName</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style type="text/css">
+<!--
+td {
+	border: 1px solid black;
+}
+
+table {
+	border-collapse: collapse;
+}
+.stdTable {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 9pt;
+	border: 1px solid #000000;
+	margin 2px;
+}
+.outsideStdTable {
+	border: 1px solid #000000;
+}
+
+.paper {
+	/*height: 297mm; width: 210mm*/
+	height: 287mm;
+	width: 200mm;
+	padding: 1cm;
+	text-align: center;
+	/*page-break-after: always;*/
+}
+.headingTitle {
+	font-family: "French Script MT", Georgia, "Times New Roman", Times, serif;
+	font-size: 26pt;
+	font-style: italic;
+	font-weight: bold;
+}
+.noteId {
+ 	vertical-align: super;
+ 	font-size: 8pt;
+ 	/*margin-top: -4px;
+ 	padding: 0px;*/
+}
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 9pt;
+	margin: 0px;
+	padding: 0px;
+	border: none;
+}
+.roleName {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 11pt;
+    font-style: italic;
+}
+-->
+</style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000">
+<div class="paper">
+  <p class="headingTitle" align="center">$heading</p>
+    <p align="center">
+    	<span class="roleName">
+    		<b><i>$roleName</i></b>
+    	</span>
+    </p>
+<table class="outsideStdTable" width="100%">
+<tr><td>
+	<table border="0" cellspacing="0" cellpadding="2" width="100%" class="stdTable">
+	  <tr>
+	    <td><b>Background</b></td>
+	  </tr>
+	  <tr>
+	  <td style="text-align: justify; padding: 4px;">
+	  $background
+	  </td>
+	  </tr>
+	</table>
+</td></tr>
+</table>
+<p><p>
+<table class="outsideStdTable" width="100%">
+<tr><td>
+	<table border="0" cellspacing="0" cellpadding="2" width="100%" class="stdTable">
+	  <tr>
+	    <td><b>Will</b></td>
+	  </tr>
+	  <tr>
+	  <td>
+	  $will
+	  </td>
+	  </tr>
+	</table>
+</td></tr>
+</table>
+</div>
+</body>

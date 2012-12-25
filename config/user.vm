@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>User</title>
+<style type="text/css">
+<!--
+td {
+	border: 1px solid black;
+}
+
+table {
+	border-collapse: collapse;
+}
+.stdTable {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 10pt;
+	border: 1px solid #000000;
+	margin 2px;
+}
+.outsideStdTable {
+	border: 1px solid #000000;
+}
+body {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 11pt;
+	margin: 0px;
+	padding: 4px;
+	border: none;
+}
+-->
+</style>
+</head>
+<body bgcolor = "#FFFFFF" text="#000000">
+<h1 align="center">$user.UserName</h1>
+    <table class="outsideStdTable" align="center" width="70%">
+    <tr>
+    <td>
+        <table class="stdTable">
+            <tr>
+                <td width="10%"><b>Full Name:</b></td>
+                <td>$user.FullName</td>
+            </tr>
+            <tr>
+                <td width="10%"><b>Domain:</b></td>
+                <td>$user.Domain.Name</td>
+            </tr>
+            <tr>
+                <td valign="top" width="10%"><b>Other&nbsp;Domains:</b></td>
+                <td valign="top">
+                #if( $user.isOtherDomainIsAll() )
+                    All
+                #else
+                    #foreach( $domain in $user.OtherDomains )
+                        $domain.Name <br>
+                    #end
+                #end
+                </td>
+            </tr>
+            <tr>
+                <td width="10%"><b>Last&nbsp;Login:</b></td>
+                <td>
+                    #if( $user.LastLogin )
+                        $user.LastLogin
+                    #else
+                        Never
+                    #end
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="10%"><b>Description:</b></td>
+                <td>$user.Description</td>
+            </tr>
+        </table>
+    </td>
+    </tr>
+    </table>
+</body>
+</html>

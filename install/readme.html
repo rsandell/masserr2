@@ -1,0 +1,98 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+
+    <title>Download Masserr Java Client</title>
+</head><body>
+    <h1>Ladda ner Masserr Klient Application</h1>
+    <h2>Installations Instruktioner</h2>
+    <p>
+        Masserr behöver Java Runtime 1.5 (a.k. 5.0) installerad på din dator för att kunna köra, 1.6 (a.k. 6.0) har också testats fast inte fullt ut, och verkar funka.
+        Java laddar du ner ifrån <a href="#download">länken nedanför</a>, Javas installationsfil ligger på ca 45 MB så en modemuppkoppling är inte att rekomendera.
+    </p>
+    <p>
+        När Java är installerat så packar du upp <a href="http://www.blodseden.se:81/WebMasserr/masserr.zip">masserr.zip</a> till valfri katalog på din dator,
+        för PC t.ex. "C:\Program\masserr".
+        Katalogen du packade upp till innehåller nu bl.a. tre stycken <code><i>".bat"</i></code>
+        <code>masserr.bat</code>, <code>admin.bat</code> och eventuellt <code>server.bat</code> och <code>serversetup.bat</code>.
+    </p>
+    <p>
+        <code>masserr.bat</code> Startar den normala klienten för Roller, Influenser o.s.v.
+    </p>
+    <p>
+        <code>admin.bat</code> Startar Administratör klienten, man behöver ha Administratörs rättigheter för att köra den.
+        Admin-klienten används för att lägga till nya användare, ge dem rättigheter och lägga till &amp; ändra Domäner.
+    </p>
+    <p>
+        <code>server.bat</code> Startar en masserr server i ett DOS fönster, för detta behövs en databas fil, var den finns ställer man in genom att köra <code>serversetup.bat</code>.
+    </p>
+    <h3>Installera typsnitt</h3>
+    <p>
+        I katalogewn som du packade upp masserr i så finns en katalog vid namn install. Däri ligger tre stycken typsnitt
+        (<code>WOD_____.TTF</code>, <code>WOD2_____.TTF</code> och <code>WOD3_____.TTF</code>) detta gör du genom att kopiera dessa filer
+        till <code>Kontrollpanelen/Typsnitt</code> i Windows, dessa behöver du även ha installerat för att WebMasserr skall visa korrekt klan-symboler när du surfar där.
+    </p>
+    <p>
+        När du startar <code>masserr.bat</code> så ska du se till att arbets-katalogen är densamma som där <code>masserr.bat</code>
+ligger placerad, om du t.ex. startar genom att i Windows dubbel-klicka
+på filen i katalogen som den ligger så är arbetskatalogen rätt, men om
+du skapar en genväg på t.ex. skrivbordet, så behöver du se till att
+genvägens arbets-katalog är satt rätt. Annars så kommer inte ikoner och
+klansymboler att laddas, samt andra skumma problem som inte är fullt
+testade ännu. </p>
+    <h3>Första gången du kör Masserr</h3>
+    <p>
+        Första gången en <b><u>Användare</u></b> på datorn kör <code>masserr.bat</code> eller <code>admin.bat</code>,
+så kommer systemet märka att det inte finns några inställningar, det
+första den märker av är troligtvis att Temp-katalogen inte är satt och
+meddela detta, efter meddelandet så dyker Preferences-dialogen upp, där
+du ska fylla in de uppgifter om din Dator som behövs för att köra
+Masserr, se bilden nedan.<br>
+        <img src="readme-filer/preferences.png" alt="Preferences Dialog"><br>
+        <i>Följande Fält kan/ska fyllas i</i>
+        </p><ul>
+            <li><b>Database File</b>
+- Om du har en lokal databas-fil och vill använda den istället för att
+koppla upp dig på servern så fyller du i var databasen finns i detta
+fältet, du kan använda ..-knappen för att browsa dig fram till filen.
+Du kan endast fylla i detta fältet om <i><b>Go Online</b></i> är avkryssat.</li>
+            <li><b>Heading</b> - Här fyller du i vad som skall stå som Överskrift på karaktärsbladen.</li>
+            <li><b>Temp Directory</b> - Fyll i var temporära filer skall sparas vanligtvis på Windows masiner används
+                <code>C:\Windows\Temp</code> de temporära filerna tas bort när Applikationen stängs av.
+                Du kan använda dig av ..-knappen för att browsa dig fram till den katalog du vill använda.</li>
+            <li><b>Html Browser</b>
+- Alla dokument såsom Karaktärs-blad o.s.v. är i HTML format, så
+Masserr behöver veta var din Web-läsare finns så att Masser kan starta
+den för att visa dokumenten. Masserr är endast testad med Microsoft
+Internet Explorer 6.0 och är därför rekomenderad att använda. På
+standard Svenska Windows-maskiner hittar du Internet Explorer på <code>C:\Program\Internet&nbsp;Explorer\IEXPLORE.EXE</code>. Du kan använda dig av
+                ..-knappen för att browsa dig dit.</li>
+            <li><b>Show XP from</b>
+- Efterssom Masses stödjer att man lägger XP till Roller eller till
+Spelare så behöver systemet veta varifrån den ska hämta XP-infon ifrån
+(Roller eller Spelare) när den ska visas på t.ex. Karaktärsbladet.
+Carlshamn By Night och WebMasserr är inställt på Player, så det
+rekomenderas att köra samma om ni använder bådeoch.</li>
+            <li><b>Go Online</b>
+- Ska systemet hämta data från servern via nätet eller ska den hämta
+från en lokal kopia av databasen.</li>
+            <li><b>Server HostName</b> - Adressen till servern så att systemet vet vart servern är, antingen skriver du i <code>blodseden.gotdns.com</code> eller så skriver du serverns lite mer pålitliga address:
+            <code>cern.dyndns.org</code></li>
+        </ul>
+    <p></p>
+    <h3>Skriva ut karaktärsblad</h3>
+    <p>
+Om du vill skriva ut karaktärsblad från systemet så behöver du ställa
+om marginalerna i Internet Explorers Utskriftsformat. Ta bort alla
+marginaler, och för att det ska se snyggare ut så kan du även ta bord
+sidhuvud och sidfot. Detta behöver du även göra för att det ska fungera
+att skriva ut karaktärsblad i WebMasserr.<br>
+        <img src="readme-filer/pagesetup.png" alt="Internet Explorer Page Setup">
+    </p>
+
+    <h2>Ladda ner</h2>
+    <a name="#download"> </a>
+    <p>
+        <a href="http://java.sun.com/j2se/1.5.0/download.jsp">Java Download Page</a> <i><b>Välj</b> 32-bit/64-bit for Windows/Linux/Solaris SPARC
+32-bit for Solaris x86 -&gt; JRE</i>
+    </p>
+</body></html>
