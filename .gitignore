@@ -3,3 +3,4 @@ databases/
 *.iml
 *.ipr
 *.iws
+.idea/
