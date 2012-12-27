@@ -58,7 +58,8 @@ public interface RetrievalDB extends BasicDB {
 
     int getBaseMoneyForAge(int pAgeYears) throws SQLException, RemoteException;
 
-    List<TreeNode> getFamelyTrees() throws SQLException, RemoteException;
+    //TODO Better implementation
+    //List<TreeNode> getFamelyTrees() throws SQLException, RemoteException;
 
     List getGroups() throws SQLException, RemoteException;
 
@@ -92,7 +93,8 @@ public interface RetrievalDB extends BasicDB {
 
     List<ClanFontSymbol> getClanFontSymbols() throws SQLException, RemoteException;
 
-    List<TreeNode> getFamelyTrees(Clan pClan) throws SQLException, RemoteException;
+    //TODO Better implementation
+    //List<TreeNode> getFamelyTrees(Clan pClan) throws SQLException, RemoteException;
 
     List<Clan> getRepresentedClans() throws SQLException, RemoteException;
 

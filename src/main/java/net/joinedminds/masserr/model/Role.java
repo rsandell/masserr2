@@ -82,7 +82,7 @@ public class Role implements Serializable {
     private List<BankAccount> bankAccounts;
     private List<Influence> influences;
     private int experience;
-    private int vitals = 1;
+    private Vitals vitals;
     private Domain domain;
     private List<Ritual> rituals;
     private String selfControlOrInstinct = "Self-Control";
@@ -804,19 +804,11 @@ public class Role implements Serializable {
     }
 
     public Vitals getVitals() {
-        return Vitals.getVital(vitals);
-    }
-
-    public int getVitalsId() {
         return vitals;
     }
 
-    public void setVitals(int pVitals) {
-        vitals = pVitals;
-    }
-
     public void setVitals(Vitals pVitals) {
-        vitals = pVitals.getId();
+        vitals = pVitals;
     }
 
     public Domain getDomain() {

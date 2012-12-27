@@ -66,11 +66,11 @@ public class EmptyRole {
         }
         merits = new ArrayList<MeritOrFlaw>(5);
         for (int i = 0; i < 5; i++) {
-            merits.add(new MeritOrFlaw(-1, "&nbsp;", 1));
+            merits.add(new MeritOrFlaw("", "&nbsp;", 1));
         }
         flaws = new ArrayList<MeritOrFlaw>(5);
         for (int i = 0; i < 5; i++) {
-            flaws.add(new MeritOrFlaw(-1, "&nbsp;", -1));
+            flaws.add(new MeritOrFlaw("", "&nbsp;", -1));
         }
         derangements = new ArrayList<String>(4);
         for (int i = 0; i < 3; i++) {
