@@ -1,7 +1,7 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.mgm.User;
-import se.tdt.bobby.wodcc.data.Domain;
+import net.joinedminds.masserr.model.Domain;
+import net.joinedminds.masserr.model.mgm.User;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;

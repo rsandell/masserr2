@@ -1,0 +1,128 @@
+/*
+ * The MIT License
+ *
+ * Copyright (c) 2004-2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+package net.joinedminds.masserr.model;
+
+import javax.persistence.Id;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.Serializable;
+
+/**
+ * Description
+ *
+ * 
+ * Created: 2004-jan-27 21:43:06
+ * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
+ */
+public class Group implements Serializable, Cloneable {
+    @Id
+    private String id;
+	private String name;
+	private Date date;
+	private String description;
+	private String type;
+	private List<Role> roles;
+
+    /**
+     * For serialisation
+     */
+    public Group() {
+    }
+
+	public Group(String pId, String pName, Date pDate, String pDescription, String pType) {
+		id = pId;
+		name = pName;
+		date = pDate;
+		description = pDescription;
+		type = pType;
+		roles = new LinkedList<Role>();
+	}
+
+	public Group(String pName, Date pDate, String pDescription, String pType) {
+		name = pName;
+		date = pDate;
+		description = pDescription;
+		type = pType;
+		roles = new LinkedList<Role>();
+	}
+
+    public Object clone() {
+        return new Group(id, name, new Date(date.getTime()), description, type);
+    }
+
+	public List getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List pRoles) {
+		roles = pRoles;
+	}
+
+	public void addRole(Role pRole) {
+		roles.add(pRole);
+	}
+
+	public String toString() {
+		return name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String pName) {
+		name = pName;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date pDate) {
+		date = pDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String pDescription) {
+		description = pDescription;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String pType) {
+		type = pType;
+	}
+}

@@ -1,5 +1,6 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
+import net.joinedminds.masserr.model.*;
 import se.tdt.bobby.wodcc.data.*;
 
 import javax.swing.*;

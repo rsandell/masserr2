@@ -1,8 +1,7 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.*;
+import net.joinedminds.masserr.model.*;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.Vector;
 import java.util.ArrayList;
@@ -51,9 +50,9 @@ public interface RetrievalDB extends BasicDB {
 
     Discipline getDiscipline(int pNumber) throws SQLException, RemoteException;
 
-    Vector<MeritORflaw> getMerits() throws SQLException, RemoteException;
+    Vector<MeritOrFlaw> getMerits() throws SQLException, RemoteException;
 
-    Vector<MeritORflaw> getFlaws() throws SQLException, RemoteException;
+    Vector<MeritOrFlaw> getFlaws() throws SQLException, RemoteException;
 
     Role getRole(int pId) throws SQLException, ParseException, RemoteException;
 

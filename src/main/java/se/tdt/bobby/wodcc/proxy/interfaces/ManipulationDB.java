@@ -1,6 +1,6 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.*;
+import net.joinedminds.masserr.model.*;
 
 import java.sql.SQLException;
 import java.rmi.RemoteException;
@@ -48,9 +48,9 @@ public interface ManipulationDB extends BasicDB {
 
     IntWithString addNecromancyPath(String pName) throws SQLException, RemoteException;
 
-    void updateMeritORflaw(MeritORflaw pToUpdate) throws SQLException, RemoteException;
+    void updateMeritORflaw(MeritOrFlaw pToUpdate) throws SQLException, RemoteException;
 
-    MeritORflaw addMeritORflaw(String pName) throws SQLException, RemoteException;
+    MeritOrFlaw addMeritORflaw(String pName) throws SQLException, RemoteException;
 
     void updateOtherTrait(IntWithString pToUpdate) throws SQLException, RemoteException;
 

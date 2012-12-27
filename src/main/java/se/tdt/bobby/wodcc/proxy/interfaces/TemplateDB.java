@@ -1,6 +1,7 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.Role;
+import net.joinedminds.masserr.model.Role;
+import net.joinedminds.masserr.model.Role;
 
 import java.sql.SQLException;
 import java.text.ParseException;

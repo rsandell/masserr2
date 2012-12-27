@@ -1,6 +1,7 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.CreateRule;
+import net.joinedminds.masserr.model.CreateRule;
+import net.joinedminds.masserr.model.CreateRule;
 
 import java.sql.SQLException;
 import java.rmi.RemoteException;

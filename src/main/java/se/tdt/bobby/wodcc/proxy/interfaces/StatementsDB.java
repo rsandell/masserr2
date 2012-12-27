@@ -1,9 +1,10 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.IntWithString;
-import se.tdt.bobby.wodcc.data.sqllists.ListStatement;
-import se.tdt.bobby.wodcc.data.sqllists.ListStatementResult;
-import se.tdt.bobby.wodcc.data.sqllists.Parameter;
+import net.joinedminds.masserr.model.IntWithString;
+import net.joinedminds.masserr.model.IntWithString;
+import net.joinedminds.masserr.model.sqllists.ListStatement;
+import net.joinedminds.masserr.model.sqllists.ListStatementResult;
+import net.joinedminds.masserr.model.sqllists.Parameter;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;

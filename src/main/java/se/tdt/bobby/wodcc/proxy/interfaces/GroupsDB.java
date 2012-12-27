@@ -1,7 +1,7 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.RolesGroup;
-import se.tdt.bobby.wodcc.data.mgm.OperationDeniedException;
+import net.joinedminds.masserr.model.RolesGroup;
+import net.joinedminds.masserr.security.OperationDeniedException;
 
 import java.util.*;
 import java.sql.SQLException;

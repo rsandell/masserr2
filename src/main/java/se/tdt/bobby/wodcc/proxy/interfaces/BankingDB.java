@@ -1,9 +1,9 @@
 package se.tdt.bobby.wodcc.proxy.interfaces;
 
-import se.tdt.bobby.wodcc.data.BankAccount;
-import se.tdt.bobby.wodcc.data.Role;
-import se.tdt.bobby.wodcc.data.Resource;
-import se.tdt.bobby.wodcc.data.Withdrawal;
+import net.joinedminds.masserr.model.BankAccount;
+import net.joinedminds.masserr.model.Role;
+import net.joinedminds.masserr.model.Withdrawal;
+import net.joinedminds.masserr.model.Resource;
 
 import java.sql.SQLException;
 import java.rmi.RemoteException;
