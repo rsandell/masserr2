@@ -33,11 +33,22 @@ import com.google.inject.name.Names;
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
 public class GuiceModule extends AbstractModule {
+
+    private String dbUrl;
+    private String dbUser;
+    private String dbPasswd;
+
+    public GuiceModule(String dbUrl, String dbUser, String dbPasswd) {
+        this.dbUrl = dbUrl;
+        this.dbUser = dbUser;
+        this.dbPasswd = dbPasswd;
+    }
+
     @Override
     protected void configure() {
-        bind(String.class).annotatedWith(Names.named("DB_URL")).toInstance("local:databases/staplertest");
-        bind(String.class).annotatedWith(Names.named("DB_USER")).toInstance("admin");
-        bind(String.class).annotatedWith(Names.named("DB_PASSWD")).toInstance("admin");
+        bind(String.class).annotatedWith(Names.named("DB_URL")).toInstance(dbUrl);
+        bind(String.class).annotatedWith(Names.named("DB_USER")).toInstance(dbUser);
+        bind(String.class).annotatedWith(Names.named("DB_PASSWD")).toInstance(dbPasswd);
         bind(Masserr.class);
     }
 }

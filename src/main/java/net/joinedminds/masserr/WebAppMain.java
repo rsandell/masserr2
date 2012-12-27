@@ -24,12 +24,16 @@
 
 package net.joinedminds.masserr;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.kohsuke.stapler.Stapler;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
@@ -37,7 +41,12 @@ import javax.servlet.ServletContextListener;
 public class WebAppMain implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        Injector injector = Guice.createInjector(new GuiceModule());
+        ServletContext context = sce.getServletContext();
+        String dbUrl = checkNotNull(context.getInitParameter("DB_URL"), "Missing DB_URL parameter.");
+        String dbUser = checkNotNull(context.getInitParameter("DB_USER"), "Missing DB_USER parameter.");
+        String dbPasswd = checkNotNull(context.getInitParameter("DB_PASSWD"), "Missing DB_PASSWD parameter.");
+
+        Injector injector = Guice.createInjector(new GuiceModule(dbUrl, dbUser, dbPasswd));
         Stapler.setRoot(sce, injector.getInstance(Masserr.class));
     }
 

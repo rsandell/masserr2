@@ -2,6 +2,20 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <context-param>
+        <param-name>DB_URL</param-name>
+        <param-value>local:databases/dev</param-value>
+    </context-param>
+    <context-param>
+        <param-name>DB_USER</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+    <context-param>
+        <param-name>DB_PASSWD</param-name>
+        <param-value>admin</param-value>
+    </context-param>
+
     <servlet>
         <servlet-name>Stapler</servlet-name>
         <servlet-class>org.kohsuke.stapler.Stapler</servlet-class>
@@ -13,7 +27,7 @@
     </servlet-mapping>
 
     <listener>
-        <listener-class>net.joinedminds.staplertest.WebAppMain</listener-class>
+        <listener-class>net.joinedminds.masserr.WebAppMain</listener-class>
     </listener>
 
     <display-name>Masserr2</display-name>
