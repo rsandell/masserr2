@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-jan-13 20:48:42
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class MeritOrFlaw implements Serializable, Cloneable {
+public class MeritOrFlaw implements NamedIdentifiable {
 
 	@Id
     private String id;
@@ -45,27 +45,26 @@ public class MeritOrFlaw implements Serializable, Cloneable {
 	public MeritOrFlaw() {
 	}
 
-	public MeritOrFlaw(String pId, String pName, int pPoints, String pNote) {
-		id = pId;
+	public MeritOrFlaw(String pName, int pPoints, String pNote) {
 		name = pName;
 		points = pPoints;
 		note = pNote;
 	}
 
-	public MeritOrFlaw(String pId, String pName, int pPoints) {
-		id = pId;
+	public MeritOrFlaw(String pName, int pPoints) {
 		name = pName;
 		points = pPoints;
 		note = "";
 	}
 
 
-
+    @Override
 	public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 
@@ -91,9 +90,5 @@ public class MeritOrFlaw implements Serializable, Cloneable {
 
 	public String toString() {
 		return name + " (" + points + ")";
-	}
-
-	public Object clone() {
-		return new MeritOrFlaw(id, name, points, note);
 	}
 }

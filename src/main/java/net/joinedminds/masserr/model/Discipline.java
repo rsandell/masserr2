@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-jan-11 14:44:54
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class Discipline implements Serializable, Cloneable  {
+public class Discipline implements NamedIdentifiable  {
 	@Id
     private String id;
 	private String name;
@@ -45,45 +45,39 @@ public class Discipline implements Serializable, Cloneable  {
 	public Discipline() {
 	}
 
-	public Discipline(String pId, String pName, boolean pOfClan, int pDots, Ability pRetestAbility) {
-		id = pId;
+	public Discipline(String pName, boolean pOfClan, int pDots, Ability pRetestAbility) {
 		name = pName;
 		offClan = pOfClan;
 		dots = pDots;
 		retestAbility = pRetestAbility;
 	}
 
-	public Discipline(String pId, String pName, boolean pOfClan, int pDots) {
-		id = pId;
+	public Discipline(String pName, boolean pOfClan, int pDots) {
 		name = pName;
 		offClan = pOfClan;
 		dots = pDots;
 	}
 
-	public Discipline(String pId, String pName, Ability pRetestAbility) {
-		id = pId;
+	public Discipline(String pName, Ability pRetestAbility) {
 		name = pName;
 		retestAbility = pRetestAbility;
 		offClan = false;
 		dots = 0;
 	}
 
-	public Discipline(String pId, String pName) {
-		id = pId;
+	public Discipline(String pName) {
 		name = pName;
 		offClan = false;
 		dots = 0;
 	}
 
-    public Object clone() {
-        return new Discipline(id, name, offClan, dots,  (Ability) retestAbility.clone());
-    }
-
+    @Override
 	public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 

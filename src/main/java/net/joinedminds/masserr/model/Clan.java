@@ -1,5 +1,6 @@
 package net.joinedminds.masserr.model;
 
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -9,70 +10,63 @@ import java.io.Serializable;
  * Created: 2004-jan-10 01:52:34
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class Clan implements Serializable, Cloneable  {
-	private int mId;
-	private String mName;
-	private int mBaseIncome;
-    private String mWeaknesses = "";
+public class Clan implements NamedIdentifiable  {
+
+    @Id
+    private String id;
+	private String name;
+	private int baseIncome;
+    private String weaknesses = "";
 
 	public Clan() {
 	}
 
-	public Clan(int pId, String pName) {
-		mId = pId;
-		mName = pName;
+	public Clan(String pName) {
+		name = pName;
 	}
 
-	public Clan(int pId, String pName, int pBaseIncome) {
-		mId = pId;
-		mName = pName;
-		mBaseIncome = pBaseIncome;
+	public Clan(String pName, int pBaseIncome) {
+		name = pName;
+		baseIncome = pBaseIncome;
 	}
 
-    public Clan(int pId, String pName, int pBaseIncome, String pWeaknesses) {
-        mId = pId;
-        mName = pName;
-        mBaseIncome = pBaseIncome;
-        mWeaknesses = pWeaknesses;
+    public Clan(String pName, int pBaseIncome, String pWeaknesses) {
+        name = pName;
+        baseIncome = pBaseIncome;
+        weaknesses = pWeaknesses;
     }
 
-    public Object clone() {
-        return new Clan(mId, mName, mBaseIncome, mWeaknesses);
-    }
-
-	public int getId() {
-		return mId;
+	@Override
+    public String getId() {
+		return id;
 	}
 
-	public String getName() {
-		return mName;
-	}
-
-	public void setId(int pId) {
-		mId = pId;
+	@Override
+    public String getName() {
+		return name;
 	}
 
 	public void setName(String pName) {
-		mName = pName;
+		name = pName;
 	}
 
 	public String toString() {
-		return mName;
+		return name;
 	}
 
 	public int getBaseIncome() {
-		return mBaseIncome;
+		return baseIncome;
 	}
 
 	public void setBaseIncome(int pBaseIncome) {
-		mBaseIncome = pBaseIncome;
+		baseIncome = pBaseIncome;
 	}
 
     public String getWeaknesses() {
-        return mWeaknesses;
+        return weaknesses;
     }
 
     public void setWeaknesses(String pWeaknesses) {
-        mWeaknesses = pWeaknesses;
+        weaknesses = pWeaknesses;
     }
 }

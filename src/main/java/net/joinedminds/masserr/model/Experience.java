@@ -37,19 +37,19 @@ import java.util.Date;
  * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
  */
 public class Experience implements Serializable {
-    private int ammount;
+    private int amount;
     private Date date;
     private String reason;
     private User setByUser;
 
-    public Experience(int pAmmount, Date pDate, String pReason) {
-        ammount = pAmmount;
+    public Experience(int pAmount, Date pDate, String pReason) {
+        amount = pAmount;
         date = pDate;
         reason = pReason;
     }
 
-    public Experience(int pAmmount, Date pDate, String pReason, User pSetByUser) {
-        ammount = pAmmount;
+    public Experience(int pAmount, Date pDate, String pReason, User pSetByUser) {
+        amount = pAmount;
         date = pDate;
         reason = pReason;
         setByUser = pSetByUser;
@@ -61,12 +61,12 @@ public class Experience implements Serializable {
     public Experience() {
     }
 
-    public int getAmmount() {
-        return ammount;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAmmount(int pAmmount) {
-        ammount = pAmmount;
+    public void setAmount(int pAmmount) {
+        amount = pAmmount;
     }
 
     public Date getDate() {

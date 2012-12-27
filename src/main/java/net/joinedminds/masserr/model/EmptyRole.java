@@ -49,34 +49,36 @@ public class EmptyRole {
     private List<String> otherTraits;
     private List compiledInfluences;
 
-    public EmptyRole(Clan pClan, List pPhysicalAbilities, List pSocialAbilities, List pMentalAbilities, List<Discipline> pDisciplines, boolean pGhoul) {
+    public EmptyRole(Clan pClan,
+                     List<Ability> pPhysicalAbilities, List<Ability> pSocialAbilities, List<Ability> pMentalAbilities,
+                     List<Discipline> pDisciplines, boolean pGhoul) {
         clan = pClan;
         physicalAbilities = pPhysicalAbilities;
         socialAbilities = pSocialAbilities;
         mentalAbilities = pMentalAbilities;
         disciplines = pDisciplines;
         ghoul = pGhoul;
-        thaumaturgicalPaths = new ArrayList<String>(7);
+        thaumaturgicalPaths = new ArrayList<>(7);
         for(int i = 0; i < 6; i++) {
             thaumaturgicalPaths.add("&nbsp;");
         }
-        necromancyPaths = new ArrayList<String>(7);
+        necromancyPaths = new ArrayList<>(7);
         for(int i = 0; i < 6; i++) {
             necromancyPaths.add("&nbsp;");
         }
-        merits = new ArrayList<MeritOrFlaw>(5);
+        merits = new ArrayList<>(5);
         for (int i = 0; i < 5; i++) {
-            merits.add(new MeritOrFlaw("", "&nbsp;", 1));
+            merits.add(new MeritOrFlaw("&nbsp;", 1));
         }
-        flaws = new ArrayList<MeritOrFlaw>(5);
+        flaws = new ArrayList<>(5);
         for (int i = 0; i < 5; i++) {
-            flaws.add(new MeritOrFlaw("", "&nbsp;", -1));
+            flaws.add(new MeritOrFlaw("&nbsp;", -1));
         }
-        derangements = new ArrayList<String>(4);
+        derangements = new ArrayList<>(4);
         for (int i = 0; i < 3; i++) {
             derangements.add("&nbsp;");
         }
-        otherTraits = new ArrayList<String>(4);
+        otherTraits = new ArrayList<>(4);
         for (int i = 0; i < 3; i++) {
             otherTraits.add("&nbsp;");
         }
@@ -188,8 +190,7 @@ public class EmptyRole {
         return false;
     }
     public List<RitualType> getRitualTypes() {
-        ArrayList<RitualType> list = new ArrayList<RitualType>();
-        return list;
+        return Collections.emptyList();
     }
     public static int getAge(Date pEmbraced) {
         Calendar cal = Calendar.getInstance();

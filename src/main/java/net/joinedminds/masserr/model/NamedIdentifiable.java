@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2004-2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ * Copyright (c) 2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,47 +24,19 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import net.joinedminds.masserr.model.Identifiable;
 
 /**
- * Description.
- * <p/>
- * Created: 2004-mar-22 22:12:29
- * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * Something with an id and a name.
+ *
+ * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class RitualType implements NamedIdentifiable {
-
-    @Id
-    private String id;
-    private String name;
-
-    public RitualType(String pName) {
-        name = pName;
-    }
+public interface NamedIdentifiable extends Identifiable {
 
     /**
-     * For serialization
+     * The name associated with this object.
+     *
+     * @return the name
      */
-    public RitualType() {
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String pName) {
-        name = pName;
-    }
-
-    public String toString() {
-        return name;
-    }
+    String getName();
 }

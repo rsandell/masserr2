@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-jan-14 01:09:22
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class OtherTrait implements Serializable, Cloneable  {
+public class OtherTrait implements NamedIdentifiable  {
 
 	@Id
     private String id;
@@ -44,27 +44,23 @@ public class OtherTrait implements Serializable, Cloneable  {
 	public OtherTrait() {
 	}
 
-	public OtherTrait(String pId, String pName, int pDots) {
-		id = pId;
+	public OtherTrait(String pName, int pDots) {
 		name = pName;
 		dots = pDots;
 	}
 
-	public OtherTrait(String pId, String pName) {
-		id = pId;
+	public OtherTrait(String pName) {
 		name = pName;
 		dots = 0;
 	}
 
-    public Object clone() {
-        return new OtherTrait(id, name, dots);
-    }
-
+    @Override
 	public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 

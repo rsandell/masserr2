@@ -37,7 +37,7 @@ import java.util.ArrayList;
  * Created: 2004-feb-03 00:34:49
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class Resource implements Serializable, Cloneable {
+public class Resource implements NamedIdentifiable {
 
     @Id
     private String id;
@@ -53,8 +53,7 @@ public class Resource implements Serializable, Cloneable {
 	public Resource() {
 	}
 
-	public Resource(String pId, String pName, String pDescription, int pIncome, int pPercent, float pCost, String pType) {
-		id = pId;
+	public Resource(String pName, String pDescription, int pIncome, int pPercent, float pCost, String pType) {
 		name = pName;
 		description = pDescription;
 		income = pIncome;
@@ -63,8 +62,7 @@ public class Resource implements Serializable, Cloneable {
         type = pType;
     }
 
-    public Resource(String pId, String pName, String pDescription, int pIncome, int pPercent, List pInfluences, float pCost, Domain pDomain, String pType) {
-        id = pId;
+    public Resource(String pName, String pDescription, int pIncome, int pPercent, List<Influence> pInfluences, float pCost, Domain pDomain, String pType) {
         name = pName;
         description = pDescription;
         income = pIncome;
@@ -75,19 +73,8 @@ public class Resource implements Serializable, Cloneable {
         type = pType;
     }
 
-    public Resource(String pName, String pDescription, int pIncome, int pPercent, List pInfluences, float pCost, Domain pDomain, String pType) {
-        name = pName;
-        description = pDescription;
-        income = pIncome;
-        percent = pPercent;
-        influences = pInfluences;
-        cost = pCost;
-        domain = pDomain;
-        type = pType;
-    }
 
-	public Resource(String pId, String pName, String pDescription, int pIncome, float pCost, String pType) {
-		id = pId;
+	public Resource(String pName, String pDescription, int pIncome, float pCost, String pType) {
 		name = pName;
 		description = pDescription;
 		income = pIncome;
@@ -96,29 +83,13 @@ public class Resource implements Serializable, Cloneable {
         percent = 0;
 	}
 
-	public Resource(String pName, String pDescription, int pIncome, float pCost, String pType) {
-		name = pName;
-		description = pDescription;
-		income = pIncome;
-		cost = pCost;
-        type = pType;
-		percent = 0;
-	}
-
-    public Object clone() {
-        List infl = new ArrayList(influences.size()+1);
-        for (int i = 0; i < influences.size(); i++) {
-            Influence influence = (Influence) influences.get(i);
-            infl.add(influence.clone());
-        }
-        return new Resource(id, name, description, income, percent, infl, cost, domain, type);
-    }
-
+	@Override
 	public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 
@@ -154,7 +125,7 @@ public class Resource implements Serializable, Cloneable {
 		return name;
 	}
 
-	public void setInfluences(List pInfluences) {
+	public void setInfluences(List<Influence> pInfluences) {
 		influences = pInfluences;
 	}
 

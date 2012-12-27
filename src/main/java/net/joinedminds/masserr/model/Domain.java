@@ -33,7 +33,7 @@ import java.io.Serializable;
  * Created: 2004-mar-08 17:06:13
  * @author <a href="mailto:the.bobby.is@home.se">Robert "Bobby" Sandell</a>
  */
-public class Domain implements Serializable, Cloneable {
+public class Domain implements NamedIdentifiable {
 
     @Id
     private String id;
@@ -43,19 +43,13 @@ public class Domain implements Serializable, Cloneable {
     public Domain() {
     }
 
-    public Domain(String pId, String pName, String pHistory) {
-        id = pId;
+    public Domain(String pName, String pHistory) {
         name = pName;
         history = pHistory;
     }
 
-    public Domain(String pId, String pName) {
-        id = pId;
+    public Domain(String pName) {
         name = pName;
-    }
-
-    public Object clone() {
-        return new Domain(id, name, history);
     }
 
     public boolean equals(Domain pDomain) {
@@ -71,10 +65,12 @@ public class Domain implements Serializable, Cloneable {
         }
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }

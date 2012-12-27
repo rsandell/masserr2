@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-feb-03 00:43:53
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class Influence implements Serializable, Cloneable {
+public class Influence implements NamedIdentifiable {
 
     @Id
     private String id;
@@ -45,27 +45,35 @@ public class Influence implements Serializable, Cloneable {
     public Influence() {
     }
 
-    public Influence(String pId, String pName, int pDots) {
-        id = pId;
+    public Influence(String pName, int pDots) {
         name = pName;
         dots = pDots;
     }
 
-    public Influence(String pId, String pName, int pDots, String pNotes) {
-        id = pId;
+    public Influence(String pName, int pDots, String pNotes) {
         name = pName;
         dots = pDots;
         notes = pNotes;
     }
 
-    public Influence(String pId, String pName) {
-        id = pId;
+    public Influence(String pName) {
         name = pName;
         dots = 0;
     }
 
-    public Object clone()  {
-        return new Influence(id, name, dots, notes);
+    /**
+     * Should only be used for UI representations.
+     *
+     * @param id the id
+     * @param name the name
+     * @param dots the dots
+     * @param notes the notes.
+     */
+    public Influence(String id, String name, int dots, String notes) {
+        this.id = id;
+        this.name = name;
+        this.dots = dots;
+        this.notes = notes;
     }
 
     public String getNotes() {
@@ -76,10 +84,12 @@ public class Influence implements Serializable, Cloneable {
         notes = pNotes;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }

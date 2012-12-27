@@ -34,21 +34,20 @@ import java.io.Serializable;
  * 
  * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
  */
-public class FightOrFlight implements Serializable, Cloneable {
+public class FightOrFlight implements NamedIdentifiable {
     @Id
     private String id;
     private String name;
     private String description;
 
-    public FightOrFlight(String pId, String pName, String pDescription) {
-        id = pId;
+    public FightOrFlight(String pName, String pDescription) {
         name = pName;
         description = pDescription;
     }
 
-    public FightOrFlight(String pName, String pDescription) {
+    public FightOrFlight(String pName) {
         name = pName;
-        description = pDescription;
+        description = "";
     }
 
     public boolean equals(Object obj) {
@@ -70,10 +69,12 @@ public class FightOrFlight implements Serializable, Cloneable {
     public FightOrFlight() {
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -92,9 +93,5 @@ public class FightOrFlight implements Serializable, Cloneable {
 
     public String toString() {
         return name;
-    }
-
-    public Object clone() {
-        return new FightOrFlight(id, name, description);
     }
 }

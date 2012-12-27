@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-jan-11 19:31:04
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class Path implements Serializable, Cloneable  {
+public class Path implements NamedIdentifiable {
 
 	@Id
     private String id;
@@ -44,26 +44,22 @@ public class Path implements Serializable, Cloneable  {
 	public Path() {
 	}
 
-	public Path(String pId, String pName, int pDots) {
-		id = pId;
+	public Path(String pName, int pDots) {
 		name = pName;
 		dots = pDots;
 	}
 
-	public Path(String pId, String pName) {
-		id = pId;
+	public Path(String pName) {
 		name = pName;
 		dots = 0;
 	}
 
-    public Object clone() {
-        return new Path(id, name, dots);
-    }
-
+    @Override
 	public String getId() {
 		return id;
 	}
 
+    @Override
 	public String getName() {
 		return name;
 	}

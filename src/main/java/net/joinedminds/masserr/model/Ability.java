@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-jan-10 00:14:20
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class Ability implements Serializable, Cloneable  {
+public class Ability implements NamedIdentifiable  {
 
 	@Id
     private String id;
@@ -87,10 +87,6 @@ public class Ability implements Serializable, Cloneable  {
 		dots = 0;
 	}
 
-    public Object clone() {
-        return new Ability(id, name, type, specialisation, dots, baseMonthlyIncome);
-    }
-
 	public int getBaseMonthlyIncome() {
 		return baseMonthlyIncome;
 	}
@@ -99,11 +95,13 @@ public class Ability implements Serializable, Cloneable  {
 		baseMonthlyIncome = pBaseMonthlyIncome;
 	}
 
-	public String getId() {
+	@Override
+    public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 

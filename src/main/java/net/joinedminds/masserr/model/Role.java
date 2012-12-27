@@ -652,16 +652,16 @@ public class Role implements Serializable {
         return professions;
     }
 
-    public void setProfessions(List pProfessions) {
+    public void setProfessions(List<Profession> pProfessions) {
         professions = pProfessions;
     }
 
     public List compileInfluences() {
-        ArrayList list = new ArrayList();
-        HashMap map = new HashMap();
+        List<Influence> list = new LinkedList<>();
+        HashMap<String, Influence> map = new HashMap<>();
         if (resources != null) {
             for (int i = 0; i < resources.size(); i++) {
-                Resource resource = (Resource) resources.get(i);
+                Resource resource = resources.get(i);
                 List influences = resource.getInfluences();
                 for (int j = 0; j < influences.size(); j++) {
                     Influence influence = (Influence) influences.get(j);
@@ -679,8 +679,8 @@ public class Role implements Serializable {
         }
         if (influences != null) {
             for (int i = 0; i < influences.size(); i++) {
-                Influence influence = (Influence) influences.get(i);
-                Influence stored = (Influence) map.get(influence.getId() + "");
+                Influence influence = influences.get(i);
+                Influence stored = map.get(influence.getId() + "");
                 if (stored == null) {
                     stored = new Influence(influence.getId(), influence.getName(), influence.getDots(), influence.getNotes());
                     map.put(influence.getId() + "", stored);

@@ -32,6 +32,7 @@ import java.io.Serializable;
  * Created: 2004-mar-27 01:32:29
  * 
  * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @deprecated Don't think we'll use the fonts anymore
  */
 public class ClanFontSymbol implements Serializable, Cloneable {
     private int clanId;

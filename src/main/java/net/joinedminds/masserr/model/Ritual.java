@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-jan-18 19:20:16
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class Ritual implements Serializable, Cloneable {
+public class Ritual implements NamedIdentifiable {
 
 	@Id
     private String id;
@@ -47,36 +47,31 @@ public class Ritual implements Serializable, Cloneable {
 	public Ritual() {
 	}
 
-	public Ritual(String pId, String pName, int pLevel, RitualType pRitualType) {
-		id = pId;
+	public Ritual(String pName, int pLevel, RitualType pRitualType) {
 		name = pName;
 		level = pLevel;
         ritualType = pRitualType;
     }
 
-	public Ritual(String pId, String pName, int pLevel , RitualType pRitualType, String pDescription) {
-		id = pId;
+	public Ritual(String pName, int pLevel , RitualType pRitualType, String pDescription) {
 		name = pName;
 		level = pLevel;
         ritualType = pRitualType;
         description = pDescription;
 	}
 
-	public Ritual(String pId, String pName, RitualType pRitualType) {
-		id = pId;
+	public Ritual(String pName, RitualType pRitualType) {
 		name = pName;
         ritualType = pRitualType;
     }
 
-    public Object clone() {
-        return new Ritual(id, name, level, (RitualType) ritualType.clone(), description);
-    }
-
+    @Override
 	public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 

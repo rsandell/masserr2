@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-feb-02 22:17:26
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class Profession implements Serializable, Cloneable {
+public class Profession implements NamedIdentifiable {
 	public static int MASK_INCOME_FACTOR = 10;
 
     @Id
@@ -47,31 +47,27 @@ public class Profession implements Serializable, Cloneable {
 	public Profession() {
 	}
 
-	public Profession(String pId, String pName, int pMonthlyIncome, boolean pMortal, boolean pMask) {
-		id = pId;
+	public Profession(String pName, int pMonthlyIncome, boolean pMortal, boolean pMask) {
 		name = pName;
 		monthlyIncome = pMonthlyIncome;
 		mortal = pMortal;
 		mask = pMask;
 	}
 
-	public Profession(String pId, String pName, int pMonthlyIncome, boolean pMortal) {
-		id = pId;
+	public Profession(String pName, int pMonthlyIncome, boolean pMortal) {
 		name = pName;
 		monthlyIncome = pMonthlyIncome;
 		mortal = pMortal;
 		mask = false;
 	}
 
-    public Object clone() {
-        return new Profession(id, name, monthlyIncome, mortal, mask);
-    }
-
+    @Override
 	public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 

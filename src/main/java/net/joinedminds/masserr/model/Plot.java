@@ -35,7 +35,7 @@ import java.sql.Date;
  * 
  * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
  */
-public class Plot implements Serializable, Cloneable{
+public class Plot implements NamedIdentifiable {
 
     @Id
     private String id;
@@ -49,18 +49,6 @@ public class Plot implements Serializable, Cloneable{
     private String storyTellerDescription;
 
 
-    public Plot(String pId, String pTitle, String pDescription, Date pCreated, String pPositive, String pNegative, boolean pDone, Domain pDomain, String storyTellerDescription) {
-        id = pId;
-        title = pTitle;
-        description = pDescription;
-        created = pCreated;
-        positive = pPositive;
-        negative = pNegative;
-        done = pDone;
-        domain = pDomain;
-        this.storyTellerDescription = storyTellerDescription;
-    }
-
     public Plot(String pTitle, String pDescription, Date pCreated, String pPositive, String pNegative, boolean pDone, Domain pDomain, String storyTellerDescription) {
         title = pTitle;
         description = pDescription;
@@ -72,6 +60,7 @@ public class Plot implements Serializable, Cloneable{
         this.storyTellerDescription = storyTellerDescription;
     }
 
+
     public Plot(String pTitle, String pDescription, Date pCreated, String pPositive, String pNegative, Domain pDomain, String storyTellerDescription) {
         title = pTitle;
         description = pDescription;
@@ -82,8 +71,7 @@ public class Plot implements Serializable, Cloneable{
         this.storyTellerDescription = storyTellerDescription;
     }
 
-    public Plot(String pId, String pTitle, String pDescription, Date pCreated, Domain pDomain, String pSLdescription) {
-        id = pId;
+    public Plot(String pTitle, String pDescription, Date pCreated, Domain pDomain, String pSLdescription) {
         title = pTitle;
         description = pDescription;
         created = pCreated;
@@ -91,12 +79,12 @@ public class Plot implements Serializable, Cloneable{
         storyTellerDescription = pSLdescription;
     }
 
-    public Plot(String pId, String pTitle, Domain pDomain) {
-        id = pId;
+    public Plot(String pTitle, Domain pDomain) {
         title = pTitle;
         domain = pDomain;
     }
 
+    @Override
     public String getId() {
         return id;
     }
@@ -145,10 +133,6 @@ public class Plot implements Serializable, Cloneable{
         return done;
     }
 
-    public Object clone() {
-        return new Plot(id, title, description, (Date) created.clone(), positive, negative, done, (Domain) domain.clone(), storyTellerDescription);
-    }
-
     public void setDone(boolean pDone) {
         done = pDone;
     }
@@ -171,5 +155,15 @@ public class Plot implements Serializable, Cloneable{
 
     public void setStoryTellerDescription(String storyTellerDescription) {
         this.storyTellerDescription = storyTellerDescription;
+    }
+
+    /**
+     * The title actually.
+     *
+     * @return the "name"
+     */
+    @Override
+    public String getName() {
+        return getTitle();
     }
 }

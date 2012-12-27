@@ -34,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-feb-02 10:01:20
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class CreateRule implements Serializable, Cloneable {
+public class CreateRule implements Identifiable {
 
     @Id
     private String id;
@@ -47,15 +47,6 @@ public class CreateRule implements Serializable, Cloneable {
 	public CreateRule() {
 	}
 
-	public CreateRule(String pId, int pYearMin, int pYearMax, int pDisciplines, int pAttributes, int pAbilities) {
-		id = pId;
-		yearMin = pYearMin;
-		yearMax = pYearMax;
-		disciplines = pDisciplines;
-		attributes = pAttributes;
-		abilities = pAbilities;
-	}
-
 	public CreateRule(int pYearMin, int pYearMax, int pDisciplines, int pAttributes, int pAbilities) {
 		yearMin = pYearMin;
 		yearMax = pYearMax;
@@ -64,11 +55,8 @@ public class CreateRule implements Serializable, Cloneable {
 		abilities = pAbilities;
 	}
 
-    public Object clone() {
-        return new CreateRule(id, yearMin, yearMax, disciplines, attributes, abilities);
-    }
-
-	public String getId() {
+	@Override
+    public String getId() {
 		return id;
 	}
 

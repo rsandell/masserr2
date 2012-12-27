@@ -33,7 +33,7 @@ import java.text.NumberFormat;
  * Created: 2004-feb-13 17:41:20
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class Withdrawal implements java.io.Serializable, Cloneable {
+public class Withdrawal {
 
     private static final NumberFormat format = NumberFormat.getCurrencyInstance();
     private BankAccount bankAccount;
@@ -49,10 +49,6 @@ public class Withdrawal implements java.io.Serializable, Cloneable {
      * For serialization
      */
     public Withdrawal() {
-    }
-
-    public Object clone() {
-        return new Withdrawal((BankAccount) bankAccount.clone(), amount);
     }
 
 	public BankAccount getBankAccount() {

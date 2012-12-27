@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created: 2004-feb-17 21:10:37
  * @author <a href="mailto:the.bobby.is@home.se">Robert "Bobby" Sandell</a>
  */
-public class RolesGroup implements Serializable {
+public class RolesGroup implements NamedIdentifiable {
 
     @Id
     private String id;
@@ -25,14 +25,6 @@ public class RolesGroup implements Serializable {
     public RolesGroup() {
     }
 
-    public RolesGroup(String pId, String pName, Date pDate, String pDescription, String pType) {
-        id = pId;
-        name = pName;
-        date = pDate;
-        description = pDescription;
-        type = pType;
-    }
-
     public RolesGroup(String pName, Date pDate, String pDescription, String pType) {
         name = pName;
         date = pDate;
@@ -40,10 +32,12 @@ public class RolesGroup implements Serializable {
         type = pType;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }

@@ -36,7 +36,7 @@ import java.util.Vector;
  * 
  * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
  */
-public class Player implements Serializable, Cloneable{
+public class Player implements NamedIdentifiable {
     @Id
     private String id;
     private String name;
@@ -47,16 +47,14 @@ public class Player implements Serializable, Cloneable{
     private Vector<Role> roles;
     private List<Experience> experienceList;
 
-    public Player(String pId, String pName, String pAddress, String pPhone, String pEmail) {
-        id = pId;
+    public Player(String pName, String pAddress, String pPhone, String pEmail) {
         name = pName;
         address = pAddress;
         phone = pPhone;
         email = pEmail;
     }
 
-    public Player(String pId, String pName) {
-        id = pId;
+    public Player(String pName) {
         name = pName;
         address = "";
         phone = "";
@@ -66,14 +64,12 @@ public class Player implements Serializable, Cloneable{
     public Player() {
     }
 
-    public Object clone() {
-        return new Player(id, name, address, phone, email);
-    }
-
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }

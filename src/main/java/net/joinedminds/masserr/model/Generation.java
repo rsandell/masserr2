@@ -24,6 +24,8 @@
 
 package net.joinedminds.masserr.model;
 
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 /**
@@ -33,7 +35,8 @@ import java.io.Serializable;
  * Created: 2004-jan-10 01:27:51
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class Generation implements Serializable , Cloneable {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"generation"}))
+public class Generation implements Identifiable {
     private int generation;
 	private int bloodPool;
 	private int spendBlood;
@@ -57,10 +60,6 @@ public class Generation implements Serializable , Cloneable {
 		willpowerStart = pWillpowerStart;
 		willpowerMax = pWillpowerMax;
         humanBlood = pHumanBlood;
-    }
-
-    public Object clone() {
-        return new Generation(generation, bloodPool, spendBlood, abilitiesMax, disciplinesMax, traitsMax, willpowerStart, willpowerMax, humanBlood);
     }
 
 	public int getGeneration() {
@@ -139,4 +138,14 @@ public class Generation implements Serializable , Cloneable {
 	public String toString() {
 		return String.valueOf(generation);
 	}
+
+    /**
+     * The generation actually.
+     *
+     * @return the "id"
+     */
+    @Override
+    public String getId() {
+        return String.valueOf(generation);
+    }
 }
