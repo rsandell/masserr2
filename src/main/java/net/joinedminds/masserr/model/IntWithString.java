@@ -33,7 +33,7 @@ import java.io.Serializable;
  * Created: 2004-jan-11 01:21:56
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class IntWithString implements Serializable, Cloneable  {
+public class IntWithString {
 
 	private int number;
 	private String string;
@@ -50,10 +50,6 @@ public class IntWithString implements Serializable, Cloneable  {
 		string = pString;
 		number = pNumber;
 	}
-
-    public Object clone() {
-        return new IntWithString(number, string);
-    }
 
 	public int getNumber() {
 		return number;

@@ -48,7 +48,7 @@ public class Role implements NamedIdentifiable {
     private String id;
     private String name;
     private Generation generation;
-    private IntWithString sire;
+    private Role sire;
     private Date embraced;
     private Clan clan;
     private String nature;
@@ -116,7 +116,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -148,7 +148,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -181,7 +181,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul, int pExtraMonthlyIncome, String pConcienseORconviction, String pSelfControlORinstinct) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul, int pExtraMonthlyIncome, String pConcienseORconviction, String pSelfControlORinstinct) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -217,7 +217,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, String pConcienseORconviction, String pSelfControlORinstinct) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, String pConcienseORconviction, String pSelfControlORinstinct) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -294,11 +294,11 @@ public class Role implements NamedIdentifiable {
         generation = pGeneration;
     }
 
-    public IntWithString getSire() {
+    public Role getSire() {
         return sire;
     }
 
-    public void setSire(IntWithString pSire) {
+    public void setSire(Role pSire) {
         sire = pSire;
     }
 

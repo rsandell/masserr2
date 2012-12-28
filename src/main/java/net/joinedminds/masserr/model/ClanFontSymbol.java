@@ -34,12 +34,12 @@ import java.io.Serializable;
  * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
  * @deprecated Don't think we'll use the fonts anymore
  */
-public class ClanFontSymbol implements Serializable, Cloneable {
-    private int clanId;
+public class ClanFontSymbol {
+    private String clanId;
     private String fontName;
     private char character;
 
-    public ClanFontSymbol(int pClanId, String pFontName, char pCharacter) {
+    public ClanFontSymbol(String pClanId, String pFontName, char pCharacter) {
         clanId = pClanId;
         fontName = pFontName;
         character = pCharacter;
@@ -51,15 +51,11 @@ public class ClanFontSymbol implements Serializable, Cloneable {
     public ClanFontSymbol() {
     }
 
-    public Object clone() {
-        return new ClanFontSymbol(clanId, fontName, character);
-    }
-
-    public int getClanId() {
+    public String getClanId() {
         return clanId;
     }
 
-    public void setClanId(int pClanId) {
+    public void setClanId(String pClanId) {
         clanId = pClanId;
     }
 

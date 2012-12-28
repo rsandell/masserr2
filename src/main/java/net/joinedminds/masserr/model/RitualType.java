@@ -75,9 +75,8 @@ public class RitualType implements NamedIdentifiable {
 
         RitualType that = (RitualType) o;
 
-        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        return !(getId() != null ? !getId().equals(that.getId()) : that.getId() != null);
 
-        return true;
     }
 
     @Override

@@ -26,7 +26,6 @@ package net.joinedminds.masserr.model;
 
 import javax.persistence.Id;
 import java.text.NumberFormat;
-import java.io.Serializable;
 
 /**
  * Description
@@ -35,7 +34,7 @@ import java.io.Serializable;
  * Created: 2004-feb-06 13:48:10
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class BankAccount implements Serializable, Cloneable {
+public class BankAccount implements Identifiable {
 	@Id
     private String id;
 	private String ownerName;
@@ -49,25 +48,21 @@ public class BankAccount implements Serializable, Cloneable {
     public BankAccount() {
     }
 
-	public BankAccount(String pId, String pOwnerName, double pAmmount, boolean pIncome, boolean pActive) {
-		id = pId;
+	public BankAccount(String pOwnerName, double pAmount, boolean pIncome, boolean pActive) {
 		ownerName = pOwnerName;
-		amount = pAmmount;
+		amount = pAmount;
 		income = pIncome;
 		active = pActive;
 	}
 
-	public BankAccount(String pOwnerName, float pAmmount, boolean pIncome) {
+	public BankAccount(String pOwnerName, float pAmount, boolean pIncome) {
 		ownerName = pOwnerName;
-		amount = pAmmount;
+		amount = pAmount;
 		income = pIncome;
 		active = true;
 	}
 
-    public Object clone(){
-        return new BankAccount(id, ownerName, amount, income, active);
-    }
-
+    @Override
 	public String getId() {
 		return id;
 	}
