@@ -38,7 +38,7 @@ import java.io.Serializable;
  * Created: 2004-jan-27 21:43:06
  * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
  */
-public class Group implements Serializable, Cloneable {
+public class Group implements NamedIdentifiable {
     @Id
     private String id;
 	private String name;
@@ -53,48 +53,37 @@ public class Group implements Serializable, Cloneable {
     public Group() {
     }
 
-	public Group(String pId, String pName, Date pDate, String pDescription, String pType) {
-		id = pId;
-		name = pName;
-		date = pDate;
-		description = pDescription;
-		type = pType;
-		roles = new LinkedList<Role>();
-	}
-
 	public Group(String pName, Date pDate, String pDescription, String pType) {
 		name = pName;
 		date = pDate;
 		description = pDescription;
 		type = pType;
-		roles = new LinkedList<Role>();
+		roles = new LinkedList<>();
 	}
 
-    public Object clone() {
-        return new Group(id, name, new Date(date.getTime()), description, type);
-    }
-
-	public List getRoles() {
+    public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List pRoles) {
+	public void setRoles(List<Role> pRoles) {
 		roles = pRoles;
 	}
 
 	public void addRole(Role pRole) {
-		roles.add(pRole);
+		getRoles().add(pRole);
 	}
 
 	public String toString() {
 		return name;
 	}
 
-	public String getId() {
+	@Override
+    public String getId() {
 		return id;
 	}
 
-	public String getName() {
+	@Override
+    public String getName() {
 		return name;
 	}
 

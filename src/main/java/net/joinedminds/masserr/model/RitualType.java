@@ -67,4 +67,21 @@ public class RitualType implements NamedIdentifiable {
     public String toString() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RitualType)) return false;
+
+        RitualType that = (RitualType) o;
+
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId() != null ? getId().hashCode() : 0;
+    }
 }

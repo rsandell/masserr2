@@ -25,8 +25,9 @@
 package net.joinedminds.masserr.model;
 
 
+import com.google.common.collect.ImmutableList;
+
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -40,13 +41,12 @@ import static java.util.Collections.emptyList;
  *
  * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
  */
-public class Role implements Serializable {
+public class Role implements NamedIdentifiable {
     public static final int GHOUL_GENERATION = 17;
 
     @Id
     private String id;
     private String name;
-    private String playerName;
     private Generation generation;
     private IntWithString sire;
     private Date embraced;
@@ -73,8 +73,8 @@ public class Role implements Serializable {
     private List<Ability> mentalAbilities;
     private List<MeritOrFlaw> merits;
     private List<MeritOrFlaw> flaws;
-    private List derangements;
-    private List otherTraits;
+    private List<String> derangements;
+    private List<OtherTrait> otherTraits;
     private boolean ghoul = false;
     private int extraMonthlyIncome;
     private List<Profession> professions;
@@ -91,7 +91,7 @@ public class Role implements Serializable {
     private String necromancyType = "";
     private List<Plot> plots;
     private String quote;
-    private boolean mSLP = false;
+    private boolean npc = false;
     private List<String> beastTraits;
     private FightOrFlight fightForm;
     private FightOrFlight flightForm;
@@ -100,8 +100,7 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public Role(String pId, String pName, Clan pClan) {
-        id = pId;
+    public Role(String pName, Clan pClan) {
         name = pName;
         clan = pClan;
         disciplines = emptyList();
@@ -114,13 +113,11 @@ public class Role implements Serializable {
         flaws = emptyList();
         derangements = emptyList();
         otherTraits = emptyList();
-        rituals = new LinkedList<Ritual>();
+        rituals = new LinkedList<>();
     }
 
-    public Role(String pId, String pName, String pPlayerName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury) {
-        id = pId;
+    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury) {
         name = pName;
-        playerName = pPlayerName;
         generation = pGeneration;
         sire = pSire;
         embraced = pEmbraced;
@@ -148,13 +145,11 @@ public class Role implements Serializable {
         flaws = emptyList();
         derangements = emptyList();
         otherTraits = emptyList();
-        rituals = new LinkedList<Ritual>();
+        rituals = new LinkedList<>();
     }
 
-    public Role(String pId, String pName, String pPlayerName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul) {
-        id = pId;
+    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul) {
         name = pName;
-        playerName = pPlayerName;
         generation = pGeneration;
         sire = pSire;
         embraced = pEmbraced;
@@ -183,13 +178,11 @@ public class Role implements Serializable {
         flaws = emptyList();
         derangements = emptyList();
         otherTraits = emptyList();
-        rituals = new LinkedList<Ritual>();
+        rituals = new LinkedList<>();
     }
 
-    public Role(String pId, String pName, String pPlayerName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul, int pExtraMonthlyIncome, String pConcienseORconviction, String pSelfControlORinstinct) {
-        id = pId;
+    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul, int pExtraMonthlyIncome, String pConcienseORconviction, String pSelfControlORinstinct) {
         name = pName;
-        playerName = pPlayerName;
         generation = pGeneration;
         sire = pSire;
         embraced = pEmbraced;
@@ -221,12 +214,11 @@ public class Role implements Serializable {
         flaws = emptyList();
         derangements = emptyList();
         otherTraits = emptyList();
-        rituals = new LinkedList<Ritual>();
+        rituals = new LinkedList<>();
     }
 
-    public Role(String pName, String pPlayerName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, String pConcienseORconviction, String pSelfControlORinstinct) {
+    public Role(String pName, Generation pGeneration, IntWithString pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, String pConcienseORconviction, String pSelfControlORinstinct) {
         name = pName;
-        playerName = pPlayerName;
         generation = pGeneration;
         sire = pSire;
         embraced = pEmbraced;
@@ -256,21 +248,23 @@ public class Role implements Serializable {
         flaws = emptyList();
         derangements = emptyList();
         otherTraits = emptyList();
-        rituals = new LinkedList<Ritual>();
+        rituals = new LinkedList<>();
     }
 
-    public List getResources() {
+    public List<Resource> getResources() {
         return resources;
     }
 
-    public void setResources(List pResources) {
+    public void setResources(List<Resource> pResources) {
         resources = pResources;
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -446,15 +440,15 @@ public class Role implements Serializable {
         return disciplines;
     }
 
-    public void setDisciplines(List pDisciplines) {
+    public void setDisciplines(List<Discipline> pDisciplines) {
         disciplines = pDisciplines;
     }
 
-    public List getThaumaturgicalPaths() {
+    public List<Path> getThaumaturgicalPaths() {
         return thaumaturgicalPaths;
     }
 
-    public void setThaumaturgicalPaths(List pThaumaturgicalPaths) {
+    public void setThaumaturgicalPaths(List<Path> pThaumaturgicalPaths) {
         thaumaturgicalPaths = pThaumaturgicalPaths;
     }
 
@@ -466,11 +460,11 @@ public class Role implements Serializable {
         mThaumaturgicalRituals = pThaumaturgicalRituals;
     }*/
 
-    public List getNecromancyPaths() {
+    public List<Path> getNecromancyPaths() {
         return necromancyPaths;
     }
 
-    public void setNecromancyPaths(List pNecromancyPaths) {
+    public void setNecromancyPaths(List<Path> pNecromancyPaths) {
         necromancyPaths = pNecromancyPaths;
     }
 
@@ -490,59 +484,59 @@ public class Role implements Serializable {
         rituals = pRituals;
     }
 
-    public void setPhysicalAbilities(List pAbilities) {
+    public void setPhysicalAbilities(List<Ability> pAbilities) {
         physicalAbilities = pAbilities;
     }
 
-    public List getPhysicalAbilities() {
+    public List<Ability> getPhysicalAbilities() {
         return physicalAbilities;
     }
 
-    public List getSocialAbilities() {
+    public List<Ability> getSocialAbilities() {
         return socialAbilities;
     }
 
-    public void setSocialAbilities(List pSocialAbilities) {
+    public void setSocialAbilities(List<Ability> pSocialAbilities) {
         socialAbilities = pSocialAbilities;
     }
 
-    public List getMentalAbilities() {
+    public List<Ability> getMentalAbilities() {
         return mentalAbilities;
     }
 
-    public void setMentalAbilities(List pMentalAbilities) {
+    public void setMentalAbilities(List<Ability> pMentalAbilities) {
         mentalAbilities = pMentalAbilities;
     }
 
-    public List getMerits() {
+    public List<MeritOrFlaw> getMerits() {
         return merits;
     }
 
-    public void setMerits(List pMerits) {
+    public void setMerits(List<MeritOrFlaw> pMerits) {
         merits = pMerits;
     }
 
-    public List getFlaws() {
+    public List<MeritOrFlaw> getFlaws() {
         return flaws;
     }
 
-    public void setFlaws(List pFlaws) {
+    public void setFlaws(List<MeritOrFlaw> pFlaws) {
         flaws = pFlaws;
     }
 
-    public List getDerangements() {
+    public List<String> getDerangements() {
         return derangements;
     }
 
-    public void setDerangements(List pDerangements) {
+    public void setDerangements(List<String> pDerangements) {
         derangements = pDerangements;
     }
 
-    public List getOtherTraits() {
+    public List<OtherTrait> getOtherTraits() {
         return otherTraits;
     }
 
-    public void setOtherTraits(List pOtherTraits) {
+    public void setOtherTraits(List<OtherTrait> pOtherTraits) {
         otherTraits = pOtherTraits;
     }
 
@@ -565,27 +559,15 @@ public class Role implements Serializable {
     }
 
     public boolean hasRituals() {
-        if (rituals != null) {
-            return rituals.size() > 0;
-        }
-        return false;
+        return rituals != null && rituals.size() > 0;
     }
 
-    public List<RitualType> getRitualTypes() {
-        ArrayList<RitualType> list = new ArrayList<RitualType>();
-        RitualType lastType = null;
-        for (int i = 0; i < rituals.size(); i++) {
-            Ritual ritual = rituals.get(i);
-            if (lastType == null) {
-                lastType = ritual.getRitualType();
-                list.add(lastType);
-            }
-            else if (lastType.getId() != ritual.getRitualType().getId()) {
-                lastType = ritual.getRitualType();
-                list.add(lastType);
-            }
+    public Set<RitualType> getRitualTypes() {
+        Set<RitualType> set = new HashSet<>();
+        for (Ritual ritual : getRituals()) {
+            set.add(ritual.getRitualType());
         }
-        return list;
+        return set;
     }
 
     public static int getAge(Date pEmbraced) {
@@ -618,37 +600,31 @@ public class Role implements Serializable {
         mBaseMoneyForAge = pBaseMoneyForAge;
     }*/
 
-    public static int calculateBaseMonthlyIncome(List pAbilities, List pProfessions) {
-
+    public static int calculateBaseMonthlyIncome(List<Ability> pAbilities, List<Profession> pProfessions) {
         int baseIncome = 0;
-        for (int i = 0; i < pAbilities.size(); i++) {
-            Ability ability = (Ability) pAbilities.get(i);
+        for (Ability ability : pAbilities) {
             baseIncome += (ability.getBaseMonthlyIncome() * ability.getDots());
         }
-        for (int i = 0; i < pProfessions.size(); i++) {
-            Profession profession = (Profession) pProfessions.get(i);
+        for (Profession profession : pProfessions) {
             if (profession.isMask()) {
                 baseIncome += (profession.getMonthlyIncome() * Profession.MASK_INCOME_FACTOR);
-            }
-            else {
+            } else {
                 baseIncome += profession.getMonthlyIncome();
             }
         }
         return baseIncome;
     }
 
-    public static long calculateTotalMonthlyIncome(List pAbilities, List pProfessions, List pResources) {
+    public static long calculateTotalMonthlyIncome(List<Ability> pAbilities, List<Profession> pProfessions, List<Resource> pResources) {
         long baseIncome = calculateBaseMonthlyIncome(pAbilities, pProfessions);
         long incomeResources = 0;
-        for (int i = 0; i < pResources.size(); i++) {
-            Resource resource = (Resource) pResources.get(i);
+        for (Resource resource : pResources) {
             incomeResources += (resource.getIncome() * resource.getPercent());
         }
-        long totalIncome = baseIncome + incomeResources;
-        return totalIncome;
+        return baseIncome + incomeResources;
     }
 
-    public List getProfessions() {
+    public List<Profession> getProfessions() {
         return professions;
     }
 
@@ -656,37 +632,32 @@ public class Role implements Serializable {
         professions = pProfessions;
     }
 
-    public List compileInfluences() {
+    public List<Influence> compileInfluences() {
         List<Influence> list = new LinkedList<>();
         HashMap<String, Influence> map = new HashMap<>();
         if (resources != null) {
-            for (int i = 0; i < resources.size(); i++) {
-                Resource resource = resources.get(i);
-                List influences = resource.getInfluences();
-                for (int j = 0; j < influences.size(); j++) {
-                    Influence influence = (Influence) influences.get(j);
-                    Influence stored = (Influence) map.get(influence.getId() + "");
+            for (Resource resource : resources) {
+                List<Influence> influences = resource.getInfluences();
+                for (Influence influence : influences) {
+                    Influence stored = map.get(influence.getId() + "");
                     if (stored == null) {
                         stored = new Influence(influence.getId(), influence.getName(), influence.getDots(), influence.getNotes());
                         map.put(influence.getId() + "", stored);
                         list.add(stored);
-                    }
-                    else {
+                    } else {
                         stored.setDots(stored.getDots() + influence.getDots());
                     }
                 }
             }
         }
         if (influences != null) {
-            for (int i = 0; i < influences.size(); i++) {
-                Influence influence = influences.get(i);
+            for (Influence influence : influences) {
                 Influence stored = map.get(influence.getId() + "");
                 if (stored == null) {
                     stored = new Influence(influence.getId(), influence.getName(), influence.getDots(), influence.getNotes());
                     map.put(influence.getId() + "", stored);
                     list.add(stored);
-                }
-                else {
+                } else {
                     stored.setDots(stored.getDots() + influence.getDots());
                 }
             }
@@ -694,11 +665,11 @@ public class Role implements Serializable {
         return list;
     }
 
-    public List getBankAccounts() {
+    public List<BankAccount> getBankAccounts() {
         return bankAccounts;
     }
 
-    public void setBankAccounts(List pBankAccounts) {
+    public void setBankAccounts(List<BankAccount> pBankAccounts) {
         bankAccounts = pBankAccounts;
     }
 
@@ -720,53 +691,36 @@ public class Role implements Serializable {
 
     public void addInfluence(Influence pInf) {
         if (influences == null) {
-            influences = new Vector();
+            influences = new LinkedList<>();
         }
         influences.add(pInf);
     }
 
     public int baseMonthlyIncome() {
-        List abilities = new ArrayList();
-        for (int i = 0; i < physicalAbilities.size(); i++) {
-            Ability ability = (Ability) physicalAbilities.get(i);
-            abilities.add(ability);
-        }
-        for (int i = 0; i < socialAbilities.size(); i++) {
-            Ability ability = (Ability) socialAbilities.get(i);
-            abilities.add(ability);
-        }
-        for (int i = 0; i < mentalAbilities.size(); i++) {
-            Ability ability = (Ability) mentalAbilities.get(i);
-            abilities.add(ability);
-        }
-        int base = calculateBaseMonthlyIncome(abilities, professions);
-        return base;
+        List<Ability> abilities = combinedAbilities();
+        return calculateBaseMonthlyIncome(abilities, professions);
+    }
+
+    private List<Ability> combinedAbilities() {
+        ImmutableList.Builder<Ability> builder = ImmutableList.builder();
+        return builder.
+                addAll(getPhysicalAbilities()).
+                addAll(getSocialAbilities()).
+                addAll(getMentalAbilities()).build();
     }
 
     public long totalMonthlyIncome() {
-        List abilities = new ArrayList();
-        for (int i = 0; i < physicalAbilities.size(); i++) {
-            Ability ability = (Ability) physicalAbilities.get(i);
-            abilities.add(ability);
-        }
-        for (int i = 0; i < socialAbilities.size(); i++) {
-            Ability ability = (Ability) socialAbilities.get(i);
-            abilities.add(ability);
-        }
-        for (int i = 0; i < mentalAbilities.size(); i++) {
-            Ability ability = (Ability) mentalAbilities.get(i);
-            abilities.add(ability);
-        }
-        long base = calculateTotalMonthlyIncome(abilities, professions, resources);
+        List<Ability> abilities = combinedAbilities();
+        long base = calculateTotalMonthlyIncome(abilities, getProfessions(), getResources());
         return base + extraMonthlyIncome;
     }
 
     public BankAccount getIncomeBankAccount() {
-        if (bankAccounts != null && bankAccounts.size() > 0) {
-            for (int i = 0; i < bankAccounts.size(); i++) {
-                BankAccount bankAccount = (BankAccount) bankAccounts.get(i);
-                if (bankAccount.isIncome()) {
-                    return bankAccount;
+        List<BankAccount> accounts = getBankAccounts();
+        if (accounts != null && !accounts.isEmpty()) {
+            for (BankAccount account : accounts) {
+                if (account.isIncome()) {
+                    return account;
                 }
             }
         }
@@ -779,7 +733,7 @@ public class Role implements Serializable {
      * else 0 is returned
      *
      * @return the Experience for the Role or the Player
-     * @see AppPreferences#getReadXPFrom()
+     * AppPreferences#getReadXPFrom()
      * @see #getPlayer()
      * @see Player
      */
@@ -797,7 +751,8 @@ public class Role implements Serializable {
 
     /**
      * Sets this Roles experience.
-     * @param pExperience
+     *
+     * @param pExperience the total experience.
      */
     public void setExperience(int pExperience) {
         experience = pExperience;
@@ -867,12 +822,12 @@ public class Role implements Serializable {
         quote = pQuote;
     }
 
-    public boolean isSLP() {
-        return mSLP;
+    public boolean isNpc() {
+        return npc;
     }
 
-    public void setSLP(boolean pSLP) {
-        mSLP = pSLP;
+    public void setNpc(boolean pNpc) {
+        npc = pNpc;
     }
 
     public List<String> getBeastTraits() {

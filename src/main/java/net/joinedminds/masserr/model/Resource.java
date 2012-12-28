@@ -129,7 +129,7 @@ public class Resource implements NamedIdentifiable {
 		influences = pInfluences;
 	}
 
-	public List getInfluences() {
+	public List<Influence> getInfluences() {
 		return influences;
 	}
 
