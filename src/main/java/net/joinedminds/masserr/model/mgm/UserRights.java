@@ -32,7 +32,7 @@ import java.util.BitSet;
  * <p/>
  * Created: 2004-mar-26 01:35:34
  * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public class UserRights implements Serializable, Cloneable {
 

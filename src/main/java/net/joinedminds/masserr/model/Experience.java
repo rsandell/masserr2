@@ -34,7 +34,7 @@ import java.util.Date;
  * <p/>
  * Created: 2004-maj-18 16:18:17
  * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public class Experience implements Serializable {
     private int amount;

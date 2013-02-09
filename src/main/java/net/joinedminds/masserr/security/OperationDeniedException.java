@@ -30,7 +30,7 @@ package net.joinedminds.masserr.security;
  * <p/>
  * Created: 2004-apr-14 02:36:33
  * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public class OperationDeniedException extends Exception {
     public OperationDeniedException(String reason) {

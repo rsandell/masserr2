@@ -31,7 +31,7 @@ import java.text.NumberFormat;
  *
  * 
  * Created: 2004-feb-13 17:41:20
- * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
+ * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
 public class Withdrawal {
 

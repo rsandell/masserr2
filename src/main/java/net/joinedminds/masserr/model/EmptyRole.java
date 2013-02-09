@@ -32,7 +32,7 @@ import java.util.*;
  * <p/>
  * Created: 2004-mar-23 19:45:12
  * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public class EmptyRole {
     private Clan clan;

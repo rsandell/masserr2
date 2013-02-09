@@ -32,7 +32,7 @@ import java.io.Serializable;
  *
  * 
  * Created: 2004-jan-14 01:09:22
- * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
+ * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
 public class OtherTrait implements NamedIdentifiable  {
 

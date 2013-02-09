@@ -33,7 +33,7 @@ import java.sql.Date;
  * <p/>
  * Created: 2004-apr-25 17:34:51
  * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public class Plot implements NamedIdentifiable {
 

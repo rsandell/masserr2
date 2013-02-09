@@ -31,7 +31,7 @@ import java.io.Serializable;
  * <p/>
  * Created: 2004-mar-27 01:32:29
  * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  * @deprecated Don't think we'll use the fonts anymore
  */
 public class ClanFontSymbol {

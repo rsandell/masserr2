@@ -32,7 +32,7 @@ import java.io.Serializable;
  *
  * 
  * Created: 2004-feb-02 10:01:20
- * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
+ * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
 public class CreateRule implements Identifiable {
 

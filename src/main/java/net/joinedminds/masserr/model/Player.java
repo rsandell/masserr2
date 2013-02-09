@@ -34,7 +34,7 @@ import java.util.Vector;
  * <p/>
  * Created: 2004-jun-29 19:57:15
  * 
- * @author <a href="mailto:the.bobby.is@home.se>Robert Sandell</a>"
+ * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public class Player implements NamedIdentifiable {
     @Id

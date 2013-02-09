@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2004-2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ * Copyright (c) 2004,2013-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,65 +22,25 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.model;
+package net.joinedminds.masserr.db;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import net.joinedminds.masserr.model.CreateRule;
+
+import java.sql.SQLException;
+import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  * Description.
  * <p/>
- * Created: 2004-mar-22 22:12:29
+ * Created: 2004-mar-15 12:42:40
  * 
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
-public class RitualType implements NamedIdentifiable {
+public interface CreateRules extends BasicDB {
+    CreateRule getRule(int pYear) throws SQLException, RemoteException;
 
-    @Id
-    private String id;
-    private String name;
+    CreateRule getRule(String pYear) throws SQLException, RemoteException;
 
-    public RitualType(String pName) {
-        name = pName;
-    }
-
-    /**
-     * For serialization
-     */
-    public RitualType() {
-    }
-
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String pName) {
-        name = pName;
-    }
-
-    public String toString() {
-        return name;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof RitualType)) return false;
-
-        RitualType that = (RitualType) o;
-
-        return !(getId() != null ? !getId().equals(that.getId()) : that.getId() != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return getId() != null ? getId().hashCode() : 0;
-    }
+    List<CreateRule> getRules()  throws SQLException, RemoteException;
 }

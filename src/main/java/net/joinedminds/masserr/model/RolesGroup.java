@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Description
  *
  * Created: 2004-feb-17 21:10:37
- * @author <a href="mailto:the.bobby.is@home.se">Robert "Bobby" Sandell</a>
+ * @author <a href="mailto:sandell.robert@gmail.com">Robert "Bobby" Sandell</a>
  */
 public class RolesGroup implements NamedIdentifiable {
 

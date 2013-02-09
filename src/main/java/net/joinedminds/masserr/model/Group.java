@@ -36,7 +36,7 @@ import java.io.Serializable;
  *
  * 
  * Created: 2004-jan-27 21:43:06
- * @author <a href="the.bobby.is@home.se">Robert Sandell</a>
+ * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
 public class Group implements NamedIdentifiable {
     @Id

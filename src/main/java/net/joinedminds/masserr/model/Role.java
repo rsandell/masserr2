@@ -39,7 +39,7 @@ import static java.util.Collections.emptyList;
  * <p/>
  * Created: 2004-jan-15 23:02:20
  *
- * @author <a href="the.bobby.is@home.se"> Robert Sandell</a>
+ * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
 public class Role implements NamedIdentifiable {
     public static final int GHOUL_GENERATION = 17;
