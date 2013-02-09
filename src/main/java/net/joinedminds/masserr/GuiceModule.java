@@ -26,6 +26,8 @@ package net.joinedminds.masserr;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
+import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
+import net.joinedminds.masserr.db.OrientProvider;
 
 /**
  * Main Guice module.
@@ -49,6 +51,7 @@ public class GuiceModule extends AbstractModule {
         bind(String.class).annotatedWith(Names.named("DB_URL")).toInstance(dbUrl);
         bind(String.class).annotatedWith(Names.named("DB_USER")).toInstance(dbUser);
         bind(String.class).annotatedWith(Names.named("DB_PASSWD")).toInstance(dbPasswd);
+        bind(OObjectDatabaseTx.class).toProvider(OrientProvider.class);
         bind(Masserr.class);
     }
 }

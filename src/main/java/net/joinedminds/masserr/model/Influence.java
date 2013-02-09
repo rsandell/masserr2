@@ -39,41 +39,18 @@ public class Influence implements NamedIdentifiable {
     @Id
     private String id;
     private String name;
-    private int dots;
     private String notes;
 
     public Influence() {
     }
 
-    public Influence(String pName, int pDots) {
+    public Influence(String pName, String pNotes) {
         name = pName;
-        dots = pDots;
-    }
-
-    public Influence(String pName, int pDots, String pNotes) {
-        name = pName;
-        dots = pDots;
         notes = pNotes;
     }
 
     public Influence(String pName) {
         name = pName;
-        dots = 0;
-    }
-
-    /**
-     * Should only be used for UI representations.
-     *
-     * @param id the id
-     * @param name the name
-     * @param dots the dots
-     * @param notes the notes.
-     */
-    public Influence(String id, String name, int dots, String notes) {
-        this.id = id;
-        this.name = name;
-        this.dots = dots;
-        this.notes = notes;
     }
 
     public String getNotes() {
@@ -98,19 +75,8 @@ public class Influence implements NamedIdentifiable {
         name = pName;
     }
 
-    public int getDots() {
-        return dots;
-    }
-
-    public void setDots(int pDots) {
-        dots = pDots;
-    }
-
     public String toString() {
         String str = name;
-        if (dots > 0) {
-            str += " " + dots;
-        }
         if (notes != null && notes.length() > 0) {
             str += " (" + notes + ")";
         }

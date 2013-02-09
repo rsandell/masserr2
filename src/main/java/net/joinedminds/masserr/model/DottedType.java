@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2004,2013-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ * Copyright (c) 2013-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,21 +22,38 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.db;
-
-import net.joinedminds.masserr.model.mgm.User;
-
-import java.sql.SQLException;
-import java.rmi.RemoteException;
+package net.joinedminds.masserr.model;
 
 /**
- * Description.
- * <p/>
- * Created: 2004-mar-15 12:42:24
- * 
- * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
+ * Something in a Role that has an ammount of dots unique to the Role.
+ *
+ * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public interface BasicDB {
-    /*User login(String pUserName, String pPassword) throws SQLException, RemoteException;
-    public User getLoginUser() throws RemoteException;*/
+public class DottedType<T> {
+    private T type;
+    private int dots;
+
+    public DottedType(T type, int dots) {
+        this.type = type;
+        this.dots = dots;
+    }
+
+    public DottedType() {
+    }
+
+    public T getType() {
+        return type;
+    }
+
+    public void setType(T type) {
+        this.type = type;
+    }
+
+    public int getDots() {
+        return dots;
+    }
+
+    public void setDots(int dots) {
+        this.dots = dots;
+    }
 }

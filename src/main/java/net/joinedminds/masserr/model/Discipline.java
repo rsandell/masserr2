@@ -39,36 +39,31 @@ public class Discipline implements NamedIdentifiable  {
     private String id;
 	private String name;
 	private boolean offClan;
-	private int dots;
 	private Ability retestAbility = null;
 
 	public Discipline() {
 	}
 
-	public Discipline(String pName, boolean pOfClan, int pDots, Ability pRetestAbility) {
+	public Discipline(String pName, boolean pOfClan, Ability pRetestAbility) {
 		name = pName;
 		offClan = pOfClan;
-		dots = pDots;
 		retestAbility = pRetestAbility;
 	}
 
-	public Discipline(String pName, boolean pOfClan, int pDots) {
+	public Discipline(String pName, boolean pOfClan) {
 		name = pName;
 		offClan = pOfClan;
-		dots = pDots;
 	}
 
 	public Discipline(String pName, Ability pRetestAbility) {
 		name = pName;
 		retestAbility = pRetestAbility;
 		offClan = false;
-		dots = 0;
 	}
 
 	public Discipline(String pName) {
 		name = pName;
 		offClan = false;
-		dots = 0;
 	}
 
     @Override
@@ -90,16 +85,9 @@ public class Discipline implements NamedIdentifiable  {
 		return offClan;
 	}
 
-	public int getDots() {
-		return dots;
-	}
 
 	public void setOffClan(boolean pOfClan) {
 		offClan = pOfClan;
-	}
-
-	public void setDots(int pDots) {
-		dots = pDots;
 	}
 
 	public String toString() {

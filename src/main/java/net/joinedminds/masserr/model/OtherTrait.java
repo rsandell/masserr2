@@ -39,19 +39,12 @@ public class OtherTrait implements NamedIdentifiable  {
 	@Id
     private String id;
 	private String name;
-	private int dots;
 
 	public OtherTrait() {
 	}
 
-	public OtherTrait(String pName, int pDots) {
-		name = pName;
-		dots = pDots;
-	}
-
 	public OtherTrait(String pName) {
 		name = pName;
-		dots = 0;
 	}
 
     @Override
@@ -66,14 +59,6 @@ public class OtherTrait implements NamedIdentifiable  {
 
 	public void setName(String pName) {
 		name = pName;
-	}
-
-	public int getDots() {
-		return dots;
-	}
-
-	public void setDots(int pDots) {
-		dots = pDots;
 	}
 
 	public String toString() {

@@ -45,7 +45,7 @@ public class Resource implements NamedIdentifiable {
     private String description;
     private int income;
 	private int percent;
-	private List<Influence> influences;
+	private List<DottedType<Influence>> influences;
 	private float cost;
     private String type;
     private Domain domain;
@@ -62,7 +62,8 @@ public class Resource implements NamedIdentifiable {
         type = pType;
     }
 
-    public Resource(String pName, String pDescription, int pIncome, int pPercent, List<Influence> pInfluences, float pCost, Domain pDomain, String pType) {
+    public Resource(String pName, String pDescription, int pIncome, int pPercent,
+                    List<DottedType<Influence>> pInfluences, float pCost, Domain pDomain, String pType) {
         name = pName;
         description = pDescription;
         income = pIncome;
@@ -125,11 +126,11 @@ public class Resource implements NamedIdentifiable {
 		return name;
 	}
 
-	public void setInfluences(List<Influence> pInfluences) {
+	public void setInfluences(List<DottedType<Influence>> pInfluences) {
 		influences = pInfluences;
 	}
 
-	public List<Influence> getInfluences() {
+	public List<DottedType<Influence>> getInfluences() {
 		return influences;
 	}
 

@@ -38,51 +38,52 @@ import java.util.List;
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public interface ManipulationDB extends BasicDB {
-    void updateRole(Role pRole) throws SQLException, RemoteException;
 
-    void addRitual(Ritual pRitual) throws SQLException, RemoteException;
+    Role newRole();
 
-    void updateRitual(Ritual pRitual) throws SQLException, RemoteException;
+    Role saveRole(Role pRole);
 
-    int addRole(Role pRole) throws SQLException, RemoteException;
+    Ritual newRitual();
 
-    void addResource(Resource pResource) throws SQLException, RemoteException;
+    Ritual saveRitual(Ritual pRitual);
 
-    void updateResource(Resource pResource) throws SQLException, RemoteException;
+    Resource newResource();
 
-    void insertExperience(Role pRole, int pAmmount, String pReason) throws SQLException, RemoteException;
+    Resource saveResource(Resource pResource);
 
-    void insertExperience(List<RolesGroup> pGroupsList, List<Role> pRolesList, int pAmmount, String pReason) throws SQLException, RemoteException;
+    void insertExperience(Role pRole, int pAmmount, String pReason);
 
-    void updateBackgroundAndWill(Role pRole, String pBackground, String pWill) throws SQLException, RemoteException;
+    void insertExperience(List<RolesGroup> pGroupsList, List<Role> pRolesList, int pAmount, String pReason);
 
-    void addClanDisciplines(Clan pClan, Discipline[] pDisciplines) throws SQLException, RemoteException;
+    void updateBackgroundAndWill(Role pRole, String pBackground, String pWill);
 
-    void removeClanDisciplines(Clan pClan, Discipline[] pDisciplines) throws SQLException, RemoteException;
+    void addClanDisciplines(Clan pClan, Discipline[] pDisciplines);
 
-    void updateDiscipline(Discipline pDiscipline) throws SQLException, RemoteException;
+    void removeClanDisciplines(Clan pClan, Discipline[] pDisciplines);
 
-    void addDiscipline(Discipline pDiscipline) throws SQLException, RemoteException;
+    void updateDiscipline(Discipline pDiscipline);
 
-    void updateThaumaturgicalPath(IntWithString pPath) throws SQLException, RemoteException;
+    void addDiscipline(Discipline pDiscipline);
 
-    IntWithString addThaumaturgicalPath(String pName) throws SQLException, RemoteException;
+    void updateThaumaturgicalPath(IntWithString pPath);
 
-    void updateNecromancyPath(IntWithString pPath) throws SQLException, RemoteException;
+    IntWithString addThaumaturgicalPath(String pName);
 
-    IntWithString addNecromancyPath(String pName) throws SQLException, RemoteException;
+    void updateNecromancyPath(IntWithString pPath);
 
-    void updateMeritORflaw(MeritOrFlaw pToUpdate) throws SQLException, RemoteException;
+    IntWithString addNecromancyPath(String pName);
 
-    MeritOrFlaw addMeritORflaw(String pName) throws SQLException, RemoteException;
+    void updateMeritOrflaw(MeritOrFlaw pToUpdate);
 
-    void updateOtherTrait(IntWithString pToUpdate) throws SQLException, RemoteException;
+    MeritOrFlaw addMeritOrflaw(String pName);
 
-    IntWithString addOtherTrait(String pName) throws SQLException, RemoteException;
+    void updateOtherTrait(IntWithString pToUpdate);
 
-    void updatePlayer(Player pPlayer) throws SQLException, RemoteException;
+    IntWithString addOtherTrait(String pName);
 
-    void addPlayer(Player pPlayer) throws SQLException, RemoteException;
+    void updatePlayer(Player pPlayer);
 
-    void insertPlayersExperience(List<Player> pPlayers, int pAmmount, String pReason) throws SQLException, RemoteException;
+    void addPlayer(Player pPlayer);
+
+    void insertPlayersExperience(List<Player> pPlayers, int pAmmount, String pReason);
 }

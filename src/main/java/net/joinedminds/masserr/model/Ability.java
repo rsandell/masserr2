@@ -41,7 +41,6 @@ public class Ability implements NamedIdentifiable  {
 	private String name;
 	private char type;
 	private String specialisation;
-	private int dots;
 	private int baseMonthlyIncome;
 
 	public Ability() {
@@ -52,7 +51,6 @@ public class Ability implements NamedIdentifiable  {
 		name = pName;
 		type = pType;
 		specialisation = null;
-		dots = 0;
 	}
 
 	public Ability(String pId, String pName, char pType, int pBaseMonthlyIncome) {
@@ -67,7 +65,6 @@ public class Ability implements NamedIdentifiable  {
 		name = pName;
 		type = pType;
 		specialisation = pSpecialisation;
-		dots = pDots;
 	}
 
 	public Ability(String pId, String pName, char pType, String pSpecialisation, int pDots, int pBaseMonthlyIncome) {
@@ -75,7 +72,6 @@ public class Ability implements NamedIdentifiable  {
 		name = pName;
 		type = pType;
 		specialisation = pSpecialisation;
-		dots = pDots;
 		baseMonthlyIncome = pBaseMonthlyIncome;
 	}
 
@@ -84,7 +80,6 @@ public class Ability implements NamedIdentifiable  {
 		name = pName;
 		type = pType;
 		specialisation = pSpecialisation;
-		dots = 0;
 	}
 
 	public int getBaseMonthlyIncome() {
@@ -127,13 +122,5 @@ public class Ability implements NamedIdentifiable  {
 
 	public void setSpecialisation(String pSpecialisation) {
 		specialisation = pSpecialisation;
-	}
-
-	public int getDots() {
-		return dots;
-	}
-
-	public void setDots(int pDots) {
-		dots = pDots;
 	}
 }

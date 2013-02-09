@@ -64,23 +64,23 @@ public class Role implements NamedIdentifiable {
     private int mental;
     private int extraHealthLevels;
     private boolean sufferesOfInjury;
-    private List<Discipline> disciplines;
-    private List<Path> thaumaturgicalPaths;
-    private List<Path> necromancyPaths;
+    private List<DottedType<Discipline>> disciplines;
+    private List<DottedType<Path>> thaumaturgicalPaths;
+    private List<DottedType<Path>> necromancyPaths;
     //private List mNecromanticRituals;
-    private List<Ability> physicalAbilities;
-    private List<Ability> socialAbilities;
-    private List<Ability> mentalAbilities;
+    private List<DottedType<Ability>> physicalAbilities;
+    private List<DottedType<Ability>> socialAbilities;
+    private List<DottedType<Ability>> mentalAbilities;
     private List<MeritOrFlaw> merits;
     private List<MeritOrFlaw> flaws;
     private List<String> derangements;
-    private List<OtherTrait> otherTraits;
+    private List<DottedType<OtherTrait>> otherTraits;
     private boolean ghoul = false;
     private int extraMonthlyIncome;
     private List<Profession> professions;
     private List<Resource> resources;
     private List<BankAccount> bankAccounts;
-    private List<Influence> influences;
+    private List<DottedType<Influence>> influences;
     private int experience;
     private Vitals vitals;
     private Domain domain;
@@ -440,15 +440,15 @@ public class Role implements NamedIdentifiable {
         return disciplines;
     }
 
-    public void setDisciplines(List<Discipline> pDisciplines) {
+    public void setDisciplines(List<DottedType<Discipline>> pDisciplines) {
         disciplines = pDisciplines;
     }
 
-    public List<Path> getThaumaturgicalPaths() {
+    public List<DottedType<Path>> getThaumaturgicalPaths() {
         return thaumaturgicalPaths;
     }
 
-    public void setThaumaturgicalPaths(List<Path> pThaumaturgicalPaths) {
+    public void setThaumaturgicalPaths(List<DottedType<Path>> pThaumaturgicalPaths) {
         thaumaturgicalPaths = pThaumaturgicalPaths;
     }
 
@@ -460,11 +460,11 @@ public class Role implements NamedIdentifiable {
         mThaumaturgicalRituals = pThaumaturgicalRituals;
     }*/
 
-    public List<Path> getNecromancyPaths() {
+    public List<DottedType<Path>> getNecromancyPaths() {
         return necromancyPaths;
     }
 
-    public void setNecromancyPaths(List<Path> pNecromancyPaths) {
+    public void setNecromancyPaths(List<DottedType<Path>> pNecromancyPaths) {
         necromancyPaths = pNecromancyPaths;
     }
 
@@ -484,27 +484,27 @@ public class Role implements NamedIdentifiable {
         rituals = pRituals;
     }
 
-    public void setPhysicalAbilities(List<Ability> pAbilities) {
+    public void setPhysicalAbilities(List<DottedType<Ability>> pAbilities) {
         physicalAbilities = pAbilities;
     }
 
-    public List<Ability> getPhysicalAbilities() {
+    public List<DottedType<Ability>> getPhysicalAbilities() {
         return physicalAbilities;
     }
 
-    public List<Ability> getSocialAbilities() {
+    public List<DottedType<Ability>> getSocialAbilities() {
         return socialAbilities;
     }
 
-    public void setSocialAbilities(List<Ability> pSocialAbilities) {
+    public void setSocialAbilities(List<DottedType<Ability>> pSocialAbilities) {
         socialAbilities = pSocialAbilities;
     }
 
-    public List<Ability> getMentalAbilities() {
+    public List<DottedType<Ability>> getMentalAbilities() {
         return mentalAbilities;
     }
 
-    public void setMentalAbilities(List<Ability> pMentalAbilities) {
+    public void setMentalAbilities(List<DottedType<Ability>> pMentalAbilities) {
         mentalAbilities = pMentalAbilities;
     }
 
@@ -532,11 +532,11 @@ public class Role implements NamedIdentifiable {
         derangements = pDerangements;
     }
 
-    public List<OtherTrait> getOtherTraits() {
+    public List<DottedType<OtherTrait>> getOtherTraits() {
         return otherTraits;
     }
 
-    public void setOtherTraits(List<OtherTrait> pOtherTraits) {
+    public void setOtherTraits(List<DottedType<OtherTrait>> pOtherTraits) {
         otherTraits = pOtherTraits;
     }
 
@@ -600,10 +600,10 @@ public class Role implements NamedIdentifiable {
         mBaseMoneyForAge = pBaseMoneyForAge;
     }*/
 
-    public static int calculateBaseMonthlyIncome(List<Ability> pAbilities, List<Profession> pProfessions) {
+    public static int calculateBaseMonthlyIncome(List<DottedType<Ability>> pAbilities, List<Profession> pProfessions) {
         int baseIncome = 0;
-        for (Ability ability : pAbilities) {
-            baseIncome += (ability.getBaseMonthlyIncome() * ability.getDots());
+        for (DottedType<Ability> ability : pAbilities) {
+            baseIncome += (ability.getType().getBaseMonthlyIncome() * ability.getDots());
         }
         for (Profession profession : pProfessions) {
             if (profession.isMask()) {
@@ -615,7 +615,7 @@ public class Role implements NamedIdentifiable {
         return baseIncome;
     }
 
-    public static long calculateTotalMonthlyIncome(List<Ability> pAbilities, List<Profession> pProfessions, List<Resource> pResources) {
+    public static long calculateTotalMonthlyIncome(List<DottedType<Ability>> pAbilities, List<Profession> pProfessions, List<Resource> pResources) {
         long baseIncome = calculateBaseMonthlyIncome(pAbilities, pProfessions);
         long incomeResources = 0;
         for (Resource resource : pResources) {
@@ -632,17 +632,17 @@ public class Role implements NamedIdentifiable {
         professions = pProfessions;
     }
 
-    public List<Influence> compileInfluences() {
-        List<Influence> list = new LinkedList<>();
-        HashMap<String, Influence> map = new HashMap<>();
+    public List<DottedType<Influence>> compileInfluences() {
+        List<DottedType<Influence>> list = new LinkedList<>();
+        HashMap<String, DottedType<Influence>> map = new HashMap<>();
         if (resources != null) {
             for (Resource resource : resources) {
-                List<Influence> influences = resource.getInfluences();
-                for (Influence influence : influences) {
-                    Influence stored = map.get(influence.getId() + "");
+                List<DottedType<Influence>> influences = resource.getInfluences();
+                for (DottedType<Influence> influence : influences) {
+                    DottedType<Influence> stored = map.get(influence.getType().getId());
                     if (stored == null) {
-                        stored = new Influence(influence.getId(), influence.getName(), influence.getDots(), influence.getNotes());
-                        map.put(influence.getId() + "", stored);
+                        stored = new DottedType<Influence>(new Influence(influence.getType().getName(), influence.getType().getNotes()), influence.getDots());
+                        map.put(influence.getType().getId(), stored);
                         list.add(stored);
                     } else {
                         stored.setDots(stored.getDots() + influence.getDots());
@@ -650,12 +650,13 @@ public class Role implements NamedIdentifiable {
                 }
             }
         }
-        if (influences != null) {
-            for (Influence influence : influences) {
-                Influence stored = map.get(influence.getId() + "");
+        List<DottedType<Influence>> inf = getInfluences();
+        if (inf != null) {
+            for (DottedType<Influence> influence : inf) {
+                DottedType<Influence> stored = map.get(influence.getType().getId());
                 if (stored == null) {
-                    stored = new Influence(influence.getId(), influence.getName(), influence.getDots(), influence.getNotes());
-                    map.put(influence.getId() + "", stored);
+                    stored = new DottedType<Influence>(new Influence(influence.getType().getName(), influence.getType().getNotes()), influence.getDots());
+                    map.put(influence.getType().getId(), stored);
                     list.add(stored);
                 } else {
                     stored.setDots(stored.getDots() + influence.getDots());
@@ -681,28 +682,28 @@ public class Role implements NamedIdentifiable {
         extraMonthlyIncome = pExtraMonthlyIncome;
     }
 
-    public List<Influence> getInfluences() {
+    public List<DottedType<Influence>> getInfluences() {
         return influences;
     }
 
-    public void setInfluences(List<Influence> pInfluences) {
+    public void setInfluences(List<DottedType<Influence>> pInfluences) {
         influences = pInfluences;
     }
 
-    public void addInfluence(Influence pInf) {
-        if (influences == null) {
-            influences = new LinkedList<>();
+    public void addInfluence(DottedType<Influence> pInf) {
+        if (getInfluences() == null) {
+            setInfluences(new LinkedList<DottedType<Influence>>());
         }
-        influences.add(pInf);
+        getInfluences().add(pInf);
     }
 
     public int baseMonthlyIncome() {
-        List<Ability> abilities = combinedAbilities();
+        List<DottedType<Ability>> abilities = combinedAbilities();
         return calculateBaseMonthlyIncome(abilities, professions);
     }
 
-    private List<Ability> combinedAbilities() {
-        ImmutableList.Builder<Ability> builder = ImmutableList.builder();
+    private List<DottedType<Ability>> combinedAbilities() {
+        ImmutableList.Builder<DottedType<Ability>> builder = ImmutableList.builder();
         return builder.
                 addAll(getPhysicalAbilities()).
                 addAll(getSocialAbilities()).
@@ -710,7 +711,7 @@ public class Role implements NamedIdentifiable {
     }
 
     public long totalMonthlyIncome() {
-        List<Ability> abilities = combinedAbilities();
+        List<DottedType<Ability>> abilities = combinedAbilities();
         long base = calculateTotalMonthlyIncome(abilities, getProfessions(), getResources());
         return base + extraMonthlyIncome;
     }

@@ -39,19 +39,12 @@ public class Path implements NamedIdentifiable {
 	@Id
     private String id;
 	private String name;
-	private int dots;
 
 	public Path() {
 	}
 
-	public Path(String pName, int pDots) {
-		name = pName;
-		dots = pDots;
-	}
-
 	public Path(String pName) {
 		name = pName;
-		dots = 0;
 	}
 
     @Override
@@ -66,14 +59,6 @@ public class Path implements NamedIdentifiable {
 
 	public void setName(String pName) {
 		name = pName;
-	}
-
-	public int getDots() {
-		return dots;
-	}
-
-	public void setDots(int pDots) {
-		dots = pDots;
 	}
 
 	public String toString() {
