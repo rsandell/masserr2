@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2013-02-09T19:45:50">
+<disciplines>
+<id>35</id>
+<name>Ani6 Quell The Herd</name>
+</disciplines>
+<disciplines>
+<id>36</id>
+<name>Ani7 Stampede</name>
+</disciplines>
+<disciplines>
+<id>37</id>
+<name>Ani8 Crimson Fury</name>
+</disciplines>
+<disciplines>
+<id>38</id>
+<name>Ani9 Eyes of The Forest</name>
+</disciplines>
+<disciplines>
+<id>10</id>
+<name>Animalism</name>
+<retest_ability>2</retest_ability>
+</disciplines>
+<disciplines>
+<id>7</id>
+<name>Auspex</name>
+<retest_ability>18</retest_ability>
+</disciplines>
+<disciplines>
+<id>44</id>
+<name>Beast Meld</name>
+</disciplines>
+<disciplines>
+<id>21</id>
+<name>Burning Wrath</name>
+</disciplines>
+<disciplines>
+<id>6</id>
+<name>Celerity</name>
+</disciplines>
+<disciplines>
+<id>11</id>
+<name>Chimestry</name>
+<retest_ability>34</retest_ability>
+</disciplines>
+<disciplines>
+<id>28</id>
+<name>Claw Immunity</name>
+</disciplines>
+<disciplines>
+<id>12</id>
+<name>Dementation</name>
+<retest_ability>12</retest_ability>
+</disciplines>
+<disciplines>
+<id>3</id>
+<name>Dominate</name>
+<retest_ability>17</retest_ability>
+</disciplines>
+<disciplines>
+<id>29</id>
+<name>Doubletalk</name>
+</disciplines>
+<disciplines>
+<id>42</id>
+<name>Flesh Wound</name>
+</disciplines>
+<disciplines>
+<id>26</id>
+<name>Flight</name>
+</disciplines>
+<disciplines>
+<id>49</id>
+<name>Fo6 Personal Armour</name>
+</disciplines>
+<disciplines>
+<id>39</id>
+<name>Fo6 Sensory Shield</name>
+</disciplines>
+<disciplines>
+<id>40</id>
+<name>Fo7 Resilient Mind</name>
+</disciplines>
+<disciplines>
+<id>41</id>
+<name>Fo8 King of the Mountain</name>
+</disciplines>
+<disciplines>
+<id>1</id>
+<name>Fortitude</name>
+<retest_ability>35</retest_ability>
+</disciplines>
+<disciplines>
+<id>20</id>
+<name>Iron Heart</name>
+</disciplines>
+<disciplines>
+<id>13</id>
+<name>Melpominee</name>
+<retest_ability>25</retest_ability>
+</disciplines>
+<disciplines>
+<id>14</id>
+<name>Obeah</name>
+<retest_ability>22</retest_ability>
+</disciplines>
+<disciplines>
+<id>15</id>
+<name>Obfuscate</name>
+<retest_ability>32</retest_ability>
+</disciplines>
+<disciplines>
+<id>8</id>
+<name>Obtenebration</name>
+<retest_ability>24</retest_ability>
+</disciplines>
+<disciplines>
+<id>48</id>
+<name>Po6 Inprint</name>
+</disciplines>
+<disciplines>
+<id>33</id>
+<name>Po6 Relentless Pursuit</name>
+</disciplines>
+<disciplines>
+<id>32</id>
+<name>Po6 The Gentle Rebuke</name>
+</disciplines>
+<disciplines>
+<id>34</id>
+<name>Po7 Stutter-Step</name>
+</disciplines>
+<disciplines>
+<id>2</id>
+<name>Potence</name>
+</disciplines>
+<disciplines>
+<id>45</id>
+<name>Pr6 Love</name>
+</disciplines>
+<disciplines>
+<id>46</id>
+<name>Pr6 Paralyzing Glance</name>
+</disciplines>
+<disciplines>
+<id>47</id>
+<name>Pr6 Spark of Rage</name>
+</disciplines>
+<disciplines>
+<id>5</id>
+<name>Presence</name>
+<retest_ability>20</retest_ability>
+</disciplines>
+<disciplines>
+<id>4</id>
+<name>Protean</name>
+<retest_ability>35</retest_ability>
+</disciplines>
+<disciplines>
+<id>22</id>
+<name>Pulse of Undeath</name>
+</disciplines>
+<disciplines>
+<id>16</id>
+<name>Quietus</name>
+</disciplines>
+<disciplines>
+<id>43</id>
+<name>See the Reflected Form</name>
+</disciplines>
+<disciplines>
+<id>17</id>
+<name>Serpentis</name>
+<retest_ability>34</retest_ability>
+</disciplines>
+<disciplines>
+<id>23</id>
+<name>Shroud of the Absence</name>
+</disciplines>
+<disciplines>
+<id>30</id>
+<name>Soulpainting</name>
+</disciplines>
+<disciplines>
+<id>18</id>
+<name>Thanatosis</name>
+<retest_ability>24</retest_ability>
+</disciplines>
+<disciplines>
+<id>24</id>
+<name>Thaumathurgical countermagic</name>
+<retest_ability>24</retest_ability>
+</disciplines>
+<disciplines>
+<id>31</id>
+<name>The Rendering</name>
+</disciplines>
+<disciplines>
+<id>27</id>
+<name>Viceratika</name>
+<retest_ability>35</retest_ability>
+</disciplines>
+<disciplines>
+<id>9</id>
+<name>Vicissitude</name>
+<retest_ability>36</retest_ability>
+</disciplines>
+</dataroot>

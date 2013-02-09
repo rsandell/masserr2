@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2013-02-09T19:50:52">
+<rituals>
+<id>1</id>
+<name>Communicate with Kindred Sire</name>
+<type>1</type>
+<level>1</level>
+<description>LotN, Grundbok, Sid:185</description>
+</rituals>
+<rituals>
+<id>2</id>
+<name>Defense of the Sacred Haven</name>
+<type>1</type>
+<level>1</level>
+<description>LotN, Grundbok, Sid:185</description>
+</rituals>
+<rituals>
+<id>3</id>
+<name>Deflection of Wooden Doom</name>
+<type>1</type>
+<level>1</level>
+</rituals>
+<rituals>
+<id>4</id>
+<name>Devil&apos;s Touch</name>
+<type>1</type>
+<level>1</level>
+<description>LotN, Grundbok, Sid:185</description>
+</rituals>
+<rituals>
+<id>5</id>
+<name>The Open Passage</name>
+<type>1</type>
+<level>1</level>
+<description>LotN, Grundbok, Sid:186</description>
+</rituals>
+<rituals>
+<id>6</id>
+<name>Scent of the Lupine&apos;s Passing</name>
+<type>1</type>
+<level>1</level>
+<description>LotN, Grundbok, Sid:186</description>
+</rituals>
+<rituals>
+<id>7</id>
+<name>Ward versus Ghouls</name>
+<type>1</type>
+<level>1</level>
+<description>LotN, Grundbok, Sid:186</description>
+</rituals>
+<rituals>
+<id>8</id>
+<name>Bone of Lies</name>
+<type>1</type>
+<level>3</level>
+<description>Laws of the Night, Grundbok, Sid:186</description>
+</rituals>
+<rituals>
+<id>9</id>
+<name>Incorporeal Passage</name>
+<type>1</type>
+<level>2</level>
+</rituals>
+<rituals>
+<id>10</id>
+<name>Pavis of Foul Presence</name>
+<type>1</type>
+<level>3</level>
+<description>Laws of the Night, Grundbok, Sid:187</description>
+</rituals>
+<rituals>
+<id>11</id>
+<name>Blood Contract</name>
+<type>1</type>
+<level>5</level>
+<description>Laws of the Night, Grundbok, Sid:187</description>
+</rituals>
+<rituals>
+<id>12</id>
+<name>Nectar of the Bitter Rose</name>
+<type>1</type>
+<level>5</level>
+<description></description>
+</rituals>
+<rituals>
+<id>13</id>
+<name>Umbra Walk</name>
+<type>1</type>
+<level>5</level>
+<description></description>
+</rituals>
+<rituals>
+<id>14</id>
+<name>Brake Bloodbound</name>
+<type>1</type>
+<level>6</level>
+<description>By doing this ritual for a week together with your victim during painfull sessions, he/she looses their bloodbounds and gains a derangement.</description>
+</rituals>
+<rituals>
+<id>15</id>
+<name>Ward versus Kindred</name>
+<type>1</type>
+<level>3</level>
+<description>Tabletop,Guide to the Camarilla, Sid:113</description>
+</rituals>
+<rituals>
+<id>16</id>
+<name>Ward versus Spirits</name>
+<type>1</type>
+<level>3</level>
+<description></description>
+</rituals>
+<rituals>
+<id>17</id>
+<name>Ward versus Fae</name>
+<type>1</type>
+<level>3</level>
+<description></description>
+</rituals>
+<rituals>
+<id>18</id>
+<name>Ward versus Lupines</name>
+<type>1</type>
+<level>3</level>
+<description></description>
+</rituals>
+<rituals>
+<id>19</id>
+<name>Principal focus of Vitae Infusion</name>
+<type>1</type>
+<level>1</level>
+<description></description>
+</rituals>
+<rituals>
+<id>20</id>
+<name>Wake with evenings freshness</name>
+<type>1</type>
+<level>1</level>
+<description>LotN, Grundbok, Sid:186</description>
+</rituals>
+<rituals>
+<id>21</id>
+<name>Blood walk</name>
+<type>1</type>
+<level>3</level>
+<description>Tabletop,Guide to the Camarilla, Sid:110</description>
+</rituals>
+<rituals>
+<id>22</id>
+<name>Transport of Vitae</name>
+<type>1</type>
+<level>2</level>
+<description></description>
+</rituals>
+<rituals>
+<id>23</id>
+<name>Scry</name>
+<type>1</type>
+<level>3</level>
+<description>LotN Storytellers Guide Sid:71</description>
+</rituals>
+<rituals>
+<id>24</id>
+<name>Call of the Hungry Dead</name>
+<type>2</type>
+<level>1</level>
+<description>With 10 minutes of time and a hair from the head of your prospective victim, you afflict your target with the cacophonous moaning and wailing beyond the Shroud</description>
+</rituals>
+<rituals>
+<id>25</id>
+<name>Eyes of the grave</name>
+<type>2</type>
+<level>1</level>
+<description>Over a time of two hours, you can concentrate the deathly emotions in a pinch of grave and soil and use it to conjure vishions of death and horror.</description>
+</rituals>
+<rituals>
+<id>26</id>
+<name>Spirit Beacon</name>
+<type>2</type>
+<level>1</level>
+<description>By casting this ritual over a severed human head, you turn it into a supernatural beacon for ghosts</description>
+</rituals>
+<rituals>
+<id>27</id>
+<name>Cadaver&apos;s Touch</name>
+<type>2</type>
+<level>2</level>
+<description>By chanting hideous paeans while melting a wax figure of your victim over a three-hour ritual, you cause the subject to loose all semblance of life.</description>
+</rituals>
+<rituals>
+<id>28</id>
+<name>Call on the Shadow&apos;s Grace</name>
+<type>2</type>
+<level>2</level>
+</rituals>
+<rituals>
+<id>29</id>
+<name>Ritual of the Unearthed Fetter</name>
+<type>2</type>
+<level>2</level>
+</rituals>
+<rituals>
+<id>30</id>
+<name>Grasp the Ghostly</name>
+<type>2</type>
+<level>3</level>
+</rituals>
+<rituals>
+<id>31</id>
+<name>Warding circle versus Spirits</name>
+<type>1</type>
+<level>4</level>
+<description></description>
+</rituals>
+<rituals>
+<id>32</id>
+<name>Warding circle versus Fae</name>
+<type>1</type>
+<level>4</level>
+<description></description>
+</rituals>
+<rituals>
+<id>33</id>
+<name>Warding circle versus Kindred</name>
+<type>1</type>
+<level>4</level>
+<description></description>
+</rituals>
+<rituals>
+<id>34</id>
+<name>Warding circle versus Lupines</name>
+<type>1</type>
+<level>4</level>
+<description></description>
+</rituals>
+<rituals>
+<id>35</id>
+<name>Warding circle versus Ghouls</name>
+<type>1</type>
+<level>1</level>
+<description></description>
+</rituals>
+<rituals>
+<id>36</id>
+<name>Calling the thing in darkness</name>
+<type>3</type>
+<level>1</level>
+<description></description>
+</rituals>
+<rituals>
+<id>37</id>
+<name>Descent into darkness</name>
+<type>3</type>
+<level>1</level>
+<description></description>
+</rituals>
+<rituals>
+<id>38</id>
+<name>Melding into the Abyss</name>
+<type>3</type>
+<level>1</level>
+<description></description>
+</rituals>
+<rituals>
+<id>39</id>
+<name>Extinguish</name>
+<type>1</type>
+<level>1</level>
+<description>LotN Storytellers Guide Sid:66</description>
+</rituals>
+<rituals>
+<id>40</id>
+<name>Impassable trail</name>
+<type>1</type>
+<level>1</level>
+<description>LotN Storytellers Guide Sid:66</description>
+</rituals>
+<rituals>
+<id>41</id>
+<name>Rite of introduction</name>
+<type>1</type>
+<level>1</level>
+<description>LotN Storytellers Guide Sid:68</description>
+</rituals>
+<rituals>
+<id>42</id>
+<name>Sense the Mystical</name>
+<type>1</type>
+<level>1</level>
+<description>LotN Storytellers Guide Sid:68</description>
+</rituals>
+<rituals>
+<id>43</id>
+<name>Dedicate the Chantry</name>
+<type>1</type>
+<level>1</level>
+<description>Clanbook Tremere, Sid 57</description>
+</rituals>
+<rituals>
+<id>44</id>
+<name>Purify Blood</name>
+<type>1</type>
+<level>1</level>
+<description>Clanbook Tremere, Sid 57</description>
+</rituals>
+<rituals>
+<id>45</id>
+<name>Inscription</name>
+<type>1</type>
+<level>1</level>
+<description>Clanbook Tremere, Sid 58</description>
+</rituals>
+<rituals>
+<id>46</id>
+<name>Rituals Recognition</name>
+<type>1</type>
+<level>1</level>
+<description>Clanbook Tremere, Sid 59</description>
+</rituals>
+<rituals>
+<id>47</id>
+<name>Deny the intruder</name>
+<type>1</type>
+<level>1</level>
+<description>Clanbook Tremere, Sid 58</description>
+</rituals>
+<rituals>
+<id>48</id>
+<name>Transubstansion to the seven</name>
+<type>1</type>
+<level>3</level>
+<description>Clanbook Tremere, Sid 61</description>
+</rituals>
+<rituals>
+<id>49</id>
+<name>Unweave Ritual</name>
+<type>1</type>
+<level>3</level>
+<description>Clanbook Tremere, Sid 64</description>
+</rituals>
+<rituals>
+<id>50</id>
+<name>Cleansing of the Flesh</name>
+<type>1</type>
+<level>3</level>
+<description>LotN Storytellers Guide Sid:69</description>
+</rituals>
+<rituals>
+<id>51</id>
+<name>Heart of Stone</name>
+<type>1</type>
+<level>4</level>
+<description>Tabletop,Guide to the Camarilla, Sid:113</description>
+</rituals>
+<rituals>
+<id>52</id>
+<name>Soul of the homunculus</name>
+<type>1</type>
+<level>3</level>
+<description>Laws of the Night, Grundbok, Sid:187</description>
+</rituals>
+<rituals>
+<id>53</id>
+<name>Escape to a True Friend</name>
+<type>1</type>
+<level>5</level>
+<description>Tabletop,Guide to the Camarilla, Sid:114</description>
+</rituals>
+<rituals>
+<id>54</id>
+<name>Night of the Red heart</name>
+<type>1</type>
+<level>5</level>
+<description>Clanbook Tremere, Sid: 65</description>
+</rituals>
+<rituals>
+<id>55</id>
+<name>Abandon the Fetters</name>
+<type>1</type>
+<level>5</level>
+<description>Clanbook Tremere, Sid 65</description>
+</rituals>
+<rituals>
+<id>56</id>
+<name>Quencing the Lambent Flame</name>
+<type>1</type>
+<level>6</level>
+<description>Sins of the blood, Sid:97</description>
+</rituals>
+<rituals>
+<id>57</id>
+<name>Rutors hands</name>
+<type>2</type>
+<level>3</level>
+<description>Clanbook Tremere, sid 60</description>
+</rituals>
+<rituals>
+<id>58</id>
+<name>Knowing stone</name>
+<type>2</type>
+<level>1</level>
+<description>Bloodmagic Companion</description>
+</rituals>
+<rituals>
+<id>59</id>
+<name>Occhio d&apos;Uomo Morto</name>
+<type>2</type>
+<level>2</level>
+<description>Clanbook Giovanni sid. 75-76</description>
+</rituals>
+<rituals>
+<id>60</id>
+<name>Encrypt Missive</name>
+<type>1</type>
+<level>1</level>
+<description>Lotn Storytellers Guide sid 65</description>
+</rituals>
+<rituals>
+<id>61</id>
+<name>The Scribe</name>
+<type>1</type>
+<level>1</level>
+<description>Lotn Storytellers guide sid. 68</description>
+</rituals>
+<rituals>
+<id>62</id>
+<name>Telecommunication</name>
+<type>1</type>
+<level>3</level>
+<description>Lotn Storytellers guide sid. 72</description>
+</rituals>
+<rituals>
+<id>63</id>
+<name>Nightmare Drums</name>
+<type>2</type>
+<level>3</level>
+<description>Blood Magic, Voudoun.</description>
+</rituals>
+<rituals>
+<id>64</id>
+<name>Craft Bloodstone</name>
+<type>1</type>
+<level>1</level>
+<description>LotN Storytellers Guide s.65</description>
+</rituals>
+<rituals>
+<id>65</id>
+<name>Craft Dreamcatcher</name>
+<type>1</type>
+<level>3</level>
+<description></description>
+</rituals>
+</dataroot>

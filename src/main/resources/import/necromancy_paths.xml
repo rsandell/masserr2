@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2013-02-09T19:49:30">
+<necromancy_paths>
+<id>1</id>
+<name>The Sepulchre Path</name>
+</necromancy_paths>
+<necromancy_paths>
+<id>2</id>
+<name>The Ash Path</name>
+</necromancy_paths>
+<necromancy_paths>
+<id>3</id>
+<name>The Bone Path</name>
+</necromancy_paths>
+</dataroot>

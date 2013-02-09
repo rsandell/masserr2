@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2013-02-09T19:49:45">
+<otherTraits>
+<id>13</id>
+<name>Abyss Lore</name>
+</otherTraits>
+<otherTraits>
+<id>74</id>
+<name>Anarch Lore</name>
+</otherTraits>
+<otherTraits>
+<id>36</id>
+<name>Anatomy</name>
+</otherTraits>
+<otherTraits>
+<id>14</id>
+<name>Assamite Lore</name>
+</otherTraits>
+<otherTraits>
+<id>59</id>
+<name>Astronomy</name>
+</otherTraits>
+<otherTraits>
+<id>15</id>
+<name>Baali Lore</name>
+</otherTraits>
+<otherTraits>
+<id>9</id>
+<name>Brewing Lore</name>
+</otherTraits>
+<otherTraits>
+<id>5</id>
+<name>Brujah Lore</name>
+</otherTraits>
+<otherTraits>
+<id>2</id>
+<name>Camarilla Lore</name>
+</otherTraits>
+<otherTraits>
+<id>16</id>
+<name>Cappadocian Lore</name>
+</otherTraits>
+<otherTraits>
+<id>43</id>
+<name>Cathayian Lore</name>
+</otherTraits>
+<otherTraits>
+<id>58</id>
+<name>Cavalery</name>
+</otherTraits>
+<otherTraits>
+<id>39</id>
+<name>Church Lore</name>
+</otherTraits>
+<otherTraits>
+<id>50</id>
+<name>Cooking</name>
+</otherTraits>
+<otherTraits>
+<id>71</id>
+<name>Cryptography</name>
+</otherTraits>
+<otherTraits>
+<id>45</id>
+<name>Demolitions</name>
+</otherTraits>
+<otherTraits>
+<id>68</id>
+<name>Disguise</name>
+</otherTraits>
+<otherTraits>
+<id>72</id>
+<name>Enigmas</name>
+</otherTraits>
+<otherTraits>
+<id>49</id>
+<name>Explosives</name>
+</otherTraits>
+<otherTraits>
+<id>41</id>
+<name>Fae Lore</name>
+</otherTraits>
+<otherTraits>
+<id>75</id>
+<name>Farming</name>
+</otherTraits>
+<otherTraits>
+<id>6</id>
+<name>Gangrel Lore</name>
+</otherTraits>
+<otherTraits>
+<id>18</id>
+<name>Gargoyle Lore</name>
+</otherTraits>
+<otherTraits>
+<id>38</id>
+<name>Garou Lore</name>
+</otherTraits>
+<otherTraits>
+<id>57</id>
+<name>Geography</name>
+</otherTraits>
+<otherTraits>
+<id>19</id>
+<name>Giovanni Lore</name>
+</otherTraits>
+<otherTraits>
+<id>20</id>
+<name>Harbinger of Skulls Lore</name>
+</otherTraits>
+<otherTraits>
+<id>10</id>
+<name>Heavy Weapons</name>
+</otherTraits>
+<otherTraits>
+<id>60</id>
+<name>Hereldics</name>
+</otherTraits>
+<otherTraits>
+<id>31</id>
+<name>History</name>
+</otherTraits>
+<otherTraits>
+<id>33</id>
+<name>Idea History</name>
+</otherTraits>
+<otherTraits>
+<id>37</id>
+<name>Inquision Lore</name>
+</otherTraits>
+<otherTraits>
+<id>53</id>
+<name>Interrogation</name>
+</otherTraits>
+<otherTraits>
+<id>21</id>
+<name>Kiasyd Lore</name>
+</otherTraits>
+<otherTraits>
+<id>1</id>
+<name>Kindred Lore</name>
+</otherTraits>
+<otherTraits>
+<id>12</id>
+<name>Lasombra Lore</name>
+</otherTraits>
+<otherTraits>
+<id>69</id>
+<name>Lip Reading</name>
+</otherTraits>
+<otherTraits>
+<id>8</id>
+<name>Lupine Lore</name>
+</otherTraits>
+<otherTraits>
+<id>40</id>
+<name>Mage Lore</name>
+</otherTraits>
+<otherTraits>
+<id>22</id>
+<name>Malkavian Lore</name>
+</otherTraits>
+<otherTraits>
+<id>64</id>
+<name>Malkavian Time</name>
+</otherTraits>
+<otherTraits>
+<id>35</id>
+<name>Martial Arts</name>
+</otherTraits>
+<otherTraits>
+<id>54</id>
+<name>Military History</name>
+</otherTraits>
+<otherTraits>
+<id>55</id>
+<name>Military Strategy</name>
+</otherTraits>
+<otherTraits>
+<id>62</id>
+<name>Music</name>
+</otherTraits>
+<otherTraits>
+<id>56</id>
+<name>Nordic History</name>
+</otherTraits>
+<otherTraits>
+<id>23</id>
+<name>Nosferatu Lore</name>
+</otherTraits>
+<otherTraits>
+<id>65</id>
+<name>Pentex Lore</name>
+</otherTraits>
+<otherTraits>
+<id>32</id>
+<name>Philosophy</name>
+</otherTraits>
+<otherTraits>
+<id>24</id>
+<name>Ravnos Lore</name>
+</otherTraits>
+<otherTraits>
+<id>29</id>
+<name>Religion Asatro</name>
+</otherTraits>
+<otherTraits>
+<id>30</id>
+<name>Religion Christianity</name>
+</otherTraits>
+<otherTraits>
+<id>28</id>
+<name>Religion Jewish</name>
+</otherTraits>
+<otherTraits>
+<id>44</id>
+<name>Religion Shinto</name>
+</otherTraits>
+<otherTraits>
+<id>52</id>
+<name>Rrom Lore</name>
+</otherTraits>
+<otherTraits>
+<id>3</id>
+<name>Sabbat Lore</name>
+</otherTraits>
+<otherTraits>
+<id>46</id>
+<name>Sabotage</name>
+</otherTraits>
+<otherTraits>
+<id>25</id>
+<name>Salubri Lore</name>
+</otherTraits>
+<otherTraits>
+<id>63</id>
+<name>Samedi Lore</name>
+</otherTraits>
+<otherTraits>
+<id>17</id>
+<name>Setite Lore</name>
+</otherTraits>
+<otherTraits>
+<id>73</id>
+<name>Sewer Lore</name>
+</otherTraits>
+<otherTraits>
+<id>70</id>
+<name>Sleight of Hand</name>
+</otherTraits>
+<otherTraits>
+<id>42</id>
+<name>Spirit Lore</name>
+</otherTraits>
+<otherTraits>
+<id>51</id>
+<name>Strategy</name>
+</otherTraits>
+<otherTraits>
+<id>67</id>
+<name>Style</name>
+</otherTraits>
+<otherTraits>
+<id>61</id>
+<name>Surveilence</name>
+</otherTraits>
+<otherTraits>
+<id>4</id>
+<name>Thaumaturgy Lore</name>
+</otherTraits>
+<otherTraits>
+<id>11</id>
+<name>Toreador Lore</name>
+</otherTraits>
+<otherTraits>
+<id>47</id>
+<name>Traps</name>
+</otherTraits>
+<otherTraits>
+<id>26</id>
+<name>Tremere Lore</name>
+</otherTraits>
+<otherTraits>
+<id>27</id>
+<name>Tzimisce Lore</name>
+</otherTraits>
+<otherTraits>
+<id>48</id>
+<name>Urban Warfare</name>
+</otherTraits>
+<otherTraits>
+<id>7</id>
+<name>Ventrue Lore</name>
+</otherTraits>
+<otherTraits>
+<id>76</id>
+<name>Whine Farming</name>
+</otherTraits>
+<otherTraits>
+<id>78</id>
+<name>Whine Lore</name>
+</otherTraits>
+<otherTraits>
+<id>77</id>
+<name>Whine Making</name>
+</otherTraits>
+<otherTraits>
+<id>34</id>
+<name>Wraith Lore</name>
+</otherTraits>
+<otherTraits>
+<id>66</id>
+<name>Wyrm Lore</name>
+</otherTraits>
+</dataroot>

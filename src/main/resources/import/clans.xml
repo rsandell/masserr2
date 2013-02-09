@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2013-02-09T19:44:38">
+<clans>
+<id>1</id>
+<name>Brujah</name>
+<base_income>200000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>¨</symbol_char>
+<weaknesses>-1 Self-Control/Instinct</weaknesses>
+</clans>
+<clans>
+<id>2</id>
+<name>Gangrel</name>
+<base_income>5000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>k</symbol_char>
+<weaknesses>Gains a beast-trait from each frenzy</weaknesses>
+</clans>
+<clans>
+<id>3</id>
+<name>Ventrue</name>
+<base_income>7000000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>p</symbol_char>
+<weaknesses>Feeding restriction</weaknesses>
+</clans>
+<clans>
+<id>4</id>
+<name>Lasombra</name>
+<base_income>6000000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>E</symbol_char>
+<weaknesses>Cast no reflection, double dammage from sunlight</weaknesses>
+</clans>
+<clans>
+<id>5</id>
+<name>Tremere</name>
+<base_income>600000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>o</symbol_char>
+<weaknesses>One step bloodbound to the clan-elders</weaknesses>
+</clans>
+<clans>
+<id>6</id>
+<name>Toreador</name>
+<base_income>1000000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>n</symbol_char>
+<weaknesses>Entranced by beauty</weaknesses>
+</clans>
+<clans>
+<id>7</id>
+<name>Tzimisce</name>
+<base_income>600000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>C</symbol_char>
+<weaknesses>Must sleep within at least two hands of homeland/grave</weaknesses>
+</clans>
+<clans>
+<id>8</id>
+<name>Malkavian</name>
+<base_income>200000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>l</symbol_char>
+<weaknesses>Deranged</weaknesses>
+</clans>
+<clans>
+<id>9</id>
+<name>Nosferatu</name>
+<base_income>300000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>m</symbol_char>
+<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+</clans>
+<clans>
+<id>10</id>
+<name>Giovanni</name>
+<base_income>6000000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>5</symbol_char>
+<weaknesses>The kiss is not pleasurable (1 aggrevated per blood-point)</weaknesses>
+</clans>
+<clans>
+<id>11</id>
+<name>Ravnos</name>
+<base_income>50000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>f</symbol_char>
+<weaknesses>Must commit criminal acts when need arrises</weaknesses>
+</clans>
+<clans>
+<id>12</id>
+<name>Assamite</name>
+<base_income>300000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>¢</symbol_char>
+<weaknesses>Easily addicted to vitae</weaknesses>
+</clans>
+<clans>
+<id>13</id>
+<name>Cappadocian</name>
+<base_income>2000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>h</symbol_char>
+<weaknesses>Corpse-like appearence</weaknesses>
+</clans>
+<clans>
+<id>14</id>
+<name>Salubri</name>
+<base_income>5000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>¡</symbol_char>
+<weaknesses>Cannot feed from unwilling viktims</weaknesses>
+</clans>
+<clans>
+<id>15</id>
+<name>Baali</name>
+<base_income>2000</base_income>
+<weaknesses>Effected by religous symbols, double dammage from True Faith</weaknesses>
+</clans>
+<clans>
+<id>16</id>
+<name>Followers of Set</name>
+<base_income>4000000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>g</symbol_char>
+<weaknesses>Takes dammage from bright light</weaknesses>
+</clans>
+<clans>
+<id>17</id>
+<name>Harbringers of Skulls</name>
+<base_income>2000</base_income>
+<symbol_font>WoD3</symbol_font>
+<symbol_char>*</symbol_char>
+<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+</clans>
+<clans>
+<id>18</id>
+<name>Gargoyle</name>
+<base_income>0</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>D</symbol_char>
+<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+</clans>
+<clans>
+<id>19</id>
+<name>Människa</name>
+<base_income>2000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>y</symbol_char>
+</clans>
+<clans>
+<id>20</id>
+<name>Caitiff</name>
+<base_income>5000</base_income>
+</clans>
+<clans>
+<id>21</id>
+<name>Kiasyd</name>
+<base_income>6000000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>p</symbol_char>
+<weaknesses>Takes aggrevated dammage from pure iron</weaknesses>
+</clans>
+<clans>
+<id>22</id>
+<name>Okänd</name>
+<base_income>2000</base_income>
+</clans>
+<clans>
+<id>24</id>
+<name>Samedi</name>
+<base_income>2000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>¹</symbol_char>
+<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+</clans>
+<clans>
+<id>25</id>
+<name>Daughters of Cacophony</name>
+<base_income>2000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>j</symbol_char>
+</clans>
+<clans>
+<id>26</id>
+<name>Nosferatu Antitribu</name>
+<base_income>2000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>m</symbol_char>
+<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+</clans>
+<clans>
+<id>27</id>
+<name>Malkavian Antitribu</name>
+<base_income>2000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>n</symbol_char>
+<weaknesses>Deranged</weaknesses>
+</clans>
+<clans>
+<id>28</id>
+<name>Salubri Antitribu</name>
+<base_income>2000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>o</symbol_char>
+<weaknesses>Cannot feed from unwilling viktims</weaknesses>
+</clans>
+<clans>
+<id>29</id>
+<name>Brujah Antitribu</name>
+<base_income>200000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>q</symbol_char>
+<weaknesses>-1 Self-Control/Instinct</weaknesses>
+</clans>
+<clans>
+<id>30</id>
+<name>Ventrue Antitribu</name>
+<base_income>7000000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>r</symbol_char>
+<weaknesses>Feeding restriction</weaknesses>
+</clans>
+<clans>
+<id>31</id>
+<name>Toreador Antitribu</name>
+<base_income>1000000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>t</symbol_char>
+<weaknesses>Entranced by beauty</weaknesses>
+</clans>
+<clans>
+<id>32</id>
+<name>Gangrel Antitribu</name>
+<base_income>5000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>u</symbol_char>
+<weaknesses>Gains a beast-trait from each frenzy</weaknesses>
+</clans>
+<clans>
+<id>33</id>
+<name>Ravnos Antitribu</name>
+<base_income>50000</base_income>
+<symbol_font>WoD2</symbol_font>
+<symbol_char>v</symbol_char>
+<weaknesses>Must commit criminal acts when need arrises</weaknesses>
+</clans>
+<clans>
+<id>34</id>
+<name>City Gangrel</name>
+<base_income>200000</base_income>
+<symbol_font>WoD</symbol_font>
+<symbol_char>k</symbol_char>
+<weaknesses>Gains a beast-trait from each frenzy</weaknesses>
+</clans>
+</dataroot>
