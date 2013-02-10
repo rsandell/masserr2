@@ -40,13 +40,23 @@ import java.util.List;
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class ManipulationDBImpl implements ManipulationDB {
+public class ManipulationDbImpl implements ManipulationDB {
 
     private Provider<OObjectDatabaseTx> db;
 
     @Inject
-    public ManipulationDBImpl(Provider<OObjectDatabaseTx> db) {
+    public ManipulationDbImpl(Provider<OObjectDatabaseTx> db) {
         this.db = db;
+    }
+
+    @Override
+    public Ability newAbility() {
+        return db.get().newInstance(Ability.class);
+    }
+
+    @Override
+    public Ability saveAbility(Ability ability) {
+        return db.get().save(ability);
     }
 
     @Override
@@ -77,6 +87,76 @@ public class ManipulationDBImpl implements ManipulationDB {
     @Override
     public Resource saveResource(Resource resource) {
         return db.get().save(resource);
+    }
+
+    @Override
+    public Clan newClan() {
+        return db.get().newInstance(Clan.class);
+    }
+
+    @Override
+    public Clan saveClan(Clan clan) {
+        return db.get().save(clan);
+    }
+
+    @Override
+    public Discipline newDiscipline() {
+        return db.get().newInstance(Discipline.class);
+    }
+
+    @Override
+    public Discipline saveDiscipline(Discipline discipline) {
+        return db.get().save(discipline);
+    }
+
+    @Override
+    public FightOrFlight newFightOrFlight() {
+        return db.get().newInstance(FightOrFlight.class);
+    }
+
+    @Override
+    public FightOrFlight saveFightOrFlight(FightOrFlight fightOrFlight) {
+        return db.get().save(fightOrFlight);
+    }
+
+    @Override
+    public Generation newGeneration() {
+        return db.get().newInstance(Generation.class);
+    }
+
+    @Override
+    public Generation saveGeneration(Generation generation) {
+        return db.get().save(Generation.class);
+    }
+
+    @Override
+    public MeritOrFlaw newMeritOrFlaw() {
+        return db.get().newInstance(MeritOrFlaw.class);
+    }
+
+    @Override
+    public MeritOrFlaw saveMeritOrFlaw(MeritOrFlaw meritOrFlaw) {
+        return db.get().save(meritOrFlaw);
+    }
+
+    @Override
+    public Path newPath() {
+        return db.get().newInstance(Path.class);
+    }
+
+    @Override
+    public Path savePath(Path path) {
+        return db.get().save(path);
+    }
+
+    @Override
+    public OtherTrait newOtherTrait() {
+        return db.get().newInstance(OtherTrait.class);
+    }
+
+    @Override
+    public OtherTrait saveOtherTrait(OtherTrait otherTrait) {
+        return db.get().save(otherTrait);
     }
 
     @Override
@@ -167,5 +247,10 @@ public class ManipulationDBImpl implements ManipulationDB {
     @Override
     public void insertPlayersExperience(List<Player> pPlayers, int pAmmount, String pReason) {
         //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return db.get().countClass(Ability.class) <= 0;
     }
 }

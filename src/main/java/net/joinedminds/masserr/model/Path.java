@@ -39,6 +39,7 @@ public class Path implements NamedIdentifiable {
 	@Id
     private String id;
 	private String name;
+    private Type type;
 
 	public Path() {
 	}
@@ -46,6 +47,11 @@ public class Path implements NamedIdentifiable {
 	public Path(String pName) {
 		name = pName;
 	}
+
+    public Path(String name, Type type) {
+        this.name = name;
+        this.type = type;
+    }
 
     @Override
 	public String getId() {
@@ -64,4 +70,16 @@ public class Path implements NamedIdentifiable {
 	public String toString() {
 		return name;
 	}
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public static enum Type {
+        Necromancy, Thaumaturgy
+    }
 }

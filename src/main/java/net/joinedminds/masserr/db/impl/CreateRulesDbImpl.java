@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ * Copyright (c) 2013-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,43 +22,52 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr;
+package net.joinedminds.masserr.db.impl;
 
 import com.google.inject.Inject;
-import net.joinedminds.masserr.dataimport.Importer;
-import net.joinedminds.masserr.db.ManipulationDB;
-import net.joinedminds.masserr.ui.NavItem;
-import org.xml.sax.SAXException;
+import com.google.inject.Provider;
+import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
+import net.joinedminds.masserr.db.CreateRulesDB;
+import net.joinedminds.masserr.model.CreateRule;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.util.logging.Logger;
+import java.util.List;
 
 /**
- * Main class for the application.
+ * Description
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class Masserr implements NavItem {
+public class CreateRulesDbImpl implements CreateRulesDB {
 
-    private static final Logger logger = Logger.getLogger(Masserr.class.getName());
-
-    private ManipulationDB manipulationDB;
-    private Importer importer;
+    private Provider<OObjectDatabaseTx> db;
 
     @Inject
-    public Masserr(ManipulationDB manipulationDB, Importer importer) throws ParserConfigurationException, SAXException, IOException {
-        this.manipulationDB = manipulationDB;
-        this.importer = importer;
-
-        if (manipulationDB.isEmpty()) {
-            logger.info("Starting first data input.");
-            importer.importAll();
-        }
+    public CreateRulesDbImpl(Provider<OObjectDatabaseTx> db) {
+        this.db = db;
     }
 
     @Override
-    public String getNavDisplay() {
-        return Messages.nav_Home();
+    public CreateRule getRule(int pYear) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public CreateRule getRule(String pYear) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<CreateRule> getRules() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public CreateRule newRule() {
+        return db.get().newInstance(CreateRule.class);
+    }
+
+    @Override
+    public CreateRule saveRule(CreateRule rule) {
+        return db.get().save(rule);
     }
 }

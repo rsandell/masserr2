@@ -39,6 +39,10 @@ import java.util.List;
  */
 public interface ManipulationDB extends BasicDB {
 
+    Ability newAbility();
+
+    Ability saveAbility(Ability ability);
+
     Role newRole();
 
     Role saveRole(Role pRole);
@@ -50,6 +54,34 @@ public interface ManipulationDB extends BasicDB {
     Resource newResource();
 
     Resource saveResource(Resource pResource);
+
+    Clan newClan();
+
+    Clan saveClan(Clan clan);
+
+    Discipline newDiscipline();
+
+    Discipline saveDiscipline(Discipline discipline);
+
+    FightOrFlight newFightOrFlight();
+
+    FightOrFlight saveFightOrFlight(FightOrFlight fightOrFlight);
+
+    Generation newGeneration();
+
+    Generation saveGeneration(Generation generation);
+
+    MeritOrFlaw newMeritOrFlaw();
+
+    MeritOrFlaw saveMeritOrFlaw(MeritOrFlaw meritOrFlaw);
+
+    Path newPath();
+
+    Path savePath(Path path);
+
+    OtherTrait newOtherTrait();
+
+    OtherTrait saveOtherTrait(OtherTrait otherTrait);
 
     void insertExperience(Role pRole, int pAmmount, String pReason);
 
@@ -86,4 +118,6 @@ public interface ManipulationDB extends BasicDB {
     void addPlayer(Player pPlayer);
 
     void insertPlayersExperience(List<Player> pPlayers, int pAmmount, String pReason);
+
+    boolean isEmpty();
 }

@@ -40,6 +40,11 @@ import java.rmi.RemoteException;
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public interface InfluenceDB extends BasicDB {
+
+    Influence newInfluence();
+
+    Influence saveInfluence(Influence influence);
+
     void updateRoleProfessions(Role pRole, List pProfessions) throws SQLException, RemoteException;
 
     void removeResourcesFromRole(Role pRole, Resource[] pResources) throws SQLException, RemoteException;

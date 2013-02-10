@@ -39,43 +39,35 @@ public class Ability implements NamedIdentifiable  {
 	@Id
     private String id;
 	private String name;
-	private char type;
+	private Type type;
 	private String specialisation;
 	private int baseMonthlyIncome;
 
 	public Ability() {
 	}
 
-	public Ability(String pId, String pName, char pType) {
+	public Ability(String pId, String pName, Type pType) {
 		id = pId;
 		name = pName;
 		type = pType;
 		specialisation = null;
 	}
 
-	public Ability(String pId, String pName, char pType, int pBaseMonthlyIncome) {
+	public Ability(String pId, String pName, Type pType, int pBaseMonthlyIncome) {
 		id = pId;
 		name = pName;
 		type = pType;
 		baseMonthlyIncome = pBaseMonthlyIncome;
 	}
 
-	public Ability(String pId, String pName, char pType, String pSpecialisation, int pDots) {
+	public Ability(String pId, String pName, Type pType, String pSpecialisation, int pBaseMonthlyIncome) {
 		id = pId;
 		name = pName;
-		type = pType;
-		specialisation = pSpecialisation;
-	}
-
-	public Ability(String pId, String pName, char pType, String pSpecialisation, int pDots, int pBaseMonthlyIncome) {
-		id = pId;
-		name = pName;
-		type = pType;
 		specialisation = pSpecialisation;
 		baseMonthlyIncome = pBaseMonthlyIncome;
 	}
 
-	public Ability(String pId, String pName, char pType, String pSpecialisation) {
+	public Ability(String pId, String pName, Type pType, String pSpecialisation) {
 		id = pId;
 		name = pName;
 		type = pType;
@@ -104,11 +96,11 @@ public class Ability implements NamedIdentifiable  {
 		name = pName;
 	}
 
-	public char getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(char pType) {
+	public void setType(Type pType) {
 		type = pType;
 	}
 
@@ -123,4 +115,29 @@ public class Ability implements NamedIdentifiable  {
 	public void setSpecialisation(String pSpecialisation) {
 		specialisation = pSpecialisation;
 	}
+
+    public static enum Type {
+        Physical('P'),
+        Social('S'),
+        Mental('M');
+
+        private char sign;
+
+        Type(char sign) {
+            this.sign = sign;
+        }
+
+        public char getSign() {
+            return sign;
+        }
+
+        public static Type findByChar(char sign) {
+            for (Type t : Type.values()) {
+                if (t.getSign() == sign) {
+                    return t;
+                }
+            }
+            return null;
+        }
+    }
 }

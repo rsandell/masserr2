@@ -37,10 +37,14 @@ import java.util.List;
  * 
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
-public interface CreateRules extends BasicDB {
-    CreateRule getRule(int pYear) throws SQLException, RemoteException;
+public interface CreateRulesDB extends BasicDB {
+    CreateRule getRule(int pYear);
 
-    CreateRule getRule(String pYear) throws SQLException, RemoteException;
+    CreateRule getRule(String pYear);
 
-    List<CreateRule> getRules()  throws SQLException, RemoteException;
+    List<CreateRule> getRules();
+
+    public CreateRule newRule();
+
+    public CreateRule saveRule(CreateRule rule);
 }
