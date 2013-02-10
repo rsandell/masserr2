@@ -24,10 +24,7 @@
 
 package net.joinedminds.masserr.db;
 
-import net.joinedminds.masserr.model.BankAccount;
-import net.joinedminds.masserr.model.Role;
-import net.joinedminds.masserr.model.Withdrawal;
-import net.joinedminds.masserr.model.Resource;
+import net.joinedminds.masserr.model.*;
 
 import java.sql.SQLException;
 import java.rmi.RemoteException;
@@ -42,6 +39,11 @@ import java.util.List;
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public interface BankingDB extends BasicDB {
+
+    StarterMoneyRule newStarterMoneyRule();
+
+    StarterMoneyRule saveStarterMoneyRule(StarterMoneyRule rule);
+
     boolean hasAccount(int pRoleId) throws SQLException, RemoteException;
 
     void createAccount(Role pRoleOwner, BankAccount pBankAccount) throws SQLException, RemoteException;

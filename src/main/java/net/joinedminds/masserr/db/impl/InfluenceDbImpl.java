@@ -61,6 +61,16 @@ public class InfluenceDbImpl implements InfluenceDB {
     }
 
     @Override
+    public Profession newProfession() {
+        return db.get().newInstance(Profession.class);
+    }
+
+    @Override
+    public Profession saveProfession(Profession profession) {
+        return db.get().save(profession);
+    }
+
+    @Override
     public void updateRoleProfessions(Role pRole, List pProfessions) throws SQLException, RemoteException {
         //To change body of implemented methods use File | Settings | File Templates.
     }

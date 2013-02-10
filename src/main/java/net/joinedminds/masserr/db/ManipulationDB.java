@@ -83,6 +83,11 @@ public interface ManipulationDB extends BasicDB {
 
     OtherTrait saveOtherTrait(OtherTrait otherTrait);
 
+    RitualType newRitualType();
+
+    RitualType saveRitualType(RitualType type);
+
+
     void insertExperience(Role pRole, int pAmmount, String pReason);
 
     void insertExperience(List<RolesGroup> pGroupsList, List<Role> pRolesList, int pAmount, String pReason);

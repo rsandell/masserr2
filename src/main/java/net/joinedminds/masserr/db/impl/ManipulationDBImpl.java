@@ -160,6 +160,16 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public RitualType newRitualType() {
+        return db.get().newInstance(RitualType.class);
+    }
+
+    @Override
+    public RitualType saveRitualType(RitualType type) {
+        return db.get().save(type);
+    }
+
+    @Override
     public void insertExperience(Role pRole, int pAmmount, String pReason) {
         //To change body of implemented methods use File | Settings | File Templates.
     }

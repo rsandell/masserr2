@@ -45,6 +45,10 @@ public interface InfluenceDB extends BasicDB {
 
     Influence saveInfluence(Influence influence);
 
+    Profession newProfession();
+
+    Profession saveProfession(Profession profession);
+
     void updateRoleProfessions(Role pRole, List pProfessions) throws SQLException, RemoteException;
 
     void removeResourcesFromRole(Role pRole, Resource[] pResources) throws SQLException, RemoteException;

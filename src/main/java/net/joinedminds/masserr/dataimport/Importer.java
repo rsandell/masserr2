@@ -25,6 +25,7 @@
 package net.joinedminds.masserr.dataimport;
 
 import com.google.inject.Inject;
+import net.joinedminds.masserr.db.BankingDB;
 import net.joinedminds.masserr.db.CreateRulesDB;
 import net.joinedminds.masserr.db.InfluenceDB;
 import net.joinedminds.masserr.db.ManipulationDB;
@@ -53,19 +54,22 @@ public class Importer {
 
     private static final Logger logger = Logger.getLogger(Importer.class.getName());
 
-    ManipulationDB manipulationDB;
-    CreateRulesDB createRulesDB;
+    private ManipulationDB manipulationDB;
+    private CreateRulesDB createRulesDB;
     private InfluenceDB influenceDB;
+    private BankingDB bankingDB;
     private Map<String, Ability> abilities;
     private HashMap<String, Clan> clans;
     private HashMap<String, Discipline> disciplines;
     private HashMap<String, Generation> generations;
+    private HashMap<String, RitualType> ritualTypes;
 
     @Inject
-    public Importer(ManipulationDB manipulationDB, CreateRulesDB createRulesDB, InfluenceDB influenceDB) {
+    public Importer(ManipulationDB manipulationDB, CreateRulesDB createRulesDB, InfluenceDB influenceDB, BankingDB bankingDB) {
         this.manipulationDB = manipulationDB;
         this.createRulesDB = createRulesDB;
         this.influenceDB = influenceDB;
+        this.bankingDB = bankingDB;
     }
 
     public void importAll() throws IOException, SAXException, ParserConfigurationException {
@@ -204,7 +208,7 @@ public class Importer {
                 },
                 meritOrFlawHandlers()
         );
-        //=====Paths=======
+        //=====PATHS=======
         logger.info("Importing Paths");
         importPaths();
 
@@ -223,6 +227,159 @@ public class Importer {
                     }
                 }, otherTraitsHandlers()
         );
+
+        //=====PROFESSIONS======
+        logger.info("Importing Professions");
+        importFromResource(getClass().getResourceAsStream("/import/professions.xml"), "professions", "id", null,
+                new Creator<Profession>() {
+                    @Override
+                    public Profession create() {
+                        return influenceDB.newProfession();
+                    }
+                }, new Saver<Profession>() {
+                    @Override
+                    public Profession save(Profession entity) {
+                        return influenceDB.saveProfession(entity);
+                    }
+                }, professionHandlers()
+        );
+        //=====RITUAL TYPES=======
+        logger.info("Importing Ritual Types");
+        ritualTypes = new HashMap<>();
+        importFromResource(getClass().getResourceAsStream("/import/ritual_types.xml"), "ritual_types", "id", ritualTypes,
+                new Creator<RitualType>() {
+                    @Override
+                    public RitualType create() {
+                        return manipulationDB.newRitualType();
+                    }
+                },
+                new Saver<RitualType>() {
+                    @Override
+                    public RitualType save(RitualType entity) {
+                        return manipulationDB.saveRitualType(entity);
+                    }
+                },
+                ritualTypeHandlers()
+        );
+        //=========RITUALS===========
+        logger.info("Importing Rituals");
+        importFromResource(getClass().getResourceAsStream("/import/rituals.xml"), "rituals", "id", null,
+                new Creator<Ritual>() {
+                    @Override
+                    public Ritual create() {
+                        return manipulationDB.newRitual();
+                    }
+                }, new Saver<Ritual>() {
+                    @Override
+                    public Ritual save(Ritual entity) {
+                        return manipulationDB.saveRitual(entity);
+                    }
+                }, ritualHandlers()
+        );
+        //=======Starting Money=======
+        logger.info("Importing StarterMoneyRules");
+        Map<String, AttributeHandler<StarterMoneyRule>> handlers = starterMoneyRuleHandlers();
+        importFromResource(getClass().getResourceAsStream("/import/roleAgeSpanMoney.xml"), "roleAgeSpanMoney", "id", null,
+                new Creator<StarterMoneyRule>() {
+                    @Override
+                    public StarterMoneyRule create() {
+                        return bankingDB.newStarterMoneyRule();
+                    }
+                },
+                new Saver<StarterMoneyRule>() {
+                    @Override
+                    public StarterMoneyRule save(StarterMoneyRule entity) {
+                        return bankingDB.saveStarterMoneyRule(entity);
+                    }
+                },
+                handlers
+        );
+    }
+
+    private Map<String, AttributeHandler<StarterMoneyRule>> starterMoneyRuleHandlers() {
+        Map<String, AttributeHandler<StarterMoneyRule>> handlers = new HashMap<>();
+        handlers.put("min_age", new AttributeHandler<StarterMoneyRule>() {
+            @Override
+            public void handle(Node node, StarterMoneyRule entity) {
+                entity.setMinAge(Integer.parseInt(node.getTextContent()));
+            }
+        });
+        handlers.put("max_age", new AttributeHandler<StarterMoneyRule>() {
+            @Override
+            public void handle(Node node, StarterMoneyRule entity) {
+                entity.setMaxAge(Integer.parseInt(node.getTextContent()));
+            }
+        });
+        handlers.put("base_money", new AttributeHandler<StarterMoneyRule>() {
+            @Override
+            public void handle(Node node, StarterMoneyRule entity) {
+                entity.setBaseMoney(Integer.parseInt(node.getTextContent()));
+            }
+        });
+        return handlers;
+    }
+
+    private Map<String, AttributeHandler<Ritual>> ritualHandlers() {
+        Map<String, AttributeHandler<Ritual>> handlers = new HashMap<>();
+        handlers.put("name", new AttributeHandler<Ritual>() {
+            @Override
+            public void handle(Node node, Ritual entity) {
+                entity.setName(node.getTextContent());
+            }
+        });
+        handlers.put("type", new AttributeHandler<Ritual>() {
+            @Override
+            public void handle(Node node, Ritual entity) {
+                entity.setRitualType(ritualTypes.get(node.getTextContent()));
+            }
+        });
+        handlers.put("level", new AttributeHandler<Ritual>() {
+            @Override
+            public void handle(Node node, Ritual entity) {
+                entity.setLevel(Integer.parseInt(node.getTextContent()));
+            }
+        });
+        handlers.put("description", new AttributeHandler<Ritual>() {
+            @Override
+            public void handle(Node node, Ritual entity) {
+                entity.setDescription(node.getTextContent());
+            }
+        });
+        return handlers;
+    }
+
+    private Map<String, AttributeHandler<RitualType>> ritualTypeHandlers() {
+        Map<String, AttributeHandler<RitualType>> handlers = new HashMap<>();
+        handlers.put("name", new AttributeHandler<RitualType>() {
+            @Override
+            public void handle(Node node, RitualType entity) {
+                entity.setName(node.getTextContent());
+            }
+        });
+        return handlers;
+    }
+
+    private Map<String, AttributeHandler<Profession>> professionHandlers() {
+        Map<String, AttributeHandler<Profession>> handlers = new HashMap<>();
+        handlers.put("name", new AttributeHandler<Profession>() {
+            @Override
+            public void handle(Node node, Profession entity) {
+                entity.setName(node.getTextContent());
+            }
+        });
+        handlers.put("monthly_income", new AttributeHandler<Profession>() {
+            @Override
+            public void handle(Node node, Profession entity) {
+                entity.setMonthlyIncome(Integer.parseInt(node.getTextContent()));
+            }
+        });
+        handlers.put("mortal", new AttributeHandler<Profession>() {
+            @Override
+            public void handle(Node node, Profession entity) {
+                entity.setMortal("1".equals(node.getTextContent()));
+            }
+        });
+        return handlers;
     }
 
     private Map<String, AttributeHandler<OtherTrait>> otherTraitsHandlers() {
