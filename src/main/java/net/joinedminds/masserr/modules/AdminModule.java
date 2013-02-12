@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ * Copyright (c) 2013-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,72 +22,33 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr;
+package net.joinedminds.masserr.modules;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import net.joinedminds.masserr.dataimport.Importer;
+import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
-import net.joinedminds.masserr.modules.AdminModule;
 import net.joinedminds.masserr.ui.NavItem;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
- * Main class for the application.
+ * Description
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
 @Singleton
-public class Masserr implements NavItem {
-
-    private static final Logger logger = Logger.getLogger(Masserr.class.getName());
-    private static Masserr instance = null;
-
-    private AdminModule admin;
+public class AdminModule implements NavItem {
     private ManipulationDB manipulationDb;
     private AdminDB adminDb;
-    private Importer importer;
 
     @Inject
-    public Masserr(AdminModule admin, ManipulationDB manipulationDb, AdminDB adminDb, Importer importer) throws Exception {
-        this.admin = admin;
+    public AdminModule(ManipulationDB manipulationDb, AdminDB adminDb) {
         this.manipulationDb = manipulationDb;
         this.adminDb = adminDb;
-        this.importer = importer;
-
-        if (instance != null) {
-            throw new IllegalStateException("Second Instance!");
-        }
-        instance = this;
-
-        if (manipulationDb.isEmpty()) {
-            logger.info("Starting first data input.");
-            try {
-                importer.importAll();
-            } catch (Exception e) {
-                logger.log(Level.SEVERE, "Failed to first-time-initialize the database", e);
-                throw new Exception("Failed to first-time-initialize the database", e);
-            }
-        }
-    }
-
-    public String getAppName() {
-        return adminDb.getConfig().getAppName();
     }
 
     @Override
     public String getNavDisplay() {
-        return Messages.nav_Home();
-    }
-
-    public AdminModule getAdmin() {
-        return admin;
-    }
-
-    public static Masserr getInstance() {
-        return instance;
+        return Messages.nav_Admin();
     }
 }

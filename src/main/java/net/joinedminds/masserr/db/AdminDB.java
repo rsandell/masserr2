@@ -25,6 +25,7 @@
 package net.joinedminds.masserr.db;
 
 import net.joinedminds.masserr.model.Domain;
+import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.model.mgm.User;
 
 import java.rmi.RemoteException;
@@ -39,6 +40,11 @@ import java.util.List;
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public interface AdminDB extends BasicDB {
+
+    Config getConfig();
+
+    Config saveConfig(Config config);
+
     void updateUser(User pUser) throws SQLException, RemoteException;
 
     User addUser(User pUser) throws SQLException, RemoteException;

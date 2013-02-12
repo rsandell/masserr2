@@ -29,10 +29,8 @@ import com.google.inject.name.Names;
 import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 import net.joinedminds.masserr.dataimport.Importer;
 import net.joinedminds.masserr.db.*;
-import net.joinedminds.masserr.db.impl.BankingDbImpl;
-import net.joinedminds.masserr.db.impl.CreateRulesDbImpl;
-import net.joinedminds.masserr.db.impl.InfluenceDbImpl;
-import net.joinedminds.masserr.db.impl.ManipulationDbImpl;
+import net.joinedminds.masserr.db.impl.*;
+import net.joinedminds.masserr.modules.AdminModule;
 
 /**
  * Main Guice module.
@@ -61,7 +59,8 @@ public class GuiceModule extends AbstractModule {
         bind(CreateRulesDB.class).to(CreateRulesDbImpl.class);
         bind(InfluenceDB.class).to(InfluenceDbImpl.class);
         bind(BankingDB.class).to(BankingDbImpl.class);
-
+        bind(AdminDB.class).to(AdminDbImpl.class);
+        bind(AdminModule.class);
         bind(Importer.class);
         bind(Masserr.class);
     }

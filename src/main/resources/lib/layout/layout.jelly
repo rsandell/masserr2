@@ -15,7 +15,7 @@
     <st:header name="Cache-Control" value="no-cache,must-revalidate"/>
     <st:contentType value="text/html;charset=UTF-8"/>
 
-    <j:new var="h" className="net.joinedminds.staplertest.Functions"/>
+    <j:new var="h" className="net.joinedminds.masserr.Functions"/>
     ${h.initPageVariables(context)}
 
     <j:set var="_" value="${request.getSession()}"/>
@@ -48,14 +48,20 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <a class="brand" href="#">Project name</a>
+                        <a class="brand" href="#">Masserr</a>
                         <div class="nav-collapse collapse">
                             <ul class="nav">
                                 <li class="active">
                                     <a href="/">Home</a>
                                 </li>
                                 <li>
-                                    <a href="test">Test</a>
+                                    <a href="test">Roles</a>
+                                </li>
+                                <li>
+                                    <a href="#about">Influences</a>
+                                </li>
+                                <li>
+                                    <a href="$rootUrl/admin">Admin</a>
                                 </li>
                                 <li>
                                     <a href="#about">About</a>
@@ -99,26 +105,46 @@
                     </div>
                 </div>
             </div>
-
             <div class="container">
-                <j:set var="breadcrumbs" value="${h.getBreadcrumbs()}"/>
-                <j:if test="${not empty breadcrumbs}">
-                    <ul class="breadcrumb">
-                        <j:forEach items="${breadcrumbs}" var="b" varStatus="iterStat">
-                            <j:choose>
-                                <j:when test="${iterStat.last}">
-                                    <li class="active">${b.display}</li>
-                                </j:when>
-                                <j:otherwise>
-                                    <li><a href="${b.url}">${b.display}</a> <span class="divider"><i class="icon-chevron-right"/></span></li>
-                                </j:otherwise>
-                            </j:choose>
-                        </j:forEach>
-                    </ul>
-                </j:if>
                 <d:invokeBody/>
             </div>
 
+            <div class="navbar navbar-fixed-bottom" style="height: 40px">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <div class="row">
+                            <div class="span6">
+                                <small>
+                                    <em><strong>Copyright © 2004,2012-</strong> Robert Sandell. All rights reserved.</em><br/>
+                                    <em>Mind's Eye Theatre (MET) Game and Artwork is <strong>© 2012 CCP hf. All rights reserved.</strong></em>
+                                </small>
+                            </div>
+                            <div class="span6">
+                                <j:set var="breadcrumbs" value="${h.getBreadcrumbs()}"/>
+                                <j:if test="${not empty breadcrumbs}">
+                                    <ul class="breadcrumb" style="background-color: transparent">
+                                        <j:forEach items="${breadcrumbs}" var="b" varStatus="iterStat">
+                                            <j:choose>
+                                                <j:when test="${iterStat.last}">
+                                                    <li class="active">${b.display}</li>
+                                                </j:when>
+                                                <j:otherwise>
+                                                    <li>
+                                                        <a href="${b.url}">${b.display}</a>
+                                                        <span class="divider">
+                                                            <i class="icon-chevron-right"/>
+                                                        </span>
+                                                    </li>
+                                                </j:otherwise>
+                                            </j:choose>
+                                        </j:forEach>
+                                    </ul>
+                                </j:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <script src="http://code.jquery.com/jquery-latest.js"></script>
             <script src="${resURL}/bootstrap/js/bootstrap.min.js"></script>
         </body>
