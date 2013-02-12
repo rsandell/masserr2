@@ -2,6 +2,8 @@ package net.joinedminds.masserr.model;
 
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Description
@@ -17,6 +19,7 @@ public class Clan implements NamedIdentifiable  {
 	private String name;
 	private int baseIncome;
     private String weaknesses = "";
+    private List<Discipline> clanDisciplines;
 
 	public Clan() {
 	}
@@ -68,5 +71,16 @@ public class Clan implements NamedIdentifiable  {
 
     public void setWeaknesses(String pWeaknesses) {
         weaknesses = pWeaknesses;
+    }
+
+    public List<Discipline> getClanDisciplines() {
+        if (clanDisciplines == null) {
+            clanDisciplines = new LinkedList<>();
+        }
+        return clanDisciplines;
+    }
+
+    public void setClanDisciplines(List<Discipline> clanDisciplines) {
+        this.clanDisciplines = clanDisciplines;
     }
 }

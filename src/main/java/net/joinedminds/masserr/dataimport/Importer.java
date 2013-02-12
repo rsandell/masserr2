@@ -74,209 +74,67 @@ public class Importer {
 
     public void importAll() throws IOException, SAXException, ParserConfigurationException {
         //======ABILITIES======
-        abilities = new HashMap<>();
-        logger.info("Importing Abilities");
-        importFromResource(getClass().getResourceAsStream("/import/abilities.xml"), "abilities", "id", abilities,
-                new Creator<Ability>() {
-                    @Override
-                    public Ability create() {
-                        return manipulationDB.newAbility();
-                    }
-                },
-                new Saver<Ability>() {
-                    @Override
-                    public Ability save(Ability entity) {
-                        return manipulationDB.saveAbility(entity);
-                    }
-                }, abilityHandlers()
-        );
-
+        importAbilities();
         //======CREATE RULES======
-        logger.info("Importing CreateRules");
-        importFromResource(getClass().getResourceAsStream("/import/age_createRules.xml"), "age_createRules", "id", null,
-                new Creator<CreateRule>() {
-                    @Override
-                    public CreateRule create() {
-                        return createRulesDB.newRule();
-                    }
-                },
-                new Saver<CreateRule>() {
-                    @Override
-                    public CreateRule save(CreateRule entity) {
-                        return createRulesDB.saveRule(entity);
-                    }
-                }, createRulesHandlers()
-        );
+        importCreateRules();
         //======CLANS========
-        logger.info("Importing Clans");
-        clans = new HashMap<>();
+        importClans();
+        //========DISCIPLINES=========
+        importDisciplines();
+        //========CLAN DISCIPLINES======
+        importClanDisciplines();
+        //======FIGHT OR FLIGHT=========
+        importFightOrFlight();
+        //======GENERATIONS===========
+        importGenerations();
+        //=====INFLUENCES==========
+        importInfluences();
+        //=====Merits and Flaws==========
+        importMeritOrFlaws();
+        //=====PATHS=======
+        importPaths();
+        //======OTHER TRAITS========
+        importOtherTraits();
+        //=====PROFESSIONS======
+        importProfessions();
+        //=====RITUAL TYPES=======
+        importRitualTypes();
+        //=========RITUALS===========
+        importRituals();
+        //=======Starting Money=======
+        importStarterMoneyRules();
+    }
 
-        importFromResource(getClass().getResourceAsStream("/import/clans.xml"), "clans", "id", clans,
-                new Creator<Clan>() {
-                    @Override
-                    public Clan create() {
-                        return manipulationDB.newClan();
+    private void importClanDisciplines() throws IOException, SAXException, ParserConfigurationException {
+        logger.info("Importing Clan Disciplines");
+        mapImportFromResource(getClass().getResourceAsStream("/import/clan_disciplines.xml"), "clan_disciplines", new Mapper<Clan>() {
+            @Override
+            public Clan map(Map<String, String> entity) {
+                String clanId = entity.get("clan_id");
+                String disciplineId = entity.get("discipline_id");
+                Clan c = clans.get(clanId);
+                if (c != null) {
+                    Discipline d = disciplines.get(disciplineId);
+                    if (d != null) {
+                        c.getClanDisciplines().add(d);
+                        return c;
+                    } else {
+                        logger.warning("Could not find discipline with id: " + disciplineId);
                     }
-                }, new Saver<Clan>() {
+                } else {
+                    logger.warning("Could not find clan with id: " + clanId);
+                }
+                return null;
+            }
+        }, new Saver<Clan>() {
                     @Override
                     public Clan save(Clan entity) {
                         return manipulationDB.saveClan(entity);
                     }
-                }, clanHandlers()
-        );
+                });
+    }
 
-        //========DISCIPLINES=========
-        logger.info("Importing Disciplines");
-        disciplines = new HashMap<>();
-        importFromResource(getClass().getResourceAsStream("/import/disciplines.xml"), "disciplines", "id", disciplines,
-                new Creator<Discipline>() {
-                    @Override
-                    public Discipline create() {
-                        return manipulationDB.newDiscipline();
-                    }
-                },
-                new Saver<Discipline>() {
-                    @Override
-                    public Discipline save(Discipline entity) {
-                        return manipulationDB.saveDiscipline(entity);
-                    }
-                }, disciplineHandlers()
-        );
-
-        //======FIGHT OR FLIGHT=========
-        logger.info("Importing FightOrFlight");
-        importFromResource(getClass().getResourceAsStream("/import/fightNflight.xml"), "fightNflight", "id", null, new Creator<FightOrFlight>() {
-                    @Override
-                    public FightOrFlight create() {
-                        return manipulationDB.newFightOrFlight();
-                    }
-                }, new Saver<FightOrFlight>() {
-                    @Override
-                    public FightOrFlight save(FightOrFlight entity) {
-                        return manipulationDB.saveFightOrFlight(entity);
-                    }
-                }, fightOrFlightHandlers()
-        );
-
-        //======GENERATIONS===========
-        logger.info("Importing Generations");
-        generations = new HashMap<>();
-        importFromResource(getClass().getResourceAsStream("/import/generations.xml"), "generations", "generation", generations,
-                new Creator<Generation>() {
-                    @Override
-                    public Generation create() {
-                        return manipulationDB.newGeneration();
-                    }
-                }, new Saver<Generation>() {
-                    @Override
-                    public Generation save(Generation entity) {
-                        return manipulationDB.saveGeneration(entity);
-                    }
-                },
-                generationHandlers()
-        );
-        //=====INFLUENCES==========
-        logger.info("Importing Influences");
-        importFromResource(getClass().getResourceAsStream("/import/influences.xml"), "influences", "id", null,
-                new Creator<Influence>() {
-                    @Override
-                    public Influence create() {
-                        return influenceDB.newInfluence();
-                    }
-                },
-                new Saver<Influence>() {
-                    @Override
-                    public Influence save(Influence entity) {
-                        return influenceDB.saveInfluence(entity);
-                    }
-                },
-                influenceHandlers()
-        );
-        logger.info("Importing MeritOrFlaws");
-        importFromResource(getClass().getResourceAsStream("/import/meritsNflaws.xml"), "meritsNflaws", "id", null,
-                new Creator<MeritOrFlaw>() {
-                    @Override
-                    public MeritOrFlaw create() {
-                        return manipulationDB.newMeritOrFlaw();
-                    }
-                },
-                new Saver<MeritOrFlaw>() {
-                    @Override
-                    public MeritOrFlaw save(MeritOrFlaw entity) {
-                        return manipulationDB.saveMeritOrFlaw(entity);
-                    }
-                },
-                meritOrFlawHandlers()
-        );
-        //=====PATHS=======
-        logger.info("Importing Paths");
-        importPaths();
-
-        //======OTHER TRAITS========
-        logger.info("Importing OtherTraits");
-        importFromResource(getClass().getResourceAsStream("/import/otherTraits.xml"), "otherTraits", "id", null,
-                new Creator<OtherTrait>() {
-                    @Override
-                    public OtherTrait create() {
-                        return manipulationDB.newOtherTrait();
-                    }
-                }, new Saver<OtherTrait>() {
-                    @Override
-                    public OtherTrait save(OtherTrait entity) {
-                        return manipulationDB.saveOtherTrait(entity);
-                    }
-                }, otherTraitsHandlers()
-        );
-
-        //=====PROFESSIONS======
-        logger.info("Importing Professions");
-        importFromResource(getClass().getResourceAsStream("/import/professions.xml"), "professions", "id", null,
-                new Creator<Profession>() {
-                    @Override
-                    public Profession create() {
-                        return influenceDB.newProfession();
-                    }
-                }, new Saver<Profession>() {
-                    @Override
-                    public Profession save(Profession entity) {
-                        return influenceDB.saveProfession(entity);
-                    }
-                }, professionHandlers()
-        );
-        //=====RITUAL TYPES=======
-        logger.info("Importing Ritual Types");
-        ritualTypes = new HashMap<>();
-        importFromResource(getClass().getResourceAsStream("/import/ritual_types.xml"), "ritual_types", "id", ritualTypes,
-                new Creator<RitualType>() {
-                    @Override
-                    public RitualType create() {
-                        return manipulationDB.newRitualType();
-                    }
-                },
-                new Saver<RitualType>() {
-                    @Override
-                    public RitualType save(RitualType entity) {
-                        return manipulationDB.saveRitualType(entity);
-                    }
-                },
-                ritualTypeHandlers()
-        );
-        //=========RITUALS===========
-        logger.info("Importing Rituals");
-        importFromResource(getClass().getResourceAsStream("/import/rituals.xml"), "rituals", "id", null,
-                new Creator<Ritual>() {
-                    @Override
-                    public Ritual create() {
-                        return manipulationDB.newRitual();
-                    }
-                }, new Saver<Ritual>() {
-                    @Override
-                    public Ritual save(Ritual entity) {
-                        return manipulationDB.saveRitual(entity);
-                    }
-                }, ritualHandlers()
-        );
-        //=======Starting Money=======
+    public void importStarterMoneyRules() throws ParserConfigurationException, IOException, SAXException {
         logger.info("Importing StarterMoneyRules");
         Map<String, AttributeHandler<StarterMoneyRule>> handlers = starterMoneyRuleHandlers();
         importFromResource(getClass().getResourceAsStream("/import/roleAgeSpanMoney.xml"), "roleAgeSpanMoney", "id", null,
@@ -296,24 +154,244 @@ public class Importer {
         );
     }
 
+    public void importRituals() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Rituals");
+        if (ritualTypes == null) throw new IllegalStateException("RitualTypes must be imported first.");
+        importFromResource(getClass().getResourceAsStream("/import/rituals.xml"), "rituals", "id", null,
+                new Creator<Ritual>() {
+                    @Override
+                    public Ritual create() {
+                        return manipulationDB.newRitual();
+                    }
+                }, new Saver<Ritual>() {
+                    @Override
+                    public Ritual save(Ritual entity) {
+                        return manipulationDB.saveRitual(entity);
+                    }
+                }, ritualHandlers()
+        );
+    }
+
+    public void importRitualTypes() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Ritual Types");
+        ritualTypes = new HashMap<>();
+        importFromResource(getClass().getResourceAsStream("/import/ritual_types.xml"), "ritual_types", "id", ritualTypes,
+                new Creator<RitualType>() {
+                    @Override
+                    public RitualType create() {
+                        return manipulationDB.newRitualType();
+                    }
+                },
+                new Saver<RitualType>() {
+                    @Override
+                    public RitualType save(RitualType entity) {
+                        return manipulationDB.saveRitualType(entity);
+                    }
+                },
+                ritualTypeHandlers()
+        );
+    }
+
+    public void importProfessions() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Professions");
+        importFromResource(getClass().getResourceAsStream("/import/professions.xml"), "professions", "id", null,
+                new Creator<Profession>() {
+                    @Override
+                    public Profession create() {
+                        return influenceDB.newProfession();
+                    }
+                }, new Saver<Profession>() {
+                    @Override
+                    public Profession save(Profession entity) {
+                        return influenceDB.saveProfession(entity);
+                    }
+                }, professionHandlers()
+        );
+    }
+
+    public void importOtherTraits() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing OtherTraits");
+        importFromResource(getClass().getResourceAsStream("/import/otherTraits.xml"), "otherTraits", "id", null,
+                new Creator<OtherTrait>() {
+                    @Override
+                    public OtherTrait create() {
+                        return manipulationDB.newOtherTrait();
+                    }
+                }, new Saver<OtherTrait>() {
+                    @Override
+                    public OtherTrait save(OtherTrait entity) {
+                        return manipulationDB.saveOtherTrait(entity);
+                    }
+                }, otherTraitsHandlers()
+        );
+    }
+
+    public void importMeritOrFlaws() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing MeritOrFlaws");
+        importFromResource(getClass().getResourceAsStream("/import/meritsNflaws.xml"), "meritsNflaws", "id", null,
+                new Creator<MeritOrFlaw>() {
+                    @Override
+                    public MeritOrFlaw create() {
+                        return manipulationDB.newMeritOrFlaw();
+                    }
+                },
+                new Saver<MeritOrFlaw>() {
+                    @Override
+                    public MeritOrFlaw save(MeritOrFlaw entity) {
+                        return manipulationDB.saveMeritOrFlaw(entity);
+                    }
+                },
+                meritOrFlawHandlers()
+        );
+    }
+
+    public void importInfluences() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Influences");
+        importFromResource(getClass().getResourceAsStream("/import/influences.xml"), "influences", "id", null,
+                new Creator<Influence>() {
+                    @Override
+                    public Influence create() {
+                        return influenceDB.newInfluence();
+                    }
+                },
+                new Saver<Influence>() {
+                    @Override
+                    public Influence save(Influence entity) {
+                        return influenceDB.saveInfluence(entity);
+                    }
+                },
+                influenceHandlers()
+        );
+    }
+
+    public void importGenerations() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Generations");
+        generations = new HashMap<>();
+        importFromResource(getClass().getResourceAsStream("/import/generations.xml"), "generations", "generation", generations,
+                new Creator<Generation>() {
+                    @Override
+                    public Generation create() {
+                        return manipulationDB.newGeneration();
+                    }
+                }, new Saver<Generation>() {
+                    @Override
+                    public Generation save(Generation entity) {
+                        return manipulationDB.saveGeneration(entity);
+                    }
+                },
+                generationHandlers()
+        );
+    }
+
+    public void importFightOrFlight() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing FightOrFlight");
+        importFromResource(getClass().getResourceAsStream("/import/fightNflight.xml"), "fightNflight", "id", null, new Creator<FightOrFlight>() {
+                    @Override
+                    public FightOrFlight create() {
+                        return manipulationDB.newFightOrFlight();
+                    }
+                }, new Saver<FightOrFlight>() {
+                    @Override
+                    public FightOrFlight save(FightOrFlight entity) {
+                        return manipulationDB.saveFightOrFlight(entity);
+                    }
+                }, fightOrFlightHandlers()
+        );
+    }
+
+    public void importDisciplines() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Disciplines");
+        disciplines = new HashMap<>();
+        importFromResource(getClass().getResourceAsStream("/import/disciplines.xml"), "disciplines", "id", disciplines,
+                new Creator<Discipline>() {
+                    @Override
+                    public Discipline create() {
+                        return manipulationDB.newDiscipline();
+                    }
+                },
+                new Saver<Discipline>() {
+                    @Override
+                    public Discipline save(Discipline entity) {
+                        return manipulationDB.saveDiscipline(entity);
+                    }
+                }, disciplineHandlers()
+        );
+    }
+
+    public void importClans() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Clans");
+        clans = new HashMap<>();
+
+        importFromResource(getClass().getResourceAsStream("/import/clans.xml"), "clans", "id", clans,
+                new Creator<Clan>() {
+                    @Override
+                    public Clan create() {
+                        return manipulationDB.newClan();
+                    }
+                }, new Saver<Clan>() {
+                    @Override
+                    public Clan save(Clan entity) {
+                        return manipulationDB.saveClan(entity);
+                    }
+                }, clanHandlers()
+        );
+    }
+
+    public void importCreateRules() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing CreateRules");
+        importFromResource(getClass().getResourceAsStream("/import/age_createRules.xml"), "age_createRules", "id", null,
+                new Creator<CreateRule>() {
+                    @Override
+                    public CreateRule create() {
+                        return createRulesDB.newRule();
+                    }
+                },
+                new Saver<CreateRule>() {
+                    @Override
+                    public CreateRule save(CreateRule entity) {
+                        return createRulesDB.saveRule(entity);
+                    }
+                }, createRulesHandlers()
+        );
+    }
+
+    public void importAbilities() throws ParserConfigurationException, IOException, SAXException {
+        abilities = new HashMap<>();
+        logger.info("Importing Abilities");
+        importFromResource(getClass().getResourceAsStream("/import/abilities.xml"), "abilities", "id", abilities,
+                new Creator<Ability>() {
+                    @Override
+                    public Ability create() {
+                        return manipulationDB.newAbility();
+                    }
+                },
+                new Saver<Ability>() {
+                    @Override
+                    public Ability save(Ability entity) {
+                        return manipulationDB.saveAbility(entity);
+                    }
+                }, abilityHandlers()
+        );
+    }
+
     private Map<String, AttributeHandler<StarterMoneyRule>> starterMoneyRuleHandlers() {
         Map<String, AttributeHandler<StarterMoneyRule>> handlers = new HashMap<>();
         handlers.put("min_age", new AttributeHandler<StarterMoneyRule>() {
             @Override
             public void handle(Node node, StarterMoneyRule entity) {
-                entity.setMinAge(Integer.parseInt(node.getTextContent()));
+                entity.setMinAge(Integer.parseInt(node. getTextContent()));
             }
         });
         handlers.put("max_age", new AttributeHandler<StarterMoneyRule>() {
             @Override
             public void handle(Node node, StarterMoneyRule entity) {
-                entity.setMaxAge(Integer.parseInt(node.getTextContent()));
+                entity.setMaxAge(Integer.parseInt(node. getTextContent()));
             }
         });
         handlers.put("base_money", new AttributeHandler<StarterMoneyRule>() {
             @Override
             public void handle(Node node, StarterMoneyRule entity) {
-                entity.setBaseMoney(Integer.parseInt(node.getTextContent()));
+                entity.setBaseMoney(Integer.parseInt(node. getTextContent()));
             }
         });
         return handlers;
@@ -324,25 +402,25 @@ public class Importer {
         handlers.put("name", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setName(node.getTextContent());
+                entity.setName(node. getTextContent());
             }
         });
         handlers.put("type", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setRitualType(ritualTypes.get(node.getTextContent()));
+                entity.setRitualType(ritualTypes.get(node. getTextContent()));
             }
         });
         handlers.put("level", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setLevel(Integer.parseInt(node.getTextContent()));
+                entity.setLevel(Integer.parseInt(node. getTextContent()));
             }
         });
         handlers.put("description", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setDescription(node.getTextContent());
+                entity.setDescription(node. getTextContent());
             }
         });
         return handlers;
@@ -393,7 +471,8 @@ public class Importer {
         return handlers;
     }
 
-    private void importPaths() throws ParserConfigurationException, IOException, SAXException {
+    public void importPaths() throws ParserConfigurationException, IOException, SAXException {
+        logger.info("Importing Paths");
         Map<String, AttributeHandler<Path>> handlers = new HashMap<>();
         handlers.put("name", new AttributeHandler<Path>() {
             @Override
@@ -629,6 +708,30 @@ public class Importer {
         return handlers;
     }
 
+    private <T> void mapImportFromResource(InputStream input, String entityTagName, Mapper<T> mapper, Saver<T> saver) throws ParserConfigurationException, IOException, SAXException {
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document doc = docBuilder.parse(input);
+
+        // normalize text representation
+        doc.getDocumentElement().normalize();
+
+        NodeList nodes = doc.getElementsByTagName(entityTagName);
+        for (int i = 0; i < nodes.getLength(); i++) {
+            Element element = (Element) nodes.item(i);
+            Map<String, String> entityMap = new HashMap<>();
+            NodeList childNodes = element.getChildNodes();
+            for (int j = 0; j < childNodes.getLength(); j++) {
+                Node item = childNodes.item(j);
+                entityMap.put(item.getNodeName(), item.getTextContent());
+            }
+            T entity = mapper.map(entityMap);
+            if (entity != null) {
+                saver.save(entity);
+            }
+        }
+    }
+
     private <T> void importFromResource(InputStream input, String entityTagName, String idTagName,
                                         Map<String, T> entityCash, Creator<T> creator, Saver<T> saver,
                                         Map<String, AttributeHandler<T>> handlers) throws ParserConfigurationException, IOException, SAXException {
@@ -639,9 +742,6 @@ public class Importer {
 
         // normalize text representation
         doc.getDocumentElement().normalize();
-        System.out.println("Root element of the doc is " +
-                doc.getDocumentElement().getNodeName());
-
 
         NodeList nodes = doc.getElementsByTagName(entityTagName);
         for (int i = 0; i < nodes.getLength(); i++) {
@@ -651,10 +751,10 @@ public class Importer {
             NodeList childNodes = element.getChildNodes();
             for (int j = 0; j < childNodes.getLength(); j++) {
                 Node item = childNodes.item(j);
-                if (key == null && idTagName.equals(item.getLocalName())) {
+                if (key == null && idTagName.equals(item.getNodeName())) {
                     key = item.getTextContent();
                 }
-                AttributeHandler<T> handler = handlers.get(item.getLocalName());
+                AttributeHandler<T> handler = handlers.get(item.getNodeName());
                 if (handler != null) {
                     handler.handle(item, theObject);
                 }
@@ -664,6 +764,10 @@ public class Importer {
                 entityCash.put(key, saver.save(theObject));
             }
         }
+    }
+
+    static interface Mapper<T> {
+        T map(Map<String, String> entity);
     }
 
     static interface Creator<T> {
