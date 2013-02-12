@@ -126,7 +126,7 @@ public class ManipulationDbImpl implements ManipulationDB {
 
     @Override
     public Generation saveGeneration(Generation generation) {
-        return db.get().save(Generation.class);
+        return db.get().save(generation);
     }
 
     @Override
