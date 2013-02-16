@@ -26,6 +26,7 @@ package net.joinedminds.masserr;
 
 import net.joinedminds.masserr.ui.NavItem;
 import org.apache.commons.jelly.JellyContext;
+import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
 
@@ -42,6 +43,14 @@ public class Functions {
     public static final String RESOURCE_PATH = "/resources";
     public static final String IMAGES_PATH = RESOURCE_PATH + "/images";
 
+    public static final Breadcrumb[] MAIN_MENU = {
+            new Breadcrumb("/", Messages._nav_Home()),
+            new Breadcrumb("/roles", "Roles"),
+            new Breadcrumb("/influences", "Influences"),
+            new Breadcrumb("/admin", Messages._nav_Admin()),
+            new Breadcrumb("/about", "About"),
+    };
+
     public static void initPageVariables(JellyContext context) {
         String rootURL = Stapler.getCurrentRequest().getContextPath();
 
@@ -53,6 +62,7 @@ public class Functions {
 
         context.setVariable("resURL", rootURL + RESOURCE_PATH);
         context.setVariable("imagesURL", rootURL + IMAGES_PATH);
+        context.setVariable("selectedMainMenuItem", getParentMainMenu());
     }
 
     public static String appendIfNotNull(String text, String suffix, String nullText) {
@@ -63,10 +73,25 @@ public class Functions {
         return obj == null ? thenVal : obj;
     }
 
+    public static Breadcrumb getParentMainMenu() {
+        List<Ancestor> ancestors = Stapler.getCurrentRequest().getAncestors();
+        for (int i = ancestors.size() - 1; i >= 0; i++) {
+            Ancestor ancestor = ancestors.get(i);
+            if (ancestor.getObject() instanceof NavItem) {
+                for (Breadcrumb b : MAIN_MENU) {
+                    if (((NavItem) ancestor.getObject()).getNavDisplay().equals(b.getDisplay())) {
+                        return b;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public static List<Breadcrumb> getBreadcrumbs() {
         List<Ancestor> ancestors = Stapler.getCurrentRequest().getAncestors();
-        List<Breadcrumb> list = new LinkedList<Breadcrumb>();
-        for(Ancestor ancestor : ancestors) {
+        List<Breadcrumb> list = new LinkedList<>();
+        for (Ancestor ancestor : ancestors) {
             if (ancestor.getObject() instanceof NavItem) {
                 NavItem item = (NavItem) ancestor.getObject();
                 list.add(new Breadcrumb(ancestor.getUrl(), item.getNavDisplay()));
@@ -77,7 +102,13 @@ public class Functions {
 
     public static class Breadcrumb {
         private String url;
+        private Localizable localizableDisplay;
         private String display;
+
+        public Breadcrumb(String url, Localizable localizableDisplay) {
+            this(url, (String) null);
+            this.localizableDisplay = localizableDisplay;
+        }
 
         public Breadcrumb(String url, String display) {
             this.url = url;
@@ -92,6 +123,9 @@ public class Functions {
         }
 
         public String getDisplay() {
+            if (localizableDisplay != null) {
+                return localizableDisplay.toString();
+            }
             return display;
         }
     }

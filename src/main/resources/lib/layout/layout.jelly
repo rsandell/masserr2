@@ -51,25 +51,11 @@
                         <a class="brand" href="#">Masserr</a>
                         <div class="nav-collapse collapse">
                             <ul class="nav">
-                                <li class="active">
-                                    <a href="/">Home</a>
-                                </li>
-                                <li>
-                                    <a href="test">Roles</a>
-                                </li>
-                                <li>
-                                    <a href="#about">Influences</a>
-                                </li>
-                                <li>
-                                    <a href="$rootUrl/admin">Admin</a>
-                                </li>
-                                <li>
-                                    <a href="#about">About</a>
-                                </li>
-                                <li>
-                                    <a href="#contact">Contact</a>
-                                </li>
-
+                                <j:forEach items="${h.MAIN_MENU}" var="item">
+                                    <li class="${item eq selectedMainMenuItem ? 'active' : ''}">
+                                        <a href="${rootUrl}${item.getUrl()}">${item.getDisplay()}</a>
+                                    </li>
+                                </j:forEach>
                             </ul>
                         </div>
                         <j:if test="${not empty contextMenu}">
