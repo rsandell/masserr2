@@ -29,7 +29,12 @@ import com.google.inject.Singleton;
 import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
+import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+
+import java.io.IOException;
 
 /**
  * Description
@@ -50,5 +55,16 @@ public class AdminModule implements NavItem {
     @Override
     public String getNavDisplay() {
         return Messages.nav_Admin();
+    }
+
+    public Config getConfig() {
+        return adminDb.getConfig();
+    }
+
+    public void doConfigSubmit(StaplerRequest request, StaplerResponse response) throws IOException {
+        Config config = getConfig();
+        request.bindParameters(config);
+        adminDb.saveConfig(config);
+        response.sendRedirect2("../");
     }
 }
