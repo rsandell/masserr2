@@ -39,6 +39,7 @@ public class OtherTrait implements NamedIdentifiable  {
 	@Id
     private String id;
 	private String name;
+    private String docUrl;
 
 	public OtherTrait() {
 	}
@@ -46,6 +47,12 @@ public class OtherTrait implements NamedIdentifiable  {
 	public OtherTrait(String pName) {
 		name = pName;
 	}
+
+    public OtherTrait(OtherTrait trait) {
+        this.id = trait.getId();
+        this.name = trait.getName();
+        this.docUrl = trait.getDocUrl();
+    }
 
     @Override
 	public String getId() {
@@ -61,7 +68,15 @@ public class OtherTrait implements NamedIdentifiable  {
 		name = pName;
 	}
 
-	public String toString() {
+    public String getDocUrl() {
+        return docUrl;
+    }
+
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
+    }
+
+    public String toString() {
 		return name;
 	}
 }

@@ -129,4 +129,8 @@ public interface ManipulationDB extends BasicDB {
     boolean isEmpty();
 
     Ability getAbility(String id);
+
+    List<OtherTrait> getOtherTraits();
+
+    OtherTrait getOtherTrait(String id);
 }

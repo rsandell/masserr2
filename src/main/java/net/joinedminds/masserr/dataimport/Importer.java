@@ -764,6 +764,8 @@ public class Importer {
             }
             if (key != null && entityCash != null) {
                 entityCash.put(key, saver.save(theObject));
+            } else {
+                saver.save(theObject);
             }
         }
     }

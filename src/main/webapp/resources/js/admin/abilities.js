@@ -35,7 +35,7 @@ function findAbility(abilityId) {
 }
 
 function generateAbilityForm(ability) {
-    var html = "" + //"<form action='abilitySubmit' method='POST' class='.form-inline'>" +
+    var html = "" +
         "<tr ability='"+toNavId(ability.id)+"'>" +
         "<td><input type='hidden' name='id' value='"+ability.id+"'/><small>"+ability.id+"</small></td>" +
         "<td>"+generateTypesSelect(ability.type)+"</td>" +

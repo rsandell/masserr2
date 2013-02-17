@@ -72,6 +72,16 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<OtherTrait> getOtherTraits() {
+        return db.get().query(new OSQLSynchQuery<OtherTrait>("SELECT * FROM OtherTrait ORDER BY name ASC"));
+    }
+
+    @Override
+    public OtherTrait getOtherTrait(String id) {
+        return db.get().load(new ORecordId(id));
+    }
+
+    @Override
     public Role newRole() {
         return db.get().newInstance(Role.class);
     }
@@ -280,4 +290,5 @@ public class ManipulationDbImpl implements ManipulationDB {
     public Ability getAbility(String id) {
         return db.get().load(new ORecordId(id));
     }
+
 }

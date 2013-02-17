@@ -14,13 +14,13 @@ l.layout(title: _("MasserrAdmin") + " " + Masserr.getInstance().getAppName()) {
         div(class: "span3") {
             div(class: "well") {
                 a(href: "abilities") {h3(_("Abilities"))}
-                p(_("Edit Abilities"))
+                p(_("Edit global Abilities list"))
             }
         }
         div(class: "span3") {
             div(class: "well") {
-                h3(_("Config"))
-                p(_("Change global configuration properties"))
+                a(href: "othertraits") {h3(_("Other Traits"))}
+                p(_("Edit global Other Traits list"))
             }
         }
         div(class: "span3") {

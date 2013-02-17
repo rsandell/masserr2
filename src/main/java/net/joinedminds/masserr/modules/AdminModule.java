@@ -31,6 +31,7 @@ import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.Ability;
+import net.joinedminds.masserr.model.OtherTrait;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
 import net.sf.json.JSONObject;
@@ -43,6 +44,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static net.joinedminds.masserr.Functions.fromNavId;
 
 /**
  * Description
@@ -70,6 +73,36 @@ public class AdminModule implements NavItem {
         return manipulationDb.getAbilities();
     }
 
+    public List<OtherTrait> getOtherTraits() {
+        return manipulationDb.getOtherTraits();
+    }
+
+    public void doOtherTraitSubmit(@QueryParameter("id") String id,
+                                @QueryParameter("name") String name,
+                                @QueryParameter("docUrl") String docUrl,
+                                StaplerResponse response) throws IOException {
+        OtherTrait trait;
+        if (id != null && id.startsWith("new")) {
+            trait = manipulationDb.newOtherTrait();
+        } else {
+            trait = manipulationDb.getOtherTrait(fromNavId(id));
+        }
+
+        if (trait != null) {
+            trait.setName(name);
+            trait.setDocUrl(docUrl);
+            trait = manipulationDb.saveOtherTrait(trait);
+            JSONObject o = JSONObject.fromObject(new OtherTrait(trait));
+            o.put("status", "OK");
+            response.getWriter().print(o.toString());
+        } else {
+            JSONObject o = new JSONObject();
+            o.put("status", "error");
+            o.put("message", "Id ["+id+"] not found");
+            response.getWriter().print(o.toString());
+        }
+    }
+
     public void doAbilitySubmit(@QueryParameter("id") String id,
                                 @QueryParameter("type") String type,
                                 @QueryParameter("name") String name,
@@ -80,7 +113,7 @@ public class AdminModule implements NavItem {
         if (id != null && id.startsWith("new")) {
             ability = manipulationDb.newAbility();
         } else {
-            ability = manipulationDb.getAbility(Functions.fromNavId(id));
+            ability = manipulationDb.getAbility(fromNavId(id));
         }
 
         if (ability != null) {
@@ -95,7 +128,7 @@ public class AdminModule implements NavItem {
         } else {
             JSONObject o = new JSONObject();
             o.put("status", "error");
-            o.put("message", "Id ["+id+"]not found");
+            o.put("message", "Id ["+id+"] not found");
             response.getWriter().print(o.toString());
         }
     }
