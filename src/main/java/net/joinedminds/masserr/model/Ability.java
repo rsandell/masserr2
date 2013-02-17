@@ -35,22 +35,22 @@ import java.io.Serializable;
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
 public class Ability implements NamedIdentifiable  {
-
 	@Id
     private String id;
 	private String name;
 	private Type type;
-	private String specialisation;
+	//TODO private String specialisation;
+    private String docUrl;
 	private int baseMonthlyIncome;
 
 	public Ability() {
 	}
 
-	public Ability(String pId, String pName, Type pType) {
-		id = pId;
-		name = pName;
-		type = pType;
-		specialisation = null;
+	public Ability(String id, String name, Type type) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		docUrl = null;
 	}
 
 	public Ability(String pId, String pName, Type pType, int pBaseMonthlyIncome) {
@@ -60,26 +60,27 @@ public class Ability implements NamedIdentifiable  {
 		baseMonthlyIncome = pBaseMonthlyIncome;
 	}
 
-	public Ability(String pId, String pName, Type pType, String pSpecialisation, int pBaseMonthlyIncome) {
-		id = pId;
-		name = pName;
-		specialisation = pSpecialisation;
-		baseMonthlyIncome = pBaseMonthlyIncome;
+	public Ability(String id, String name, Type type, String docUrl, int baseMonthlyIncome) {
+		this.id = id;
+		this.name = name;
+        this.type = type;
+        this.docUrl = docUrl;
+		this.baseMonthlyIncome = baseMonthlyIncome;
 	}
 
-	public Ability(String pId, String pName, Type pType, String pSpecialisation) {
-		id = pId;
-		name = pName;
-		type = pType;
-		specialisation = pSpecialisation;
-	}
+	public Ability(String id, String name, Type type, String docUrl) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+        this.docUrl = docUrl;
+    }
 
 	public int getBaseMonthlyIncome() {
 		return baseMonthlyIncome;
 	}
 
-	public void setBaseMonthlyIncome(int pBaseMonthlyIncome) {
-		baseMonthlyIncome = pBaseMonthlyIncome;
+	public void setBaseMonthlyIncome(int baseMonthlyIncome) {
+		this.baseMonthlyIncome = baseMonthlyIncome;
 	}
 
 	@Override
@@ -92,29 +93,29 @@ public class Ability implements NamedIdentifiable  {
 		return name;
 	}
 
-	public void setName(String pName) {
-		name = pName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Type getType() {
 		return type;
 	}
 
-	public void setType(Type pType) {
-		type = pType;
+	public void setType(Type type) {
+		this.type = type;
 	}
 
 	public String toString() {
 		return name;
 	}
 
-	public String getSpecialisation() {
-		return specialisation;
-	}
+    public String getDocUrl() {
+        return docUrl;
+    }
 
-	public void setSpecialisation(String pSpecialisation) {
-		specialisation = pSpecialisation;
-	}
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
+    }
 
     public static enum Type {
         Physical('P'),

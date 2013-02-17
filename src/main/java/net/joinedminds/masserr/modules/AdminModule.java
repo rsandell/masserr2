@@ -26,15 +26,19 @@ package net.joinedminds.masserr.modules;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
+import net.joinedminds.masserr.model.Ability;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Description
@@ -57,10 +61,24 @@ public class AdminModule implements NavItem {
         return Messages.nav_Admin();
     }
 
+    public List<Ability> getAbilities() {
+        return manipulationDb.getAbilities();
+    }
+
+    @JavaScriptMethod
+    public Ability getAbility(String id) {
+        if (id != null && !id.isEmpty()) {
+            return manipulationDb.getAbility(Functions.fromNavId(id));
+        } else {
+            return null;
+        }
+    }
+
     public Config getConfig() {
         return adminDb.getConfig();
     }
 
+    @SuppressWarnings("unused") //Form post
     public void doConfigSubmit(StaplerRequest request, StaplerResponse response) throws IOException {
         Config config = getConfig();
         request.bindParameters(config);

@@ -26,6 +26,13 @@ package net.joinedminds.masserr.db.impl;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.orientechnologies.orient.core.command.OCommandContext;
+import com.orientechnologies.orient.core.command.OCommandRequestText;
+import com.orientechnologies.orient.core.id.ORecordId;
+import com.orientechnologies.orient.core.query.nativ.ONativeQuery;
+import com.orientechnologies.orient.core.query.nativ.ONativeSynchQuery;
+import com.orientechnologies.orient.core.sql.query.OSQLQuery;
+import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
 import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
@@ -57,6 +64,11 @@ public class ManipulationDbImpl implements ManipulationDB {
     @Override
     public Ability saveAbility(Ability ability) {
         return db.get().save(ability);
+    }
+
+    @Override
+    public List<Ability> getAbilities() {
+        return db.get().query(new OSQLSynchQuery<Ability>("SELECT * FROM Ability ORDER BY type ASC, name ASC"));
     }
 
     @Override
@@ -255,12 +267,17 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
-    public void insertPlayersExperience(List<Player> pPlayers, int pAmmount, String pReason) {
+    public void insertPlayersExperience(List<Player> pPlayers, int amount, String pReason) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
     public boolean isEmpty() {
         return db.get().countClass(Ability.class) <= 0;
+    }
+
+    @Override
+    public Ability getAbility(String id) {
+        return db.get().load(new ORecordId(id));
     }
 }

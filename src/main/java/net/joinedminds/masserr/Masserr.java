@@ -31,7 +31,9 @@ import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.modules.AdminModule;
 import net.joinedminds.masserr.ui.NavItem;
+import org.kohsuke.stapler.framework.adjunct.AdjunctManager;
 
+import javax.servlet.ServletContext;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,13 +48,17 @@ public class Masserr implements NavItem {
     private static final Logger logger = Logger.getLogger(Masserr.class.getName());
     private static Masserr instance = null;
 
+    private ServletContext context;
     private AdminModule admin;
     private ManipulationDB manipulationDb;
     private AdminDB adminDb;
     private Importer importer;
+    public final AdjunctManager adjuncts;
 
     @Inject
-    public Masserr(AdminModule admin, ManipulationDB manipulationDb, AdminDB adminDb, Importer importer) throws Exception {
+    public Masserr(ServletContext context, AdminModule admin, ManipulationDB manipulationDb, AdminDB adminDb, Importer importer) throws Exception {
+        this.context = context;
+        adjuncts = new AdjunctManager(context, getClass().getClassLoader(), "/adjuncts");
         this.admin = admin;
         this.manipulationDb = manipulationDb;
         this.adminDb = adminDb;

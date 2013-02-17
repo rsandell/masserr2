@@ -28,6 +28,7 @@ import com.google.common.base.Preconditions;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.framework.adjunct.AdjunctManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -39,6 +40,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
 public class WebAppMain implements ServletContextListener {
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
@@ -46,7 +48,7 @@ public class WebAppMain implements ServletContextListener {
         String dbUser = checkNotNull(context.getInitParameter("DB_USER"), "Missing DB_USER parameter.");
         String dbPasswd = checkNotNull(context.getInitParameter("DB_PASSWD"), "Missing DB_PASSWD parameter.");
 
-        Injector injector = Guice.createInjector(new GuiceModule(dbUrl, dbUser, dbPasswd));
+        Injector injector = Guice.createInjector(new GuiceModule(context, dbUrl, dbUser, dbPasswd));
         Stapler.setRoot(sce, injector.getInstance(Masserr.class));
     }
 

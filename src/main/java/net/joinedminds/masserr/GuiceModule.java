@@ -32,6 +32,8 @@ import net.joinedminds.masserr.db.*;
 import net.joinedminds.masserr.db.impl.*;
 import net.joinedminds.masserr.modules.AdminModule;
 
+import javax.servlet.ServletContext;
+
 /**
  * Main Guice module.
  *
@@ -39,11 +41,13 @@ import net.joinedminds.masserr.modules.AdminModule;
  */
 public class GuiceModule extends AbstractModule {
 
+    private ServletContext context;
     private String dbUrl;
     private String dbUser;
     private String dbPasswd;
 
-    public GuiceModule(String dbUrl, String dbUser, String dbPasswd) {
+    public GuiceModule(ServletContext context, String dbUrl, String dbUser, String dbPasswd) {
+        this.context = context;
         this.dbUrl = dbUrl;
         this.dbUser = dbUser;
         this.dbPasswd = dbPasswd;
@@ -51,6 +55,7 @@ public class GuiceModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        bind(ServletContext.class).toInstance(context);
         bind(String.class).annotatedWith(Names.named("DB_URL")).toInstance(dbUrl);
         bind(String.class).annotatedWith(Names.named("DB_USER")).toInstance(dbUser);
         bind(String.class).annotatedWith(Names.named("DB_PASSWD")).toInstance(dbPasswd);

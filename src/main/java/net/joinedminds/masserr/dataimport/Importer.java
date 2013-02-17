@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -368,6 +369,7 @@ public class Importer {
                 new Saver<Ability>() {
                     @Override
                     public Ability save(Ability entity) {
+                        logger.log(Level.FINE, "Storing {0}", entity.getName());
                         return manipulationDB.saveAbility(entity);
                     }
                 }, abilityHandlers()

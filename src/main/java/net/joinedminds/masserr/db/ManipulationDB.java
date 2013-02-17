@@ -43,6 +43,8 @@ public interface ManipulationDB extends BasicDB {
 
     Ability saveAbility(Ability ability);
 
+    List<Ability> getAbilities();
+
     Role newRole();
 
     Role saveRole(Role pRole);
@@ -122,7 +124,9 @@ public interface ManipulationDB extends BasicDB {
 
     void addPlayer(Player pPlayer);
 
-    void insertPlayersExperience(List<Player> pPlayers, int pAmmount, String pReason);
+    void insertPlayersExperience(List<Player> pPlayers, int amount, String pReason);
 
     boolean isEmpty();
+
+    Ability getAbility(String id);
 }

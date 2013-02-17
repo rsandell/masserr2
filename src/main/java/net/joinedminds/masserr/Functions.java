@@ -65,6 +65,22 @@ public class Functions {
         context.setVariable("selectedMainMenuItem", getParentMainMenu());
     }
 
+    public static String toNavId(String id) {
+        if (id.startsWith("#")) {
+            return id.substring(1);
+        } else {
+            return id;
+        }
+    }
+
+    public static String fromNavId(String id) {
+        if (id.startsWith("#")) {
+            return id;
+        } else {
+            return "#" + id;
+        }
+    }
+
     public static String appendIfNotNull(String text, String suffix, String nullText) {
         return text == null ? nullText : text + suffix;
     }
