@@ -36,7 +36,7 @@
             <link rel="stylesheet" href="${resURL}/css/style.css" type="text/css"/>
             <link rel="shortcut icon" href="${resURL}/cube_yellow.ico" type="image/vnd.microsoft.icon"/>
             <meta name="ROBOTS" content="INDEX,NOFOLLOW"/>
-            <st:adjunct includes="org.kohsuke.stapler.bind"/>
+            <!--<st:adjunct includes="org.kohsuke.stapler.bind"/>-->
             <!--<j:set var="mode" value="header"/>
             <d:invokeBody/>-->
         </head>

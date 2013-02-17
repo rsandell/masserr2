@@ -96,4 +96,8 @@ public class Masserr implements NavItem {
     public static Masserr getInstance() {
         return instance;
     }
+
+    public AdjunctManager getAdjuncts() {
+        return adjuncts;
+    }
 }

@@ -7,7 +7,7 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Abilities") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
-    script("admin = ${st.bind(my)}")
+    st.bind(value: my, var: 'admin')
     script(src: "${resURL}/js/admin/abilities.js")
 
     legend(_("Abilities"))
@@ -28,7 +28,7 @@ l.layout(title: _("Abilities") + " " + Masserr.getInstance().getAppName()) {
                 td(width: "10%", style: "text-align: right", ability.getBaseMonthlyIncome())
                 td(width: "30%", ability.getDocUrl())
                 td(width: "10%") {
-                    a(class: "btn", href: "javascript:editAbilitiesRow('${f.toNavId(ability.getId())}')"){
+                    a(class: "btn", href: "javascript:editAbilitiesRow(admin, '${f.toNavId(ability.getId())}')"){
                         i(class: "icon-edit")
                     }
                 }

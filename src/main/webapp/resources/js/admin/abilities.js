@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-function editAbilitiesRow(abilityId) {
+function editAbilitiesRow(admin, abilityId) {
     var ability = admin.getAbility(abilityId)
     $('tr[ability~="'+ abilityId +'"]').css("background-color", "blue")
     //abilityRow.replaceWith("<tr><td colspan='6'>Hello</td></tr>")
