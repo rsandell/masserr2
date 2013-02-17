@@ -22,6 +22,8 @@
  * THE SOFTWARE.
  */
 
+var newAbilityCounter = 0
+
 function findAbility(abilityId) {
     var id = fromNavId(abilityId);
     for (var i = 0; i < abilities.length; i++) {
@@ -101,11 +103,20 @@ function submitAbility(abilityId) {
     $.get("abilitySubmit?" + params,
           function(data) {
               if(data.status == "OK") {
-                  $('tr[ability~="'+ abilityId +'"]').replaceWith(generateAbilityRow(data));
+                  if (id.indexOf("new") == 0) {
+                      location.reload(true);
+                  } else {
+                    $('tr[ability~="'+ abilityId +'"]').replaceWith(generateAbilityRow(data));
+                  }
               } else {
                   alert(data.message);
               }
           }, "json");
+}
+
+function newAbility() {
+    var newA = {id: "new" + (newAbilityCounter++), name: "", type: "", docUrl: "", baseMonthlyIncome: 0};
+    $("#abilitiesTable tr.heading").after(generateAbilityForm(newA));
 }
 
 $("#abilitiesTable tr.heading").after(generateAbilitiesTable());

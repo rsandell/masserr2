@@ -76,7 +76,13 @@ public class AdminModule implements NavItem {
                                 @QueryParameter("baseMonthlyIncome") int baseMonthlyIncome,
                                 @QueryParameter("docUrl") String docUrl,
                                 StaplerResponse response) throws IOException {
-        Ability ability = manipulationDb.getAbility(Functions.fromNavId(id));
+        Ability ability;
+        if (id != null && id.startsWith("new")) {
+            ability = manipulationDb.newAbility();
+        } else {
+            ability = manipulationDb.getAbility(Functions.fromNavId(id));
+        }
+
         if (ability != null) {
             ability.setName(name);
             ability.setType(Ability.Type.valueOf(type));
