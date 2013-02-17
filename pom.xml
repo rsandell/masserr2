@@ -21,6 +21,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.kohsuke.stapler</groupId>
             <artifactId>stapler</artifactId>
             <version>${stapler.version}</version>
@@ -130,6 +135,9 @@
                 <configuration>
                     <stopKey>STOP</stopKey>
                     <stopPort>10002</stopPort>
+                    <webApp>
+                        <contextPath>/dev</contextPath>
+                    </webApp>
                     <systemProperties>
                         <systemProperty>
                             <!-- show the stapler evaluation during execution -->

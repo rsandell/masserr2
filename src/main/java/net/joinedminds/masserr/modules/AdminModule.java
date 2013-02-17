@@ -33,12 +33,16 @@ import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.Ability;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
+import net.sf.json.JSONObject;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Description
@@ -47,6 +51,7 @@ import java.util.List;
  */
 @Singleton
 public class AdminModule implements NavItem {
+    private static final Logger logger = Logger.getLogger(AdminModule.class.getName());
     private ManipulationDB manipulationDb;
     private AdminDB adminDb;
 
@@ -65,12 +70,27 @@ public class AdminModule implements NavItem {
         return manipulationDb.getAbilities();
     }
 
-    @JavaScriptMethod
-    public Ability getAbility(String id) {
-        if (id != null && !id.isEmpty()) {
-            return manipulationDb.getAbility(Functions.fromNavId(id));
+    public void doAbilitySubmit(@QueryParameter("id") String id,
+                                @QueryParameter("type") String type,
+                                @QueryParameter("name") String name,
+                                @QueryParameter("baseMonthlyIncome") int baseMonthlyIncome,
+                                @QueryParameter("docUrl") String docUrl,
+                                StaplerResponse response) throws IOException {
+        Ability ability = manipulationDb.getAbility(Functions.fromNavId(id));
+        if (ability != null) {
+            ability.setName(name);
+            ability.setType(Ability.Type.valueOf(type));
+            ability.setBaseMonthlyIncome(baseMonthlyIncome);
+            ability.setDocUrl(docUrl);
+            ability = manipulationDb.saveAbility(ability);
+            JSONObject o = JSONObject.fromObject(new Ability(ability));
+            o.put("status", "OK");
+            response.getWriter().print(o.toString());
         } else {
-            return null;
+            JSONObject o = new JSONObject();
+            o.put("status", "error");
+            o.put("message", "Id ["+id+"]not found");
+            response.getWriter().print(o.toString());
         }
     }
 

@@ -75,7 +75,15 @@ public class Ability implements NamedIdentifiable  {
         this.docUrl = docUrl;
     }
 
-	public int getBaseMonthlyIncome() {
+    public Ability(Ability ability) {
+        id = ability.getId();
+        name = ability.getName();
+        type = ability.getType();
+        docUrl = ability.getDocUrl();
+        baseMonthlyIncome = ability.getBaseMonthlyIncome();
+    }
+
+    public int getBaseMonthlyIncome() {
 		return baseMonthlyIncome;
 	}
 
@@ -105,10 +113,6 @@ public class Ability implements NamedIdentifiable  {
 		this.type = type;
 	}
 
-	public String toString() {
-		return name;
-	}
-
     public String getDocUrl() {
         return docUrl;
     }
@@ -116,6 +120,10 @@ public class Ability implements NamedIdentifiable  {
     public void setDocUrl(String docUrl) {
         this.docUrl = docUrl;
     }
+
+	public String toString() {
+		return getName();
+	}
 
     public static enum Type {
         Physical('P'),
