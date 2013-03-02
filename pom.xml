@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <stapler.version>1.200</stapler.version>
+        <stapler.version>1.203</stapler.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -81,6 +81,21 @@
             <artifactId>guava</artifactId>
             <version>10.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.kohsuke.stapler</groupId>
+            <artifactId>stapler-adjunct-jquery</artifactId>
+            <version>1.8.3-0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kohsuke.stapler</groupId>
+            <artifactId>stapler-adjunct-bootstrap</artifactId>
+            <version>2.2.1-1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kohsuke.stapler</groupId>
+            <artifactId>stapler-adjunct-underscore</artifactId>
+            <version>1.4.3-1</version>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -135,9 +150,9 @@
                 <configuration>
                     <stopKey>STOP</stopKey>
                     <stopPort>10002</stopPort>
-                    <webApp>
+                    <!--<webApp>
                         <contextPath>/dev</contextPath>
-                    </webApp>
+                    </webApp>-->
                     <systemProperties>
                         <systemProperty>
                             <!-- show the stapler evaluation during execution -->

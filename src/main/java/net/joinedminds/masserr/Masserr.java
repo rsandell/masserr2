@@ -58,7 +58,7 @@ public class Masserr implements NavItem {
     @Inject
     public Masserr(ServletContext context, AdminModule admin, ManipulationDB manipulationDb, AdminDB adminDb, Importer importer) throws Exception {
         this.context = context;
-        adjuncts = new AdjunctManager(context, getClass().getClassLoader(), "/adjuncts");
+        adjuncts = new AdjunctManager(context, getClass().getClassLoader(), "adjuncts");
         this.admin = admin;
         this.manipulationDb = manipulationDb;
         this.adminDb = adminDb;

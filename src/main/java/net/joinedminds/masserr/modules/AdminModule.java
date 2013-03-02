@@ -103,6 +103,11 @@ public class AdminModule implements NavItem {
         }
     }
 
+    @JavaScriptMethod
+    public String testIt(StaplerRequest request, StaplerResponse response) {
+        return "bah";
+    }
+
     public void doAbilitySubmit(@QueryParameter("id") String id,
                                 @QueryParameter("type") String type,
                                 @QueryParameter("name") String name,
