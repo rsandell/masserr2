@@ -28,6 +28,7 @@
             <st:adjunct includes="org.kohsuke.stapler.underscore"/>
             <st:adjunct includes="org.kohsuke.stapler.jquery"/>
             <st:adjunct includes="org.kohsuke.stapler.bootstrap-responsive"/>
+            <script src="${resURL}/js/jquery.serializeObject.min.js"></script>
             <script src="${resURL}/js/utils.js"></script>
             <!-- Custom if any -->
             <link rel="stylesheet" href="${resURL}/css/style.css" type="text/css"/>
