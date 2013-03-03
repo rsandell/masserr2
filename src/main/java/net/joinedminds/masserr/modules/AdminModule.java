@@ -34,6 +34,7 @@ import net.joinedminds.masserr.model.Ability;
 import net.joinedminds.masserr.model.OtherTrait;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
+import net.joinedminds.masserr.ui.dto.SubmitResponse;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
@@ -106,6 +107,26 @@ public class AdminModule implements NavItem {
     @JavaScriptMethod
     public String testIt(StaplerRequest request, StaplerResponse response) {
         return "bah";
+    }
+
+    @JavaScriptMethod
+    public SubmitResponse<OtherTrait> submitOtherTrait(OtherTrait submit) {
+        String id = submit.getId();
+        OtherTrait trait;
+        if (id == null || id.startsWith("new")) {
+            trait = manipulationDb.newOtherTrait();
+        } else {
+            trait = manipulationDb.getOtherTrait(fromNavId(id));
+        }
+
+        if (trait != null) {
+            trait.setName(submit.getName());
+            trait.setDocUrl(submit.getDocUrl());
+            trait = manipulationDb.saveOtherTrait(trait);
+            return new SubmitResponse<>(new OtherTrait(trait));
+        } else {
+            return new SubmitResponse<>("Id ["+id+"] not found");
+        }
     }
 
     public void doAbilitySubmit(@QueryParameter("id") String id,

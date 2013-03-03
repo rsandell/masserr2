@@ -39,19 +39,19 @@ function findTrait(traitId) {
 
 function submitTrait(traitId) {
     var id = toNavId(traitId);
-    var params = $("tr[ability~='"+id+"'] :input").serialize();
-    $.get("otherTraitSubmit?" + params,
-        function(data) {
-            if(data.status == "OK") {
+    var formObj = $("tr[ability~='"+id+"'] :input").serializeObject();
+    admin.submitOtherTrait(formObj, function(t) {
+            var resp = t.responseObject();
+            if (resp.ok) {
                 if (id.indexOf("new") == 0) {
                     location.reload(true);
                 } else {
-                    $('tr[ability~="'+ traitId +'"]').replaceWith(generateTraitRow(data));
+                    $('tr[ability~="'+ traitId +'"]').replaceWith(generateTraitRow(resp.data));
                 }
             } else {
-                alert(data.message);
+                alert(resp.message);
             }
-        }, "json");
+        });
 }
 
 function generateTraitsForm(trait) {

@@ -24,6 +24,8 @@
 
 package net.joinedminds.masserr.model;
 
+import org.kohsuke.stapler.DataBoundConstructor;
+
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -52,6 +54,13 @@ public class OtherTrait implements NamedIdentifiable  {
         this.id = trait.getId();
         this.name = trait.getName();
         this.docUrl = trait.getDocUrl();
+    }
+
+    @DataBoundConstructor
+    public OtherTrait(String id, String name, String docUrl) {
+        this.id = id;
+        this.name = name;
+        this.docUrl = docUrl;
     }
 
     @Override

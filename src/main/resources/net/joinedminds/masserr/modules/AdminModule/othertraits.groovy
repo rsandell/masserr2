@@ -31,6 +31,7 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
+    st.bind(value: my, var: 'admin')
     script() {
         raw("var traits = [")
         my.getOtherTraits().each() { OtherTrait trait ->
