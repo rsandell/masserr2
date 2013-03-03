@@ -22,7 +22,10 @@
  * THE SOFTWARE.
  */
 
-var newTraitsCounter = 0
+var newTraitsCounter = 0;
+
+var templateTraitRow = _.template($("#t_traitRow").html());
+var templateTraitForm = _.template($("#t_traitForm").html());
 
 function findTrait(traitId) {
     var id = fromNavId(traitId);
@@ -52,19 +55,8 @@ function submitTrait(traitId) {
 }
 
 function generateTraitsForm(trait) {
-    var html = "" +
-        "<tr ability='"+toNavId(trait.id)+"'>" +
-        "<td><input type='hidden' name='id' value='"+trait.id+"'/><small>"+trait.id+"</small></td>" +
-        "<td><input type='text' name='name' value='"+trait.name+"' required/></td>" +
-        "<td><input type='url' name='docUrl' value='"+trait.docUrl+"'/> </td>" +
-        "<td>" +
-        "<button type='button' class='btn btn-mini btn-primary' onclick=\"submitTrait('"+toNavId(trait.id)+"')\">" +
-        "<i class='icon-check icon-white'>" +
-        "</button>" +
-        "</td>" +
-        "</tr>";
-    //"</form>";
-    return html;
+    trait.navId = toNavId(trait.id);
+    return templateTraitForm(trait);
 }
 
 function editTraitsRow(traitId) {
@@ -77,14 +69,9 @@ function generateTraitRow(a) {
     if (a.docUrl != null && a.docUrl.length > 0) {
         urlPart = "<a href='"+a.docUrl+"'>"+a.docUrl+"</a>";
     }
-    return "<tr ability='"+toNavId(a.id)+"'>" +
-        "<td><small>"+ a.id+"</small></td>" +
-        "<td>"+a.name+"</td>" +
-        "<td>"+ urlPart +"</td>" +
-        "<td>" +
-        "<a class='btn btn-mini' href='javascript:editTraitsRow(\""+toNavId(a.id)+"\")'><i class='icon-edit'/></a>" +
-        "</td>" +
-        "</tr>";
+    a.navId = toNavId(a.id);
+    a.urlPart = urlPart;
+    return templateTraitRow(a);
 }
 
 function generateTraitsTable() {

@@ -24,9 +24,10 @@
     <html>
         <head>
             <title>${h.appendIfNotNull(title, ' [Play Along]', 'Play Along')}</title>
+            <st:adjunct includes="org.kohsuke.stapler.bind"/>
+            <st:adjunct includes="org.kohsuke.stapler.underscore"/>
             <st:adjunct includes="org.kohsuke.stapler.jquery"/>
             <st:adjunct includes="org.kohsuke.stapler.bootstrap-responsive"/>
-            <st:adjunct includes="org.kohsuke.stapler.bind"/>
             <script src="${resURL}/js/utils.js"></script>
             <!-- Custom if any -->
             <link rel="stylesheet" href="${resURL}/css/style.css" type="text/css"/>

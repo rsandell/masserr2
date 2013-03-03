@@ -10,6 +10,7 @@ l.layout(title: _("MasserrAdmin") + " " + Masserr.getInstance().getAppName()) {
     script {
         raw("admin.testIt(function(t){alert(t.responseObject())})")
     }
+
     div(class: "row") {
         div(class: "span3") {
             div(class: "well") {

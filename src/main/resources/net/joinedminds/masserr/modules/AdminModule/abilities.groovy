@@ -21,6 +21,48 @@ l.layout(title: _("Abilities") + " " + Masserr.getInstance().getAppName()) {
         }
         raw("];\n")
     }
+    script(type: "template", id: "t_abilityRow") {
+        tr(ability: "{{ navId }}") {
+            td {
+                small("{{ id }}")
+            }
+            td {
+                small("{{ type }}")
+            }
+            td("{{ name }}")
+            td(style: "text-align: right;", "{{ baseMonthlyIncome }}")
+            td("{{ urlPart }}")
+            td {
+                a(class: "btn btn-mini",  href: "javascript:editAbilitiesRow('{{ navId }}')") {
+                    i(class: 'icon-edit')
+                }
+            }
+        }
+    }
+    script(type: "template", id: "t_abilityForm") {
+        tr(ability: "{{ navId }}") {
+            td {
+                input(type: 'hidden', name: 'id', value: "{{ id }}") {
+                    small("{{ id }}")
+                }
+            }
+            td("{{ generatedTypesSelect }}")
+            td {
+                input(type: 'text', name: 'name', value: '{{ name }}', required: "true")
+            }
+            td {
+                input(type: 'number', style: 'text-align: right', name: 'baseMonthlyIncome', value: '{{ baseMonthlyIncome }}')
+            }
+            td {
+                input(type: 'url', name: 'docUrl', value: '{{ docUrl }}')
+            }
+            td {
+                button(type: 'button', class: 'btn btn-mini btn-primary', onclick: "submitAbility('{{ navId }}')") {
+                    i(class: 'icon-check icon-white')
+                }
+            }
+        }
+    }
 
     legend(_("Abilities"))
     table(class: "table table-hover", id:"abilitiesTable") {

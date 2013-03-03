@@ -22,6 +22,10 @@
  * THE SOFTWARE.
  */
 
+_.templateSettings = {
+    interpolate : /\{\{(.+?)\}\}/g
+};
+
 function toNavId(id) {
     if (id.indexOf("#") == 0) {
         return id.substring(1);

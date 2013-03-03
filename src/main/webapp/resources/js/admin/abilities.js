@@ -22,7 +22,10 @@
  * THE SOFTWARE.
  */
 
-var newAbilityCounter = 0
+var newAbilityCounter = 0;
+
+var templateAbilityRow = _.template($("#t_abilityRow").html());
+var templateAbilityForm = _.template($("#t_abilityForm").html());
 
 function findAbility(abilityId) {
     var id = fromNavId(abilityId);
@@ -35,27 +38,14 @@ function findAbility(abilityId) {
 }
 
 function generateAbilityForm(ability) {
-    var html = "" +
-        "<tr ability='"+toNavId(ability.id)+"'>" +
-        "<td><input type='hidden' name='id' value='"+ability.id+"'/><small>"+ability.id+"</small></td>" +
-        "<td>"+generateTypesSelect(ability.type)+"</td>" +
-        "<td><input type='text' name='name' value='"+ability.name+"' required/></td>" +
-        "<td><input type='number' style='text-align: right' name='baseMonthlyIncome' value='"+ability.baseMonthlyIncome+"'/> </td>" +
-        "<td><input type='url' name='docUrl' value='"+ability.docUrl+"'/> </td>" +
-        "<td>" +
-        "<button type='button' class='btn btn-mini btn-primary' onclick=\"submitAbility('"+toNavId(ability.id)+"')\">" +
-        "<i class='icon-check icon-white'>" +
-        "</button>" +
-        "</td>" +
-        "</tr>";
-        //"</form>";
-    return html;
+    ability.navId = toNavId(ability.id);
+    ability.generatedTypesSelect = generateTypesSelect(ability.type);
+    return templateAbilityForm(ability);
 }
 
 function editAbilitiesRow(abilityId) {
     var ability = findAbility(abilityId);
     $('tr[ability~="'+ abilityId +'"]').replaceWith(generateAbilityForm(ability));
-    //abilityRow.replaceWith("<tr><td colspan='6'>Hello</td></tr>")
 }
 
 function generateAbilityRow(a) {
@@ -63,16 +53,9 @@ function generateAbilityRow(a) {
     if (a.docUrl != null && a.docUrl.length > 0) {
         urlPart = "<a href='"+a.docUrl+"'>"+a.docUrl+"</a>";
     }
-    return "<tr ability='"+toNavId(a.id)+"'>" +
-        "<td><small>"+ a.id+"</small></td>" +
-        "<td><small>"+ a.type+"</small></td>" +
-        "<td>"+a.name+"</td>" +
-        "<td style='text-align: right;'>"+ a.baseMonthlyIncome+"</td>" +
-        "<td>"+ urlPart +"</td>" +
-        "<td>" +
-        "<a class='btn btn-mini' href='javascript:editAbilitiesRow(\""+toNavId(a.id)+"\")'><i class='icon-edit'/></a>" +
-        "</td>" +
-        "</tr>";
+    a.urlPart = urlPart;
+    a.navId = toNavId(a.id);
+    return templateAbilityRow(a);
 }
 
 function generateAbilitiesTable() {

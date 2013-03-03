@@ -1,6 +1,5 @@
 import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.Ability
 import net.joinedminds.masserr.model.OtherTrait
 import net.sf.json.JSONObject
 
@@ -38,6 +37,41 @@ l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
             raw("jQuery.parseJSON( '" + JSONObject.fromObject(new OtherTrait(trait)).toString() + "' ), ")
         }
         raw("];\n")
+    }
+
+    script(type: "template", id: "t_traitRow") {
+        tr(ability: "{{ navId }}") {
+            td {
+                small("{{ id }}")
+            }
+            td("{{ name }}")
+            td("{{ urlPart }}")
+            td {
+                a(class: "btn btn-mini",  href: "javascript:editTraitsRow('{{ navId }}')") {
+                    i(class: 'icon-edit')
+                }
+            }
+        }
+    }
+    script(type: "template", id: "t_traitForm") {
+        tr(ability: "{{ navId }}") {
+            td {
+                input(type: 'hidden', name: 'id', value: "{{ id }}") {
+                    small("{{ id }}")
+                }
+            }
+            td {
+                input(type: 'text', name: 'name', value: '{{ name }}', required: "true")
+            }
+            td {
+                input(type: 'url', name: 'docUrl', value: '{{ docUrl }}')
+            }
+            td {
+                button(type: 'button', class: 'btn btn-mini btn-primary', onclick: "submitTrait('{{ navId }}')") {
+                    i(class: 'icon-check icon-white')
+                }
+            }
+        }
     }
 
     legend(_("Other Traits"))
