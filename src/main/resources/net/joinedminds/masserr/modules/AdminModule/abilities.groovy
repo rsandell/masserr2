@@ -8,7 +8,7 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Abilities") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
-    //st.bind(value: my, var: 'admin')
+    st.bind(value: my, var: 'admin')
     script() {
         raw("var abilities = [")
         my.getAbilities().each() { Ability ability ->

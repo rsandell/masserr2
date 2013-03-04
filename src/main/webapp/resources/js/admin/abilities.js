@@ -28,13 +28,7 @@ var templateAbilityRow = _.template($("#t_abilityRow").html());
 var templateAbilityForm = _.template($("#t_abilityForm").html());
 
 function findAbility(abilityId) {
-    var id = fromNavId(abilityId);
-    for (var i = 0; i < abilities.length; i++) {
-        if (abilities[i].id == id) {
-            return abilities[i];
-        }
-    }
-    return null;
+    return findById(abilityId, abilities);
 }
 
 function generateAbilityForm(ability) {
@@ -82,7 +76,21 @@ function generateTypesSelect(selected) {
 
 function submitAbility(abilityId) {
     var id = toNavId(abilityId);
-    var params = $("tr[ability~='"+id+"'] :input").serialize();
+    var formObj = $("tr[ability~='"+id+"'] :input").serializeObject();
+    admin.submitAbility(formObj, function(t) {
+        var resp = t.responseObject();
+        if (resp.ok) {
+            if (id.indexOf("new") == 0) {
+                location.reload(true);
+            } else {
+                $('tr[ability~="'+ abilityId +'"]').replaceWith(generateAbilityRow(resp.data));
+                replaceByObjectId(resp.data, abilities);
+            }
+        } else {
+            alert(resp.message);
+        }
+    });
+    /*var params = $("tr[ability~='"+id+"'] :input").serialize();
     $.get("abilitySubmit?" + params,
           function(data) {
               if(data.status == "OK") {
@@ -94,7 +102,7 @@ function submitAbility(abilityId) {
               } else {
                   alert(data.message);
               }
-          }, "json");
+          }, "json");*/
 }
 
 function newAbility() {

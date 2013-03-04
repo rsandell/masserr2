@@ -28,13 +28,7 @@ var templateTraitRow = _.template($("#t_traitRow").html());
 var templateTraitForm = _.template($("#t_traitForm").html());
 
 function findTrait(traitId) {
-    var id = fromNavId(traitId);
-    for (var i = 0; i < traits.length; i++) {
-        if (traits[i].id == id) {
-            return traits[i];
-        }
-    }
-    return null;
+    return findById(traitId, traits);
 }
 
 function submitTrait(traitId) {
@@ -47,6 +41,7 @@ function submitTrait(traitId) {
                     location.reload(true);
                 } else {
                     $('tr[ability~="'+ traitId +'"]').replaceWith(generateTraitRow(resp.data));
+                    replaceByObjectId(resp.data, traits);
                 }
             } else {
                 alert(resp.message);

@@ -24,6 +24,8 @@
 
 package net.joinedminds.masserr.model;
 
+import org.kohsuke.stapler.DataBoundConstructor;
+
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -60,7 +62,8 @@ public class Ability implements NamedIdentifiable  {
 		baseMonthlyIncome = pBaseMonthlyIncome;
 	}
 
-	public Ability(String id, String name, Type type, String docUrl, int baseMonthlyIncome) {
+	@DataBoundConstructor
+    public Ability(String id, String name, Type type, String docUrl, int baseMonthlyIncome) {
 		this.id = id;
 		this.name = name;
         this.type = type;

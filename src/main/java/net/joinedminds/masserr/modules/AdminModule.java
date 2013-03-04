@@ -129,6 +129,28 @@ public class AdminModule implements NavItem {
         }
     }
 
+    @JavaScriptMethod()
+    public SubmitResponse<Ability> submitAbility(Ability submit) {
+        String id = submit.getId();
+        Ability ability;
+        if (id == null || id.startsWith("new")) {
+            ability = manipulationDb.newAbility();
+        } else {
+            ability = manipulationDb.getAbility(id);
+        }
+
+        if (ability != null) {
+            ability.setName(submit.getName());
+            ability.setDocUrl(submit.getDocUrl());
+            ability.setType(submit.getType());
+            ability.setBaseMonthlyIncome(submit.getBaseMonthlyIncome());
+            ability = manipulationDb.saveAbility(ability);
+            return new SubmitResponse<>(new Ability(ability));
+        } else {
+            return new SubmitResponse<>("Id ["+id+"] not found");
+        }
+    }
+
     public void doAbilitySubmit(@QueryParameter("id") String id,
                                 @QueryParameter("type") String type,
                                 @QueryParameter("name") String name,

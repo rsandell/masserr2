@@ -40,3 +40,24 @@ function fromNavId(id) {
     return id;
 }
 
+function findById(needleId, haystack) {
+    var id = fromNavId(needleId);
+    for (var i = 0; i < haystack.length; i++) {
+        if (haystack[i].id == id) {
+            return haystack[i];
+        }
+    }
+    return null;
+}
+
+function replaceByObjectId(newNeedle, haystack) {
+    var id = fromNavId(newNeedle.id);
+    for (var i = 0; i < haystack.length; i++) {
+        if (haystack[i].id == id) {
+            haystack[i] = newNeedle;
+            return true;
+        }
+    }
+    return false;
+}
+
