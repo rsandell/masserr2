@@ -31,6 +31,7 @@ import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.Ability;
+import net.joinedminds.masserr.model.Discipline;
 import net.joinedminds.masserr.model.OtherTrait;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
@@ -76,6 +77,10 @@ public class AdminModule implements NavItem {
 
     public List<OtherTrait> getOtherTraits() {
         return manipulationDb.getOtherTraits();
+    }
+
+    public List<Discipline> getDisciplines() {
+        return manipulationDb.getDisciplines();
     }
 
     public void doOtherTraitSubmit(@QueryParameter("id") String id,

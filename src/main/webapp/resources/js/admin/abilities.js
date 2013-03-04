@@ -90,19 +90,6 @@ function submitAbility(abilityId) {
             alert(resp.message);
         }
     });
-    /*var params = $("tr[ability~='"+id+"'] :input").serialize();
-    $.get("abilitySubmit?" + params,
-          function(data) {
-              if(data.status == "OK") {
-                  if (id.indexOf("new") == 0) {
-                      location.reload(true);
-                  } else {
-                    $('tr[ability~="'+ abilityId +'"]').replaceWith(generateAbilityRow(data));
-                  }
-              } else {
-                  alert(data.message);
-              }
-          }, "json");*/
 }
 
 function newAbility() {

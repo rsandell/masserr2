@@ -132,5 +132,7 @@ public interface ManipulationDB extends BasicDB {
 
     List<OtherTrait> getOtherTraits();
 
+    List<Discipline> getDisciplines();
+
     OtherTrait getOtherTrait(String id);
 }

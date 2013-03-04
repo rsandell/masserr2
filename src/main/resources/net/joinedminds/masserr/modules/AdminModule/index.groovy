@@ -32,8 +32,8 @@ l.layout(title: _("MasserrAdmin") + " " + Masserr.getInstance().getAppName()) {
         }
         div(class: "span3") {
             div(class: "well") {
-                h3(_("Config"))
-                p(_("Change global configuration properties"))
+                a(href: "disciplines") {h3(_("Disciplines"))}
+                p(_("Edit global Disciplines list"))
             }
         }
     }

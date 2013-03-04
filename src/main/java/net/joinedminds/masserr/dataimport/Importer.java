@@ -108,6 +108,7 @@ public class Importer {
 
     private void importClanDisciplines() throws IOException, SAXException, ParserConfigurationException {
         logger.info("Importing Clan Disciplines");
+        if (clans == null) throw new IllegalStateException("Clans must be imported first.");
         mapImportFromResource(getClass().getResourceAsStream("/import/clan_disciplines.xml"), "clan_disciplines", new Mapper<Clan>() {
             @Override
             public Clan map(Map<String, String> entity) {
@@ -302,6 +303,7 @@ public class Importer {
 
     public void importDisciplines() throws ParserConfigurationException, IOException, SAXException {
         logger.info("Importing Disciplines");
+        if (abilities == null) throw new IllegalStateException("Abilities must be imported first.");
         disciplines = new HashMap<>();
         importFromResource(getClass().getResourceAsStream("/import/disciplines.xml"), "disciplines", "id", disciplines,
                 new Creator<Discipline>() {
@@ -624,6 +626,15 @@ public class Importer {
             @Override
             public void handle(Node node, Discipline entity) {
                 entity.setName(node.getTextContent());
+            }
+        });
+        handlers.put("retest_ability", new AttributeHandler<Discipline>() {
+            @Override
+            public void handle(Node node, Discipline entity) {
+                if (node.getTextContent() != null && !node.getTextContent().isEmpty()) {
+                    Ability ability = abilities.get(node.getTextContent());
+                    entity.setRetestAbility(ability);
+                }
             }
         });
         return handlers;

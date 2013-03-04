@@ -42,9 +42,8 @@ l.layout(title: _("Abilities") + " " + Masserr.getInstance().getAppName()) {
     script(type: "template", id: "t_abilityForm") {
         tr(ability: "{{ navId }}") {
             td {
-                input(type: 'hidden', name: 'id', value: "{{ id }}") {
-                    small("{{ id }}")
-                }
+                input(type: 'hidden', name: 'id', value: "{{ id }}")
+                small("{{ id }}")
             }
             td("{{ generatedTypesSelect }}")
             td {

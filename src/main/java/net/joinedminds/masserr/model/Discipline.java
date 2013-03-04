@@ -24,7 +24,10 @@
 
 package net.joinedminds.masserr.model;
 
+import org.kohsuke.stapler.DataBoundConstructor;
+
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 /**
@@ -38,33 +41,36 @@ public class Discipline implements NamedIdentifiable  {
 	@Id
     private String id;
 	private String name;
-	private boolean offClan;
-	private Ability retestAbility = null;
+    private Ability retestAbility = null;
+    private String docUrl;
 
 	public Discipline() {
 	}
 
-	public Discipline(String pName, boolean pOfClan, Ability pRetestAbility) {
-		name = pName;
-		offClan = pOfClan;
-		retestAbility = pRetestAbility;
-	}
+    @DataBoundConstructor
+    public Discipline(String id, String name, Ability retestAbility, String docUrl) {
+        this.id = id;
+        this.name = name;
+        this.retestAbility = retestAbility;
+        this.docUrl = docUrl;
+    }
 
-	public Discipline(String pName, boolean pOfClan) {
-		name = pName;
-		offClan = pOfClan;
-	}
-
-	public Discipline(String pName, Ability pRetestAbility) {
+    public Discipline(String pName, Ability pRetestAbility) {
 		name = pName;
 		retestAbility = pRetestAbility;
-		offClan = false;
 	}
 
 	public Discipline(String pName) {
 		name = pName;
-		offClan = false;
 	}
+
+    public Discipline(Discipline discipline) {
+        this.id = discipline.getId();
+        this.name = discipline.getName();
+        if (discipline.getRetestAbility() != null) {
+            this.retestAbility = new Ability(discipline.getRetestAbility());
+        }
+    }
 
     @Override
 	public String getId() {
@@ -81,15 +87,6 @@ public class Discipline implements NamedIdentifiable  {
 		name = pName;
 	}
 
-	public boolean isOffClan() {
-		return offClan;
-	}
-
-
-	public void setOffClan(boolean pOfClan) {
-		offClan = pOfClan;
-	}
-
 	public String toString() {
 		return name;
 	}
@@ -101,4 +98,12 @@ public class Discipline implements NamedIdentifiable  {
 	public void setRetestAbility(Ability pRetestAbility) {
 		retestAbility = pRetestAbility;
 	}
+
+    public String getDocUrl() {
+        return docUrl;
+    }
+
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
+    }
 }
