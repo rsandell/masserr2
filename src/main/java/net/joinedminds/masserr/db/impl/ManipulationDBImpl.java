@@ -77,6 +77,11 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<Discipline> getDisciplines() {
+        return db.get().query(new OSQLSynchQuery<OtherTrait>("SELECT * FROM Discipline ORDER BY name ASC"));
+    }
+
+    @Override
     public OtherTrait getOtherTrait(String id) {
         return db.get().load(new ORecordId(id));
     }

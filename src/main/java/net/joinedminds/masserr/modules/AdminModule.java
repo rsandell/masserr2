@@ -83,37 +83,6 @@ public class AdminModule implements NavItem {
         return manipulationDb.getDisciplines();
     }
 
-    public void doOtherTraitSubmit(@QueryParameter("id") String id,
-                                @QueryParameter("name") String name,
-                                @QueryParameter("docUrl") String docUrl,
-                                StaplerResponse response) throws IOException {
-        OtherTrait trait;
-        if (id != null && id.startsWith("new")) {
-            trait = manipulationDb.newOtherTrait();
-        } else {
-            trait = manipulationDb.getOtherTrait(fromNavId(id));
-        }
-
-        if (trait != null) {
-            trait.setName(name);
-            trait.setDocUrl(docUrl);
-            trait = manipulationDb.saveOtherTrait(trait);
-            JSONObject o = JSONObject.fromObject(new OtherTrait(trait));
-            o.put("status", "OK");
-            response.getWriter().print(o.toString());
-        } else {
-            JSONObject o = new JSONObject();
-            o.put("status", "error");
-            o.put("message", "Id ["+id+"] not found");
-            response.getWriter().print(o.toString());
-        }
-    }
-
-    @JavaScriptMethod
-    public String testIt(StaplerRequest request, StaplerResponse response) {
-        return "bah";
-    }
-
     @JavaScriptMethod
     public SubmitResponse<OtherTrait> submitOtherTrait(OtherTrait submit) {
         String id = submit.getId();
