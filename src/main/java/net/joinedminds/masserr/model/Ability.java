@@ -48,7 +48,7 @@ public class Ability implements NamedIdentifiable  {
 	public Ability() {
 	}
 
-	public Ability(String id, String name, Type type) {
+    public Ability(String id, String name, Type type) {
 		this.id = id;
 		this.name = name;
 		this.type = type;

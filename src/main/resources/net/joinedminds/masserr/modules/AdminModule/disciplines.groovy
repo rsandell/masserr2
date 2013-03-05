@@ -54,7 +54,8 @@ l.layout(title: _("Disciplines") + " " + Masserr.getInstance().getAppName()) {
                 input(type: 'text', name: 'name', value: '{{ name }}', required: "true")
             }
             td {
-                select(name: "retestAbility") {
+                select(name: "retestAbility_id") {
+                    option(value: '', '')
                     my.getAbilities().each() { Ability ability ->
                         option(value: ability.getId(), ability.getName())
                     }
@@ -89,9 +90,9 @@ l.layout(title: _("Disciplines") + " " + Masserr.getInstance().getAppName()) {
     table(class: "table table-hover", id:"disciplinesTable") {
         tr(class: "heading") {
             th(width: "10%", _("Id"))
-            th(_("Name"))
-            th(_("Retest Ability"))
-            th( _("Doc URL"))
+            th(width: "30%", _("Name"))
+            th(width: "25%", _("Retest Ability"))
+            th(width: "25%", _("Doc URL"))
             th(width: "10%") {
                 button(class: "btn btn-mini", onclick: "newDiscipline()") {
                     i(class: "icon-plus")

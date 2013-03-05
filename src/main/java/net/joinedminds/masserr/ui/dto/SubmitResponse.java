@@ -68,13 +68,17 @@ public class SubmitResponse<T> implements Serializable {
      *
      * @param message the error message
      */
-    public SubmitResponse(String message) {
+    private SubmitResponse(String message) {
         this.ok = false;
         this.data = null;
         this.message = message;
     }
 
     public SubmitResponse() {
+    }
+
+    public static <T> SubmitResponse<T> idNotFound(String id) {
+        return new SubmitResponse<T>("Id [" + id + "] not found");
     }
 
     public T getData() {

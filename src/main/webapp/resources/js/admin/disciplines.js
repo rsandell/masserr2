@@ -25,6 +25,51 @@
 var templateRow = _.template($("#t_disciplineRow").html());
 var templateForm = _.template($("#t_disciplineForm").html());
 
+function submitDiscipline(navId) {
+    var id = toNavId(navId);
+    var formObj = $("tr[discipline~='"+id+"'] :input").serializeObject();
+    if (formObj.retestAbility_id != '') {
+        //Fill up the DataBoundConstructor
+        formObj.retestAbility = Object();
+        formObj.retestAbility.id = formObj.retestAbility_id;
+        formObj.retestAbility.name = '';
+        formObj.retestAbility.type = null;
+        formObj.retestAbility.docUrl = '';
+        formObj.retestAbility.baseMonthlyIncome = 0;
+    } else {
+        formObj.retestAbility = null;
+    }
+    formObj.retestAbility_id = undefined;
+    admin.submitDiscipline(formObj, function(t) {
+        var resp = t.responseObject();
+        if (resp.ok) {
+            if (id.indexOf("new") == 0) {
+                location.reload(true);
+            } else {
+                $('tr[discipline~="'+ navId +'"]').replaceWith(generateRow(resp.data));
+                replaceByObjectId(resp.data, disciplines);
+            }
+        } else {
+            alert(resp.message);
+        }
+    });
+}
+
+function generateForm(obj) {
+    obj.navId = toNavId(obj.id);
+    return templateForm(obj);
+}
+
+function editRow(navId) {
+    var rowObj = findById(navId, disciplines);
+    $('tr[discipline~="'+ navId +'"]').replaceWith(generateForm(rowObj));
+    if (rowObj.retestAbility == null) {
+        $('tr[discipline~="'+ navId +'"] select[name="retestAbility_id"]').val('');
+    } else {
+        $('tr[discipline~="'+ navId +'"] select[name="retestAbility_id"]').val(rowObj.retestAbility.id);
+    }
+}
+
 function generateRow(a) {
     var urlPart = "";
     if (a.docUrl != null && a.docUrl.length > 0) {

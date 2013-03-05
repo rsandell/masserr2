@@ -135,4 +135,6 @@ public interface ManipulationDB extends BasicDB {
     List<Discipline> getDisciplines();
 
     OtherTrait getOtherTrait(String id);
+
+    Discipline getDiscipline(String id);
 }

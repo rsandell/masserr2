@@ -26,7 +26,6 @@ package net.joinedminds.masserr.modules;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
@@ -44,7 +43,6 @@ import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static net.joinedminds.masserr.Functions.fromNavId;
@@ -84,6 +82,36 @@ public class AdminModule implements NavItem {
     }
 
     @JavaScriptMethod
+    public SubmitResponse<Discipline> submitDiscipline(Discipline submit) {
+        String id = submit.getId();
+        Discipline discipline;
+        if (id == null || id.startsWith("new")) {
+            discipline = manipulationDb.newDiscipline();
+        } else {
+            discipline = manipulationDb.getDiscipline(fromNavId(id));
+        }
+
+        if (discipline != null) {
+            discipline.setName(submit.getName());
+            discipline.setDocUrl(submit.getDocUrl());
+            if (discipline.getRetestAbility() != null) {
+                if (submit.getRetestAbility() != null &&
+                        !discipline.getRetestAbility().getId().equals(submit.getRetestAbility().getId())){
+                    discipline.setRetestAbility(manipulationDb.getAbility(submit.getRetestAbility().getId()));
+                } else if (submit.getRetestAbility() == null || submit.getRetestAbility().getId().isEmpty()) {
+                    discipline.setRetestAbility(null);
+                }
+            } else if (submit.getRetestAbility() != null && !submit.getRetestAbility().getId().isEmpty()){
+                discipline.setRetestAbility(manipulationDb.getAbility(submit.getRetestAbility().getId()));
+            }
+            discipline = manipulationDb.saveDiscipline(discipline);
+            return new SubmitResponse<>(new Discipline(discipline));
+        } else {
+            return SubmitResponse.idNotFound(id);
+        }
+    }
+
+    @JavaScriptMethod
     public SubmitResponse<OtherTrait> submitOtherTrait(OtherTrait submit) {
         String id = submit.getId();
         OtherTrait trait;
@@ -99,7 +127,7 @@ public class AdminModule implements NavItem {
             trait = manipulationDb.saveOtherTrait(trait);
             return new SubmitResponse<>(new OtherTrait(trait));
         } else {
-            return new SubmitResponse<>("Id ["+id+"] not found");
+            return SubmitResponse.idNotFound(id);
         }
     }
 
@@ -121,37 +149,7 @@ public class AdminModule implements NavItem {
             ability = manipulationDb.saveAbility(ability);
             return new SubmitResponse<>(new Ability(ability));
         } else {
-            return new SubmitResponse<>("Id ["+id+"] not found");
-        }
-    }
-
-    public void doAbilitySubmit(@QueryParameter("id") String id,
-                                @QueryParameter("type") String type,
-                                @QueryParameter("name") String name,
-                                @QueryParameter("baseMonthlyIncome") int baseMonthlyIncome,
-                                @QueryParameter("docUrl") String docUrl,
-                                StaplerResponse response) throws IOException {
-        Ability ability;
-        if (id != null && id.startsWith("new")) {
-            ability = manipulationDb.newAbility();
-        } else {
-            ability = manipulationDb.getAbility(fromNavId(id));
-        }
-
-        if (ability != null) {
-            ability.setName(name);
-            ability.setType(Ability.Type.valueOf(type));
-            ability.setBaseMonthlyIncome(baseMonthlyIncome);
-            ability.setDocUrl(docUrl);
-            ability = manipulationDb.saveAbility(ability);
-            JSONObject o = JSONObject.fromObject(new Ability(ability));
-            o.put("status", "OK");
-            response.getWriter().print(o.toString());
-        } else {
-            JSONObject o = new JSONObject();
-            o.put("status", "error");
-            o.put("message", "Id ["+id+"] not found");
-            response.getWriter().print(o.toString());
+            return SubmitResponse.idNotFound(id);
         }
     }
 
