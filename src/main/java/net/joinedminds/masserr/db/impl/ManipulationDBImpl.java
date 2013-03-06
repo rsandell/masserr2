@@ -87,6 +87,11 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public Discipline getDiscipline(String id) {
+        return db.get().load(new ORecordId(id));
+    }
+
+    @Override
     public Role newRole() {
         return db.get().newInstance(Role.class);
     }

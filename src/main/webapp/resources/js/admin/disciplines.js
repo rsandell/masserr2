@@ -25,6 +25,13 @@
 var templateRow = _.template($("#t_disciplineRow").html());
 var templateForm = _.template($("#t_disciplineForm").html());
 
+var newDisciplineCounter = 0;
+
+function newDiscipline() {
+    var newD = {id: "new" + (newDisciplineCounter++), name: "",docUrl: "", retestAbility: null};
+    $("#disciplinesTable tr.heading").after(generateForm(newD));
+}
+
 function submitDiscipline(navId) {
     var id = toNavId(navId);
     var formObj = $("tr[discipline~='"+id+"'] :input").serializeObject();

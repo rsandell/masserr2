@@ -70,6 +70,7 @@ public class Discipline implements NamedIdentifiable  {
         if (discipline.getRetestAbility() != null) {
             this.retestAbility = new Ability(discipline.getRetestAbility());
         }
+        this.docUrl = discipline.getDocUrl();
     }
 
     @Override
