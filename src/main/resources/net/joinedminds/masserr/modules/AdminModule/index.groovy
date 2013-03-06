@@ -60,8 +60,8 @@ l.layout(title: _("MasserrAdmin") + " " + Masserr.getInstance().getAppName()) {
     div(class: "row") {
         div(class: "span3") {
             div(class: "well") {
-                h3(_("Config"))
-                p(_("Change global configuration properties"))
+                a(href: "paths") {h3(_("Paths"))}
+                p(_("Edit Thaumaturgy and Necromancy Paths"))
             }
         }
         div(class: "span3") {

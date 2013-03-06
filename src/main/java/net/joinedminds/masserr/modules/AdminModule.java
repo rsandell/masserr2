@@ -32,6 +32,7 @@ import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.Ability;
 import net.joinedminds.masserr.model.Discipline;
 import net.joinedminds.masserr.model.OtherTrait;
+import net.joinedminds.masserr.model.Path;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
@@ -79,6 +80,31 @@ public class AdminModule implements NavItem {
 
     public List<Discipline> getDisciplines() {
         return manipulationDb.getDisciplines();
+    }
+
+    public List<Path> getPaths() {
+        return manipulationDb.getPaths();
+    }
+
+    @JavaScriptMethod
+    public SubmitResponse<Path> submitPath(Path submit) {
+        String id = submit.getId();
+        Path path;
+        if (id == null || id.startsWith("new")) {
+            path = manipulationDb.newPath();
+        } else {
+            path = manipulationDb.getPath(fromNavId(id));
+        }
+
+        if (path != null) {
+            path.setName(submit.getName());
+            path.setType(submit.getType());
+            path.setDocUrl(submit.getDocUrl());
+            path = manipulationDb.savePath(path);
+            return new SubmitResponse<>(new Path(path));
+        } else {
+            return SubmitResponse.idNotFound(id);
+        }
     }
 
     @JavaScriptMethod

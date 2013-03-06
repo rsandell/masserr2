@@ -137,4 +137,8 @@ public interface ManipulationDB extends BasicDB {
     OtherTrait getOtherTrait(String id);
 
     Discipline getDiscipline(String id);
+
+    List<Path> getPaths();
+
+    Path getPath(String id);
 }

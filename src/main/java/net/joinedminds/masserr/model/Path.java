@@ -24,6 +24,8 @@
 
 package net.joinedminds.masserr.model;
 
+import org.kohsuke.stapler.DataBoundConstructor;
+
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -40,6 +42,7 @@ public class Path implements NamedIdentifiable {
     private String id;
 	private String name;
     private Type type;
+    private String docUrl;
 
 	public Path() {
 	}
@@ -51,6 +54,21 @@ public class Path implements NamedIdentifiable {
     public Path(String name, Type type) {
         this.name = name;
         this.type = type;
+    }
+
+    @DataBoundConstructor
+    public Path(String id, String name, Type type, String docUrl) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.docUrl = docUrl;
+    }
+
+    public Path(Path path) {
+        this.id = path.getId();
+        this.name = path.getName();
+        this.type = path.getType();
+        this.docUrl = path.getDocUrl();
     }
 
     @Override
@@ -77,6 +95,14 @@ public class Path implements NamedIdentifiable {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getDocUrl() {
+        return docUrl;
+    }
+
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
     }
 
     public static enum Type {
