@@ -30,6 +30,7 @@ import net.joinedminds.masserr.dataimport.Importer;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.modules.AdminModule;
+import net.joinedminds.masserr.modules.RolesModule;
 import net.joinedminds.masserr.ui.NavItem;
 import org.kohsuke.stapler.framework.adjunct.AdjunctManager;
 
@@ -50,14 +51,16 @@ public class Masserr implements NavItem {
 
     private ServletContext context;
     private AdminModule admin;
+    private RolesModule roles;
     private ManipulationDB manipulationDb;
     private AdminDB adminDb;
     private Importer importer;
     public final AdjunctManager adjuncts;
 
     @Inject
-    public Masserr(ServletContext context, AdminModule admin, ManipulationDB manipulationDb, AdminDB adminDb, Importer importer) throws Exception {
+    public Masserr(ServletContext context, AdminModule admin, RolesModule roles, ManipulationDB manipulationDb, AdminDB adminDb, Importer importer) throws Exception {
         this.context = context;
+        this.roles = roles;
         adjuncts = new AdjunctManager(context, getClass().getClassLoader(), "adjuncts");
         this.admin = admin;
         this.manipulationDb = manipulationDb;
@@ -91,6 +94,10 @@ public class Masserr implements NavItem {
 
     public AdminModule getAdmin() {
         return admin;
+    }
+
+    public RolesModule getRoles() {
+        return roles;
     }
 
     public static Masserr getInstance() {

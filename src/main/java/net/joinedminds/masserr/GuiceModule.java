@@ -31,6 +31,7 @@ import net.joinedminds.masserr.dataimport.Importer;
 import net.joinedminds.masserr.db.*;
 import net.joinedminds.masserr.db.impl.*;
 import net.joinedminds.masserr.modules.AdminModule;
+import net.joinedminds.masserr.modules.RolesModule;
 
 import javax.servlet.ServletContext;
 
@@ -66,6 +67,7 @@ public class GuiceModule extends AbstractModule {
         bind(BankingDB.class).to(BankingDbImpl.class);
         bind(AdminDB.class).to(AdminDbImpl.class);
         bind(AdminModule.class);
+        bind(RolesModule.class);
         bind(Importer.class);
         bind(Masserr.class);
     }
