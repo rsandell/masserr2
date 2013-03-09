@@ -26,18 +26,12 @@ package net.joinedminds.masserr;
 
 import net.joinedminds.masserr.ui.NavItem;
 import org.apache.commons.jelly.JellyContext;
-import org.apache.commons.jelly.JellyTagException;
-import org.apache.commons.jelly.XMLOutput;
 import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.WebApp;
 import org.kohsuke.stapler.bind.Bound;
-import org.xml.sax.SAXException;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -158,11 +152,11 @@ public class Functions {
      * Replacement for stapler's bind that doesn't require prototype.js to work.
      *
      * @param javaObject the object to bind
-     * @param varName the name of the js variable to bind to
+     * @param varName    the name of the js variable to bind to
      * @return the html/js code
      */
     public static String bind(Object javaObject, String varName) {
-        StringBuffer str = new StringBuffer("");
+        StringBuilder str = new StringBuilder("");
         String expr;
         if (javaObject == null) {
             expr = "null";
