@@ -26,6 +26,10 @@ _.templateSettings = {
     interpolate : /\{\{(.+?)\}\}/g
 };
 
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 function toNavId(id) {
     if (id.indexOf("#") == 0) {
         return id.substring(1);

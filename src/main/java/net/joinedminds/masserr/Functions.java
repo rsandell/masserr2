@@ -26,10 +26,18 @@ package net.joinedminds.masserr;
 
 import net.joinedminds.masserr.ui.NavItem;
 import org.apache.commons.jelly.JellyContext;
+import org.apache.commons.jelly.JellyTagException;
+import org.apache.commons.jelly.XMLOutput;
 import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerResponse;
+import org.kohsuke.stapler.WebApp;
+import org.kohsuke.stapler.bind.Bound;
+import org.xml.sax.SAXException;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -91,11 +99,11 @@ public class Functions {
 
     public static Breadcrumb getParentMainMenu() {
         List<Ancestor> ancestors = Stapler.getCurrentRequest().getAncestors();
-        for (int i = ancestors.size() - 1; i >= 0; i++) {
+        for (int i = ancestors.size() - 1; i >= 0; i--) {
             Ancestor ancestor = ancestors.get(i);
             if (ancestor.getObject() instanceof NavItem) {
                 for (Breadcrumb b : MAIN_MENU) {
-                    if (((NavItem) ancestor.getObject()).getNavDisplay().equals(b.getDisplay())) {
+                    if (((NavItem)ancestor.getObject()).getNavDisplay().equals(b.getDisplay())) {
                         return b;
                     }
                 }
@@ -109,7 +117,7 @@ public class Functions {
         List<Breadcrumb> list = new LinkedList<>();
         for (Ancestor ancestor : ancestors) {
             if (ancestor.getObject() instanceof NavItem) {
-                NavItem item = (NavItem) ancestor.getObject();
+                NavItem item = (NavItem)ancestor.getObject();
                 list.add(new Breadcrumb(ancestor.getUrl(), item.getNavDisplay()));
             }
         }
@@ -122,7 +130,7 @@ public class Functions {
         private String display;
 
         public Breadcrumb(String url, Localizable localizableDisplay) {
-            this(url, (String) null);
+            this(url, (String)null);
             this.localizableDisplay = localizableDisplay;
         }
 
@@ -144,5 +152,31 @@ public class Functions {
             }
             return display;
         }
+    }
+
+    /**
+     * Replacement for stapler's bind that doesn't require prototype.js to work.
+     *
+     * @param javaObject the object to bind
+     * @param varName the name of the js variable to bind to
+     * @return the html/js code
+     */
+    public static String bind(Object javaObject, String varName) {
+        StringBuffer str = new StringBuffer("");
+        String expr;
+        if (javaObject == null) {
+            expr = "null";
+        } else {
+            Bound h = WebApp.getCurrent().boundObjectTable.bind(javaObject);
+            expr = h.getProxyScript();
+        }
+        if (varName == null) {
+            str.append(expr);
+        } else {
+            str.append("<script>");
+            str.append(varName).append("=").append(expr).append(";");
+            str.append("</script>");
+        }
+        return str.toString();
     }
 }
