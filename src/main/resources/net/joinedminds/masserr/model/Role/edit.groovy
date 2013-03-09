@@ -1,5 +1,5 @@
-import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
+import net.joinedminds.masserr.model.Role
 
 /*
  * The MIT License
@@ -27,10 +27,23 @@ import net.joinedminds.masserr.Masserr
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
-l.layout(title: _("Roles") + " " + Masserr.getInstance().getAppName()) {
-    Functions f = h;
-    legend(_("Roles"))
+l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
+    Role role = my;
+    ul(class: "nav nav-tabs", id: "myTab") {
+        li(class: "active") { a(href: "#home", _("Home")) }
+        li { a(href: "#profile", _("Profile")) }
+        li { a(href: "#messages", _("Messages")) }
+        li { a(href: "#settings", _("Settings")) }
+    }
 
+    div(id: "myTabContent", class: "tab-content") {
+        div(class: "tab-pane active", id: "home") { p("Hello I'm Home") }
+        div(class: "tab-pane", id: "profile") { p("Hello This is your profile") }
+        div(class: "tab-pane", id: "messages") { p("Hello You have messages") }
+        div(class: "tab-pane", id: "settings") { p("Your settings") }
+    }
+
+    script(src: "${resURL}/js/role/edit.js")
 }
 
 

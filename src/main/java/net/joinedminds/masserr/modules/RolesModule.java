@@ -25,7 +25,11 @@
 package net.joinedminds.masserr.modules;
 
 import net.joinedminds.masserr.Messages;
+import net.joinedminds.masserr.model.Role;
 import net.joinedminds.masserr.ui.NavItem;
+import org.kohsuke.stapler.bind.JavaScriptMethod;
+
+import java.util.logging.Logger;
 
 /**
  * Description
@@ -34,7 +38,17 @@ import net.joinedminds.masserr.ui.NavItem;
  */
 public class RolesModule implements NavItem {
 
+    private Logger logger = Logger.getLogger(RolesModule.class.getName());
 
+    @JavaScriptMethod
+    public String theTest(String what) {
+        return "Hello " + what;
+    }
+
+    public Role getNewRole() {
+        logger.info("New Role!!");
+        return new Role();
+    }
 
     @Override
     public String getNavDisplay() {

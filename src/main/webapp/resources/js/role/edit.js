@@ -1,6 +1,3 @@
-import net.joinedminds.masserr.Functions
-import net.joinedminds.masserr.Masserr
-
 /*
  * The MIT License
  *
@@ -24,13 +21,12 @@ import net.joinedminds.masserr.Masserr
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-def l = namespace(lib.LayoutTagLib)
-st = namespace("jelly:stapler")
 
-l.layout(title: _("Roles") + " " + Masserr.getInstance().getAppName()) {
-    Functions f = h;
-    legend(_("Roles"))
+//$(function () {
+//    $('#myTab a:last').tab('show');
+//})
 
-}
-
-
+$('#myTab a').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+})
