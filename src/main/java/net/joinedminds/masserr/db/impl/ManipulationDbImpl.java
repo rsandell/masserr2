@@ -102,6 +102,16 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<Generation> getGenerations() {
+        return db.get().query(new OSQLSynchQuery<Generation>("SELECT * FROM Generation ORDER BY generation DESC"));
+    }
+
+    @Override
+    public List<Clan> getClans() {
+        return db.get().query(new OSQLSynchQuery<Clan>("SELECT * FROM Clan ORDER BY name ASC"));
+    }
+
+    @Override
     public Role newRole() {
         return db.get().newInstance(Role.class);
     }

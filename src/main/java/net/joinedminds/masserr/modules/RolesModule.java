@@ -24,11 +24,16 @@
 
 package net.joinedminds.masserr.modules;
 
+import com.google.inject.Inject;
 import net.joinedminds.masserr.Messages;
+import net.joinedminds.masserr.db.ManipulationDB;
+import net.joinedminds.masserr.model.Clan;
+import net.joinedminds.masserr.model.Generation;
 import net.joinedminds.masserr.model.Role;
 import net.joinedminds.masserr.ui.NavItem;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -40,6 +45,13 @@ public class RolesModule implements NavItem {
 
     private Logger logger = Logger.getLogger(RolesModule.class.getName());
 
+    private ManipulationDB manipulationDB;
+
+    @Inject
+    public RolesModule(ManipulationDB manipulationDB) {
+        this.manipulationDB = manipulationDB;
+    }
+
     @JavaScriptMethod
     public String theTest(String what) {
         return "Hello " + what;
@@ -48,6 +60,14 @@ public class RolesModule implements NavItem {
     public Role getNewRole() {
         logger.info("New Role!!");
         return new Role();
+    }
+
+    public List<Generation> getGenerations() {
+        return manipulationDB.getGenerations();
+    }
+
+    public List<Clan> getClans() {
+        return manipulationDB.getClans();
     }
 
     @Override

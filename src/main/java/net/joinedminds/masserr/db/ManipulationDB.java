@@ -141,4 +141,8 @@ public interface ManipulationDB extends BasicDB {
     List<Path> getPaths();
 
     Path getPath(String id);
+
+    List<Generation> getGenerations();
+
+    List<Clan> getClans();
 }
