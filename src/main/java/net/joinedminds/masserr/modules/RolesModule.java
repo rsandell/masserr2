@@ -28,6 +28,7 @@ import com.google.inject.Inject;
 import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.Clan;
+import net.joinedminds.masserr.model.Discipline;
 import net.joinedminds.masserr.model.Generation;
 import net.joinedminds.masserr.model.Role;
 import net.joinedminds.masserr.ui.NavItem;
@@ -68,6 +69,10 @@ public class RolesModule implements NavItem {
 
     public List<Clan> getClans() {
         return manipulationDB.getClans();
+    }
+
+    public List<Discipline> getDisciplines() {
+        return manipulationDB.getDisciplines();
     }
 
     @Override

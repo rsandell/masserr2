@@ -35,7 +35,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
     Role role = my;
     RolesModule module = Masserr.getInstance().getRoles();
     div(class: "row") {
-        div(class: "span2") {
+        div(class: "span1") {
             div(class: "row") {
                 ul(class: "nav nav-list affix", 'data-offset-top': "200") {
                     li("Hello")
@@ -43,7 +43,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                 }
             }
         }
-        div(class: "span10") {
+        div(class: "span11") {
             ul(class: "nav nav-tabs", id: "myTab") {
                 li(class: "active") { a(href: "#basic", _("Basic")) }
                 li { a(href: "#magic", _("Magic")) }
@@ -54,40 +54,32 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
             div(id: "myTabContent", class: "tab-content") {
                 div(class: "tab-pane active", id: "basic") {
                     div(class: "row") {
-                        div(class: "span5") {
+                        div(class: "span4") {
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "name", _("Name"))
-                                }
-                                div(class: "span4") {
-                                    input(type: "text", id: "name")
-                                }
+                                    div(class: "span1", _("Name"))
+                                    input(type: "text", class: "span3", id: "name")
                             }
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "player", _("Player"))
-                                }
-                                div(class: "span4") {
-                                    input(type: "text", id: "player")
-                                }
+                                div(class: "span1", _("Player"))
+
+                                    input(class: "span3", type: "text", id: "player")
+
                             }
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "generation", _("Generation"))
-                                }
-                                div(class: "span4") {
-                                    select(id: "generation") {
+                                div(class: "span1", _("Generation"))
+
+                                    select(class: "span3", id: "generation", name: "generation") {
                                         module.getGenerations().each { Generation gen ->
                                             option(value: gen.getId(), gen.getGeneration())
                                         }
                                     }
-                                }
+
                             }
                             div(class: "row") {
                                 div(class: "span1") {
                                     label(for: "embraced", _("Embraced"))
                                 }
-                                div(class: "span4") {
+                                div(class: "span3") {
                                     input(type: "text", id: "embraced")
                                 }
                             }
@@ -95,7 +87,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 div(class: "span1") {
                                     label(for: "clan", _("Clan"))
                                 }
-                                div(class: "span4") {
+                                div(class: "span3") {
                                     select(id: "clan") {
                                         module.getClans().each { Clan clan ->
                                             option(value: clan.getId(), clan.getName())
@@ -107,22 +99,59 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 div(class: "span1") {
                                     label(for: "sire", _("Sire"))
                                 }
-                                div(class: "span4") {
+                                div(class: "span3") {
                                     input(type: "text", id: "sire")
                                 }
                             }
-                        }
-                        div(class: "span5") {
-                            table(class: "table table-condensed") {
-                                tr {
-                                    th(colspan: "2", _("Disciplines"))
+                            div(class: "row") {
+                                div(class: "span1") {
+                                    label(for: "nature", _("Nature"))
                                 }
-                                module.getClans().get(0).getClanDisciplines().each { Discipline discipline ->
-                                    tr {
-                                        td(discipline.getName())
-                                        td {
-                                            input(type: "number", class: "input-mini", value: 0)
+                                div(class: "span3") {
+                                    input(type: "text", id: "nature")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1") {
+                                    label(for: "demeanor", _("Demeanor"))
+                                }
+                                div(class: "span3") {
+                                    input(type: "text", id: "demeanor")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1") {
+                                    label(for: "path", _("Path/Road"))
+                                }
+                                div(class: "span2") {
+                                    input(type: "text", id: "path")
+                                }
+                                div(class: "span1") {
+                                    input(type: "number", class: "input-mini", name: "pathDots", value: 0)
+                                }
+                            }
+                        }
+                        div(class: "span6") {
+                            div(class: "row") {
+                                div(class: "span5") {
+                                    strong(_("Disciplines"))
+                                }
+                            }
+                            module.getClans().get(0).getClanDisciplines().each { Discipline discipline ->
+                                div(class: "row") {
+                                    div(class: "span3") {
+                                        select(name: "discipline") {
+                                            module.getDisciplines().each { Discipline aD ->
+                                                if (aD.getId() == discipline.getId()) {
+                                                    option(value: aD.getId(), selected: "true", aD.getName())
+                                                } else {
+                                                    option(value: aD.getId(), aD.getName())
+                                                }
+                                            }
                                         }
+                                    }
+                                    div(class: "span1") {
+                                        input(type: "number", class: "input-mini", value: 0)
                                     }
                                 }
                             }
