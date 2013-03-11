@@ -1,6 +1,8 @@
 import net.joinedminds.masserr.Masserr
 import net.joinedminds.masserr.model.Clan
 import net.joinedminds.masserr.model.Discipline
+import net.joinedminds.masserr.model.Domain
+import net.joinedminds.masserr.model.FightOrFlight
 import net.joinedminds.masserr.model.Generation
 import net.joinedminds.masserr.model.Role
 import net.joinedminds.masserr.modules.RolesModule
@@ -56,39 +58,52 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                     div(class: "row") {
                         div(class: "span4") {
                             div(class: "row") {
-                                    div(class: "span1", _("Name"))
+                                div(class: "span1") {
+                                    p {raw("&nbsp;")}
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1", _("Domain"))
+                                div(class: "span3") {
+                                    select(name: "domain", class: "span3") {
+                                        module.getDomains().each {Domain domain ->
+                                            option(value: domain.getId(), domain.getName())
+                                        }
+                                    }
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1", _("Name"))
+                                div(class: "span3") {
                                     input(type: "text", class: "span3", id: "name")
+                                }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Player"))
-
+                                div(class: "span3") {
                                     input(class: "span3", type: "text", id: "player")
-
+                                }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Generation"))
-
+                                div(class: "span3") {
                                     select(class: "span3", id: "generation", name: "generation") {
                                         module.getGenerations().each { Generation gen ->
                                             option(value: gen.getId(), gen.getGeneration())
                                         }
                                     }
-
-                            }
-                            div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "embraced", _("Embraced"))
-                                }
-                                div(class: "span3") {
-                                    input(type: "text", id: "embraced")
                                 }
                             }
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "clan", _("Clan"))
-                                }
+                                div(class: "span1", _("Embraced"))
                                 div(class: "span3") {
-                                    select(id: "clan") {
+                                    input(type: "text", class: "span3", id: "embraced")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1", _("Clan"))
+                                div(class: "span3") {
+                                    select(id: "clan", class: "span3") {
                                         module.getClans().each { Clan clan ->
                                             option(value: clan.getId(), clan.getName())
                                         }
@@ -96,51 +111,48 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 }
                             }
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "sire", _("Sire"))
-                                }
+                                div(class: "span1", _("Sire"))
                                 div(class: "span3") {
-                                    input(type: "text", id: "sire")
+                                    input(type: "text", id: "sire", class: "span3")
                                 }
                             }
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "nature", _("Nature"))
-                                }
+                                div(class: "span1", _("Nature"))
                                 div(class: "span3") {
-                                    input(type: "text", id: "nature")
+                                    input(type: "text", id: "nature", class: "span3")
                                 }
                             }
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "demeanor", _("Demeanor"))
-                                }
+                                div(class: "span1", _("Demeanor"))
                                 div(class: "span3") {
-                                    input(type: "text", id: "demeanor")
+                                    input(type: "text", id: "demeanor", class: "span3")
                                 }
                             }
                             div(class: "row") {
-                                div(class: "span1") {
-                                    label(for: "path", _("Path/Road"))
-                                }
+                                div(class: "span1", _("Path/Road"))
                                 div(class: "span2") {
-                                    input(type: "text", id: "path")
+                                    input(type: "text", id: "path", class: "span2")
                                 }
                                 div(class: "span1") {
-                                    input(type: "number", class: "input-mini", name: "pathDots", value: 0)
+                                    input(type: "number", class: "span1", name: "pathDots", value: 0)
                                 }
                             }
                         }
                         div(class: "span6") {
                             div(class: "row") {
-                                div(class: "span5") {
-                                    strong(_("Disciplines"))
+                                div(class: "span3") {
+                                    p {strong(_("Disciplines"))}
+                                }
+                                div(class: "span1") {
+                                    button(class: "btn btn-mini", onclick: "addDiscipline()") {
+                                        i(class: "icon-plus")
+                                    }
                                 }
                             }
                             module.getClans().get(0).getClanDisciplines().each { Discipline discipline ->
                                 div(class: "row") {
                                     div(class: "span3") {
-                                        select(name: "discipline") {
+                                        select(name: "discipline", class: "span3") {
                                             module.getDisciplines().each { Discipline aD ->
                                                 if (aD.getId() == discipline.getId()) {
                                                     option(value: aD.getId(), selected: "true", aD.getName())
@@ -151,7 +163,40 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                         }
                                     }
                                     div(class: "span1") {
-                                        input(type: "number", class: "input-mini", value: 0)
+                                        input(type: "number", class: "span1", value: 0)
+                                    }
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1", _("+Health"))
+                                div(class: "span1") {
+                                    input(type: "number", class: "span1", value: 0, name: "healthLevels")
+                                }
+                                div(class: "span2") {
+                                    input(type: "checkbox", class: "span1", name: "injury")
+                                    span(_("-Injury"))
+                                }
+                            }
+                            List<FightOrFlight> forms = module.getFightOrFlights()
+                            div(class: "row") {
+                                div(class: "span1", _("Fight"))
+                                div(class: "span3") {
+                                    select(name: "fightForm", class: "span3") {
+                                        option(value: '', '')
+                                        forms.each { FightOrFlight f ->
+                                            option(value: f.getId(), f.getName())
+                                        }
+                                    }
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1", _("Flight"))
+                                div(class: "span3") {
+                                    select(name: "flightForm", class: "span3") {
+                                        option(value: '', '')
+                                        forms.each { FightOrFlight f ->
+                                            option(value: f.getId(), f.getName())
+                                        }
                                     }
                                 }
                             }

@@ -112,6 +112,11 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<Domain> getDomains() {
+        return db.get().query(new OSQLSynchQuery<Domain>("SELECT * FROM Domain ORDER BY name ASC"));
+    }
+
+    @Override
     public Role newRole() {
         return db.get().newInstance(Role.class);
     }
@@ -169,6 +174,11 @@ public class ManipulationDbImpl implements ManipulationDB {
     @Override
     public FightOrFlight saveFightOrFlight(FightOrFlight fightOrFlight) {
         return db.get().save(fightOrFlight);
+    }
+
+    @Override
+    public List<FightOrFlight> getFightOrFlights() {
+        return db.get().query(new OSQLSynchQuery<FightOrFlight>("SELECT * FROM FightOrFlight ORDER BY name ASC"));
     }
 
     @Override

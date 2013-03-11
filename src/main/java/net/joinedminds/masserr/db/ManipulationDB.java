@@ -69,6 +69,8 @@ public interface ManipulationDB extends BasicDB {
 
     FightOrFlight saveFightOrFlight(FightOrFlight fightOrFlight);
 
+    List<FightOrFlight> getFightOrFlights();
+
     Generation newGeneration();
 
     Generation saveGeneration(Generation generation);
@@ -145,4 +147,6 @@ public interface ManipulationDB extends BasicDB {
     List<Generation> getGenerations();
 
     List<Clan> getClans();
+
+    List<Domain> getDomains();
 }
