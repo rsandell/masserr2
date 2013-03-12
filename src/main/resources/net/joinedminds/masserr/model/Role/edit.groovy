@@ -1,10 +1,5 @@
 import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.Clan
-import net.joinedminds.masserr.model.Discipline
-import net.joinedminds.masserr.model.Domain
-import net.joinedminds.masserr.model.FightOrFlight
-import net.joinedminds.masserr.model.Generation
-import net.joinedminds.masserr.model.Role
+import net.joinedminds.masserr.model.*
 import net.joinedminds.masserr.modules.RolesModule
 
 /*
@@ -39,34 +34,31 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
     div(class: "row") {
         div(class: "span1") {
             div(class: "row") {
-                ul(class: "nav nav-list affix", 'data-offset-top': "200") {
-                    li("Hello")
-                    li("World")
-                }
+                div(class: 'span1', raw("&nbsp;"))
             }
         }
         div(class: "span11") {
-            ul(class: "nav nav-tabs", id: "myTab") {
+            ul(class: "nav nav-tabs", id: "roleTab") {
                 li(class: "active") { a(href: "#basic", _("Basic")) }
                 li { a(href: "#magic", _("Magic")) }
                 li { a(href: "#attributes", _("Attributes")) }
                 li { a(href: "#settings", _("Settings")) }
             }
 
-            div(id: "myTabContent", class: "tab-content") {
+            div(id: "roleTabContent", class: "tab-content") {
                 div(class: "tab-pane active", id: "basic") {
                     div(class: "row") {
                         div(class: "span4") {
                             div(class: "row") {
                                 div(class: "span1") {
-                                    p {raw("&nbsp;")}
+                                    p { raw("&nbsp;") }
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Domain"))
                                 div(class: "span3") {
                                     select(name: "domain", class: "span3") {
-                                        module.getDomains().each {Domain domain ->
+                                        module.getDomains().each { Domain domain ->
                                             option(value: domain.getId(), domain.getName())
                                         }
                                     }
@@ -141,7 +133,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                         div(class: "span6") {
                             div(class: "row") {
                                 div(class: "span3") {
-                                    p {strong(_("Disciplines"))}
+                                    p { strong(_("Disciplines")) }
                                 }
                                 div(class: "span1") {
                                     button(class: "btn btn-mini", onclick: "addDiscipline()") {
@@ -200,12 +192,54 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                     }
                                 }
                             }
+                            div(class: "row") {
+                                div(class: "span1", _("Quote"))
+                                div(class: "span3") {
+                                    input(type: "text", id: "quote", class: "span3")
+                                }
+                            }
                         }
                     }
                 }
                 div(class: "tab-pane", id: "magic") { p("Hello This is your profile") }
                 div(class: "tab-pane", id: "attributes") { p("Hello You have messages") }
                 div(class: "tab-pane", id: "settings") { p("Your settings") }
+            }
+        }
+    }
+    script(type: "template", id: "statsContent") {
+        table(class: "table table-condensed") {
+            tr {
+                td(_("NPC"))
+                td {
+                    input(type: "checkbox", name: "npc")
+                }
+            }
+            tr {
+                td(_("Status"))
+                td {
+                    select(name: "vitals", class: 'input-small', style: "margin-bottom: 0") {
+                        Vitals.values().each { Vitals v ->
+                            option(value: v.name(), v.toString())
+                        }
+                    }
+                }
+            }
+            tr {
+                td(_("Disciplines"))
+                td(id: "disciplinesStats", raw("&nbsp;"))
+            }
+            tr {
+                td(_("Attributes"))
+                td(id: "attributesStats", raw("&nbsp;"))
+            }
+            tr {
+                td(_("Abilities"))
+                td(id: "abilitiesStats", raw("&nbsp;"))
+            }
+            tr {
+                td(_("Sum M&F"))
+                td(id: "mnfSumStats", raw("&nbsp;"))
             }
         }
     }

@@ -29,7 +29,12 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Roles") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
-    legend(_("Roles"))
+    legend {
+        span(_("Roles"))
+        a(class: "btn btn-mini", href: "newRole/edit", style: "float: right") {
+            i(class: "icon-plus")
+        }
+    }
 
 }
 

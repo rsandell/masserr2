@@ -24,6 +24,9 @@
 
 package net.joinedminds.masserr.model;
 
+import net.joinedminds.masserr.Messages;
+import org.jvnet.localizer.Localizable;
+
 /**
  * Description
  *
@@ -32,24 +35,24 @@ package net.joinedminds.masserr.model;
  */
 public enum Vitals {
 
-    NORMAL("Normal"),
-    TORPOR("Torpor"),
-    FINAL_DEATH("Final Death"),
-    DISAPPEARED("Disappeared"),
-    ON_LONG_JOURNEY("On Long Journey");
+    NORMAL(Messages._vital_Normal()),
+    TORPOR(Messages._vital_Torpor()),
+    FINAL_DEATH(Messages._vital_FinalDeath()),
+    DISAPPEARED(Messages._vital_Disappeared()),
+    ON_LONG_JOURNEY(Messages._vital_OnLongJourney());
 
-    private String name;
+    private Localizable display;
 
-    private Vitals(String pName) {
-        name = pName;
+    private Vitals(Localizable display) {
+        this.display = display;
     }
 
-    public String getName() {
-        return name;
+    public Localizable getDisplay() {
+        return display;
     }
 
     public String toString() {
-        return name;
+        return getDisplay().toString();
     }
 
     public boolean isFinalDeath() {

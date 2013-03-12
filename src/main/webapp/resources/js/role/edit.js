@@ -26,7 +26,10 @@
 //    $('#myTab a:last').tab('show');
 //})
 
-$('#myTab a').click(function (e) {
+$('#roleTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
 })
+
+$('#roleTabContent').popover({placement: 'left', html: true, title: 'Stats', container: 'body', trigger: 'manual', content: $('#statsContent').html()});
+$('#roleTabContent').popover('show');
