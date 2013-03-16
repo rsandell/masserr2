@@ -6,3 +6,42 @@
 .table th .currency {
     text-align: right
 }
+
+/* Base class */
+.msr-region-bordered {
+    position: relative;
+    margin-left: 30px;
+    margin-bottom: 25px;
+    padding: 29px 19px 14px;
+    *padding-top: 19px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+/* Echo out a label for the example */
+.msr-region-bordered:after {
+    content: attr(regionlabel);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    padding: 2px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #9da0a4;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
+}
+
+.msr-region-bordered .region-btn {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    padding: 1px 7px;
+    padding-bottom: 2px;
+}

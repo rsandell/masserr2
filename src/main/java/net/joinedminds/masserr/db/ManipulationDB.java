@@ -142,6 +142,8 @@ public interface ManipulationDB extends BasicDB {
 
     List<Path> getPaths();
 
+    List<Path> getPaths(Path.Type type);
+
     Path getPath(String id);
 
     List<Generation> getGenerations();
@@ -149,4 +151,11 @@ public interface ManipulationDB extends BasicDB {
     List<Clan> getClans();
 
     List<Domain> getDomains();
+
+
+    List<RitualType> getRitualTypes();
+
+    List<Ritual> getRituals(String typeId);
+
+    List<Ability> getAbilities(Ability.Type type);
 }

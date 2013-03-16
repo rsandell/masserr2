@@ -80,6 +80,23 @@ public class RolesModule implements NavItem {
         return manipulationDB.getDomains();
     }
 
+    public List<Path> getPaths(Path.Type type) {
+        return manipulationDB.getPaths(type);
+    }
+
+    public List<RitualType> getRitualTypes() {
+        return manipulationDB.getRitualTypes();
+    }
+
+    @JavaScriptMethod
+    public List<Ritual> getRituals(String typeId) {
+        return manipulationDB.getRituals(typeId);
+    }
+
+    public List<Ability> getAbilities(Ability.Type type) {
+        return manipulationDB.getAbilities(type);
+    }
+
     @Override
     public String getNavDisplay() {
         return Messages.nav_Roles();

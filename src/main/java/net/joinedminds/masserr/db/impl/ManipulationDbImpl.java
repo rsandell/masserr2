@@ -97,6 +97,11 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<Path> getPaths(Path.Type type) {
+        return db.get().query(new OSQLSynchQuery<Path>("SELECT * FROM Path WHERE type = ? ORDER BY name ASC"), type);
+    }
+
+    @Override
     public Path getPath(String id) {
         return db.get().load(new ORecordId(id));
     }
@@ -114,6 +119,21 @@ public class ManipulationDbImpl implements ManipulationDB {
     @Override
     public List<Domain> getDomains() {
         return db.get().query(new OSQLSynchQuery<Domain>("SELECT * FROM Domain ORDER BY name ASC"));
+    }
+
+    @Override
+    public List<RitualType> getRitualTypes() {
+        return db.get().query(new OSQLSynchQuery<RitualType>("SELECT * FROM RitualType ORDER BY name ASC"));
+    }
+
+    @Override
+    public List<Ritual> getRituals(String typeId) {
+        return db.get().query(new OSQLSynchQuery<Ritual>("SELECT * FROM Ritual WHERE type.id = ? ORDER BY name ASC"), typeId);
+    }
+
+    @Override
+    public List<Ability> getAbilities(Ability.Type type) {
+        return db.get().query(new OSQLSynchQuery<Ability>("SELECT * FROM Ability WHERE type = ? ORDER BY name ASC"), type);
     }
 
     @Override

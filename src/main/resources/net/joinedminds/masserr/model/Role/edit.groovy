@@ -42,7 +42,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                 li(class: "active") { a(href: "#basic", _("Basic")) }
                 li { a(href: "#magic", _("Magic")) }
                 li { a(href: "#attributes", _("Attributes")) }
-                li { a(href: "#settings", _("Settings")) }
+                li { a(href: "#misc", _("Misc")) }
             }
 
             div(id: "roleTabContent", class: "tab-content") {
@@ -132,30 +132,27 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                         }
                         div(class: "span6") {
                             div(class: "row") {
-                                div(class: "span3") {
-                                    p { strong(_("Disciplines")) }
-                                }
-                                div(class: "span1") {
-                                    button(class: "btn btn-mini", onclick: "addDiscipline()") {
+                                div(class: "span4 msr-region-bordered", regionlabel: _("Disciplines")) {
+                                    button(class: "btn btn-mini region-btn", onclick: "addDiscipline()") {
                                         i(class: "icon-plus")
                                     }
-                                }
-                            }
-                            module.getClans().get(0).getClanDisciplines().each { Discipline discipline ->
-                                div(class: "row") {
-                                    div(class: "span3") {
-                                        select(name: "discipline", class: "span3") {
-                                            module.getDisciplines().each { Discipline aD ->
-                                                if (aD.getId() == discipline.getId()) {
-                                                    option(value: aD.getId(), selected: "true", aD.getName())
-                                                } else {
-                                                    option(value: aD.getId(), aD.getName())
+                                    module.getClans().get(0).getClanDisciplines().each { Discipline discipline ->
+                                        div(class: "row") {
+                                            div(class: "span3") {
+                                                select(name: "discipline", class: "span3") {
+                                                    module.getDisciplines().each { Discipline aD ->
+                                                        if (aD.getId() == discipline.getId()) {
+                                                            option(value: aD.getId(), selected: "true", aD.getName())
+                                                        } else {
+                                                            option(value: aD.getId(), aD.getName())
+                                                        }
+                                                    }
                                                 }
                                             }
+                                            div(class: "span1") {
+                                                input(type: "number", class: "span1", value: 0)
+                                            }
                                         }
-                                    }
-                                    div(class: "span1") {
-                                        input(type: "number", class: "span1", value: 0)
                                     }
                                 }
                             }
@@ -201,49 +198,266 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                         }
                     }
                 }
-                div(class: "tab-pane", id: "magic") { p("Hello This is your profile") }
-                div(class: "tab-pane", id: "attributes") { p("Hello You have messages") }
-                div(class: "tab-pane", id: "settings") { p("Your settings") }
-            }
-        }
-    }
-    script(type: "template", id: "statsContent") {
-        table(class: "table table-condensed") {
-            tr {
-                td(_("NPC"))
-                td {
-                    input(type: "checkbox", name: "npc")
+                div(class: "tab-pane", id: "magic") {
+                    div(class: "row") {
+                        div(class: "span5 msr-region-bordered", regionlabel: _("Thaumaturgy Paths")) {
+                            button(class: "btn btn-mini region-btn", onclick: "addThaumaPath()") {
+                                i(class: "icon-plus")
+                            }
+                            div(class: "row") {
+                                div(class: "span5") {
+                                    input(type: "text", name: "thaumaSchoolName", placeholder: "School", class: "span5")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    select(class: "span4") {
+                                        option(value: "", "")
+                                        module.getPaths(Path.Type.Thaumaturgy).each { Path p ->
+                                            option(value: p.id, p.getName())
+                                        }
+                                    }
+                                }
+                                div(class: "span1") {
+                                    input(type: "number", class: "span1")
+                                }
+                            }
+                        }
+                        div(class: "span5 msr-region-bordered", regionlabel: _("Necromancy Paths")) {
+                            button(class: "btn btn-mini region-btn", onclick: "addNectromancyPath()") {
+                                i(class: "icon-plus")
+                            }
+                            div(class: "row") {
+                                div(class: "span5") {
+                                    input(type: "text", name: "necromancySchoolName", placeholder: "School", class: "span5")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    select(class: "span4") {
+                                        option(value: "", "")
+                                        module.getPaths(Path.Type.Necromancy).each { Path p ->
+                                            option(value: p.id, p.getName())
+                                        }
+                                    }
+                                }
+                                div(class: "span1") {
+                                    input(type: "number", class: "span1")
+                                }
+                            }
+                        }
+                    }
+                    div(class: "row") {
+                        div(class: "span10 msr-region-bordered", regionlabel: _("Rituals")) {
+                            div(class: "row") {
+                                div(class: "span7") {
+                                    table(class: "table table-condensed span6") {
+                                        tr {
+                                            td(raw("&nbsp;"))
+                                            td(raw("&nbsp;"))
+                                            td(width: "10%", raw("&nbsp;"))
+                                        }
+                                    }
+                                }
+                                div(class: "span3") {
+                                    div(class: "row") {
+                                        div(class: "span3") {
+                                            select(class: "span3", id: "ritualTypesSelect") {
+                                                module.getRitualTypes().each { RitualType t ->
+                                                    option(value: t.getId(), t.getName())
+                                                }
+                                            }
+                                        }
+                                    }
+                                    div(class: "row") {
+                                        div(class: "span3") {
+                                            select(class: "span3", id: "ritualsSelect") {
+                                                module.getRituals(module.getRitualTypes().get(0).getId()).each { Ritual ritual ->
+                                                    option(value: ritual.getId(), ritual.getName())
+                                                }
+                                            }
+                                        }
+                                    }
+                                    div(class: "row") {
+                                        div(class: "span1 offset2") {
+                                            button(class: "btn", onclick: "addRitual()", _("Add"))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-            }
-            tr {
-                td(_("Status"))
-                td {
-                    select(name: "vitals", class: 'input-small', style: "margin-bottom: 0") {
-                        Vitals.values().each { Vitals v ->
-                            option(value: v.name(), v.toString())
+                div(class: "tab-pane", id: "attributes") {
+                    div(class: "row") {
+                        div(class: "span3 msr-region-bordered", regionlabel: _("Physical")) {
+                            div(class: "row") {
+                                div(class: "span3") {
+                                    input(type: "number", class: "span3")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span3") {
+                                    table(class: "table table-condensed", style: "width: 100%") {
+                                        module.getAbilities(Ability.Type.Physical).each { Ability ability ->
+                                            tr {
+                                                td(ability.getName())
+                                                td(raw("&nbsp;"))
+                                                td("0")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        div(class: "span3 msr-region-bordered", regionlabel: _("Social")) {
+                            div(class: "row") {
+                                div(class: "span3") {
+                                    input(type: "number", class: "span3")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span3") {
+                                    table(class: "table table-condensed", style: "width: 100%") {
+                                        module.getAbilities(Ability.Type.Social).each { Ability ability ->
+                                            tr {
+                                                td(ability.getName())
+                                                td(raw("&nbsp;"))
+                                                td("0")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        div(class: "span3 msr-region-bordered", regionlabel: _("Mental")) {
+                            div(class: "row") {
+                                div(class: "span3") {
+                                    input(type: "number", class: "span3")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span3") {
+                                    table(class: "table table-condensed", style: "width: 100%") {
+                                        module.getAbilities(Ability.Type.Mental).each { Ability ability ->
+                                            tr {
+                                                td(ability.getName())
+                                                td(raw("&nbsp;"))
+                                                td("0")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    div(class: "row") {
+                        div(class: "span9", "Obfuscate retests with Occult")
+                    }
+                }
+                div(class: "tab-pane", id: "misc") {
+                    div(class: "row") {
+                        div(class: "span4") {
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    div(class: "msr-region-bordered", style: "width: 100%;", regionlabel: _("Derangements")) {
+                                        div(class: "row") {
+                                            div(class: "span4") {
+                                                input(type: "text", class: "span4")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    div(class: "msr-region-bordered", style: "width: 100%;", regionlabel: _("Beast Traits")) {
+                                        div(class: "row") {
+                                            div(class: "span4") {
+                                                input(type: "text", class: "span4")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    div(class: "msr-region-bordered", style: "width: 100%;", regionlabel: _("Other Traits")) {
+                                        div(class: "row") {
+                                            div(class: "span4") {
+                                                input(type: "text", class: "span4")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        div(class: "span4") {
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    div(class: "msr-region-bordered", style: "width: 100%;", regionlabel: _("Merits")) {
+                                        div(class: "row") {
+                                            div(class: "span4") {
+                                                input(type: "text", class: "span4")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    div(class: "msr-region-bordered", style: "width: 100%;", regionlabel: _("Flaws")) {
+                                        div(class: "row") {
+                                            div(class: "span4") {
+                                                input(type: "text", class: "span4")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                         }
                     }
                 }
             }
-            tr {
-                td(_("Disciplines"))
-                td(id: "disciplinesStats", raw("&nbsp;"))
+            script(type: "template", id: "statsContent") {
+                table(class: "table table-condensed") {
+                    tr {
+                        td(_("NPC"))
+                        td {
+                            input(type: "checkbox", name: "npc")
+                        }
+                    }
+                    tr {
+                        td(_("Status"))
+                        td {
+                            select(name: "vitals", class: 'input-small', style: "margin-bottom: 0") {
+                                Vitals.values().each { Vitals v ->
+                                    option(value: v.name(), v.toString())
+                                }
+                            }
+                        }
+                    }
+                    tr {
+                        td(_("Disciplines"))
+                        td(id: "disciplinesStats", raw("&nbsp;"))
+                    }
+                    tr {
+                        td(_("Attributes"))
+                        td(id: "attributesStats", raw("&nbsp;"))
+                    }
+                    tr {
+                        td(_("Abilities"))
+                        td(id: "abilitiesStats", raw("&nbsp;"))
+                    }
+                    tr {
+                        td(_("Sum M&F"))
+                        td(id: "mnfSumStats", raw("&nbsp;"))
+                    }
+                }
             }
-            tr {
-                td(_("Attributes"))
-                td(id: "attributesStats", raw("&nbsp;"))
-            }
-            tr {
-                td(_("Abilities"))
-                td(id: "abilitiesStats", raw("&nbsp;"))
-            }
-            tr {
-                td(_("Sum M&F"))
-                td(id: "mnfSumStats", raw("&nbsp;"))
-            }
+            script(src: "${resURL}/js/role/edit.js")
         }
     }
-    script(src: "${resURL}/js/role/edit.js")
 }
-
 
