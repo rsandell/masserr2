@@ -112,6 +112,16 @@ public class ManipulationDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<Generation> getGenerations(boolean ghoulGenerations) {
+        return db.get().query(new OSQLSynchQuery<Generation>("SELECT * FROM Generation WHERE ghoulLevel = ? ORDER BY generation DESC"), ghoulGenerations);
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        return db.get().query(new OSQLSynchQuery<Path>("SELECT * FROM Role ORDER BY clan.name ASC, name ASC"));
+    }
+
+    @Override
     public List<Clan> getClans() {
         return db.get().query(new OSQLSynchQuery<Clan>("SELECT * FROM Clan ORDER BY name ASC"));
     }
@@ -134,6 +144,44 @@ public class ManipulationDbImpl implements ManipulationDB {
     @Override
     public List<Ability> getAbilities(Ability.Type type) {
         return db.get().query(new OSQLSynchQuery<Ability>("SELECT * FROM Ability WHERE type = ? ORDER BY name ASC"), type);
+    }
+
+    @Override
+    public Domain newDomain() {
+        return db.get().newInstance(Domain.class);
+    }
+
+    @Override
+    public Domain saveDomain(Domain d) {
+        return db.get().save(d);
+    }
+
+    @Override
+    public Domain getDomain(String id) {
+        return db.get().load(new ORecordId(id));
+    }
+
+    @Override
+    public Generation getGeneration(int generation) {
+        List<Generation> list = db.get().query(new OSQLSynchQuery<Generation>("SELECT * FROM Generation WHERE generation=?"), generation);
+        if(list != null && !list.isEmpty()) {
+            return list.get(0);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Clan getClan(String id) {
+        return db.get().load(new ORecordId(id));
+    }
+
+    @Override
+    public Role getRole(String id) {
+        if (id == null || id.isEmpty()) {
+            return null;
+        }
+        return db.get().load(new ORecordId(id));
     }
 
     @Override

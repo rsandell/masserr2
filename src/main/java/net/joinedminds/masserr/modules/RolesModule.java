@@ -29,9 +29,13 @@ import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.ui.NavItem;
+import net.joinedminds.masserr.ui.dto.SubmitResponse;
+import net.sf.json.JSONObject;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -55,13 +59,47 @@ public class RolesModule implements NavItem {
         return "Hello " + what;
     }
 
+    @JavaScriptMethod
+    public SubmitResponse<String> submitQuickRole(JSONObject jsonRole) {
+        try {
+            Role role = manipulationDB.newRole();
+            role.setDomain(manipulationDB.getDomain(jsonRole.getString("domain")));
+            role.setName(jsonRole.getString("name"));
+            role.setGeneration(manipulationDB.getGeneration(jsonRole.getInt("generation")));
+            String embr = jsonRole.getString("embraced");
+            String[] parts = embr.split("-");
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.YEAR, Integer.parseInt(parts[0]));
+            if(parts.length > 1) {
+                c.set(Calendar.MONTH, Integer.parseInt(parts[1]) - 1);
+            }
+            if(parts.length > 2) {
+                c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(parts[2]));
+            }
+            role.setEmbraced(c.getTime());
+            role.setClan(manipulationDB.getClan(jsonRole.getString("clan")));
+            role.setSire(manipulationDB.getRole(jsonRole.getString("sire")));
+            role.setNpc(true);
+            logger.info("Saving role");
+            manipulationDB.saveRole(role);
+            return new SubmitResponse<>("");
+        } catch (Exception e) {
+            logger.log(Level.WARNING, "When saving quick role", e);
+            return new SubmitResponse<>("", e.getMessage());
+        }
+    }
+
+    public List<Role> getRoles() {
+        return manipulationDB.getRoles();
+    }
+
     public Role getNewRole() {
         logger.info("New Role!!");
         return new Role();
     }
 
     public List<Generation> getGenerations() {
-        return manipulationDB.getGenerations();
+        return manipulationDB.getGenerations(false);
     }
 
     public List<Clan> getClans() {

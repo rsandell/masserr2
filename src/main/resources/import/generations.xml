@@ -1,124 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2013-02-09T19:47:38">
-<generations>
-<generation>13</generation>
-<bloodpool>10</bloodpool>
-<bloodpool_spend>1</bloodpool_spend>
-<abilities_max>5</abilities_max>
-<disciplines_max>5</disciplines_max>
-<traits_max>10</traits_max>
-<willpower_start>2</willpower_start>
-<willpower_max>6</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>12</generation>
-<bloodpool>11</bloodpool>
-<bloodpool_spend>1</bloodpool_spend>
-<abilities_max>5</abilities_max>
-<disciplines_max>5</disciplines_max>
-<traits_max>10</traits_max>
-<willpower_start>2</willpower_start>
-<willpower_max>8</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>11</generation>
-<bloodpool>12</bloodpool>
-<bloodpool_spend>1</bloodpool_spend>
-<abilities_max>5</abilities_max>
-<disciplines_max>5</disciplines_max>
-<traits_max>11</traits_max>
-<willpower_start>4</willpower_start>
-<willpower_max>8</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>10</generation>
-<bloodpool>13</bloodpool>
-<bloodpool_spend>1</bloodpool_spend>
-<abilities_max>5</abilities_max>
-<disciplines_max>5</disciplines_max>
-<traits_max>12</traits_max>
-<willpower_start>4</willpower_start>
-<willpower_max>10</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>9</generation>
-<bloodpool>14</bloodpool>
-<bloodpool_spend>2</bloodpool_spend>
-<abilities_max>5</abilities_max>
-<disciplines_max>5</disciplines_max>
-<traits_max>13</traits_max>
-<willpower_start>6</willpower_start>
-<willpower_max>10</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>8</generation>
-<bloodpool>15</bloodpool>
-<bloodpool_spend>3</bloodpool_spend>
-<abilities_max>5</abilities_max>
-<disciplines_max>6</disciplines_max>
-<traits_max>14</traits_max>
-<willpower_start>6</willpower_start>
-<willpower_max>12</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>7</generation>
-<bloodpool>20</bloodpool>
-<bloodpool_spend>5</bloodpool_spend>
-<abilities_max>6</abilities_max>
-<disciplines_max>7</disciplines_max>
-<traits_max>16</traits_max>
-<willpower_start>7</willpower_start>
-<willpower_max>14</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>6</generation>
-<bloodpool>30</bloodpool>
-<bloodpool_spend>6</bloodpool_spend>
-<abilities_max>7</abilities_max>
-<disciplines_max>8</disciplines_max>
-<traits_max>18</traits_max>
-<willpower_start>8</willpower_start>
-<willpower_max>16</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>5</generation>
-<bloodpool>40</bloodpool>
-<bloodpool_spend>8</bloodpool_spend>
-<abilities_max>8</abilities_max>
-<disciplines_max>9</disciplines_max>
-<traits_max>20</traits_max>
-<willpower_start>9</willpower_start>
-<willpower_max>18</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>4</generation>
-<bloodpool>50</bloodpool>
-<bloodpool_spend>10</bloodpool_spend>
-<abilities_max>9</abilities_max>
-<disciplines_max>9</disciplines_max>
-<traits_max>25</traits_max>
-<willpower_start>10</willpower_start>
-<willpower_max>20</willpower_max>
-<bloodpool_human>0</bloodpool_human>
-</generations>
-<generations>
-<generation>17</generation>
-<bloodpool>3</bloodpool>
-<bloodpool_spend>1</bloodpool_spend>
-<abilities_max>128</abilities_max>
-<disciplines_max>5</disciplines_max>
-<traits_max>11</traits_max>
-<willpower_start>4</willpower_start>
-<willpower_max>8</willpower_max>
-<bloodpool_human>3</bloodpool_human>
-</generations>
+<dataroot generated="2013-02-09T19:47:38">
+    <generations>
+        <generation>13</generation>
+        <bloodpool>10</bloodpool>
+        <bloodpool_spend>1</bloodpool_spend>
+        <abilities_max>5</abilities_max>
+        <disciplines_max>5</disciplines_max>
+        <traits_max>10</traits_max>
+        <willpower_start>2</willpower_start>
+        <willpower_max>6</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>12</generation>
+        <bloodpool>11</bloodpool>
+        <bloodpool_spend>1</bloodpool_spend>
+        <abilities_max>5</abilities_max>
+        <disciplines_max>5</disciplines_max>
+        <traits_max>10</traits_max>
+        <willpower_start>2</willpower_start>
+        <willpower_max>8</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>11</generation>
+        <bloodpool>12</bloodpool>
+        <bloodpool_spend>1</bloodpool_spend>
+        <abilities_max>5</abilities_max>
+        <disciplines_max>5</disciplines_max>
+        <traits_max>11</traits_max>
+        <willpower_start>4</willpower_start>
+        <willpower_max>8</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>10</generation>
+        <bloodpool>13</bloodpool>
+        <bloodpool_spend>1</bloodpool_spend>
+        <abilities_max>5</abilities_max>
+        <disciplines_max>5</disciplines_max>
+        <traits_max>12</traits_max>
+        <willpower_start>4</willpower_start>
+        <willpower_max>10</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>9</generation>
+        <bloodpool>14</bloodpool>
+        <bloodpool_spend>2</bloodpool_spend>
+        <abilities_max>5</abilities_max>
+        <disciplines_max>5</disciplines_max>
+        <traits_max>13</traits_max>
+        <willpower_start>6</willpower_start>
+        <willpower_max>10</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>8</generation>
+        <bloodpool>15</bloodpool>
+        <bloodpool_spend>3</bloodpool_spend>
+        <abilities_max>5</abilities_max>
+        <disciplines_max>6</disciplines_max>
+        <traits_max>14</traits_max>
+        <willpower_start>6</willpower_start>
+        <willpower_max>12</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>7</generation>
+        <bloodpool>20</bloodpool>
+        <bloodpool_spend>5</bloodpool_spend>
+        <abilities_max>6</abilities_max>
+        <disciplines_max>7</disciplines_max>
+        <traits_max>16</traits_max>
+        <willpower_start>7</willpower_start>
+        <willpower_max>14</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>6</generation>
+        <bloodpool>30</bloodpool>
+        <bloodpool_spend>6</bloodpool_spend>
+        <abilities_max>7</abilities_max>
+        <disciplines_max>8</disciplines_max>
+        <traits_max>18</traits_max>
+        <willpower_start>8</willpower_start>
+        <willpower_max>16</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>5</generation>
+        <bloodpool>40</bloodpool>
+        <bloodpool_spend>8</bloodpool_spend>
+        <abilities_max>8</abilities_max>
+        <disciplines_max>9</disciplines_max>
+        <traits_max>20</traits_max>
+        <willpower_start>9</willpower_start>
+        <willpower_max>18</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>4</generation>
+        <bloodpool>50</bloodpool>
+        <bloodpool_spend>10</bloodpool_spend>
+        <abilities_max>9</abilities_max>
+        <disciplines_max>9</disciplines_max>
+        <traits_max>25</traits_max>
+        <willpower_start>10</willpower_start>
+        <willpower_max>20</willpower_max>
+        <bloodpool_human>0</bloodpool_human>
+        <ghoul>false</ghoul>
+    </generations>
+    <generations>
+        <generation>17</generation>
+        <bloodpool>3</bloodpool>
+        <bloodpool_spend>1</bloodpool_spend>
+        <abilities_max>128</abilities_max>
+        <disciplines_max>5</disciplines_max>
+        <traits_max>11</traits_max>
+        <willpower_start>4</willpower_start>
+        <willpower_max>8</willpower_max>
+        <bloodpool_human>3</bloodpool_human>
+        <ghoul>true</ghoul>
+    </generations>
 </dataroot>

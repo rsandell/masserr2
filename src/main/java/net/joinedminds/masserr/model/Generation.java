@@ -46,11 +46,12 @@ public class Generation implements Identifiable {
     private int willpowerStart;
     private int willpowerMax;
     private int humanBlood;
+    private boolean ghoulLevel;
 
     public Generation() {
 	}
 
-	public Generation(int pGeneration, int pBloodPool, int pSpendBlood, int pAbilitiesMax, int pDisciplinesMax, int pTraitsMax, int pWillpowerStart, int pWillpowerMax, int pHumanBlood) {
+	public Generation(int pGeneration, int pBloodPool, int pSpendBlood, int pAbilitiesMax, int pDisciplinesMax, int pTraitsMax, int pWillpowerStart, int pWillpowerMax, int pHumanBlood, boolean ghoulLevel) {
 		generation = pGeneration;
 		bloodPool = pBloodPool;
 		spendBlood = pSpendBlood;
@@ -60,6 +61,7 @@ public class Generation implements Identifiable {
 		willpowerStart = pWillpowerStart;
 		willpowerMax = pWillpowerMax;
         humanBlood = pHumanBlood;
+        this.ghoulLevel = ghoulLevel;
     }
 
 	public int getGeneration() {
@@ -135,8 +137,16 @@ public class Generation implements Identifiable {
         humanBlood = pHumanBlood;
     }
 
-	public String toString() {
-		return String.valueOf(generation);
+    public boolean isGhoulLevel() {
+        return ghoulLevel;
+    }
+
+    public void setGhoulLevel(boolean ghoulLevel) {
+        this.ghoulLevel = ghoulLevel;
+    }
+
+    public String toString() {
+		return String.valueOf(getGeneration());
 	}
 
     /**
@@ -146,6 +156,6 @@ public class Generation implements Identifiable {
      */
     @Override
     public String getId() {
-        return String.valueOf(generation);
+        return String.valueOf(getGeneration());
     }
 }

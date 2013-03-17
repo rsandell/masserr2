@@ -64,6 +64,7 @@ public class Importer {
     private HashMap<String, Discipline> disciplines;
     private HashMap<String, Generation> generations;
     private HashMap<String, RitualType> ritualTypes;
+    private Domain domain;
 
     @Inject
     public Importer(ManipulationDB manipulationDB, CreateRulesDB createRulesDB, InfluenceDB influenceDB, BankingDB bankingDB) {
@@ -74,6 +75,9 @@ public class Importer {
     }
 
     public void importAll() throws IOException, SAXException, ParserConfigurationException {
+        Domain d = manipulationDB.newDomain();
+        d.setName("World");
+        domain = manipulationDB.saveDomain(d);
         //======ABILITIES======
         importAbilities();
         //======CREATE RULES======
@@ -598,6 +602,12 @@ public class Importer {
             @Override
             public void handle(Node node, Generation entity) {
                 entity.setHumanBlood(Integer.parseInt(node.getTextContent()));
+            }
+        });
+        handlers.put("ghoul", new AttributeHandler<Generation>() {
+            @Override
+            public void handle(Node node, Generation entity) {
+                entity.setGhoulLevel(Boolean.parseBoolean(node.getTextContent()));
             }
         });
         return handlers;

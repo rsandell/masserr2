@@ -1,5 +1,7 @@
 import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
+import net.joinedminds.masserr.model.Role
+import net.joinedminds.masserr.modules.RolesModule
 
 /*
  * The MIT License
@@ -29,13 +31,26 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Roles") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
+    RolesModule module = my;
+    st.include(page: "quickRole.groovy")
     legend {
         span(_("Roles"))
-        a(class: "btn btn-mini", href: "newRole/edit", style: "float: right") {
-            i(class: "icon-plus")
+        a(class: "btn btn-mini", role: "button", href: "#quickRoleModal", 'data-toggle': "modal", style: "float: right", title: _("New Quick NPC")) {
+            i(class: "icon-asterisk", alt: _("New Quick NPC"))
+        }
+        a(class: "btn btn-mini", href: "newRole/edit", style: "float: right", title: _("New Role")) {
+            i(class: "icon-plus", alt: _("New Role"))
         }
     }
-
+    div(class: "row") {
+        module.getRoles().each {Role role ->
+            div(class: "span1") {
+                div(class: "well") {
+                    h4(role.getName())
+                }
+            }
+        }
+    }
 }
 
 

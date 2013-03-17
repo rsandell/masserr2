@@ -158,4 +158,20 @@ public interface ManipulationDB extends BasicDB {
     List<Ritual> getRituals(String typeId);
 
     List<Ability> getAbilities(Ability.Type type);
+
+    Domain newDomain();
+
+    Domain saveDomain(Domain d);
+
+    Domain getDomain(String id);
+
+    Generation getGeneration(int generation);
+
+    Clan getClan(String id);
+
+    Role getRole(String id);
+
+    List<Generation> getGenerations(boolean ghoulGenerations);
+
+    List<Role> getRoles();
 }
