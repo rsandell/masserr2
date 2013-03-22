@@ -24,12 +24,17 @@
 
 package net.joinedminds.masserr.model;
 
+import com.github.jmkgreen.morphia.annotations.Embedded;
+import com.github.jmkgreen.morphia.annotations.Reference;
+
 /**
  * Something in a Role that has an ammount of dots unique to the Role.
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
+@Embedded
 public class DottedType<T> {
+    @Reference
     private T type;
     private int dots;
 

@@ -38,9 +38,6 @@ function toNavId(id) {
 }
 
 function fromNavId(id) {
-    if (id.indexOf("#") != 0) {
-        id = "#" + id;
-    }
     return id;
 }
 

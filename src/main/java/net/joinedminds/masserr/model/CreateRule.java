@@ -24,87 +24,98 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Index;
+import com.github.jmkgreen.morphia.annotations.Indexes;
+import org.bson.types.ObjectId;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-feb-02 10:01:20
+ *
  * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
+@Entity
+@Indexes(@Index("yearMin, yearMax"))
 public class CreateRule implements Identifiable {
 
     @Id
-    private String id;
+    private ObjectId objectId;
     private int yearMin;
     private int yearMax;
     private int disciplines;
     private int attributes;
     private int abilities;
 
-	public CreateRule() {
-	}
+    public CreateRule() {
+    }
 
-	public CreateRule(int pYearMin, int pYearMax, int pDisciplines, int pAttributes, int pAbilities) {
-		yearMin = pYearMin;
-		yearMax = pYearMax;
-		disciplines = pDisciplines;
-		attributes = pAttributes;
-		abilities = pAbilities;
-	}
+    public CreateRule(int pYearMin, int pYearMax, int pDisciplines, int pAttributes, int pAbilities) {
+        yearMin = pYearMin;
+        yearMax = pYearMax;
+        disciplines = pDisciplines;
+        attributes = pAttributes;
+        abilities = pAbilities;
+    }
 
-	@Override
+    @Override
     public String getId() {
-		return id;
-	}
+        if (objectId != null) {
+            return objectId.toString();
+        }
+        return null;
+    }
 
-	public int getYearMin() {
-		return yearMin;
-	}
+    public int getYearMin() {
+        return yearMin;
+    }
 
-	public void setYearMin(int pYearMin) {
-		yearMin = pYearMin;
-	}
+    public void setYearMin(int pYearMin) {
+        yearMin = pYearMin;
+    }
 
-	public int getYearMax() {
-		return yearMax;
-	}
+    public int getYearMax() {
+        return yearMax;
+    }
 
-	public void setYearMax(int pYearMax) {
-		yearMax = pYearMax;
-	}
+    public void setYearMax(int pYearMax) {
+        yearMax = pYearMax;
+    }
 
-	public int getDisciplines() {
-		return disciplines;
-	}
+    public int getDisciplines() {
+        return disciplines;
+    }
 
-	public void setDisciplines(int pDisciplines) {
-		disciplines = pDisciplines;
-	}
+    public void setDisciplines(int pDisciplines) {
+        disciplines = pDisciplines;
+    }
 
-	/**
-	 * a.k. Traits
-	 * @return
-	 */
-	public int getAttributes() {
-		return attributes;
-	}
+    /**
+     * a.k. Traits
+     *
+     * @return
+     */
+    public int getAttributes() {
+        return attributes;
+    }
 
-	/**
-	 * a.k. Traits
-	 * @param pAttributes
-	 */
-	public void setAttributes(int pAttributes) {
-		attributes = pAttributes;
-	}
+    /**
+     * a.k. Traits
+     *
+     * @param pAttributes
+     */
+    public void setAttributes(int pAttributes) {
+        attributes = pAttributes;
+    }
 
-	public int getAbilities() {
-		return abilities;
-	}
+    public int getAbilities() {
+        return abilities;
+    }
 
-	public void setAbilities(int pAbilities) {
-		abilities = pAbilities;
-	}
+    public void setAbilities(int pAbilities) {
+        abilities = pAbilities;
+    }
 }

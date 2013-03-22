@@ -67,6 +67,14 @@ public class Functions {
         context.setVariable("selectedMainMenuItem", getParentMainMenu());
     }
 
+    public static String toString(Object o) {
+        if (o != null) {
+            return o.toString();
+        } else {
+            return null;
+        }
+    }
+
     public static String toNavId(String id) {
         if (id.startsWith("#")) {
             return id.substring(1);
@@ -76,18 +84,18 @@ public class Functions {
     }
 
     public static String fromNavId(String id) {
-        if (id.startsWith("#")) {
-            return id;
-        } else {
-            return "#" + id;
-        }
+        return id;
     }
 
     public static String appendIfNotNull(String text, String suffix, String nullText) {
         return text == null ? nullText : text + suffix;
     }
 
-    public static Object ifNull(Object obj, Object thenVal) {
+    /*public static Object ifNull(Object obj, Object thenVal) {
+        return obj == null ? thenVal : obj;
+    }*/
+
+    public static <T> T ifNull(T obj, T thenVal) {
         return obj == null ? thenVal : obj;
     }
 

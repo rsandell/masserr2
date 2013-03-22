@@ -22,51 +22,25 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.db.impl;
+package net.joinedminds.masserr.util;
 
-import com.github.jmkgreen.morphia.Datastore;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import net.joinedminds.masserr.db.CreateRulesDB;
-import net.joinedminds.masserr.model.CreateRule;
+import net.joinedminds.masserr.model.Role;
 
-import java.util.List;
+import java.util.Comparator;
 
 /**
  * Description
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class CreateRulesDbImpl extends BasicDbImpl implements CreateRulesDB {
-
-
-    @Inject
-    public CreateRulesDbImpl(Provider<Datastore> db) {
-        super(db);
-    }
-
+public class RoleClanComparator implements Comparator<Role> {
     @Override
-    public CreateRule getRule(int pYear) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public CreateRule getRule(String pYear) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public List<CreateRule> getRules() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    @Override
-    public CreateRule newRule() {
-        return new CreateRule();
-    }
-
-    @Override
-    public CreateRule saveRule(CreateRule rule) {
-        return save(rule);
+    public int compare(Role o1, Role o2) {
+        int comp = o1.getClan().getName().compareTo(o2.getClan().getName());
+        if (comp == 0) {
+            return o1.getName().compareTo(o2.getName());
+        } else {
+            return comp;
+        }
     }
 }

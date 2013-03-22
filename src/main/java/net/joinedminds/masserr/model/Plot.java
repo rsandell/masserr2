@@ -24,27 +24,33 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Reference;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
+
 import java.sql.Date;
 
 /**
  * Description.
  * <p/>
  * Created: 2004-apr-25 17:34:51
- * 
+ *
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
+@Entity
 public class Plot implements NamedIdentifiable {
 
     @Id
-    private String id;
+    private ObjectId objectId;
     private String title;
     private String description;
     private Date created;
     private String positive;
     private String negative;
     private boolean done;
+    @Reference
     private Domain domain;
     private String storyTellerDescription;
 
@@ -86,7 +92,7 @@ public class Plot implements NamedIdentifiable {
 
     @Override
     public String getId() {
-        return id;
+        return Functions.toString(objectId);
     }
 
     public String getTitle() {
@@ -138,7 +144,7 @@ public class Plot implements NamedIdentifiable {
     }
 
     public String toString() {
-        return id + ": " + title;
+        return getTitle();
     }
 
     public Domain getDomain() {

@@ -24,20 +24,23 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import org.bson.types.ObjectId;
 
 /**
  * Description
- *
- *
+ * <p/>
+ * <p/>
  * Created: 2004-feb-03 00:43:53
+ *
  * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
+@Entity
 public class Influence implements NamedIdentifiable {
 
     @Id
-    private String id;
+    private ObjectId objectId;
     private String name;
     private String notes;
 
@@ -63,7 +66,10 @@ public class Influence implements NamedIdentifiable {
 
     @Override
     public String getId() {
-        return id;
+        if (objectId != null) {
+            return objectId.toString();
+        }
+        return null;
     }
 
     @Override

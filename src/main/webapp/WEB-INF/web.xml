@@ -4,17 +4,21 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <context-param>
-        <param-name>DB_URL</param-name>
-        <param-value>local:databases/dev</param-value>
+        <param-name>DB_HOST</param-name>
+        <param-value>192.168.1.20</param-value>
     </context-param>
     <context-param>
+        <param-name>DB_NAME</param-name>
+        <param-value>masserrdev1</param-value>
+    </context-param>
+    <!--<context-param>
         <param-name>DB_USER</param-name>
-        <param-value>admin</param-value>
+        <param-value>  </param-value>
     </context-param>
     <context-param>
         <param-name>DB_PASSWD</param-name>
-        <param-value>admin</param-value>
-    </context-param>
+        <param-value></param-value>
+    </context-param>-->
 
     <servlet>
         <servlet-name>Stapler</servlet-name>

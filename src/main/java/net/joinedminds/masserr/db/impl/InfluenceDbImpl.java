@@ -24,9 +24,9 @@
 
 package net.joinedminds.masserr.db.impl;
 
+import com.github.jmkgreen.morphia.Datastore;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 import net.joinedminds.masserr.db.InfluenceDB;
 import net.joinedminds.masserr.model.*;
 
@@ -41,33 +41,31 @@ import java.util.Vector;
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class InfluenceDbImpl implements InfluenceDB {
-
-    private Provider<OObjectDatabaseTx> db;
+public class InfluenceDbImpl extends BasicDbImpl implements InfluenceDB {
 
     @Inject
-    public InfluenceDbImpl(Provider<OObjectDatabaseTx> db) {
-        this.db = db;
+    public InfluenceDbImpl(Provider<Datastore> db) {
+        super(db);
     }
 
     @Override
     public Influence newInfluence() {
-        return db.get().newInstance(Influence.class);
+        return new Influence();
     }
 
     @Override
     public Influence saveInfluence(Influence influence) {
-        return db.get().save(influence);
+        return save(influence);
     }
 
     @Override
     public Profession newProfession() {
-        return db.get().newInstance(Profession.class);
+        return new Profession();
     }
 
     @Override
     public Profession saveProfession(Profession profession) {
-        return db.get().save(profession);
+        return save(profession);
     }
 
     @Override

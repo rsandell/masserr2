@@ -1,9 +1,8 @@
 package net.joinedminds.masserr.db.impl;
 
+import com.github.jmkgreen.morphia.Datastore;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
-import com.orientechnologies.orient.object.iterator.OObjectIteratorClass;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.model.Domain;
 import net.joinedminds.masserr.model.mgm.Config;
@@ -18,28 +17,28 @@ import java.util.List;
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class AdminDbImpl implements AdminDB {
+public class AdminDbImpl extends BasicDbImpl implements AdminDB {
 
-    private Provider<OObjectDatabaseTx> db;
 
     @Inject
-    public AdminDbImpl(Provider<OObjectDatabaseTx> db) {
-        this.db = db;
+    public AdminDbImpl(Provider<Datastore> db) {
+        super(db);
     }
 
     @Override
     public Config getConfig() {
-        OObjectIteratorClass<Config> configs = db.get().browseClass(Config.class);
-        if (configs.hasNext()) {
-            return configs.next();
+        Config config = db.get().find(Config.class).get();
+        if (config == null) {
+            config = new Config();
+            return save(config);
         } else {
-            return db.get().newInstance(Config.class);
+            return config;
         }
     }
 
     @Override
     public Config saveConfig(Config config) {
-        return db.get().save(config);
+        return save(config);
     }
 
     @Override

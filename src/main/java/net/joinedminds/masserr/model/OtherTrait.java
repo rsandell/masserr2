@@ -24,58 +24,63 @@
 
 package net.joinedminds.masserr.model;
 
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 import org.kohsuke.stapler.DataBoundConstructor;
-
-import javax.persistence.Id;
-import java.io.Serializable;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-jan-14 01:09:22
+ *
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
-public class OtherTrait implements NamedIdentifiable  {
+@Entity
+public class OtherTrait implements NamedIdentifiable {
 
-	@Id
-    private String id;
-	private String name;
+    @Id
+    private ObjectId objectId;
+    @Indexed
+    private String name;
     private String docUrl;
 
-	public OtherTrait() {
-	}
+    public OtherTrait() {
+    }
 
-	public OtherTrait(String pName) {
-		name = pName;
-	}
+    public OtherTrait(String pName) {
+        name = pName;
+    }
 
     public OtherTrait(OtherTrait trait) {
-        this.id = trait.getId();
+        this.objectId = new ObjectId(trait.getId());
         this.name = trait.getName();
         this.docUrl = trait.getDocUrl();
     }
 
     @DataBoundConstructor
     public OtherTrait(String id, String name, String docUrl) {
-        this.id = id;
+        this.objectId = new ObjectId(id);
         this.name = name;
         this.docUrl = docUrl;
     }
 
     @Override
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return Functions.toString(objectId);
+    }
 
-	@Override
+    @Override
     public String getName() {
-		return name;
-	}
+        return name;
+    }
 
-	public void setName(String pName) {
-		name = pName;
-	}
+    public void setName(String pName) {
+        name = pName;
+    }
 
     public String getDocUrl() {
         return docUrl;
@@ -86,6 +91,6 @@ public class OtherTrait implements NamedIdentifiable  {
     }
 
     public String toString() {
-		return name;
-	}
+        return name;
+    }
 }

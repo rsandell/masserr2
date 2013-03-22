@@ -24,19 +24,22 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 
 /**
  * Description.
  * <p/>
  * Created: 2004-maj-14 22:29:57
- * 
+ *
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
+@Entity
 public class FightOrFlight implements NamedIdentifiable {
     @Id
-    private String id;
+    private ObjectId objectId;
     private String name;
     private String description;
 
@@ -50,18 +53,6 @@ public class FightOrFlight implements NamedIdentifiable {
         description = "";
     }
 
-    public boolean equals(Object obj) {
-        return equals((FightOrFlight)obj);
-    }
-
-    public boolean equals(FightOrFlight pFightOrFlight) {
-        if (pFightOrFlight == null) {
-            return false;
-        }
-        else {
-            return id.equals(pFightOrFlight.id);
-        }
-    }
 
     /**
      * For Serialization
@@ -71,7 +62,7 @@ public class FightOrFlight implements NamedIdentifiable {
 
     @Override
     public String getId() {
-        return id;
+        return Functions.toString(objectId);
     }
 
     @Override
@@ -92,6 +83,6 @@ public class FightOrFlight implements NamedIdentifiable {
     }
 
     public String toString() {
-        return name;
+        return getName();
     }
 }

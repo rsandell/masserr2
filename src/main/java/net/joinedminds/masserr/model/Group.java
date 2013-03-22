@@ -24,28 +24,36 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.github.jmkgreen.morphia.annotations.Reference;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
+
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
-import java.io.Serializable;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-jan-27 21:43:06
+ *
  * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
+@Entity
 public class Group implements NamedIdentifiable {
     @Id
-    private String id;
-	private String name;
-	private Date date;
-	private String description;
-	private String type;
-	private List<Role> roles;
+    private ObjectId objectId;
+    private String name;
+    private Date date;
+    private String description;
+    @Indexed
+    private String type;
+    @Reference
+    private List<Role> roles;
 
     /**
      * For serialisation
@@ -53,65 +61,65 @@ public class Group implements NamedIdentifiable {
     public Group() {
     }
 
-	public Group(String pName, Date pDate, String pDescription, String pType) {
-		name = pName;
-		date = pDate;
-		description = pDescription;
-		type = pType;
-		roles = new LinkedList<>();
-	}
+    public Group(String pName, Date pDate, String pDescription, String pType) {
+        name = pName;
+        date = pDate;
+        description = pDescription;
+        type = pType;
+        roles = new LinkedList<>();
+    }
 
     public List<Role> getRoles() {
-		return roles;
-	}
+        return roles;
+    }
 
-	public void setRoles(List<Role> pRoles) {
-		roles = pRoles;
-	}
+    public void setRoles(List<Role> pRoles) {
+        roles = pRoles;
+    }
 
-	public void addRole(Role pRole) {
-		getRoles().add(pRole);
-	}
+    public void addRole(Role pRole) {
+        getRoles().add(pRole);
+    }
 
-	public String toString() {
-		return name;
-	}
+    public String toString() {
+        return name;
+    }
 
-	@Override
+    @Override
     public String getId() {
-		return id;
-	}
+        return Functions.toString(objectId);
+    }
 
-	@Override
+    @Override
     public String getName() {
-		return name;
-	}
+        return name;
+    }
 
-	public void setName(String pName) {
-		name = pName;
-	}
+    public void setName(String pName) {
+        name = pName;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public void setDate(Date pDate) {
-		date = pDate;
-	}
+    public void setDate(Date pDate) {
+        date = pDate;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String pDescription) {
-		description = pDescription;
-	}
+    public void setDescription(String pDescription) {
+        description = pDescription;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String pType) {
-		type = pType;
-	}
+    public void setType(String pType) {
+        type = pType;
+    }
 }

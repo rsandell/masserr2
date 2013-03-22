@@ -24,6 +24,8 @@
 
 package net.joinedminds.masserr.model;
 
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Reference;
 import net.joinedminds.masserr.model.mgm.User;
 
 import java.io.Serializable;
@@ -33,13 +35,15 @@ import java.util.Date;
  * Description.
  * <p/>
  * Created: 2004-maj-18 16:18:17
- * 
+ *
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
+@Entity
 public class Experience implements Serializable {
     private int amount;
     private Date date;
     private String reason;
+    @Reference
     private User setByUser;
 
     public Experience(int pAmount, Date pDate, String pReason) {

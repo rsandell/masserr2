@@ -24,9 +24,13 @@
 
 package net.joinedminds.masserr.model.mgm;
 
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Reference;
+import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.model.Domain;
+import org.bson.types.ObjectId;
 
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -36,21 +40,24 @@ import java.util.Vector;
  * Description.
  * <p/>
  * Created: 2004-mar-15 18:00:46
- * 
+ *
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
+@Entity
 public class User implements Serializable {
 
     @Id
-    private String id;
+    private ObjectId objectId;
     private String userName;
     private String password;
+    @Reference
     private Domain domain;
     private UserRights userRights;
     private String fullName;
     private String description;
     private Date lastLogin = null;
     private boolean otherDomainIsAll = false;
+    @Reference
     private List<Domain> otherDomains;
 
     /**
@@ -60,7 +67,7 @@ public class User implements Serializable {
     }
 
     public User(String pId, String pUserName, String pPassword, Domain pDomain, UserRights pUserRights, String pFullName, String pDescription) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         password = pPassword;
         domain = pDomain;
@@ -70,7 +77,7 @@ public class User implements Serializable {
     }
 
     public User(String pId, String pUserName, String pPassword, Domain pDomain, String pUserRights, String pFullName, String pDescription) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         password = pPassword;
         domain = pDomain;
@@ -83,7 +90,7 @@ public class User implements Serializable {
     }
 
     public User(String pId, String pUserName, String pPassword, Domain pDomain, UserRights pUserRights, String pFullName) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         password = pPassword;
         domain = pDomain;
@@ -93,7 +100,7 @@ public class User implements Serializable {
     }
 
     public User(String pId, String pUserName, String pPassword, Domain pDomain, String pUserRights, String pFullName) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         password = pPassword;
         domain = pDomain;
@@ -106,14 +113,14 @@ public class User implements Serializable {
     }
 
     public User(String pId, String pUserName, Domain pDomain, UserRights pUserRights) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         domain = pDomain;
         userRights = pUserRights;
     }
 
     public User(String pId, String pUserName, Domain pDomain, String pUserRights) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         domain = pDomain;
         if (pUserRights == null) {
@@ -123,7 +130,7 @@ public class User implements Serializable {
     }
 
     public User(String pId, String pUserName, String pPassword, Domain pDomain, UserRights pUserRights, String pFullName, String pDescription, Date pLastLogin, boolean pOtherDomainIsAll, Vector<Domain> pOtherDomains) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         password = pPassword;
         domain = pDomain;
@@ -136,7 +143,7 @@ public class User implements Serializable {
     }
 
     public User(String pId, String pUserName, String pPassword, Domain pDomain, String pUserRights, String pFullName, String pDescription, Date pLastLogin, boolean pOtherDomainIsAll, Vector<Domain> pOtherDomains) {
-        id = pId;
+        objectId = new ObjectId(pId);
         userName = pUserName;
         password = pPassword;
         domain = pDomain;
@@ -149,7 +156,7 @@ public class User implements Serializable {
     }
 
     public String getId() {
-        return id;
+        return Functions.toString(objectId);
     }
 
     public String getUserName() {
@@ -233,16 +240,16 @@ public class User implements Serializable {
     }
 
     public boolean hasDomain(Domain pDomain) {
-        if(pDomain.getId() == domain.getId()) {
+        if (pDomain.getId() == domain.getId()) {
             return true;
         }
-        if(otherDomainIsAll) {
+        if (otherDomainIsAll) {
             return true;
         }
-        if(otherDomains != null) {
+        if (otherDomains != null) {
             for (int i = 0; i < otherDomains.size(); i++) {
                 Domain domain = otherDomains.get(i);
-                if(domain.getId() == pDomain.getId()) {
+                if (domain.getId() == pDomain.getId()) {
                     return true;
                 }
             }

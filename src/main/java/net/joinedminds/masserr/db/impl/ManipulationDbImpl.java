@@ -24,156 +24,223 @@
 
 package net.joinedminds.masserr.db.impl;
 
+import com.github.jmkgreen.morphia.Datastore;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.orientechnologies.orient.core.command.OCommandContext;
-import com.orientechnologies.orient.core.command.OCommandRequestText;
-import com.orientechnologies.orient.core.id.ORecordId;
-import com.orientechnologies.orient.core.query.nativ.ONativeQuery;
-import com.orientechnologies.orient.core.query.nativ.ONativeSynchQuery;
-import com.orientechnologies.orient.core.sql.query.OSQLQuery;
-import com.orientechnologies.orient.core.sql.query.OSQLSynchQuery;
-import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
-import net.joinedminds.masserr.model.mgm.User;
+import net.joinedminds.masserr.util.RoleClanComparator;
+import org.bson.types.ObjectId;
 
-import java.rmi.RemoteException;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 
 /**
  * Database for manipulating base elements like Roles, Players etc.
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class ManipulationDbImpl implements ManipulationDB {
+public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
 
-    private Provider<OObjectDatabaseTx> db;
+    public static final RoleClanComparator ROLE_CLAN_COMPARATOR = new RoleClanComparator();
 
     @Inject
-    public ManipulationDbImpl(Provider<OObjectDatabaseTx> db) {
-        this.db = db;
+    public ManipulationDbImpl(Provider<Datastore> db) {
+        super(db);
     }
 
     @Override
     public Ability newAbility() {
-        return db.get().newInstance(Ability.class);
+        return new Ability();
     }
 
     @Override
     public Ability saveAbility(Ability ability) {
-        return db.get().save(ability);
+        return save(ability);
+    }
+
+    @Override
+    public Ability getAbility(String id) {
+        return get(Ability.class, id);
     }
 
     @Override
     public List<Ability> getAbilities() {
-        return db.get().query(new OSQLSynchQuery<Ability>("SELECT * FROM Ability ORDER BY type ASC, name ASC"));
+        return db.get().find(Ability.class).order("type,name").asList();
     }
 
     @Override
     public List<OtherTrait> getOtherTraits() {
-        return db.get().query(new OSQLSynchQuery<OtherTrait>("SELECT * FROM OtherTrait ORDER BY name ASC"));
-    }
-
-    @Override
-    public List<Discipline> getDisciplines() {
-        return db.get().query(new OSQLSynchQuery<Discipline>("SELECT * FROM Discipline ORDER BY name ASC"));
+        return db.get().find(OtherTrait.class).order("name").asList();
     }
 
     @Override
     public OtherTrait getOtherTrait(String id) {
-        return db.get().load(new ORecordId(id));
+        return get(OtherTrait.class, id);
+    }
+
+    @Override
+    public OtherTrait newOtherTrait() {
+        return new OtherTrait();
+    }
+
+    @Override
+    public OtherTrait saveOtherTrait(OtherTrait otherTrait) {
+        return save(otherTrait);
+    }
+
+    @Override
+    public List<Discipline> getDisciplines() {
+        return db.get().find(Discipline.class).order("name").asList();
     }
 
     @Override
     public Discipline getDiscipline(String id) {
-        return db.get().load(new ORecordId(id));
+        return get(Discipline.class, id);
+    }
+
+    @Override
+    public Discipline newDiscipline() {
+        return new Discipline();
+    }
+
+    @Override
+    public Discipline saveDiscipline(Discipline discipline) {
+        return save(discipline);
     }
 
     @Override
     public List<Path> getPaths() {
-        return db.get().query(new OSQLSynchQuery<Path>("SELECT * FROM Path ORDER BY type ASC, name ASC"));
+        return db.get().find(Path.class).order("type,name").asList();
     }
 
     @Override
     public List<Path> getPaths(Path.Type type) {
-        return db.get().query(new OSQLSynchQuery<Path>("SELECT * FROM Path WHERE type = ? ORDER BY name ASC"), type);
+        return db.get().find(Path.class, "type", type).order("name").asList();
     }
 
     @Override
     public Path getPath(String id) {
-        return db.get().load(new ORecordId(id));
+        return get(Path.class, id);
+    }
+
+    @Override
+    public Path newPath() {
+        return new Path();
+    }
+
+    @Override
+    public Path savePath(Path path) {
+        return save(path);
     }
 
     @Override
     public List<Generation> getGenerations() {
-        return db.get().query(new OSQLSynchQuery<Generation>("SELECT * FROM Generation ORDER BY generation DESC"));
+        return db.get().find(Generation.class).order("-generation").asList();
     }
 
     @Override
     public List<Generation> getGenerations(boolean ghoulGenerations) {
-        return db.get().query(new OSQLSynchQuery<Generation>("SELECT * FROM Generation WHERE ghoulLevel = ? ORDER BY generation DESC"), ghoulGenerations);
-    }
-
-    @Override
-    public List<Role> getRoles() {
-        return db.get().query(new OSQLSynchQuery<Path>("SELECT * FROM Role ORDER BY clan.name ASC, name ASC"));
-    }
-
-    @Override
-    public List<Clan> getClans() {
-        return db.get().query(new OSQLSynchQuery<Clan>("SELECT * FROM Clan ORDER BY name ASC"));
-    }
-
-    @Override
-    public List<Domain> getDomains() {
-        return db.get().query(new OSQLSynchQuery<Domain>("SELECT * FROM Domain ORDER BY name ASC"));
-    }
-
-    @Override
-    public List<RitualType> getRitualTypes() {
-        return db.get().query(new OSQLSynchQuery<RitualType>("SELECT * FROM RitualType ORDER BY name ASC"));
-    }
-
-    @Override
-    public List<Ritual> getRituals(String typeId) {
-        return db.get().query(new OSQLSynchQuery<Ritual>("SELECT * FROM Ritual WHERE type.id = ? ORDER BY name ASC"), typeId);
-    }
-
-    @Override
-    public List<Ability> getAbilities(Ability.Type type) {
-        return db.get().query(new OSQLSynchQuery<Ability>("SELECT * FROM Ability WHERE type = ? ORDER BY name ASC"), type);
-    }
-
-    @Override
-    public Domain newDomain() {
-        return db.get().newInstance(Domain.class);
-    }
-
-    @Override
-    public Domain saveDomain(Domain d) {
-        return db.get().save(d);
-    }
-
-    @Override
-    public Domain getDomain(String id) {
-        return db.get().load(new ORecordId(id));
+        return db.get().find(Generation.class, "ghoulLevel", ghoulGenerations).order("-generation").asList();
     }
 
     @Override
     public Generation getGeneration(int generation) {
-        List<Generation> list = db.get().query(new OSQLSynchQuery<Generation>("SELECT * FROM Generation WHERE generation=?"), generation);
-        if(list != null && !list.isEmpty()) {
-            return list.get(0);
-        } else {
-            return null;
-        }
+        return db.get().get(Generation.class, generation);
+    }
+
+    @Override
+    public Generation newGeneration() {
+        return new Generation();
+    }
+
+    @Override
+    public Generation saveGeneration(Generation generation) {
+        return save(generation);
+    }
+
+    @Override
+    public List<Clan> getClans() {
+        return db.get().find(Clan.class).order("name").asList();
     }
 
     @Override
     public Clan getClan(String id) {
-        return db.get().load(new ORecordId(id));
+        return get(Clan.class, id);
+    }
+
+    @Override
+    public Clan newClan() {
+        return new Clan();
+    }
+
+    @Override
+    public Clan saveClan(Clan clan) {
+        return save(clan);
+    }
+
+    @Override
+    public List<Domain> getDomains() {
+        return db.get().find(Domain.class).order("name").asList();
+    }
+
+    @Override
+    public Domain newDomain() {
+        return new Domain();
+    }
+
+    @Override
+    public Domain saveDomain(Domain d) {
+        return save(d);
+    }
+
+    @Override
+    public Domain getDomain(String id) {
+        return get(Domain.class, id);
+    }
+
+    @Override
+    public List<RitualType> getRitualTypes() {
+        return db.get().find(RitualType.class).order("name").asList();
+    }
+
+    @Override
+    public RitualType newRitualType() {
+        return new RitualType();
+    }
+
+    @Override
+    public RitualType saveRitualType(RitualType type) {
+        return save(type);
+    }
+
+    @Override
+    public List<Ritual> getRituals(String typeId) {
+        return db.get().find(Ritual.class, "type", new ObjectId(typeId)).order("name").asList();
+    }
+
+    @Override
+    public Ritual newRitual() {
+        return new Ritual();
+    }
+
+    @Override
+    public Ritual saveRitual(Ritual ritual) {
+        return save(ritual);
+    }
+
+    @Override
+    public List<Ability> getAbilities(Ability.Type type) {
+        return db.get().find(Ability.class, "type", type).order("name").asList();
+    }
+
+    @Override
+    public List<Role> getRoles() {
+        List<Role> roles = new LinkedList<>();
+        for (Role role : db.get().find(Role.class).order("name")) {
+            roles.add(role);
+        }
+        Collections.sort(roles, ROLE_CLAN_COMPARATOR);
+        return roles;
     }
 
     @Override
@@ -181,122 +248,52 @@ public class ManipulationDbImpl implements ManipulationDB {
         if (id == null || id.isEmpty()) {
             return null;
         }
-        return db.get().load(new ORecordId(id));
+        return get(Role.class, id);
     }
 
     @Override
     public Role newRole() {
-        return db.get().newInstance(Role.class);
+        return new Role();
     }
 
     @Override
     public Role saveRole(Role role) {
-        return db.get().save(role);
-    }
-
-    @Override
-    public Ritual newRitual() {
-        return db.get().newInstance(Ritual.class);
-    }
-
-    @Override
-    public Ritual saveRitual(Ritual ritual) {
-        return db.get().save(ritual);
+        return save(role);
     }
 
     @Override
     public Resource newResource() {
-        return db.get().newInstance(Resource.class);
+        return new Resource();
     }
 
     @Override
     public Resource saveResource(Resource resource) {
-        return db.get().save(resource);
-    }
-
-    @Override
-    public Clan newClan() {
-        return db.get().newInstance(Clan.class);
-    }
-
-    @Override
-    public Clan saveClan(Clan clan) {
-        return db.get().save(clan);
-    }
-
-    @Override
-    public Discipline newDiscipline() {
-        return db.get().newInstance(Discipline.class);
-    }
-
-    @Override
-    public Discipline saveDiscipline(Discipline discipline) {
-        return db.get().save(discipline);
+        return save(resource);
     }
 
     @Override
     public FightOrFlight newFightOrFlight() {
-        return db.get().newInstance(FightOrFlight.class);
+        return new FightOrFlight();
     }
 
     @Override
     public FightOrFlight saveFightOrFlight(FightOrFlight fightOrFlight) {
-        return db.get().save(fightOrFlight);
+        return save(fightOrFlight);
     }
 
     @Override
     public List<FightOrFlight> getFightOrFlights() {
-        return db.get().query(new OSQLSynchQuery<FightOrFlight>("SELECT * FROM FightOrFlight ORDER BY name ASC"));
-    }
-
-    @Override
-    public Generation newGeneration() {
-        return db.get().newInstance(Generation.class);
-    }
-
-    @Override
-    public Generation saveGeneration(Generation generation) {
-        return db.get().save(generation);
+        return db.get().find(FightOrFlight.class).order("name").asList();
     }
 
     @Override
     public MeritOrFlaw newMeritOrFlaw() {
-        return db.get().newInstance(MeritOrFlaw.class);
+        return new MeritOrFlaw();
     }
 
     @Override
     public MeritOrFlaw saveMeritOrFlaw(MeritOrFlaw meritOrFlaw) {
-        return db.get().save(meritOrFlaw);
-    }
-
-    @Override
-    public Path newPath() {
-        return db.get().newInstance(Path.class);
-    }
-
-    @Override
-    public Path savePath(Path path) {
-        return db.get().save(path);
-    }
-
-    @Override
-    public OtherTrait newOtherTrait() {
-        return db.get().newInstance(OtherTrait.class);
-    }
-
-    @Override
-    public OtherTrait saveOtherTrait(OtherTrait otherTrait) {
-        return db.get().save(otherTrait);
-    }
-
-    @Override
-    public RitualType newRitualType() {
-        return db.get().newInstance(RitualType.class);
-    }
-
-    @Override
-    public RitualType saveRitualType(RitualType type) {
-        return db.get().save(type);
+        return save(meritOrFlaw);
     }
 
     @Override
@@ -391,12 +388,6 @@ public class ManipulationDbImpl implements ManipulationDB {
 
     @Override
     public boolean isEmpty() {
-        return db.get().countClass(Ability.class) <= 0;
+        return db.get().find(Ability.class).countAll() <= 0;
     }
-
-    @Override
-    public Ability getAbility(String id) {
-        return db.get().load(new ORecordId(id));
-    }
-
 }

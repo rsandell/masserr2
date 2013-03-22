@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2006-2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ * Copyright (c) 2013-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,38 +22,33 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.model.sqllists;
+package net.joinedminds.masserr.db.impl;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.github.jmkgreen.morphia.Datastore;
+import com.google.inject.Provider;
+import net.joinedminds.masserr.db.BasicDB;
+import org.bson.types.ObjectId;
 
 /**
- * Created: 2006-jul-24 20:25:21
+ * Description
  *
- * @author <a href="bobby@ambrosias.se">Robert Sandell</a>
+ * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public abstract class ParamType implements Serializable {
-    private String name;
+public abstract class BasicDbImpl implements BasicDB {
 
-    protected ParamType(String pName) {
-        name = pName;
+    protected final Provider<Datastore> db;
+
+    protected BasicDbImpl(Provider<Datastore> db) {
+        this.db = db;
     }
 
-    protected ParamType() {
+    public <T> T save(T entity) {
+        db.get().save(entity);
+        return entity;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public <T> T get(Class<T> clazz, String id) {
+        return db.get().get(clazz, new ObjectId(id));
     }
-
-    public String toString() {
-        return name;
-    }
-
-
-    public abstract Object parse(String pValue);
-
-    public abstract void setStatementValue(PreparedStatement pStatement, Object pValue, int pIndex) throws SQLException;
 }

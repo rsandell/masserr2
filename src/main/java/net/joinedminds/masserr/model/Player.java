@@ -24,27 +24,35 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.github.jmkgreen.morphia.annotations.Reference;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
+
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Description.
  * <p/>
  * Created: 2004-jun-29 19:57:15
- * 
+ *
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
+@Entity
 public class Player implements NamedIdentifiable {
     @Id
-    private String id;
+    private ObjectId objectId;
     private String name;
     private String address;
     private String phone;
+    @Indexed
     private String email;
     private int xp;
-    private Vector<Role> roles;
+    @Reference
+    private List<Role> roles;
+    @Reference
     private List<Experience> experienceList;
 
     public Player(String pName, String pAddress, String pPhone, String pEmail) {
@@ -66,7 +74,7 @@ public class Player implements NamedIdentifiable {
 
     @Override
     public String getId() {
-        return id;
+        return Functions.toString(objectId);
     }
 
     @Override
@@ -114,11 +122,11 @@ public class Player implements NamedIdentifiable {
         xp = pXP;
     }
 
-    public Vector<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Vector<Role> pRoles) {
+    public void setRoles(List<Role> pRoles) {
         roles = pRoles;
     }
 

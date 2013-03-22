@@ -1,8 +1,8 @@
 package net.joinedminds.masserr.db.impl;
 
+import com.github.jmkgreen.morphia.Datastore;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 import net.joinedminds.masserr.db.BankingDB;
 import net.joinedminds.masserr.model.*;
 
@@ -16,23 +16,21 @@ import java.util.Vector;
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class BankingDbImpl implements BankingDB {
-
-    private Provider<OObjectDatabaseTx> db;
+public class BankingDbImpl extends BasicDbImpl implements BankingDB {
 
     @Inject
-    public BankingDbImpl(Provider<OObjectDatabaseTx> db) {
-        this.db = db;
+    public BankingDbImpl(Provider<Datastore> db) {
+        super(db);
     }
 
     @Override
     public StarterMoneyRule newStarterMoneyRule() {
-        return db.get().newInstance(StarterMoneyRule.class);
+        return new StarterMoneyRule();
     }
 
     @Override
     public StarterMoneyRule saveStarterMoneyRule(StarterMoneyRule rule) {
-        return db.get().save(rule);
+        return save(rule);
     }
 
     @Override

@@ -24,19 +24,18 @@
 
 package net.joinedminds.masserr.db;
 
-import net.joinedminds.masserr.model.mgm.User;
-
-import java.sql.SQLException;
-import java.rmi.RemoteException;
-
 /**
  * Description.
  * <p/>
  * Created: 2004-mar-15 12:42:24
- * 
+ *
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
 public interface BasicDB {
     /*User login(String pUserName, String pPassword) throws SQLException, RemoteException;
     public User getLoginUser() throws RemoteException;*/
+
+    <T> T save(T entity);
+
+    <T> T get(Class<T> clazz, String id);
 }

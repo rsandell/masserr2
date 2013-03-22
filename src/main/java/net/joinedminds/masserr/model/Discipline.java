@@ -24,48 +24,54 @@
 
 package net.joinedminds.masserr.model;
 
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.github.jmkgreen.morphia.annotations.Reference;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 import org.kohsuke.stapler.DataBoundConstructor;
-
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import java.io.Serializable;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-jan-11 14:44:54
+ *
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
-public class Discipline implements NamedIdentifiable  {
-	@Id
-    private String id;
-	private String name;
+@Entity
+public class Discipline implements NamedIdentifiable {
+    @Id
+    private ObjectId objectId;
+    @Indexed
+    private String name;
+    @Reference
     private Ability retestAbility = null;
     private String docUrl;
 
-	public Discipline() {
-	}
+    public Discipline() {
+    }
 
     @DataBoundConstructor
     public Discipline(String id, String name, Ability retestAbility, String docUrl) {
-        this.id = id;
+        this.objectId = new ObjectId(id);
         this.name = name;
         this.retestAbility = retestAbility;
         this.docUrl = docUrl;
     }
 
     public Discipline(String pName, Ability pRetestAbility) {
-		name = pName;
-		retestAbility = pRetestAbility;
-	}
+        name = pName;
+        retestAbility = pRetestAbility;
+    }
 
-	public Discipline(String pName) {
-		name = pName;
-	}
+    public Discipline(String pName) {
+        name = pName;
+    }
 
     public Discipline(Discipline discipline) {
-        this.id = discipline.getId();
+        this.objectId = new ObjectId(discipline.getId());
         this.name = discipline.getName();
         if (discipline.getRetestAbility() != null) {
             this.retestAbility = new Ability(discipline.getRetestAbility());
@@ -74,31 +80,31 @@ public class Discipline implements NamedIdentifiable  {
     }
 
     @Override
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return Functions.toString(objectId);
+    }
 
-	@Override
+    @Override
     public String getName() {
-		return name;
-	}
+        return name;
+    }
 
 
-	public void setName(String pName) {
-		name = pName;
-	}
+    public void setName(String pName) {
+        name = pName;
+    }
 
-	public String toString() {
-		return name;
-	}
+    public String toString() {
+        return name;
+    }
 
-	public Ability getRetestAbility() {
-		return retestAbility;
-	}
+    public Ability getRetestAbility() {
+        return retestAbility;
+    }
 
-	public void setRetestAbility(Ability pRetestAbility) {
-		retestAbility = pRetestAbility;
-	}
+    public void setRetestAbility(Ability pRetestAbility) {
+        retestAbility = pRetestAbility;
+    }
 
     public String getDocUrl() {
         return docUrl;

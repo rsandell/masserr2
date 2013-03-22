@@ -61,7 +61,7 @@
             <artifactId>guice</artifactId>
             <version>3.0</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-core</artifactId>
             <version>1.3.0</version>
@@ -75,7 +75,7 @@
             <groupId>com.orientechnologies</groupId>
             <artifactId>orientdb-object</artifactId>
             <version>1.3.0</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -96,12 +96,28 @@
             <artifactId>stapler-adjunct-underscore</artifactId>
             <version>1.4.3-1</version>
         </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+        <!--Morphia for MongoDB-->
+        <dependency>
+            <groupId>com.github.jmkgreen.morphia</groupId>
+            <artifactId>morphia</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <!--/Morphia for MongoDB-->
     </dependencies>
 
     <repositories>
         <repository>
             <id>repo.jenkins-ci.org</id>
             <url>http://repo.jenkins-ci.org/public/</url>
+        </repository>
+        <repository>
+            <id>morphia.googlecode.com</id>
+            <url> http://morphia.googlecode.com/svn/mavenrepo/</url>
         </repository>
         <!--<repository>
             <id>orientechnologies-repository</id>

@@ -24,19 +24,25 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 
 /**
  * Description
- *
+ * <p/>
  * Created: 2004-mar-08 17:06:13
+ *
  * @author <a href="mailto:sandell.robert@gmail.com">Robert "Bobby" Sandell</a>
  */
+@Entity
 public class Domain implements NamedIdentifiable {
 
     @Id
-    private String id;
+    private ObjectId objectId;
+    @Indexed
     private String name;
     private String history;
 
@@ -52,22 +58,9 @@ public class Domain implements NamedIdentifiable {
         name = pName;
     }
 
-    public boolean equals(Domain pDomain) {
-        return id.equals(pDomain.id);
-    }
-
-    public boolean equals(Object obj) {
-        try {
-            return this.equals((Domain)obj);
-        }
-        catch (Exception e) {
-            return false;
-        }
-    }
-
     @Override
     public String getId() {
-        return id;
+        return Functions.toString(objectId);
     }
 
     @Override

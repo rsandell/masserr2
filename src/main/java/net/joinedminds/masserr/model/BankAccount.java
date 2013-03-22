@@ -24,23 +24,27 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+
 import java.text.NumberFormat;
 
 /**
  * Description
- *
- *
+ * <p/>
+ * <p/>
  * Created: 2004-feb-06 13:48:10
+ *
  * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
+@Entity
 public class BankAccount implements Identifiable {
-	@Id
+    @Id
     private String id;
-	private String ownerName;
-	private double amount;
-	private boolean income;
-	private boolean active;
+    private String ownerName;
+    private double amount;
+    private boolean income;
+    private boolean active;
 
     /**
      * For serialization
@@ -48,65 +52,65 @@ public class BankAccount implements Identifiable {
     public BankAccount() {
     }
 
-	public BankAccount(String pOwnerName, double pAmount, boolean pIncome, boolean pActive) {
-		ownerName = pOwnerName;
-		amount = pAmount;
-		income = pIncome;
-		active = pActive;
-	}
+    public BankAccount(String pOwnerName, double pAmount, boolean pIncome, boolean pActive) {
+        ownerName = pOwnerName;
+        amount = pAmount;
+        income = pIncome;
+        active = pActive;
+    }
 
-	public BankAccount(String pOwnerName, float pAmount, boolean pIncome) {
-		ownerName = pOwnerName;
-		amount = pAmount;
-		income = pIncome;
-		active = true;
-	}
+    public BankAccount(String pOwnerName, float pAmount, boolean pIncome) {
+        ownerName = pOwnerName;
+        amount = pAmount;
+        income = pIncome;
+        active = true;
+    }
 
     @Override
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String pId) {
-		id = pId;
-	}
+    public void setId(String pId) {
+        id = pId;
+    }
 
-	public String getOwnerName() {
-		return ownerName;
-	}
+    public String getOwnerName() {
+        return ownerName;
+    }
 
-	public void setOwnerName(String pOwnerName) {
-		ownerName = pOwnerName;
-	}
+    public void setOwnerName(String pOwnerName) {
+        ownerName = pOwnerName;
+    }
 
-	public double getAmount() {
-		return amount;
-	}
+    public double getAmount() {
+        return amount;
+    }
 
-	public void setAmount(double pAmount) {
-		amount = pAmount;
-	}
+    public void setAmount(double pAmount) {
+        amount = pAmount;
+    }
 
-	public boolean isIncome() {
-		return income;
-	}
+    public boolean isIncome() {
+        return income;
+    }
 
-	public void setIncome(boolean pIncome) {
-		income = pIncome;
-	}
+    public void setIncome(boolean pIncome) {
+        income = pIncome;
+    }
 
-	public boolean isActive() {
-		return active;
-	}
+    public boolean isActive() {
+        return active;
+    }
 
-	public void setActive(boolean pActive) {
-		active = pActive;
-	}
+    public void setActive(boolean pActive) {
+        active = pActive;
+    }
 
-	public String toString() {
-		String str = "";
-	    str = id + ": ";
-		str += ownerName + " ( " + NumberFormat.getCurrencyInstance().format(amount) + " )";
-		return str;
-	}
+    public String toString() {
+        String str = "";
+        str = id + ": ";
+        str += ownerName + " ( " + NumberFormat.getCurrencyInstance().format(amount) + " )";
+        return str;
+    }
 }

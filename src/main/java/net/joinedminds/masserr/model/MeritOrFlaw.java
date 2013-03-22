@@ -24,71 +24,75 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-jan-13 20:48:42
+ *
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
+@Entity
 public class MeritOrFlaw implements NamedIdentifiable {
 
-	@Id
-    private String id;
-	private String name;
-	private int points;
-	private String note;
+    @Id
+    private ObjectId objectId;
+    private String name;
+    private int points;
+    private String note;
 
-	public MeritOrFlaw() {
-	}
+    public MeritOrFlaw() {
+    }
 
-	public MeritOrFlaw(String pName, int pPoints, String pNote) {
-		name = pName;
-		points = pPoints;
-		note = pNote;
-	}
+    public MeritOrFlaw(String pName, int pPoints, String pNote) {
+        name = pName;
+        points = pPoints;
+        note = pNote;
+    }
 
-	public MeritOrFlaw(String pName, int pPoints) {
-		name = pName;
-		points = pPoints;
-		note = "";
-	}
+    public MeritOrFlaw(String pName, int pPoints) {
+        name = pName;
+        points = pPoints;
+        note = "";
+    }
 
 
     @Override
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return Functions.toString(objectId);
+    }
 
-	@Override
+    @Override
     public String getName() {
-		return name;
-	}
+        return name;
+    }
 
-	public void setName(String pName) {
-		name = pName;
-	}
+    public void setName(String pName) {
+        name = pName;
+    }
 
-	public int getPoints() {
-		return points;
-	}
+    public int getPoints() {
+        return points;
+    }
 
-	public void setPoints(int pPoints) {
-		points = pPoints;
-	}
+    public void setPoints(int pPoints) {
+        points = pPoints;
+    }
 
-	public String getNote() {
-		return note;
-	}
+    public String getNote() {
+        return note;
+    }
 
-	public void setNote(String pNote) {
-		note = pNote;
-	}
+    public void setNote(String pNote) {
+        note = pNote;
+    }
 
-	public String toString() {
-		return name + " (" + points + ")";
-	}
+    public String toString() {
+        return getName() + " (" + getPoints() + ")";
+    }
 }

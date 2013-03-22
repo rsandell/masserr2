@@ -24,82 +24,88 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-feb-02 22:17:26
+ *
  * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
+@Entity
 public class Profession implements NamedIdentifiable {
-	public static int MASK_INCOME_FACTOR = 10;
+    public static int MASK_INCOME_FACTOR = 10;
 
     @Id
-    private String id;
-	private String name;
-	private int monthlyIncome;
-	private boolean mortal;
-	private boolean mask;
+    private ObjectId objectId;
+    @Indexed
+    private String name;
+    private int monthlyIncome;
+    private boolean mortal;
+    private boolean mask;
 
-	public Profession() {
-	}
+    public Profession() {
+    }
 
-	public Profession(String pName, int pMonthlyIncome, boolean pMortal, boolean pMask) {
-		name = pName;
-		monthlyIncome = pMonthlyIncome;
-		mortal = pMortal;
-		mask = pMask;
-	}
+    public Profession(String pName, int pMonthlyIncome, boolean pMortal, boolean pMask) {
+        name = pName;
+        monthlyIncome = pMonthlyIncome;
+        mortal = pMortal;
+        mask = pMask;
+    }
 
-	public Profession(String pName, int pMonthlyIncome, boolean pMortal) {
-		name = pName;
-		monthlyIncome = pMonthlyIncome;
-		mortal = pMortal;
-		mask = false;
-	}
+    public Profession(String pName, int pMonthlyIncome, boolean pMortal) {
+        name = pName;
+        monthlyIncome = pMonthlyIncome;
+        mortal = pMortal;
+        mask = false;
+    }
 
     @Override
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return Functions.toString(objectId);
+    }
 
-	@Override
+    @Override
     public String getName() {
-		return name;
-	}
+        return name;
+    }
 
-	public void setName(String pName) {
-		name = pName;
-	}
+    public void setName(String pName) {
+        name = pName;
+    }
 
-	public int getMonthlyIncome() {
-		return monthlyIncome;
-	}
+    public int getMonthlyIncome() {
+        return monthlyIncome;
+    }
 
-	public void setMonthlyIncome(int pMonthlyIncome) {
-		monthlyIncome = pMonthlyIncome;
-	}
+    public void setMonthlyIncome(int pMonthlyIncome) {
+        monthlyIncome = pMonthlyIncome;
+    }
 
-	public boolean isMortal() {
-		return mortal;
-	}
+    public boolean isMortal() {
+        return mortal;
+    }
 
-	public void setMortal(boolean pMortal) {
-		mortal = pMortal;
-	}
+    public void setMortal(boolean pMortal) {
+        mortal = pMortal;
+    }
 
-	public boolean isMask() {
-		return mask;
-	}
+    public boolean isMask() {
+        return mask;
+    }
 
-	public void setMask(boolean pMask) {
-		mask = pMask;
-	}
+    public void setMask(boolean pMask) {
+        mask = pMask;
+    }
 
-	public String toString() {
-		return name;
-	}
+    public String toString() {
+        return name;
+    }
 }

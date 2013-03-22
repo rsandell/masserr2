@@ -24,32 +24,38 @@
 
 package net.joinedminds.masserr.model;
 
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 import org.kohsuke.stapler.DataBoundConstructor;
-
-import javax.persistence.Id;
-import java.io.Serializable;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-jan-11 19:31:04
+ *
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
+@Entity
 public class Path implements NamedIdentifiable {
 
-	@Id
-    private String id;
-	private String name;
+    @Id
+    private ObjectId objectId;
+    @Indexed
+    private String name;
+    @Indexed
     private Type type;
     private String docUrl;
 
-	public Path() {
-	}
+    public Path() {
+    }
 
-	public Path(String pName) {
-		name = pName;
-	}
+    public Path(String pName) {
+        name = pName;
+    }
 
     public Path(String name, Type type) {
         this.name = name;
@@ -58,36 +64,36 @@ public class Path implements NamedIdentifiable {
 
     @DataBoundConstructor
     public Path(String id, String name, Type type, String docUrl) {
-        this.id = id;
+        this.objectId = new ObjectId(id);
         this.name = name;
         this.type = type;
         this.docUrl = docUrl;
     }
 
     public Path(Path path) {
-        this.id = path.getId();
+        this.objectId = new ObjectId(path.getId());
         this.name = path.getName();
         this.type = path.getType();
         this.docUrl = path.getDocUrl();
     }
 
     @Override
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return Functions.toString(objectId);
+    }
 
     @Override
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String pName) {
-		name = pName;
-	}
+    public void setName(String pName) {
+        name = pName;
+    }
 
-	public String toString() {
-		return name;
-	}
+    public String toString() {
+        return name;
+    }
 
     public Type getType() {
         return type;

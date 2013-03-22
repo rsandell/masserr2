@@ -24,80 +24,88 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Id;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.github.jmkgreen.morphia.annotations.Reference;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-jan-18 19:20:16
+ *
  * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
+@Entity
 public class Ritual implements NamedIdentifiable {
 
-	@Id
-    private String id;
-	private String name;
-	private int level;
+    @Id
+    private ObjectId objectId;
+    @Indexed
+    private String name;
+    private int level;
+    @Reference
     private RitualType ritualType;
     private String description;
 
 
-	public Ritual() {
-	}
+    public Ritual() {
+    }
 
-	public Ritual(String pName, int pLevel, RitualType pRitualType) {
-		name = pName;
-		level = pLevel;
+    public Ritual(String pName, int pLevel, RitualType pRitualType) {
+        name = pName;
+        level = pLevel;
         ritualType = pRitualType;
     }
 
-	public Ritual(String pName, int pLevel , RitualType pRitualType, String pDescription) {
-		name = pName;
-		level = pLevel;
+    public Ritual(String pName, int pLevel, RitualType pRitualType, String pDescription) {
+        name = pName;
+        level = pLevel;
         ritualType = pRitualType;
         description = pDescription;
-	}
+    }
 
-	public Ritual(String pName, RitualType pRitualType) {
-		name = pName;
+    public Ritual(String pName, RitualType pRitualType) {
+        name = pName;
         ritualType = pRitualType;
     }
 
     @Override
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return Functions.toString(objectId);
+    }
 
-	@Override
+    @Override
     public String getName() {
-		return name;
-	}
+        return name;
+    }
 
-	public void setName(String pName) {
-		name = pName;
-	}
+    public void setName(String pName) {
+        name = pName;
+    }
 
-	public int getLevel() {
-		return level;
-	}
+    public int getLevel() {
+        return level;
+    }
 
-	public void setLevel(int pLevel) {
-		level = pLevel;
-	}
+    public void setLevel(int pLevel) {
+        level = pLevel;
+    }
 
-	public String toString() {
-		return name;
-	}
+    public String toString() {
+        return name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String pDescription) {
-		description = pDescription;
-	}
+    public void setDescription(String pDescription) {
+        description = pDescription;
+    }
 
 
     public RitualType getRitualType() {

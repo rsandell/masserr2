@@ -24,9 +24,9 @@
 
 package net.joinedminds.masserr;
 
+import com.github.jmkgreen.morphia.Datastore;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
-import com.orientechnologies.orient.object.db.OObjectDatabaseTx;
 import net.joinedminds.masserr.dataimport.Importer;
 import net.joinedminds.masserr.db.*;
 import net.joinedminds.masserr.db.impl.*;
@@ -43,13 +43,15 @@ import javax.servlet.ServletContext;
 public class GuiceModule extends AbstractModule {
 
     private ServletContext context;
-    private String dbUrl;
+    private String dbHost;
+    private String dbName;
     private String dbUser;
     private String dbPasswd;
 
-    public GuiceModule(ServletContext context, String dbUrl, String dbUser, String dbPasswd) {
+    public GuiceModule(ServletContext context, String dbHost, String dbName, String dbUser, String dbPasswd) {
         this.context = context;
-        this.dbUrl = dbUrl;
+        this.dbHost = dbHost;
+        this.dbName = dbName;
         this.dbUser = dbUser;
         this.dbPasswd = dbPasswd;
     }
@@ -57,10 +59,12 @@ public class GuiceModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(ServletContext.class).toInstance(context);
-        bind(String.class).annotatedWith(Names.named("DB_URL")).toInstance(dbUrl);
+        bind(String.class).annotatedWith(Names.named("DB_HOST")).toInstance(dbHost);
+        bind(String.class).annotatedWith(Names.named("DB_NAME")).toInstance(dbName);
         bind(String.class).annotatedWith(Names.named("DB_USER")).toInstance(dbUser);
         bind(String.class).annotatedWith(Names.named("DB_PASSWD")).toInstance(dbPasswd);
-        bind(OObjectDatabaseTx.class).toProvider(OrientProvider.class);
+
+        bind(Datastore.class).toProvider(MorphiaProvider.class);
         bind(ManipulationDB.class).to(ManipulationDbImpl.class);
         bind(CreateRulesDB.class).to(CreateRulesDbImpl.class);
         bind(InfluenceDB.class).to(InfluenceDbImpl.class);

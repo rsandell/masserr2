@@ -44,11 +44,12 @@ public class WebAppMain implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext context = sce.getServletContext();
-        String dbUrl = checkNotNull(context.getInitParameter("DB_URL"), "Missing DB_URL parameter.");
-        String dbUser = checkNotNull(context.getInitParameter("DB_USER"), "Missing DB_USER parameter.");
-        String dbPasswd = checkNotNull(context.getInitParameter("DB_PASSWD"), "Missing DB_PASSWD parameter.");
+        String dbHost = checkNotNull(context.getInitParameter("DB_HOST"), "Missing DB_HOST parameter.");
+        String dbName = checkNotNull(context.getInitParameter("DB_NAME"), "Missing DB_NAME parameter.");
+        String dbUser = Functions.ifNull(context.getInitParameter("DB_USER"), "");
+        String dbPasswd = Functions.ifNull(context.getInitParameter("DB_PASSWD"), "");
 
-        Injector injector = Guice.createInjector(new GuiceModule(context, dbUrl, dbUser, dbPasswd));
+        Injector injector = Guice.createInjector(new GuiceModule(context, dbHost, dbName, dbUser, dbPasswd));
         Stapler.setRoot(sce, injector.getInstance(Masserr.class));
     }
 

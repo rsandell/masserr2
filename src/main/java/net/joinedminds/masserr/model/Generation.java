@@ -24,22 +24,23 @@
 
 package net.joinedminds.masserr.model;
 
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import java.io.Serializable;
+import com.github.jmkgreen.morphia.annotations.Entity;
+import com.github.jmkgreen.morphia.annotations.Id;
 
 /**
  * Description
- *
- * 
+ * <p/>
+ * <p/>
  * Created: 2004-jan-10 01:27:51
+ *
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"generation"}))
+@Entity
 public class Generation implements Identifiable {
+    @Id
     private int generation;
-	private int bloodPool;
-	private int spendBlood;
+    private int bloodPool;
+    private int spendBlood;
     private int abilitiesMax;
     private int disciplinesMax;
     private int traitsMax;
@@ -49,85 +50,85 @@ public class Generation implements Identifiable {
     private boolean ghoulLevel;
 
     public Generation() {
-	}
+    }
 
-	public Generation(int pGeneration, int pBloodPool, int pSpendBlood, int pAbilitiesMax, int pDisciplinesMax, int pTraitsMax, int pWillpowerStart, int pWillpowerMax, int pHumanBlood, boolean ghoulLevel) {
-		generation = pGeneration;
-		bloodPool = pBloodPool;
-		spendBlood = pSpendBlood;
-		abilitiesMax = pAbilitiesMax;
-		disciplinesMax = pDisciplinesMax;
-		traitsMax = pTraitsMax;
-		willpowerStart = pWillpowerStart;
-		willpowerMax = pWillpowerMax;
+    public Generation(int pGeneration, int pBloodPool, int pSpendBlood, int pAbilitiesMax, int pDisciplinesMax, int pTraitsMax, int pWillpowerStart, int pWillpowerMax, int pHumanBlood, boolean ghoulLevel) {
+        generation = pGeneration;
+        bloodPool = pBloodPool;
+        spendBlood = pSpendBlood;
+        abilitiesMax = pAbilitiesMax;
+        disciplinesMax = pDisciplinesMax;
+        traitsMax = pTraitsMax;
+        willpowerStart = pWillpowerStart;
+        willpowerMax = pWillpowerMax;
         humanBlood = pHumanBlood;
         this.ghoulLevel = ghoulLevel;
     }
 
-	public int getGeneration() {
-		return generation;
-	}
+    public int getGeneration() {
+        return generation;
+    }
 
-	public int getBloodPool() {
-		return bloodPool;
-	}
+    public int getBloodPool() {
+        return bloodPool;
+    }
 
-	public int getSpendBlood() {
-		return spendBlood;
-	}
+    public int getSpendBlood() {
+        return spendBlood;
+    }
 
-	public int getAbilitiesMax() {
-		return abilitiesMax;
-	}
+    public int getAbilitiesMax() {
+        return abilitiesMax;
+    }
 
-	public int getDisciplinesMax() {
-		return disciplinesMax;
-	}
+    public int getDisciplinesMax() {
+        return disciplinesMax;
+    }
 
-	public int getTraitsMax() {
-		return traitsMax;
-	}
+    public int getTraitsMax() {
+        return traitsMax;
+    }
 
-	public int getWillpowerStart() {
-		return willpowerStart;
-	}
+    public int getWillpowerStart() {
+        return willpowerStart;
+    }
 
-	public int getWillpowerMax() {
-		return willpowerMax;
-	}
+    public int getWillpowerMax() {
+        return willpowerMax;
+    }
 
 
-	public void setGeneration(int pGeneration) {
-		generation = pGeneration;
-	}
+    public void setGeneration(int pGeneration) {
+        generation = pGeneration;
+    }
 
-	public void setBloodPool(int pBloodPool) {
-		bloodPool = pBloodPool;
-	}
+    public void setBloodPool(int pBloodPool) {
+        bloodPool = pBloodPool;
+    }
 
-	public void setSpendBlood(int pSpendBlood) {
-		spendBlood = pSpendBlood;
-	}
+    public void setSpendBlood(int pSpendBlood) {
+        spendBlood = pSpendBlood;
+    }
 
-	public void setAbilitiesMax(int pAbilitiesMax) {
-		abilitiesMax = pAbilitiesMax;
-	}
+    public void setAbilitiesMax(int pAbilitiesMax) {
+        abilitiesMax = pAbilitiesMax;
+    }
 
-	public void setDisciplinesMax(int pDisciplinesMax) {
-		disciplinesMax = pDisciplinesMax;
-	}
+    public void setDisciplinesMax(int pDisciplinesMax) {
+        disciplinesMax = pDisciplinesMax;
+    }
 
-	public void setTraitsMax(int pTraitsMax) {
-		traitsMax = pTraitsMax;
-	}
+    public void setTraitsMax(int pTraitsMax) {
+        traitsMax = pTraitsMax;
+    }
 
-	public void setWillpowerStart(int pWillpowerStart) {
-		willpowerStart = pWillpowerStart;
-	}
+    public void setWillpowerStart(int pWillpowerStart) {
+        willpowerStart = pWillpowerStart;
+    }
 
-	public void setWillpowerMax(int pWillpowerMax) {
-		willpowerMax = pWillpowerMax;
-	}
+    public void setWillpowerMax(int pWillpowerMax) {
+        willpowerMax = pWillpowerMax;
+    }
 
     public int getHumanBlood() {
         return humanBlood;
@@ -146,8 +147,8 @@ public class Generation implements Identifiable {
     }
 
     public String toString() {
-		return String.valueOf(getGeneration());
-	}
+        return String.valueOf(getGeneration());
+    }
 
     /**
      * The generation actually.

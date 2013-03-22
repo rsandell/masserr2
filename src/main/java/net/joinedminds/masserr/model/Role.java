@@ -25,9 +25,11 @@
 package net.joinedminds.masserr.model;
 
 
+import com.github.jmkgreen.morphia.annotations.*;
 import com.google.common.collect.ImmutableList;
+import net.joinedminds.masserr.Functions;
+import org.bson.types.ObjectId;
 
-import javax.persistence.Id;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -41,15 +43,21 @@ import static java.util.Collections.emptyList;
  *
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
+@Entity
 public class Role implements NamedIdentifiable {
     public static final int GHOUL_GENERATION = 17;
 
     @Id
-    private String id;
+    private ObjectId objectId;
     private String name;
+    @Reference
     private Generation generation;
+    @Indexed
+    @Reference
     private Role sire;
     private Date embraced;
+    @Indexed
+    @Reference
     private Clan clan;
     private String nature;
     private String demeanor;
@@ -64,37 +72,60 @@ public class Role implements NamedIdentifiable {
     private int mental;
     private int extraHealthLevels;
     private boolean sufferesOfInjury;
+    @Embedded
     private List<DottedType<Discipline>> disciplines;
+    @Embedded
     private List<DottedType<Path>> thaumaturgicalPaths;
+    @Embedded
     private List<DottedType<Path>> necromancyPaths;
     //private List mNecromanticRituals;
+    @Embedded
     private List<DottedType<Ability>> physicalAbilities;
+    @Embedded
     private List<DottedType<Ability>> socialAbilities;
+    @Embedded
     private List<DottedType<Ability>> mentalAbilities;
+    @Embedded
+    private List<DottedType<OtherTrait>> otherTraits;
+    @Reference
     private List<MeritOrFlaw> merits;
+    @Reference
     private List<MeritOrFlaw> flaws;
     private List<String> derangements;
-    private List<DottedType<OtherTrait>> otherTraits;
+    @Indexed
     private boolean ghoul = false;
     private int extraMonthlyIncome;
+    @Reference
     private List<Profession> professions;
+    @Reference
     private List<Resource> resources;
+    @Reference
     private List<BankAccount> bankAccounts;
+    @Embedded
     private List<DottedType<Influence>> influences;
     private int experience;
     private Vitals vitals;
+    @Indexed
+    @Reference
     private Domain domain;
+    @Reference
     private List<Ritual> rituals;
     private String selfControlOrInstinct = "Self-Control";
     private String conscienceOrConviction = "Conciense";
     private String thaumaType = "";
     private String necromancyType = "";
+    @Reference
     private List<Plot> plots;
     private String quote;
+    @Indexed
     private boolean npc = false;
     private List<String> beastTraits;
+    @Reference
     private FightOrFlight fightForm;
+    @Reference
     private FightOrFlight flightForm;
+    @Indexed
+    @Reference
     private Player player = null;
 
     public Role() {
@@ -261,7 +292,7 @@ public class Role implements NamedIdentifiable {
 
     @Override
     public String getId() {
-        return id;
+        return Functions.toString(objectId);
     }
 
     @Override
@@ -276,8 +307,7 @@ public class Role implements NamedIdentifiable {
     public String getPlayerName() {
         if (player != null) {
             return player.getName();
-        }
-        else {
+        } else {
             return "";
         }
     }
@@ -310,8 +340,7 @@ public class Role implements NamedIdentifiable {
         if (embraced != null) {
             DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT);
             return format.format(embraced);
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -734,13 +763,13 @@ public class Role implements NamedIdentifiable {
      * else 0 is returned
      *
      * @return the Experience for the Role or the Player
-     * AppPreferences#getReadXPFrom()
+     *         AppPreferences#getReadXPFrom()
      * @see #getPlayer()
      * @see Player
      */
     public int getExperience() {
         //if (AppPreferences.getReadXPFrom() == AppPreferences.XP_ROLE) {
-            return experience;
+        return experience;
         //}
         //else if (player != null) {
         //    return player.getXP();
