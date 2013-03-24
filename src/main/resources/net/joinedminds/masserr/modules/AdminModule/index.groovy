@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package net.joinedminds.masserr.modules.AdminModule
 
 import net.joinedminds.masserr.Masserr
 import net.joinedminds.masserr.modules.AdminModule

@@ -1,8 +1,3 @@
-import net.joinedminds.masserr.Functions
-import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.Role
-import net.joinedminds.masserr.modules.RolesModule
-
 /*
  * The MIT License
  *
@@ -26,6 +21,13 @@ import net.joinedminds.masserr.modules.RolesModule
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package net.joinedminds.masserr.modules.RolesModule
+
+import net.joinedminds.masserr.Functions
+import net.joinedminds.masserr.Masserr
+import net.joinedminds.masserr.model.Role
+import net.joinedminds.masserr.modules.RolesModule
+
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
