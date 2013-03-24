@@ -22,10 +22,15 @@
  * THE SOFTWARE.
  */
 
+/**
+ * template for select option
+ */
 var t_option = _.template("<option value='{{ id }}'>{{ name }}</option>");
 
+/**
+ * Updates the sires select when the clan is changed.
+ */
 $("#clanSelect").change(function sireUpdate(event) {
-
     var clanId = $("#clanSelect").val();
     var sire = $("#sireSelect").val();
     if(clanId != null && (sire == "" || sire == null)) {
@@ -43,22 +48,33 @@ $("#clanSelect").change(function sireUpdate(event) {
     }
 });
 
+/**
+ * Adjust the width of combined select and button inputs.
+ */
 $(document).ready(function() {
     var clanWidth = $("#clanSelect").width();
     var sireBtnWidth = $("#newSireBtn").width();
     $("#sireSelect").width(clanWidth - sireBtnWidth - 12);
 });
 
+/**
+ * When save on new quick role dialog has been successful.
+ */
 qrPostSaveHook = function(role) {
     $("#sireSelect").prepend(t_option(role));
     $("#sireSelect").val(role.id);
 }
 
-
+/**
+ * Handler for the tabs
+ */
 $('#roleTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
-})
+});
 
+/**
+ * Left side stats popover.
+ */
 $('#roleTabContent').popover({placement: 'left', html: true, title: 'Stats', container: 'body', trigger: 'manual', content: $('#statsContent').html()});
 $('#roleTabContent').popover('show');
