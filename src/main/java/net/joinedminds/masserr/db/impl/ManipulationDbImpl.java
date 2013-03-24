@@ -25,8 +25,10 @@
 package net.joinedminds.masserr.db.impl;
 
 import com.github.jmkgreen.morphia.Datastore;
+import com.github.jmkgreen.morphia.Key;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.mongodb.DBRef;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.util.RoleClanComparator;
@@ -215,7 +217,8 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
 
     @Override
     public List<Ritual> getRituals(String typeId) {
-        return db.get().find(Ritual.class, "type", new ObjectId(typeId)).order("name").asList();
+        //DBRef ref = db.get().getMapper().keyToRef(new Key<RitualType>(RitualType.class, new ObjectId(typeId)));
+        return db.get().find(Ritual.class, "ritualType", RitualType.idRef(typeId)).order("name").asList();
     }
 
     @Override
@@ -241,6 +244,11 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
         }
         Collections.sort(roles, ROLE_CLAN_COMPARATOR);
         return roles;
+    }
+
+    @Override
+    public List<Role> getRolesOfClan(String clanId) {
+        return db.get().find(Role.class, "clan", Clan.idRef(clanId)).order("name").asList();
     }
 
     @Override

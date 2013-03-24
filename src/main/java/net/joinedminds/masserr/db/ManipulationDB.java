@@ -174,4 +174,6 @@ public interface ManipulationDB extends BasicDB {
     List<Generation> getGenerations(boolean ghoulGenerations);
 
     List<Role> getRoles();
+
+    List<Role> getRolesOfClan(String clanId);
 }

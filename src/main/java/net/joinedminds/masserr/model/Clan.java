@@ -92,4 +92,10 @@ public class Clan implements NamedIdentifiable {
     public void setClanDisciplines(List<Discipline> clanDisciplines) {
         this.clanDisciplines = clanDisciplines;
     }
+
+    public static Clan idRef(String id) {
+        Clan c = new Clan();
+        c.objectId = new ObjectId(id);
+        return c;
+    }
 }

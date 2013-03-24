@@ -1,3 +1,4 @@
+import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
 import net.joinedminds.masserr.model.*
 import net.joinedminds.masserr.modules.RolesModule
@@ -31,6 +32,9 @@ st = namespace("jelly:stapler")
 l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
     Role role = my;
     RolesModule module = Masserr.getInstance().getRoles();
+    Functions f = h;
+    raw(f.bind(module, "module"))
+    st.include(page: "quickRole.groovy", class: RolesModule.class, it: module)
     div(class: "row") {
         div(class: "span1") {
             div(class: "row") {
@@ -67,19 +71,19 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             div(class: "row") {
                                 div(class: "span1", _("Name"))
                                 div(class: "span3") {
-                                    input(type: "text", class: "span3", id: "name")
+                                    input(type: "text", class: "span3", name: "name", required: "true", placeholder: _("Name"))
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Player"))
                                 div(class: "span3") {
-                                    input(class: "span3", type: "text", id: "player")
+                                    input(class: "span3", type: "text", name: "player")
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Generation"))
                                 div(class: "span3") {
-                                    select(class: "span3", id: "generation", name: "generation") {
+                                    select(class: "span3", id: "generationSelect", name: "generation") {
                                         module.getGenerations().each { Generation gen ->
                                             option(value: gen.getId(), gen.getGeneration())
                                         }
@@ -89,13 +93,14 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             div(class: "row") {
                                 div(class: "span1", _("Embraced"))
                                 div(class: "span3") {
-                                    input(type: "text", class: "span3", id: "embraced")
+                                    input(type: "text", class: "span3", name: "embraced",
+                                            required: "true", pattern: "\\d{3,4}(-\\d{2}(-\\d{2}){0,1}){0,1}")
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Clan"))
                                 div(class: "span3") {
-                                    select(id: "clan", class: "span3") {
+                                    select(name: "clan", class: "span3", id: "clanSelect") {
                                         module.getClans().each { Clan clan ->
                                             option(value: clan.getId(), clan.getName())
                                         }
@@ -104,29 +109,36 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Sire"))
-                                div(class: "span3") {
-                                    input(type: "text", id: "sire", class: "span3")
+                                div(class: "span3 input-append") {
+                                    select(id: "sireSelect", name: "sire") {
+                                        option(value: "", "")
+                                    }
+                                    button(type: "button", class: "btn", id: "newSireBtn",
+                                            role: "button", href: "#quickRoleModal", 'data-toggle': "modal",
+                                            style: "padding-left: 6px; padding-right: 6px") {
+                                        i(class: "icon-plus")
+                                    }
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Nature"))
                                 div(class: "span3") {
-                                    input(type: "text", id: "nature", class: "span3")
+                                    input(type: "text", name: "nature", class: "span3")
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Demeanor"))
                                 div(class: "span3") {
-                                    input(type: "text", id: "demeanor", class: "span3")
+                                    input(type: "text", name: "demeanor", class: "span3")
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Path/Road"))
                                 div(class: "span2") {
-                                    input(type: "text", id: "path", class: "span2")
+                                    input(type: "text", name: "path", class: "span2")
                                 }
                                 div(class: "span1") {
-                                    input(type: "number", class: "span1", name: "pathDots", value: 0)
+                                    input(type: "number", class: "span1", name: "pathDots", value: 1, max: 10, min: 1)
                                 }
                             }
                         }
@@ -139,7 +151,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                     module.getClans().get(0).getClanDisciplines().each { Discipline discipline ->
                                         div(class: "row") {
                                             div(class: "span3") {
-                                                select(name: "discipline", class: "span3") {
+                                                select(name: "discipline_name", class: "span3") {
                                                     module.getDisciplines().each { Discipline aD ->
                                                         if (aD.getId() == discipline.getId()) {
                                                             option(value: aD.getId(), selected: "true", aD.getName())
@@ -150,7 +162,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                                 }
                                             }
                                             div(class: "span1") {
-                                                input(type: "number", class: "span1", value: 0)
+                                                input(name: "discipline_dots", type: "number", class: "span1", value: 0, min: 0, max: 9)
                                             }
                                         }
                                     }
@@ -159,10 +171,10 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             div(class: "row") {
                                 div(class: "span1", _("+Health"))
                                 div(class: "span1") {
-                                    input(type: "number", class: "span1", value: 0, name: "healthLevels")
+                                    input(type: "number", class: "span1", value: 0, name: "extraHealthLevels")
                                 }
                                 div(class: "span2") {
-                                    input(type: "checkbox", class: "span1", name: "injury")
+                                    input(type: "checkbox", class: "span1", name: "suffersOfInjury")
                                     span(_("-Injury"))
                                 }
                             }
@@ -172,8 +184,8 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 div(class: "span3") {
                                     select(name: "fightForm", class: "span3") {
                                         option(value: '', '')
-                                        forms.each { FightOrFlight f ->
-                                            option(value: f.getId(), f.getName())
+                                        forms.each { FightOrFlight ff ->
+                                            option(value: ff.getId(), ff.getName())
                                         }
                                     }
                                 }
@@ -183,8 +195,8 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 div(class: "span3") {
                                     select(name: "flightForm", class: "span3") {
                                         option(value: '', '')
-                                        forms.each { FightOrFlight f ->
-                                            option(value: f.getId(), f.getName())
+                                        forms.each { FightOrFlight ff ->
+                                            option(value: ff.getId(), ff.getName())
                                         }
                                     }
                                 }
@@ -192,7 +204,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             div(class: "row") {
                                 div(class: "span1", _("Quote"))
                                 div(class: "span3") {
-                                    input(type: "text", id: "quote", class: "span3")
+                                    input(type: "text", name: "quote", class: "span3")
                                 }
                             }
                         }

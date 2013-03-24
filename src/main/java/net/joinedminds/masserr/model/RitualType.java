@@ -71,6 +71,12 @@ public class RitualType implements NamedIdentifiable {
         return name;
     }
 
+    public static RitualType idRef(String id) {
+        RitualType t = new RitualType();
+        t.objectId = new ObjectId(id);
+        return t;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

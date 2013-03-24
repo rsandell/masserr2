@@ -593,8 +593,11 @@ public class Role implements NamedIdentifiable {
 
     public Set<RitualType> getRitualTypes() {
         Set<RitualType> set = new HashSet<>();
-        for (Ritual ritual : getRituals()) {
-            set.add(ritual.getRitualType());
+        List<Ritual> ritualList = getRituals();
+        if (ritualList != null) {
+            for (Ritual ritual : ritualList) {
+                set.add(ritual.getRitualType());
+            }
         }
         return set;
     }

@@ -29,11 +29,13 @@ import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.ui.NavItem;
+import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,7 +62,7 @@ public class RolesModule implements NavItem {
     }
 
     @JavaScriptMethod
-    public SubmitResponse<String> submitQuickRole(JSONObject jsonRole) {
+    public SubmitResponse<Role> submitQuickRole(JSONObject jsonRole) {
         try {
             Role role = manipulationDB.newRole();
             role.setDomain(manipulationDB.getDomain(jsonRole.getString("domain")));
@@ -81,11 +83,11 @@ public class RolesModule implements NavItem {
             role.setSire(manipulationDB.getRole(jsonRole.getString("sire")));
             role.setNpc(true);
             logger.info("Saving role");
-            manipulationDB.saveRole(role);
-            return new SubmitResponse<>("");
+            role = manipulationDB.saveRole(role);
+            return new SubmitResponse<>(role);
         } catch (Exception e) {
             logger.log(Level.WARNING, "When saving quick role", e);
-            return new SubmitResponse<>("", e.getMessage());
+            return new SubmitResponse<>(null, e.getMessage());
         }
     }
 
@@ -133,6 +135,16 @@ public class RolesModule implements NavItem {
 
     public List<Ability> getAbilities(Ability.Type type) {
         return manipulationDB.getAbilities(type);
+    }
+
+    @JavaScriptMethod
+    public List<NameId> getRolesOfClan(String clanId) {
+        List<NameId> list = new LinkedList<>();
+        List<Role> roles = manipulationDB.getRolesOfClan(clanId);
+        for (Role role : roles) {
+            list.add(new NameId(role.getName(), role.getId()));
+        }
+        return list;
     }
 
     @Override

@@ -22,9 +22,38 @@
  * THE SOFTWARE.
  */
 
-//$(function () {
-//    $('#myTab a:last').tab('show');
-//})
+var t_option = _.template("<option value='{{ id }}'>{{ name }}</option>");
+
+$("#clanSelect").change(function sireUpdate(event) {
+
+    var clanId = $("#clanSelect").val();
+    var sire = $("#sireSelect").val();
+    if(clanId != null && (sire == "" || sire == null)) {
+        module.getRolesOfClan(clanId, function(t) {
+            var sires = t.responseObject();
+            if(sires != null) {
+                $("#sireSelect option").remove();
+                $("#sireSelect").append(t_option({id: '', name: ''}));
+                for(var i = 0; i < sires.length; i++) {
+                    var role = sires[i];
+                    $("#sireSelect").append(t_option(role));
+                }
+            }
+        });
+    }
+});
+
+$(document).ready(function() {
+    var clanWidth = $("#clanSelect").width();
+    var sireBtnWidth = $("#newSireBtn").width();
+    $("#sireSelect").width(clanWidth - sireBtnWidth - 12);
+});
+
+qrPostSaveHook = function(role) {
+    $("#sireSelect").prepend(t_option(role));
+    $("#sireSelect").val(role.id);
+}
+
 
 $('#roleTab a').click(function (e) {
     e.preventDefault();

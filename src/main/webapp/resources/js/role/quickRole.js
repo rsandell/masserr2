@@ -24,6 +24,8 @@
 
 var templateQuickRoleAlert = _.template($("#t_quickRoleModalAlert").html());
 
+var qrPostSaveHook = null;
+
 function getQuickRoleObj() {
     return $("#quickRoleModal :input").serializeObject();
 }
@@ -67,6 +69,9 @@ function saveQuickRole() {
             var resp = t.responseObject();
             if (resp.ok) {
                 $("#quickRoleModal").modal('hide');
+                if (qrPostSaveHook != null && _.isFunction(qrPostSaveHook)) {
+                    qrPostSaveHook(resp.data);
+                }
                 //location.reload(true);
             } else {
                 alert(resp.message);
