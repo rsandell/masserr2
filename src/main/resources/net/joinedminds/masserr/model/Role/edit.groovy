@@ -1,8 +1,3 @@
-import net.joinedminds.masserr.Functions
-import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.*
-import net.joinedminds.masserr.modules.RolesModule
-
 /*
  * The MIT License
  *
@@ -26,6 +21,12 @@ import net.joinedminds.masserr.modules.RolesModule
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import net.joinedminds.masserr.Functions
+import net.joinedminds.masserr.Masserr
+import net.joinedminds.masserr.model.*
+import net.joinedminds.masserr.modules.RolesModule
+
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
@@ -35,6 +36,21 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
     raw(f.bind(module, "module"))
     st.include(page: "quickRole.groovy", class: RolesModule.class, it: module)
+    script(type: "template", id: "t_DisciplinesSelect") {
+        div(class: "row") {
+            div(class: "span3") {
+                select(name: "discipline_name", class: "span3") {
+                    option(value: "", "")
+                    module.getDisciplines().each { Discipline aD ->
+                        option(value: aD.getId(), aD.getName())
+                    }
+                }
+            }
+            div(class: "span1") {
+                input(name: "discipline_dots", type: "number", class: "span1", value: 0, min: 0, max: 9)
+            }
+        }
+    }
     div(class: "row") {
         div(class: "span1") {
             div(class: "row") {
@@ -55,6 +71,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                         div(class: "span4") {
                             div(class: "row") {
                                 div(class: "span1") {
+                                    input(type: "hidden", name: "id", value: "")
                                     p { raw("&nbsp;") }
                                 }
                             }
@@ -94,7 +111,8 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 div(class: "span1", _("Embraced"))
                                 div(class: "span3") {
                                     input(type: "text", class: "span3", name: "embraced",
-                                            required: "true", pattern: "\\d{3,4}(-\\d{2}(-\\d{2}){0,1}){0,1}")
+                                            required: "true", pattern: "\\d{3,4}(-\\d{2}(-\\d{2}){0,1}){0,1}",
+                                    placeholder: "YYYY[-MM[-DD]]")
                                 }
                             }
                             div(class: "row") {
@@ -144,16 +162,30 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                         }
                         div(class: "span6") {
                             div(class: "row") {
-                                div(class: "span4 msr-region-bordered", regionlabel: _("Disciplines")) {
+                                div(class: "span4 msr-region-bordered", id: "disciplinesDiv", regionlabel: _("Disciplines")) {
                                     button(class: "btn btn-mini region-btn", onclick: "addDiscipline()") {
                                         i(class: "icon-plus")
                                     }
-                                    module.getClans().get(0).getClanDisciplines().each { Discipline discipline ->
+                                    List<DottedType<Discipline>> myDisciplines = role.getDisciplines()
+                                    if (myDisciplines == null || myDisciplines.isEmpty()) {
+                                        List<Discipline> clanDisciplines = null;
+                                        if(role.getClan() != null) {
+                                            clanDisciplines = role.getClan().getClanDisciplines()
+                                        } else {
+                                            clanDisciplines = module.getClans().get(0).getClanDisciplines()
+                                        }
+                                        myDisciplines = new LinkedList<>();
+                                        clanDisciplines.each { Discipline aD ->
+                                            myDisciplines.add(new DottedType<Discipline>(aD, 0))
+                                        }
+                                    }
+
+                                    myDisciplines.each { DottedType<Discipline> discipline ->
                                         div(class: "row") {
                                             div(class: "span3") {
                                                 select(name: "discipline_name", class: "span3") {
                                                     module.getDisciplines().each { Discipline aD ->
-                                                        if (aD.getId() == discipline.getId()) {
+                                                        if (aD.getId() == discipline.getType().getId()) {
                                                             option(value: aD.getId(), selected: "true", aD.getName())
                                                         } else {
                                                             option(value: aD.getId(), aD.getName())
@@ -162,7 +194,8 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                                 }
                                             }
                                             div(class: "span1") {
-                                                input(name: "discipline_dots", type: "number", class: "span1", value: 0, min: 0, max: 9)
+                                                input(name: "discipline_dots", type: "number", class: "span1",
+                                                        value: discipline.getDots(), min: 0, max: 9)
                                             }
                                         }
                                     }

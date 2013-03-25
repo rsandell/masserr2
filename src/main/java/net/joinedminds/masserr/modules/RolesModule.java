@@ -35,6 +35,7 @@ import net.sf.json.JSONObject;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -135,6 +136,16 @@ public class RolesModule implements NavItem {
 
     public List<Ability> getAbilities(Ability.Type type) {
         return manipulationDB.getAbilities(type);
+    }
+
+    @JavaScriptMethod
+    public List<Discipline> getClanDisciplines(String clanId) {
+        Clan clan = manipulationDB.getClan(clanId);
+        if (clan != null) {
+            return clan.getClanDisciplines();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @JavaScriptMethod

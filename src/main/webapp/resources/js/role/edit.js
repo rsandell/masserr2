@@ -26,6 +26,11 @@
  * template for select option
  */
 var t_option = _.template("<option value='{{ id }}'>{{ name }}</option>");
+var t_disciplinesSelect = _.template($("#t_DisciplinesSelect").html())
+
+function addDiscipline() {
+    $("#disciplinesDiv").append(t_disciplinesSelect());
+}
 
 /**
  * Updates the sires select when the clan is changed.
@@ -45,6 +50,24 @@ $("#clanSelect").change(function sireUpdate(event) {
                 }
             }
         });
+    }
+    //Update Disciplines
+    if(clanId != null) {
+        var dotsSum = 0;
+        $("#disciplinesDiv input[name='discipline_dots']").each(function(index) {
+            dotsSum = dotsSum + Number($(this).val());
+        });
+        if (dotsSum <= 0) {
+            module.getClanDisciplines(clanId, function(t) {
+                var list = t.responseObject();
+                $("#disciplinesDiv .row").remove();
+                var theDiv = $("#disciplinesDiv");
+                for (var i = 0; i < list.length; i++) {
+                    theDiv.append(t_disciplinesSelect());
+                    $("#disciplinesDiv select[name='discipline_name']:last").val(list[i].id);
+                }
+            });
+        }
     }
 });
 

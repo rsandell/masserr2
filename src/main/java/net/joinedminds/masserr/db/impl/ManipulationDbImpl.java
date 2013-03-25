@@ -167,7 +167,11 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
 
     @Override
     public Clan getClan(String id) {
-        return get(Clan.class, id);
+        if (id != null && !id.isEmpty()) {
+            return get(Clan.class, id);
+        } else {
+            return null;
+        }
     }
 
     @Override
