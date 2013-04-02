@@ -26,13 +26,12 @@ package net.joinedminds.masserr.modules;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.Messages;
+import net.joinedminds.masserr.dataimport.Wiki;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
-import net.joinedminds.masserr.model.Ability;
-import net.joinedminds.masserr.model.Discipline;
-import net.joinedminds.masserr.model.OtherTrait;
-import net.joinedminds.masserr.model.Path;
+import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
@@ -43,6 +42,7 @@ import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -102,6 +102,15 @@ public class AdminModule implements NavItem {
             path.setDocUrl(submit.getDocUrl());
             path = manipulationDb.savePath(path);
             return new SubmitResponse<>(new Path(path));
+        } else {
+            return SubmitResponse.idNotFound(id);
+        }
+    }
+
+    @JavaScriptMethod
+    public SubmitResponse<String> deleteDiscipline(String id) {
+        if (manipulationDb.deleteDiscipline(id)) {
+            return new SubmitResponse<>(id, true, "OK");
         } else {
             return SubmitResponse.idNotFound(id);
         }
@@ -189,5 +198,90 @@ public class AdminModule implements NavItem {
         request.bindParameters(config);
         adminDb.saveConfig(config);
         response.sendRedirect2("../");
+    }
+
+    public AdminWiki getWiki() {
+        return wiki;
+    }
+
+    private AdminWiki wiki = new AdminWiki();
+
+    public class AdminWiki extends Wiki {
+        public void doAbilities(StaplerRequest request, StaplerResponse response) throws IOException {
+
+            String text = generateWikiText("Abilities", 2, manipulationDb.getAbilities(), new PostText<Ability>() {
+                @Override
+                public String txt(Ability item, Wiki helper) {
+                    StringBuilder s = new StringBuilder();
+                    s.append(helper.bold("Type: ")).append(item.getType().name());
+                    return s.toString();
+                }
+            });
+            writeResponse(text, response);
+        }
+
+        public void doOtherTraits(StaplerRequest request, StaplerResponse response) throws IOException {
+            response.setContentType("text/plain");
+            String text = generateWikiText("Other Traits", 2, manipulationDb.getOtherTraits(), null);
+            writeResponse(text, response);
+        }
+
+        public void doDisciplines(StaplerRequest request, StaplerResponse response) throws IOException {
+            response.setContentType("text/plain");
+            String text = generateWikiText("Disciplines", 2, manipulationDb.getDisciplines(), new PostText<Discipline>() {
+                @Override
+                public String txt(Discipline item, Wiki helper) {
+                    StringBuilder s = new StringBuilder();
+                    Ability retestAbility = item.getRetestAbility();
+                    if(retestAbility != null) {
+                        s.append(bold("Retest: "));
+                        if(retestAbility.getDocUrl() != null && !retestAbility.getDocUrl().isEmpty()) {
+                            s.append(externalLink(retestAbility.getDocUrl(), retestAbility.getName()));
+                        } else {
+                            s.append(retestAbility.getName());
+                        }
+                        s.append("\n");
+                    }
+                    s.append("====Basic ").append(item.getName()).append("====\n")
+                            .append("=====X=====\n\n")
+                            .append("=====Y=====\n\n")
+                            .append("====Intermediate ").append(item.getName()).append("====\n")
+                            .append("=====X=====\n\n")
+                            .append("=====Y=====\n\n")
+                            .append("====Advanced ").append(item.getName()).append("====\n")
+                            .append("=====X=====\n");
+                    return s.toString();
+                }
+            });
+            writeResponse(text, response);
+        }
+
+        public void doMagicPaths(StaplerRequest request, StaplerResponse response) throws IOException {
+            response.setContentType("text/plain");
+            String text = generateWikiText("Thaumaturgy Paths", 2, manipulationDb.getPaths(Path.Type.Thaumaturgy), null);
+            text += generateWikiText("Necromancy Paths", 2, manipulationDb.getPaths(Path.Type.Necromancy), null);
+            writeResponse(text, response);
+        }
+
+        public void doRituals(StaplerRequest request, StaplerResponse response) throws IOException {
+            response.setContentType("text/plain");
+            List<RitualType> types = manipulationDb.getRitualTypes();
+            StringBuilder s = new StringBuilder();
+            for (RitualType type : types) {
+                s.append(generateWikiText(type.getName(), 2, manipulationDb.getRituals(type.getId()), new PostText<Ritual>() {
+                    @Override
+                    public String txt(Ritual item, Wiki helper) {
+                        StringBuilder ss = new StringBuilder();
+                        ss.append(helper.bold("Level: ")).append(item.getLevel()).append("\n");
+                        if (item.getDescription() != null && !item.getDescription().isEmpty()) {
+                            ss.append("\n").append(helper.italic(item.getDescription())).append("\n");
+                        }
+                        return ss.toString();
+                    }
+                }));
+            }
+            String text = s.toString();
+            writeResponse(text, response);
+        }
     }
 }

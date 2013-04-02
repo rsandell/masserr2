@@ -63,7 +63,7 @@ function makeStaplerProxy(url,crumb,methods) {
                         var t = {};
                         t.responseObject = function() {
                             return data;
-                        }
+                        };
                         callback(t);
                     }
                 }

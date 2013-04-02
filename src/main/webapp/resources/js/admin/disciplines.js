@@ -32,6 +32,19 @@ function newDiscipline() {
     $("#disciplinesTable tr.heading").after(generateForm(newD));
 }
 
+function deleteRow(rowId) {
+    if(confirm("Are you sure?")) {
+        admin.deleteDiscipline(rowId, function(t) {
+            var response = t.responseObject();
+            if(response.ok) {
+                location.reload(true);
+            } else {
+                alert(response.message);
+            }
+        });
+    }
+}
+
 function submitDiscipline(navId) {
     var id = toNavId(navId);
     var formObj = $("tr[discipline~='"+id+"'] :input").serializeObject();

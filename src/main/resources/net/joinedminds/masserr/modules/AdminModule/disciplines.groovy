@@ -83,6 +83,10 @@ l.layout(title: _("Disciplines") + " " + Masserr.getInstance().getAppName()) {
                 a(class: "btn btn-mini", href: "javascript:editRow('{{ navId }}')") {
                     i(class: 'icon-edit')
                 }
+                raw("&nbsp;")
+                a(class: "btn btn-mini btn-danger", href: "javascript:deleteRow('{{ navId }}')") {
+                    i(class: 'icon-remove')
+                }
             }
         }
     }
