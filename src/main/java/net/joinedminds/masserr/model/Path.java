@@ -64,7 +64,7 @@ public class Path implements NamedIdentifiable {
 
     @DataBoundConstructor
     public Path(String id, String name, Type type, String docUrl) {
-        this.objectId = new ObjectId(id);
+        this.objectId = Functions.toObjectId(id);
         this.name = name;
         this.type = type;
         this.docUrl = docUrl;

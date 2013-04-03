@@ -55,7 +55,7 @@ public class Discipline implements NamedIdentifiable {
 
     @DataBoundConstructor
     public Discipline(String id, String name, Ability retestAbility, String docUrl) {
-        this.objectId = new ObjectId(id);
+        this.objectId = Functions.toObjectId(id);
         this.name = name;
         this.retestAbility = retestAbility;
         this.docUrl = docUrl;

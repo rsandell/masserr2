@@ -67,6 +67,11 @@ public class MeritOrFlaw implements NamedIdentifiable {
         this.docUrl = docUrl;
     }
 
+    public MeritOrFlaw(String name, int points) {
+        this.name = name;
+        this.points = points;
+    }
+
     @Override
     public String getId() {
         return Functions.toString(objectId);

@@ -63,7 +63,7 @@ public class OtherTrait implements NamedIdentifiable {
 
     @DataBoundConstructor
     public OtherTrait(String id, String name, String docUrl) {
-        this.objectId = new ObjectId(id);
+        this.objectId = Functions.toObjectId(id);
         this.name = name;
         this.docUrl = docUrl;
     }

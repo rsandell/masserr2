@@ -70,7 +70,7 @@ public class Ability implements NamedIdentifiable {
 
     @DataBoundConstructor
     public Ability(String id, String name, Type type, String docUrl, int baseMonthlyIncome) {
-        this.objectId = new ObjectId(id);
+        this.objectId = Functions.toObjectId(id);
         this.name = name;
         this.type = type;
         this.docUrl = docUrl;
