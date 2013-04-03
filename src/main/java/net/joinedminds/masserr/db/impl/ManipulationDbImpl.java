@@ -263,6 +263,16 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<MeritOrFlaw> getMeritOrFlaws() {
+        return db.get().find(MeritOrFlaw.class).order("type,points,name").asList();
+    }
+
+    @Override
+    public MeritOrFlaw getMeritOrFlaw(String id) {
+        return get(MeritOrFlaw.class, id);
+    }
+
+    @Override
     public Role getRole(String id) {
         if (id == null || id.isEmpty()) {
             return null;

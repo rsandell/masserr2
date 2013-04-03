@@ -28,6 +28,7 @@ import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Id;
 import net.joinedminds.masserr.Functions;
 import org.bson.types.ObjectId;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * Description
@@ -45,16 +46,26 @@ public class MeritOrFlaw implements NamedIdentifiable {
     private String name;
     private Type type;
     private int points;
+    private String docUrl;
 
     public MeritOrFlaw() {
     }
 
-    public MeritOrFlaw(String pName, Type type, int pPoints) {
+    public MeritOrFlaw(String pName, Type type, int pPoints, String docUrl) {
         name = pName;
         this.type = type;
         points = pPoints;
+        this.docUrl = docUrl;
     }
 
+    @DataBoundConstructor
+    public MeritOrFlaw(String id, String name, Type type, int points, String docUrl) {
+        this.objectId = Functions.toObjectId(id);
+        this.name = name;
+        this.type = type;
+        this.points = points;
+        this.docUrl = docUrl;
+    }
 
     @Override
     public String getId() {
@@ -84,6 +95,14 @@ public class MeritOrFlaw implements NamedIdentifiable {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public String getDocUrl() {
+        return docUrl;
+    }
+
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
     }
 
     public String toString() {

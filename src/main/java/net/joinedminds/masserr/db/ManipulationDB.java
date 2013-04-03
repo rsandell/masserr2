@@ -178,4 +178,8 @@ public interface ManipulationDB extends BasicDB {
     List<Role> getRolesOfClan(String clanId);
 
     boolean deleteDiscipline(String id);
+
+    List<MeritOrFlaw> getMeritOrFlaws();
+
+    MeritOrFlaw getMeritOrFlaw(String id);
 }

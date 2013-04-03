@@ -26,6 +26,7 @@ package net.joinedminds.masserr;
 
 import net.joinedminds.masserr.ui.NavItem;
 import org.apache.commons.jelly.JellyContext;
+import org.bson.types.ObjectId;
 import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
@@ -124,6 +125,16 @@ public class Functions {
             }
         }
         return list;
+    }
+
+    public static ObjectId toObjectId(String id) {
+        if(id == null) {
+            return null;
+        } else if(id.startsWith("new")) {
+            return null;
+        } else {
+            return new ObjectId(id);
+        }
     }
 
     public static class Breadcrumb {

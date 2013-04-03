@@ -74,6 +74,11 @@ public class AdminModule implements NavItem {
         return manipulationDb.getAbilities();
     }
 
+    @JavaScriptMethod
+    public List<MeritOrFlaw> getMeritOrFlaws() {
+        return manipulationDb.getMeritOrFlaws();
+    }
+
     public List<OtherTrait> getOtherTraits() {
         return manipulationDb.getOtherTraits();
     }
@@ -166,7 +171,29 @@ public class AdminModule implements NavItem {
         }
     }
 
-    @JavaScriptMethod()
+    @JavaScriptMethod
+    public SubmitResponse<MeritOrFlaw> submitMeritOrFlaw(MeritOrFlaw submit) {
+        String id = submit.getId();
+        MeritOrFlaw mf;
+        if (id == null || id.startsWith("new")) {
+            mf = manipulationDb.newMeritOrFlaw();
+        } else {
+            mf = manipulationDb.getMeritOrFlaw(id);
+        }
+
+        if (mf != null) {
+            mf.setName(submit.getName());
+            mf.setType(submit.getType());
+            mf.setPoints(submit.getPoints());
+            mf.setDocUrl(submit.getDocUrl());
+            mf = manipulationDb.saveMeritOrFlaw(mf);
+            return new SubmitResponse<>(mf);
+        } else {
+            return SubmitResponse.idNotFound(id);
+        }
+    }
+
+    @JavaScriptMethod
     public SubmitResponse<Ability> submitAbility(Ability submit) {
         String id = submit.getId();
         Ability ability;
