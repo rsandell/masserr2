@@ -43,22 +43,16 @@ public class MeritOrFlaw implements NamedIdentifiable {
     @Id
     private ObjectId objectId;
     private String name;
+    private Type type;
     private int points;
-    private String note;
 
     public MeritOrFlaw() {
     }
 
-    public MeritOrFlaw(String pName, int pPoints, String pNote) {
+    public MeritOrFlaw(String pName, Type type, int pPoints) {
         name = pName;
+        this.type = type;
         points = pPoints;
-        note = pNote;
-    }
-
-    public MeritOrFlaw(String pName, int pPoints) {
-        name = pName;
-        points = pPoints;
-        note = "";
     }
 
 
@@ -84,15 +78,37 @@ public class MeritOrFlaw implements NamedIdentifiable {
         points = pPoints;
     }
 
-    public String getNote() {
-        return note;
+    public Type getType() {
+        return type;
     }
 
-    public void setNote(String pNote) {
-        note = pNote;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String toString() {
         return getName() + " (" + getPoints() + ")";
+    }
+
+    public static enum Type {
+        Physical('P'), Social('S'), Mental('M'), Supernatural('U');
+        private char sign;
+
+        Type(char sign) {
+            this.sign = sign;
+        }
+
+        public char getSign() {
+            return sign;
+        }
+
+        public static Type findByChar(char sign) {
+            for (Type t : Type.values()) {
+                if (t.getSign() == sign) {
+                    return t;
+                }
+            }
+            return null;
+        }
     }
 }

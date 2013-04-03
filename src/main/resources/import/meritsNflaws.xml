@@ -1,908 +1,1089 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" generated="2013-02-09T19:49:12">
-<meritsNflaws>
-<id>1</id>
-<name>Acute Sense Hearing</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>2</id>
-<name>Ambidextrous</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>3</id>
-<name>Catlike Balance</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>4</id>
-<name>Eat Food</name>
-<points>0</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>5</id>
-<name>Blush of Health</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>6</id>
-<name>Enchanting Voice</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>7</id>
-<name>Daredevil</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>8</id>
-<name>Efficient Digestion</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>9</id>
-<name>Huge Size</name>
-<points>4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>10</id>
-<name>Hard of Hearing</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>11</id>
-<name>Short</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>12</id>
-<name>Smell of the grave</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>13</id>
-<name>Bad Sight</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>14</id>
-<name>Bad Sight</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>15</id>
-<name>Bad Sight</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>16</id>
-<name>Acute Sense Smell</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>17</id>
-<name>Acute Sense Taste</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>18</id>
-<name>Acute Sense Vision</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>19</id>
-<name>Fourteenth Generation</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>20</id>
-<name>Disfigured</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>21</id>
-<name>One Eye</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>22</id>
-<name>Addiction</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>23</id>
-<name>Child</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>24</id>
-<name>Deformity</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>25</id>
-<name>Infections Bite</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>26</id>
-<name>Lame</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>27</id>
-<name>Monstrous</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>28</id>
-<name>Permanent Wound</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>29</id>
-<name>Slow Healing</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>30</id>
-<name>Deaf</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>31</id>
-<name>Disease Carrier</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>32</id>
-<name>Mute</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>33</id>
-<name>Thin Blood</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>34</id>
-<name>Flesh of the Corpse</name>
-<points>-5</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>35</id>
-<name>Blind</name>
-<points>-6</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>36</id>
-<name>Common Sense</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>37</id>
-<name>Concentration</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>38</id>
-<name>Time Sense</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>39</id>
-<name>Code of Honor</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>40</id>
-<name>Eidetic Memory</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>41</id>
-<name>Light Sleeper</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>42</id>
-<name>Natural Linguist</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>43</id>
-<name>Calm Heart</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>44</id>
-<name>Iron Will</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>45</id>
-<name>Deep Sleeper</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>46</id>
-<name>Nightmares</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>47</id>
-<name>Prey Exclusion</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>48</id>
-<name>Shy</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>49</id>
-<name>Soft Hearted</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>50</id>
-<name>Speech Impediment</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>51</id>
-<name>Amnesia</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>52</id>
-<name>Lunacy</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>53</id>
-<name>Phobia</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>54</id>
-<name>Short Fuse</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>55</id>
-<name>Territorial</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>56</id>
-<name>Vengeful</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>57</id>
-<name>Weak Willed</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>58</id>
-<name>Conspicuous Consumption</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>59</id>
-<name>Natural Leader</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>60</id>
-<name>Prestigious Sire</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>61</id>
-<name>Depth of Gratitude</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>62</id>
-<name>Depth of Gratitude</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>63</id>
-<name>Depth of Gratitude</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>64</id>
-<name>Enemy</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>65</id>
-<name>Enemy</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>66</id>
-<name>Enemy</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>67</id>
-<name>Enemy</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>68</id>
-<name>Enemy</name>
-<points>-5</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>69</id>
-<name>Dark Secret</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>70</id>
-<name>Infamous Sire</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>71</id>
-<name>Mistaken Identity</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>72</id>
-<name>Sire&apos;s Resentment</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>73</id>
-<name>Hunted</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>74</id>
-<name>Probationary Sect Member</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>75</id>
-<name>Magic Resistance</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>76</id>
-<name>Medium</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>77</id>
-<name>Lucky</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>78</id>
-<name>Oracular Ability</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>79</id>
-<name>Spirit Mentor</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>80</id>
-<name>Unbondable</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>81</id>
-<name>True Love</name>
-<points>4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>82</id>
-<name>Nine Lives</name>
-<points>6</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>83</id>
-<name>True Faith</name>
-<points>7</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>84</id>
-<name>Cursed</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>85</id>
-<name>Cursed</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>86</id>
-<name>Cursed</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>87</id>
-<name>Cursed</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>88</id>
-<name>Cursed</name>
-<points>-5</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>89</id>
-<name>Cast No Reflection</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>90</id>
-<name>Repulsed By Garlic</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>91</id>
-<name>Touch of Frost</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>92</id>
-<name>Eerie Presence</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>93</id>
-<name>Can&apos;t Cross Running Water</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>94</id>
-<name>Haunted</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>95</id>
-<name>Repelled By Crosses</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>96</id>
-<name>Grip of the Damned</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>97</id>
-<name>Dark Fate</name>
-<points>-5</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>98</id>
-<name>Light-Sensitive</name>
-<points>-5</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>99</id>
-<name>Rarefied Taste</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>100</id>
-<name>Cold Breeze</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>101</id>
-<name>Taint of Corruption</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>102</id>
-<name>Babyface</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>103</id>
-<name>Babemagnet</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>104</id>
-<name>Overconfident</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>105</id>
-<name>Acute Sense Touch</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>106</id>
-<name>Refined Taste</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>107</id>
-<name>Indomitable Soul</name>
-<points>7</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>108</id>
-<name>Multiple Identities</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>109</id>
-<name>Hatred</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>110</id>
-<name>Dislike</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>111</id>
-<name>Color Blindness</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>112</id>
-<name>Bound</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>113</id>
-<name>Bound</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>114</id>
-<name>Bound</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>115</id>
-<name>Loyalty to the Prince</name>
-<points>0</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>116</id>
-<name>Two weapon combo</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>117</id>
-<name>Flamboyant</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>118</id>
-<name>Embraced without the cup</name>
-<points>7</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>119</id>
-<name>Mistaken Identity</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>120</id>
-<name>Friendly Face</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>121</id>
-<name>Deceptive Aura</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>122</id>
-<name>Berserker</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>123</id>
-<name>Holder of Office</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>124</id>
-<name>Magical Item</name>
-<points>4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>126</id>
-<name>Learn other Disciplines</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>127</id>
-<name>Acute Senses</name>
-<points>5</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>128</id>
-<name>Prestigious Domitor</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>129</id>
-<name>Loyalty</name>
-<points>0</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>130</id>
-<name>Fear</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>131</id>
-<name>Lizard Limbs</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>132</id>
-<name>Projectile vomiting</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>133</id>
-<name>Anosmia</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>134</id>
-<name>Blunt Fangs</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>135</id>
-<name>Spirit Guide</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>136</id>
-<name>Intolerance</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>137</id>
-<name>Intolerance</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>138</id>
-<name>Bruiser</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>139</id>
-<name>Dulled Bite</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>140</id>
-<name>Glowing Eyes</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>141</id>
-<name>Permanent Fangs</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>142</id>
-<name>Coldly Logical</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>143</id>
-<name>Thirst for Innocence</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>144</id>
-<name>Guilt-Wracked</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>145</id>
-<name>Bright Aura</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>146</id>
-<name>Healing Touch</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>147</id>
-<name>Inoffensive to Animals</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>148</id>
-<name>Beacon of the Unholy</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>149</id>
-<name>Retractable Claws</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>150</id>
-<name>Deathsight</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>151</id>
-<name>Lord of the Flies</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>152</id>
-<name>Diabolic Aura</name>
-<points>-4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>153</id>
-<name>Absent Minded</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>154</id>
-<name>Graping Maw</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>155</id>
-<name>Parasitic Infestation</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>156</id>
-<name>Normal Sexfunctions</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>157</id>
-<name>Gift of proteus</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>158</id>
-<name>Ruse of the Wolf’s Clothing</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>159</id>
-<name>Vulnerability to silver</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>160</id>
-<name>Piscine</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>161</id>
-<name>Lizard Limbs</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>162</id>
-<name>Sleep Unseen</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>163</id>
-<name>False Reflection</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>164</id>
-<name>Infectious</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>165</id>
-<name>Regenerative Blood</name>
-<points>6</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>166</id>
-<name>Necrophilia</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>167</id>
-<name>Secret Frendship</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>168</id>
-<name>Obvious Predator</name>
-<points>-3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>169</id>
-<name>Overprotective</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>170</id>
-<name>Selective Digestion</name>
-<points>-2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>171</id>
-<name>Tough Hide</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>172</id>
-<name>Clan Sight</name>
-<points>4</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>173</id>
-<name>Gaping Maw</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>174</id>
-<name>Sight of Malkav</name>
-<points>3</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>175</id>
-<name>Disembodied Mentor</name>
-<points>5</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>176</id>
-<name>Dislike</name>
-<points>-1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>177</id>
-<name>Benevolent Blood</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>178</id>
-<name>Oversized Fangs</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>179</id>
-<name>Kinfolk</name>
-<points>2</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>180</id>
-<name>Imaculate Aura</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>181</id>
-<name>Reputation</name>
-<points>1</points>
-</meritsNflaws>
-<meritsNflaws>
-<id>182</id>
-<name>Rugged Bad Looks</name>
-<points>5</points>
-</meritsNflaws>
+<dataroot generated="2013-02-09T19:49:12">
+    <meritsNflaws>
+        <id>1</id>
+        <name>Acute Sense Hearing</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>2</id>
+        <name>Ambidextrous</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>3</id>
+        <name>Catlike Balance</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>4</id>
+        <name>Eat Food</name>
+        <points>0</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>5</id>
+        <name>Blush of Health</name>
+        <points>2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>6</id>
+        <name>Enchanting Voice</name>
+        <points>2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>7</id>
+        <name>Daredevil</name>
+        <points>3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>8</id>
+        <name>Efficient Digestion</name>
+        <points>3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>9</id>
+        <name>Huge Size</name>
+        <points>4</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>10</id>
+        <name>Hard of Hearing</name>
+        <points>-1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>11</id>
+        <name>Short</name>
+        <points>-1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>12</id>
+        <name>Smell of the grave</name>
+        <points>-1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>13</id>
+        <name>Bad Sight</name>
+        <points>-1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>14</id>
+        <name>Bad Sight</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>15</id>
+        <name>Bad Sight</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>16</id>
+        <name>Acute Sense Smell</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>17</id>
+        <name>Acute Sense Taste</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>18</id>
+        <name>Acute Sense Vision</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>19</id>
+        <name>Fourteenth Generation</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>20</id>
+        <name>Disfigured</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>21</id>
+        <name>One Eye</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>22</id>
+        <name>Addiction</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>23</id>
+        <name>Child</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>24</id>
+        <name>Deformity</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>25</id>
+        <name>Infections Bite</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>26</id>
+        <name>Lame</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>27</id>
+        <name>Monstrous</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>28</id>
+        <name>Permanent Wound</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>29</id>
+        <name>Slow Healing</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>30</id>
+        <name>Deaf</name>
+        <points>-4</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>31</id>
+        <name>Disease Carrier</name>
+        <points>-4</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>32</id>
+        <name>Mute</name>
+        <points>-4</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>33</id>
+        <name>Thin Blood</name>
+        <points>-4</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>34</id>
+        <name>Flesh of the Corpse</name>
+        <points>-5</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>35</id>
+        <name>Blind</name>
+        <points>-6</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>36</id>
+        <name>Common Sense</name>
+        <points>1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>37</id>
+        <name>Concentration</name>
+        <points>1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>38</id>
+        <name>Time Sense</name>
+        <points>1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>39</id>
+        <name>Code of Honor</name>
+        <points>2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>40</id>
+        <name>Eidetic Memory</name>
+        <points>1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>41</id>
+        <name>Light Sleeper</name>
+        <points>2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>42</id>
+        <name>Natural Linguist</name>
+        <points>2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>43</id>
+        <name>Calm Heart</name>
+        <points>3</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>44</id>
+        <name>Iron Will</name>
+        <points>3</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>45</id>
+        <name>Deep Sleeper</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>46</id>
+        <name>Nightmares</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>47</id>
+        <name>Prey Exclusion</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>48</id>
+        <name>Shy</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>49</id>
+        <name>Soft Hearted</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>50</id>
+        <name>Speech Impediment</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>51</id>
+        <name>Amnesia</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>52</id>
+        <name>Lunacy</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>53</id>
+        <name>Phobia</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>54</id>
+        <name>Short Fuse</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>55</id>
+        <name>Territorial</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>56</id>
+        <name>Vengeful</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>57</id>
+        <name>Weak Willed</name>
+        <points>-3</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>58</id>
+        <name>Conspicuous Consumption</name>
+        <points>-4</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>59</id>
+        <name>Natural Leader</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>60</id>
+        <name>Prestigious Sire</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>61</id>
+        <name>Depth of Gratitude</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>62</id>
+        <name>Depth of Gratitude</name>
+        <points>2</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>63</id>
+        <name>Depth of Gratitude</name>
+        <points>3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>64</id>
+        <name>Enemy</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>65</id>
+        <name>Enemy</name>
+        <points>-2</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>66</id>
+        <name>Enemy</name>
+        <points>-3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>67</id>
+        <name>Enemy</name>
+        <points>-4</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>68</id>
+        <name>Enemy</name>
+        <points>-5</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>69</id>
+        <name>Dark Secret</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>70</id>
+        <name>Infamous Sire</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>71</id>
+        <name>Mistaken Identity</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>72</id>
+        <name>Sire&apos;s Resentment</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>73</id>
+        <name>Hunted</name>
+        <points>-4</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>74</id>
+        <name>Probationary Sect Member</name>
+        <points>-4</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>75</id>
+        <name>Magic Resistance</name>
+        <points>2</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>76</id>
+        <name>Medium</name>
+        <points>2</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>77</id>
+        <name>Lucky</name>
+        <points>3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>78</id>
+        <name>Oracular Ability</name>
+        <points>3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>79</id>
+        <name>Spirit Mentor</name>
+        <points>3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>80</id>
+        <name>Unbondable</name>
+        <points>3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>81</id>
+        <name>True Love</name>
+        <points>4</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>82</id>
+        <name>Nine Lives</name>
+        <points>6</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>83</id>
+        <name>True Faith</name>
+        <points>7</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>84</id>
+        <name>Cursed</name>
+        <points>-1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>85</id>
+        <name>Cursed</name>
+        <points>-2</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>86</id>
+        <name>Cursed</name>
+        <points>-3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>87</id>
+        <name>Cursed</name>
+        <points>-4</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>88</id>
+        <name>Cursed</name>
+        <points>-5</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>89</id>
+        <name>Cast No Reflection</name>
+        <points>-1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>90</id>
+        <name>Repulsed By Garlic</name>
+        <points>-1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>91</id>
+        <name>Touch of Frost</name>
+        <points>-1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>92</id>
+        <name>Eerie Presence</name>
+        <points>-2</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>93</id>
+        <name>Can&apos;t Cross Running Water</name>
+        <points>-3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>94</id>
+        <name>Haunted</name>
+        <points>-3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>95</id>
+        <name>Repelled By Crosses</name>
+        <points>-3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>96</id>
+        <name>Grip of the Damned</name>
+        <points>-4</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>97</id>
+        <name>Dark Fate</name>
+        <points>-5</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>98</id>
+        <name>Light-Sensitive</name>
+        <points>-5</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>99</id>
+        <name>Rarefied Taste</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>100</id>
+        <name>Cold Breeze</name>
+        <points>-1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>101</id>
+        <name>Taint of Corruption</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>102</id>
+        <name>Babyface</name>
+        <points>2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>103</id>
+        <name>Babemagnet</name>
+        <points>3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>104</id>
+        <name>Overconfident</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>105</id>
+        <name>Acute Sense Touch</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>106</id>
+        <name>Refined Taste</name>
+        <points>-2</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>107</id>
+        <name>Indomitable Soul</name>
+        <points>7</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>108</id>
+        <name>Multiple Identities</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>109</id>
+        <name>Hatred</name>
+        <points>-3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>110</id>
+        <name>Dislike</name>
+        <points>-2</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>111</id>
+        <name>Color Blindness</name>
+        <points>-1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>112</id>
+        <name>Bound</name>
+        <points>-1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>113</id>
+        <name>Bound</name>
+        <points>-2</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>114</id>
+        <name>Bound</name>
+        <points>-3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>115</id>
+        <name>Loyalty to the Prince</name>
+        <points>0</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>116</id>
+        <name>Two weapon combo</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>117</id>
+        <name>Flamboyant</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>118</id>
+        <name>Embraced without the cup</name>
+        <points>7</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>119</id>
+        <name>Mistaken Identity</name>
+        <points>-2</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>120</id>
+        <name>Friendly Face</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>121</id>
+        <name>Deceptive Aura</name>
+        <points>3</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>122</id>
+        <name>Berserker</name>
+        <points>3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>123</id>
+        <name>Holder of Office</name>
+        <points>3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>124</id>
+        <name>Magical Item</name>
+        <points>4</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>126</id>
+        <name>Learn other Disciplines</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>127</id>
+        <name>Acute Senses</name>
+        <points>5</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>128</id>
+        <name>Prestigious Domitor</name>
+        <points>2</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>129</id>
+        <name>Loyalty</name>
+        <points>0</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>130</id>
+        <name>Fear</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>131</id>
+        <name>Lizard Limbs</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>132</id>
+        <name>Projectile vomiting</name>
+        <points>2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>133</id>
+        <name>Anosmia</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>134</id>
+        <name>Blunt Fangs</name>
+        <points>-1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>135</id>
+        <name>Spirit Guide</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>136</id>
+        <name>Intolerance</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>137</id>
+        <name>Intolerance</name>
+        <points>-4</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>138</id>
+        <name>Bruiser</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>139</id>
+        <name>Dulled Bite</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>140</id>
+        <name>Glowing Eyes</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>141</id>
+        <name>Permanent Fangs</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>142</id>
+        <name>Coldly Logical</name>
+        <points>1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>143</id>
+        <name>Thirst for Innocence</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>144</id>
+        <name>Guilt-Wracked</name>
+        <points>-4</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>145</id>
+        <name>Bright Aura</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>146</id>
+        <name>Healing Touch</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>147</id>
+        <name>Inoffensive to Animals</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>148</id>
+        <name>Beacon of the Unholy</name>
+        <points>-2</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>149</id>
+        <name>Retractable Claws</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>150</id>
+        <name>Deathsight</name>
+        <points>-2</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>151</id>
+        <name>Lord of the Flies</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>152</id>
+        <name>Diabolic Aura</name>
+        <points>-4</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>153</id>
+        <name>Absent Minded</name>
+        <points>-1</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>154</id>
+        <name>Graping Maw</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>155</id>
+        <name>Parasitic Infestation</name>
+        <points>-1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>156</id>
+        <name>Normal Sexfunctions</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>157</id>
+        <name>Gift of Proteus</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>158</id>
+        <name>Ruse of the Wolf’s Clothing</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>159</id>
+        <name>Vulnerability to silver</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>160</id>
+        <name>Piscine</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>161</id>
+        <name>Lizard Limbs</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>162</id>
+        <name>Sleep Unseen</name>
+        <points>2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>163</id>
+        <name>False Reflection</name>
+        <points>3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>164</id>
+        <name>Infectious</name>
+        <points>-3</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>165</id>
+        <name>Regenerative Blood</name>
+        <points>6</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>166</id>
+        <name>Necrophilia</name>
+        <points>-3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>167</id>
+        <name>Secret Frendship</name>
+        <points>-3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>168</id>
+        <name>Obvious Predator</name>
+        <points>-3</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>169</id>
+        <name>Overprotective</name>
+        <points>-2</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>170</id>
+        <name>Selective Digestion</name>
+        <points>-2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>171</id>
+        <name>Tough Hide</name>
+        <points>2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>172</id>
+        <name>Clan Sight</name>
+        <points>4</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>173</id>
+        <name>Gaping Maw</name>
+        <points>2</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>174</id>
+        <name>Sight of Malkav</name>
+        <points>3</points>
+        <type>M</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>175</id>
+        <name>Disembodied Mentor</name>
+        <points>5</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>176</id>
+        <name>Dislike</name>
+        <points>-1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>177</id>
+        <name>Benevolent Blood</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>178</id>
+        <name>Oversized Fangs</name>
+        <points>1</points>
+        <type>P</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>179</id>
+        <name>Kinfolk</name>
+        <points>2</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>180</id>
+        <name>Imaculate Aura</name>
+        <points>1</points>
+        <type>U</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>181</id>
+        <name>Reputation</name>
+        <points>1</points>
+        <type>S</type>
+    </meritsNflaws>
+    <meritsNflaws>
+        <id>182</id>
+        <name>Rugged Bad Looks</name>
+        <points>5</points>
+        <type>S</type>
+    </meritsNflaws>
 </dataroot>

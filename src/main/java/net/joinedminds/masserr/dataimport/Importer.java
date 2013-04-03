@@ -534,6 +534,12 @@ public class Importer {
                 entity.setPoints(Integer.parseInt(node.getTextContent()));
             }
         });
+        handlers.put("type", new AttributeHandler<MeritOrFlaw>() {
+            @Override
+            public void handle(Node node, MeritOrFlaw entity) {
+                entity.setType(MeritOrFlaw.Type.findByChar(node.getTextContent().charAt(0)));
+            }
+        });
         return handlers;
     }
 
