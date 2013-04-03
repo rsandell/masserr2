@@ -24,9 +24,10 @@
 
 package net.joinedminds.masserr.modules;
 
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.dataimport.Wiki;
 import net.joinedminds.masserr.db.AdminDB;
@@ -34,15 +35,14 @@ import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
+import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
-import net.sf.json.JSONObject;
-import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -136,12 +136,12 @@ public class AdminModule implements NavItem {
             discipline.setDocUrl(submit.getDocUrl());
             if (discipline.getRetestAbility() != null) {
                 if (submit.getRetestAbility() != null &&
-                        !discipline.getRetestAbility().getId().equals(submit.getRetestAbility().getId())){
+                        !discipline.getRetestAbility().getId().equals(submit.getRetestAbility().getId())) {
                     discipline.setRetestAbility(manipulationDb.getAbility(submit.getRetestAbility().getId()));
                 } else if (submit.getRetestAbility() == null || submit.getRetestAbility().getId().isEmpty()) {
                     discipline.setRetestAbility(null);
                 }
-            } else if (submit.getRetestAbility() != null && !submit.getRetestAbility().getId().isEmpty()){
+            } else if (submit.getRetestAbility() != null && !submit.getRetestAbility().getId().isEmpty()) {
                 discipline.setRetestAbility(manipulationDb.getAbility(submit.getRetestAbility().getId()));
             }
             discipline = manipulationDb.saveDiscipline(discipline);
@@ -260,9 +260,9 @@ public class AdminModule implements NavItem {
                 public String txt(Discipline item, Wiki helper) {
                     StringBuilder s = new StringBuilder();
                     Ability retestAbility = item.getRetestAbility();
-                    if(retestAbility != null) {
+                    if (retestAbility != null) {
                         s.append(bold("Retest: "));
-                        if(retestAbility.getDocUrl() != null && !retestAbility.getDocUrl().isEmpty()) {
+                        if (retestAbility.getDocUrl() != null && !retestAbility.getDocUrl().isEmpty()) {
                             s.append(externalLink(retestAbility.getDocUrl(), retestAbility.getName()));
                         } else {
                             s.append(retestAbility.getName());
@@ -309,6 +309,58 @@ public class AdminModule implements NavItem {
             }
             String text = s.toString();
             writeResponse(text, response);
+        }
+
+        public void doMeritsFlaws(StaplerRequest request, StaplerResponse response) throws IOException {
+            StringBuilder s = new StringBuilder();
+            ListMultimap<String, MeritOrFlaw> map;
+            List<NameId> names;
+            for (MeritOrFlaw.Type type : MeritOrFlaw.Type.values()) {
+                s.append(this.heading(2, type.name()));
+                for (MeritOrFlaw.MoF mof : MeritOrFlaw.MoF.values()) {
+                    List<MeritOrFlaw> list;
+                    switch (mof) {
+                        case Merits:
+                        default:
+                            list = manipulationDb.getMerits(type);
+                            break;
+                        case Flaws:
+                            list = manipulationDb.getFlaws(type);
+                            break;
+                    }
+                    map = LinkedListMultimap.create();
+                    names = new LinkedList<>();
+                    for (MeritOrFlaw mf : list) {
+                        map.put(mf.getName(), mf);
+                        if (map.get(mf.getName()).size() == 1) {
+                            names.add(new NameId(mf.getName(), mf.getId()));
+                        }
+                    }
+                    s.append(generateWikiText(mof.name(), 3, names, new MeritOrFlawPostText(map)));
+                }
+            }
+            writeResponse(s.toString(), response);
+        }
+
+        class MeritOrFlawPostText implements PostText<NameId> {
+            ListMultimap<String, MeritOrFlaw> map;
+
+            MeritOrFlawPostText(ListMultimap<String, MeritOrFlaw> map) {
+                this.map = map;
+            }
+
+            @Override
+            public String txt(NameId item, Wiki helper) {
+                StringBuilder mfs = new StringBuilder();
+                List<MeritOrFlaw> ml = map.get(item.getName());
+                if (ml.size() > 1) {
+                    mfs.append(bold(Math.abs(ml.get(0).getPoints()) + "-" + Math.abs(ml.get(ml.size()-1).getPoints())));
+                } else {
+                    mfs.append(bold(String.valueOf(Math.abs(ml.get(0).getPoints()))));
+                }
+                mfs.append(" Points\n\n");
+                return mfs.toString();
+            }
         }
     }
 }

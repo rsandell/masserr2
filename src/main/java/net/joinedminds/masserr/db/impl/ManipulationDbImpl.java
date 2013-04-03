@@ -26,6 +26,7 @@ package net.joinedminds.masserr.db.impl;
 
 import com.github.jmkgreen.morphia.Datastore;
 import com.github.jmkgreen.morphia.Key;
+import com.github.jmkgreen.morphia.query.Query;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.mongodb.DBRef;
@@ -270,6 +271,20 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
     @Override
     public MeritOrFlaw getMeritOrFlaw(String id) {
         return get(MeritOrFlaw.class, id);
+    }
+
+    @Override
+    public List<MeritOrFlaw> getMerits(MeritOrFlaw.Type type) {
+        Query<MeritOrFlaw> q = db.get().find(MeritOrFlaw.class);
+        q.criteria("type").equal(type).and().criteria("points").greaterThanOrEq(0);
+        return q.order("name,points").asList();
+    }
+
+    @Override
+    public List<MeritOrFlaw> getFlaws(MeritOrFlaw.Type type) {
+        Query<MeritOrFlaw> q = db.get().find(MeritOrFlaw.class);
+        q.criteria("type").equal(type).and().criteria("points").lessThan(0);
+        return q.order("name,-points").asList();
     }
 
     @Override

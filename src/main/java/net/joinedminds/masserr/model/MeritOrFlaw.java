@@ -135,4 +135,6 @@ public class MeritOrFlaw implements NamedIdentifiable {
             return null;
         }
     }
+
+    public static enum MoF {Merits, Flaws};
 }

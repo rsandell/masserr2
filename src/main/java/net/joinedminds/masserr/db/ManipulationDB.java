@@ -182,4 +182,8 @@ public interface ManipulationDB extends BasicDB {
     List<MeritOrFlaw> getMeritOrFlaws();
 
     MeritOrFlaw getMeritOrFlaw(String id);
+
+    List<MeritOrFlaw> getMerits(MeritOrFlaw.Type type);
+
+    List<MeritOrFlaw> getFlaws(MeritOrFlaw.Type type);
 }

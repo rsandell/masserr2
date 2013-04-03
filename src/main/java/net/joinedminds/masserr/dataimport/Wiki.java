@@ -74,6 +74,12 @@ public abstract class Wiki {
         return "''" + txt + "''";
     }
 
+    public String heading(int level, String txt) {
+        String p = generateHeadingPrefix(level);
+        StringBuilder s = new StringBuilder(p);
+        return s.append(txt).append(p).append("\n").toString();
+    }
+
     public String internalLink(String topic) {
         return "[[" + topic + "]]";
     }
