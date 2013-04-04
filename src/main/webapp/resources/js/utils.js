@@ -27,24 +27,28 @@ _.templateSettings = {
 };
 
 String.prototype.endsWith = function(suffix) {
+    "use strict";
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
 function toNavId(id) {
-    if (id.indexOf("#") == 0) {
+    "use strict";
+    if (id.indexOf("#") === 0) {
         return id.substring(1);
     }
     return id;
 }
 
 function fromNavId(id) {
+    "use strict";
     return id;
 }
 
 function findById(needleId, haystack) {
+    "use strict";
     var id = fromNavId(needleId);
     for (var i = 0; i < haystack.length; i++) {
-        if (haystack[i].id == id) {
+        if (haystack[i].id === id) {
             return haystack[i];
         }
     }
@@ -52,9 +56,10 @@ function findById(needleId, haystack) {
 }
 
 function replaceByObjectId(newNeedle, haystack) {
+    "use strict";
     var id = fromNavId(newNeedle.id);
     for (var i = 0; i < haystack.length; i++) {
-        if (haystack[i].id == id) {
+        if (haystack[i].id === id) {
             haystack[i] = newNeedle;
             return true;
         }

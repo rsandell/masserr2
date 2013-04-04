@@ -27,15 +27,17 @@ var templateQuickRoleAlert = _.template($("#t_quickRoleModalAlert").html());
 var qrPostSaveHook = null;
 
 function getQuickRoleObj() {
+    "use strict";
     return $("#quickRoleModal :input").serializeObject();
 }
 
 function validateQuickRole(role) {
-    if (role.name == null || role.name.length <= 0) {
+    "use strict";
+    if (role.name === null || role.name.length <= 0) {
         alertQuickRole(quickRoleMsgs.noName.heading, quickRoleMsgs.noName.message);
         return false;
     }
-    if (role.embraced != null && role.embraced.match(/\d{3,4}(-\d{2}(-\d{2}){0,1}){0,1}/g)) {
+    if (role.embraced !== null && role.embraced.match(/\d{3,4}(-\d{2}(-\d{2}){0,1}){0,1}/g)) {
         var parts = role.embraced.split("-");
         if(parts.length > 1) {
             var month = parseInt(parts[1]);
@@ -59,22 +61,24 @@ function validateQuickRole(role) {
 }
 
 function alertQuickRole(errHeading, errMessage) {
+    "use strict";
     $("#quickRoleModal .modal-body").append(templateQuickRoleAlert({heading: errHeading, message: errMessage}));
 }
 
 function saveQuickRole() {
+    "use strict";
     var role = getQuickRoleObj();
     if (validateQuickRole(role)) {
         qrModule.submitQuickRole(role, function(t) {
             var resp = t.responseObject();
             if (resp.ok) {
                 $("#quickRoleModal").modal('hide');
-                if (qrPostSaveHook != null && _.isFunction(qrPostSaveHook)) {
+                if (qrPostSaveHook !== null && _.isFunction(qrPostSaveHook)) {
                     qrPostSaveHook(resp.data);
                 }
                 //location.reload(true);
             } else {
-                alert(resp.message);
+                window.alert(resp.message);
             }
         });
     }

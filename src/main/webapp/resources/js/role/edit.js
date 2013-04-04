@@ -26,9 +26,10 @@
  * template for select option
  */
 var t_option = _.template("<option value='{{ id }}'>{{ name }}</option>");
-var t_disciplinesSelect = _.template($("#t_DisciplinesSelect").html())
+var t_disciplinesSelect = _.template($("#t_DisciplinesSelect").html());
 
 function addDiscipline() {
+    "use strict";
     $("#disciplinesDiv").append(t_disciplinesSelect());
 }
 
@@ -36,15 +37,16 @@ function addDiscipline() {
  * Updates the sires select when the clan is changed.
  */
 $("#clanSelect").change(function sireUpdate(event) {
+    "use strict";
     var clanId = $("#clanSelect").val();
     var sire = $("#sireSelect").val();
-    if(clanId != null && (sire == "" || sire == null)) {
-        module.getRolesOfClan(clanId, function(t) {
+    if (clanId !== null && (sire === "" || sire === null)) {
+        module.getRolesOfClan(clanId, function (t) {
             var sires = t.responseObject();
-            if(sires != null) {
+            if (sires !== null) {
                 $("#sireSelect option").remove();
                 $("#sireSelect").append(t_option({id: '', name: ''}));
-                for(var i = 0; i < sires.length; i++) {
+                for (var i = 0; i < sires.length; i++) {
                     var role = sires[i];
                     $("#sireSelect").append(t_option(role));
                 }
@@ -52,7 +54,7 @@ $("#clanSelect").change(function sireUpdate(event) {
         });
     }
     //Update Disciplines
-    if(clanId != null) {
+    if(clanId !== null) {
         var dotsSum = 0;
         $("#disciplinesDiv input[name='discipline_dots']").each(function(index) {
             dotsSum = dotsSum + Number($(this).val());
@@ -75,6 +77,7 @@ $("#clanSelect").change(function sireUpdate(event) {
  * Adjust the width of combined select and button inputs.
  */
 $(document).ready(function() {
+    "use strict";
     var clanWidth = $("#clanSelect").width();
     var sireBtnWidth = $("#newSireBtn").width();
     $("#sireSelect").width(clanWidth - sireBtnWidth - 12);
@@ -84,14 +87,16 @@ $(document).ready(function() {
  * When save on new quick role dialog has been successful.
  */
 qrPostSaveHook = function(role) {
+    "use strict";
     $("#sireSelect").prepend(t_option(role));
     $("#sireSelect").val(role.id);
-}
+};
 
 /**
  * Handler for the tabs
  */
 $('#roleTab a').click(function (e) {
+    "use strict";
     e.preventDefault();
     $(this).tab('show');
 });
