@@ -56,7 +56,7 @@ $("#clanSelect").change(function sireUpdate(event) {
     //Update Disciplines
     if(clanId !== null) {
         var dotsSum = 0;
-        $("#disciplinesDiv input[name='discipline_dots']").each(function(index) {
+        $("#disciplinesDiv input[name='discipline[][dots]']").each(function(index) {
             dotsSum = dotsSum + Number($(this).val());
         });
         if (dotsSum <= 0) {
@@ -66,7 +66,7 @@ $("#clanSelect").change(function sireUpdate(event) {
                 var theDiv = $("#disciplinesDiv");
                 for (var i = 0; i < list.length; i++) {
                     theDiv.append(t_disciplinesSelect());
-                    $("#disciplinesDiv select[name='discipline_name']:last").val(list[i].id);
+                    $("#disciplinesDiv select[name='discipline[][id]']:last").val(list[i].id);
                 }
             });
         }

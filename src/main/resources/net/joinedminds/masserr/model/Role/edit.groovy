@@ -39,7 +39,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
     script(type: "template", id: "t_DisciplinesSelect") {
         div(class: "row") {
             div(class: "span3") {
-                select(name: "discipline_name", class: "span3") {
+                select(name: "discipline[][id]", class: "span3") {
                     option(value: "", "")
                     module.getDisciplines().each { Discipline aD ->
                         option(value: aD.getId(), aD.getName())
@@ -47,7 +47,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                 }
             }
             div(class: "span1") {
-                input(name: "discipline_dots", type: "number", class: "span1", value: 0, min: 0, max: 9)
+                input(name: "discipline[][dots]", type: "number", class: "span1", value: 0, min: 0, max: 9)
             }
         }
     }
@@ -72,7 +72,10 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             div(class: "row") {
                                 div(class: "span1") {
                                     input(type: "hidden", name: "id", value: "")
-                                    p { raw("&nbsp;") }
+                                    p ( _("NPC") )
+                                }
+                                div(class: "span3") {
+                                    input(type: "checkbox", name: "npc")
                                 }
                             }
                             div(class: "row") {
@@ -153,10 +156,10 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             div(class: "row") {
                                 div(class: "span1", _("Path/Road"))
                                 div(class: "span2") {
-                                    input(type: "text", name: "path", class: "span2")
+                                    input(type: "text", name: "path[name]", class: "span2")
                                 }
                                 div(class: "span1") {
-                                    input(type: "number", class: "span1", name: "pathDots", value: 1, max: 10, min: 1)
+                                    input(type: "number", class: "span1", name: "path[dots]", value: 1, max: 10, min: 1)
                                 }
                             }
                         }
@@ -183,7 +186,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                     myDisciplines.each { DottedType<Discipline> discipline ->
                                         div(class: "row") {
                                             div(class: "span3") {
-                                                select(name: "discipline_name", class: "span3") {
+                                                select(name: "discipline[][id]", class: "span3") {
                                                     module.getDisciplines().each { Discipline aD ->
                                                         if (aD.getId() == discipline.getType().getId()) {
                                                             option(value: aD.getId(), selected: "true", aD.getName())
@@ -194,7 +197,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                                 }
                                             }
                                             div(class: "span1") {
-                                                input(name: "discipline_dots", type: "number", class: "span1",
+                                                input(name: "discipline[][dots]", type: "number", class: "span1",
                                                         value: discipline.getDots(), min: 0, max: 9)
                                             }
                                         }
@@ -238,6 +241,16 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 div(class: "span1", _("Quote"))
                                 div(class: "span3") {
                                     input(type: "text", name: "quote", class: "span3")
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1", _("Status"))
+                                div(class: "span3") {
+                                    select(name: "vitals", class: 'span3') {
+                                        Vitals.values().each { Vitals v ->
+                                            option(value: v.name(), v.toString())
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -467,22 +480,6 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
             }
             script(type: "template", id: "statsContent") {
                 table(class: "table table-condensed") {
-                    tr {
-                        td(_("NPC"))
-                        td {
-                            input(type: "checkbox", name: "npc")
-                        }
-                    }
-                    tr {
-                        td(_("Status"))
-                        td {
-                            select(name: "vitals", class: 'input-small', style: "margin-bottom: 0") {
-                                Vitals.values().each { Vitals v ->
-                                    option(value: v.name(), v.toString())
-                                }
-                            }
-                        }
-                    }
                     tr {
                         td(_("Disciplines"))
                         td(id: "disciplinesStats", raw("&nbsp;"))
