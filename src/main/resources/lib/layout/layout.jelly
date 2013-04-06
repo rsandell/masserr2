@@ -23,12 +23,13 @@
     <x:doctype name="html"/>
     <html>
         <head>
-            <title>${h.appendIfNotNull(title, ' [Play Along]', 'Play Along')}</title>
+            <title>${h.appendIfNotNull(title, ' [Masserr]', 'Masserr')}</title>
             <!--<st:adjunct includes="org.kohsuke.stapler.bind"/>-->
             <st:adjunct includes="org.kohsuke.stapler.underscore"/>
             <st:adjunct includes="org.kohsuke.stapler.jquery"/>
             <st:adjunct includes="org.kohsuke.stapler.bootstrap-responsive"/>
-            <script src="${resURL}/js/jquery.serializeObject.min.js"></script>
+            <script src="${resURL}/js/jQuery/serialize/jquery.serialize-object.compiled.js"></script>
+            <!--<script src="${resURL}/js/jquery.serializeObject.min.js"></script>-->
             <script src="${resURL}/js/utils.js"></script>
             <script src="${resURL}/js/bind.js"></script>
             <!-- Custom if any -->

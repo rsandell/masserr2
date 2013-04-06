@@ -29,7 +29,7 @@ import net.joinedminds.masserr.modules.AdminModule
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
-l.layout(title: _("MasserrAdmin") + " " + Masserr.getInstance().getAppName()) {
+l.layout(title: _("Admin") + " " + Masserr.getInstance().getAppName()) {
     AdminModule module = my
 
     div(class: "row") {
