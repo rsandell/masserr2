@@ -108,36 +108,64 @@ public class Importer {
         importRituals();
         //=======Starting Money=======
         importStarterMoneyRules();
+        importArchetypes();
+    }
+
+    private void importArchetypes() throws IOException, SAXException, ParserConfigurationException {
+        importFromResource(getClass().getResourceAsStream("/import/archetypes.xml"), "Query2", "nature", null, new Creator<Archetype>() {
+                    @Override
+                    public Archetype create() {
+                        return manipulationDB.newArchetype();
+                    }
+                }, new Saver<Archetype>() {
+                    @Override
+                    public Archetype save(Archetype entity) {
+                        return manipulationDB.saveArchetype(entity);
+                    }
+                }, archetypeHandlers()
+        );
+    }
+
+    private Map<String, AttributeHandler<Archetype>> archetypeHandlers() {
+        Map<String, AttributeHandler<Archetype>> map = new HashMap<>();
+        map.put("nature", new AttributeHandler<Archetype>() {
+            @Override
+            public void handle(Node node, Archetype entity) {
+                entity.setName(node.getTextContent());
+            }
+        });
+        return map;
     }
 
     private void importClanDisciplines() throws IOException, SAXException, ParserConfigurationException {
         logger.info("Importing Clan Disciplines");
         if (clans == null) throw new IllegalStateException("Clans must be imported first.");
         mapImportFromResource(getClass().getResourceAsStream("/import/clan_disciplines.xml"), "clan_disciplines", new Mapper<Clan>() {
-            @Override
-            public Clan map(Map<String, String> entity) {
-                String clanId = entity.get("clan_id");
-                String disciplineId = entity.get("discipline_id");
-                Clan c = clans.get(clanId);
-                if (c != null) {
-                    Discipline d = disciplines.get(disciplineId);
-                    if (d != null) {
-                        c.getClanDisciplines().add(d);
-                        return c;
-                    } else {
-                        logger.warning("Could not find discipline with id: " + disciplineId);
+                    @Override
+                    public Clan map(Map<String, String> entity) {
+                        String clanId = entity.get("clan_id");
+                        String disciplineId = entity.get("discipline_id");
+                        Clan c = clans.get(clanId);
+                        if (c != null) {
+                            Discipline d = disciplines.get(disciplineId);
+                            if (d != null) {
+                                c.getClanDisciplines().add(d);
+                                return c;
+                            } else {
+                                logger.warning("Could not find discipline with id: " + disciplineId);
+                            }
+                        } else {
+                            logger.warning("Could not find clan with id: " + clanId);
+                        }
+                        return null;
                     }
-                } else {
-                    logger.warning("Could not find clan with id: " + clanId);
-                }
-                return null;
-            }
-        }, new Saver<Clan>() {
+                }, new Saver<Clan>() {
                     @Override
                     public Clan save(Clan entity) {
                         return manipulationDB.saveClan(entity);
                     }
-                });
+                }
+        );
     }
 
     public void importStarterMoneyRules() throws ParserConfigurationException, IOException, SAXException {
@@ -387,19 +415,19 @@ public class Importer {
         handlers.put("min_age", new AttributeHandler<StarterMoneyRule>() {
             @Override
             public void handle(Node node, StarterMoneyRule entity) {
-                entity.setMinAge(Integer.parseInt(node. getTextContent()));
+                entity.setMinAge(Integer.parseInt(node.getTextContent()));
             }
         });
         handlers.put("max_age", new AttributeHandler<StarterMoneyRule>() {
             @Override
             public void handle(Node node, StarterMoneyRule entity) {
-                entity.setMaxAge(Integer.parseInt(node. getTextContent()));
+                entity.setMaxAge(Integer.parseInt(node.getTextContent()));
             }
         });
         handlers.put("base_money", new AttributeHandler<StarterMoneyRule>() {
             @Override
             public void handle(Node node, StarterMoneyRule entity) {
-                entity.setBaseMoney(Integer.parseInt(node. getTextContent()));
+                entity.setBaseMoney(Integer.parseInt(node.getTextContent()));
             }
         });
         return handlers;
@@ -410,25 +438,25 @@ public class Importer {
         handlers.put("name", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setName(node. getTextContent());
+                entity.setName(node.getTextContent());
             }
         });
         handlers.put("type", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setRitualType(ritualTypes.get(node. getTextContent()));
+                entity.setRitualType(ritualTypes.get(node.getTextContent()));
             }
         });
         handlers.put("level", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setLevel(Integer.parseInt(node. getTextContent()));
+                entity.setLevel(Integer.parseInt(node.getTextContent()));
             }
         });
         handlers.put("description", new AttributeHandler<Ritual>() {
             @Override
             public void handle(Node node, Ritual entity) {
-                entity.setDescription(node. getTextContent());
+                entity.setDescription(node.getTextContent());
             }
         });
         return handlers;
@@ -747,7 +775,7 @@ public class Importer {
 
         NodeList nodes = doc.getElementsByTagName(entityTagName);
         for (int i = 0; i < nodes.getLength(); i++) {
-            Element element = (Element) nodes.item(i);
+            Element element = (Element)nodes.item(i);
             Map<String, String> entityMap = new HashMap<>();
             NodeList childNodes = element.getChildNodes();
             for (int j = 0; j < childNodes.getLength(); j++) {
@@ -774,7 +802,7 @@ public class Importer {
 
         NodeList nodes = doc.getElementsByTagName(entityTagName);
         for (int i = 0; i < nodes.getLength(); i++) {
-            Element element = (Element) nodes.item(i);
+            Element element = (Element)nodes.item(i);
             String key = null;
             T theObject = creator.create();
             NodeList childNodes = element.getChildNodes();

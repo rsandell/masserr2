@@ -162,4 +162,8 @@ public class RolesModule implements NavItem {
     public String getNavDisplay() {
         return Messages.nav_Roles();
     }
+
+    public List<Archetype> getArchetypes() {
+        return manipulationDB.getArchetypes();
+    }
 }

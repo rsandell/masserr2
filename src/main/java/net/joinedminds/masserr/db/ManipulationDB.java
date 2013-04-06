@@ -186,4 +186,10 @@ public interface ManipulationDB extends BasicDB {
     List<MeritOrFlaw> getMerits(MeritOrFlaw.Type type);
 
     List<MeritOrFlaw> getFlaws(MeritOrFlaw.Type type);
+
+    Archetype newArchetype();
+
+    Archetype saveArchetype(Archetype archetype);
+
+    List<Archetype> getArchetypes();
 }

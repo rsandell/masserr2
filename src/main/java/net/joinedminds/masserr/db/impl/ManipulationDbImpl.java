@@ -288,6 +288,21 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
     }
 
     @Override
+    public Archetype newArchetype() {
+        return new Archetype();
+    }
+
+    @Override
+    public Archetype saveArchetype(Archetype archetype) {
+        return save(archetype);
+    }
+
+    @Override
+    public List<Archetype> getArchetypes() {
+        return db.get().find(Archetype.class).order("name").asList();
+    }
+
+    @Override
     public Role getRole(String id) {
         if (id == null || id.isEmpty()) {
             return null;

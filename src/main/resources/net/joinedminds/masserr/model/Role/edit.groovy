@@ -141,16 +141,35 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                     }
                                 }
                             }
+                            List<Archetype> archetypes = module.getArchetypes()
                             div(class: "row") {
                                 div(class: "span1", _("Nature"))
                                 div(class: "span3") {
-                                    input(type: "text", name: "nature", class: "span3")
+                                    select(name: "nature", class: "span3") {
+                                        option(value: "", "")
+                                        archetypes.each {Archetype at ->
+                                            if(my?.getNature()?.getId() == at.getId()) {
+                                                option(value: at.getId(), at.getName(), selected: true)
+                                            } else {
+                                                option(value: at.getId(), at.getName())
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             div(class: "row") {
                                 div(class: "span1", _("Demeanor"))
                                 div(class: "span3") {
-                                    input(type: "text", name: "demeanor", class: "span3")
+                                    select(name: "demeanor", class: "span3") {
+                                        option(value: "", "")
+                                        archetypes.each {Archetype at ->
+                                            if(my?.getDemeanor()?.getId() == at.getId()) {
+                                                option(value: at.getId(), at.getName(), selected: true)
+                                            } else {
+                                                option(value: at.getId(), at.getName())
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             div(class: "row") {

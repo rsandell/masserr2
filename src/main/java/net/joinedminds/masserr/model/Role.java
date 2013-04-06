@@ -59,8 +59,10 @@ public class Role implements NamedIdentifiable {
     @Indexed
     @Reference
     private Clan clan;
-    private String nature;
-    private String demeanor;
+    @Reference
+    private Archetype nature;
+    @Reference
+    private Archetype demeanor;
     private int courage;
     private int conscience;
     private int selfControl;
@@ -147,7 +149,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -179,7 +181,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -212,7 +214,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul, int pExtraMonthlyIncome, String pConcienseORconviction, String pSelfControlORinstinct) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul, int pExtraMonthlyIncome, String pConcienseORconviction, String pSelfControlORinstinct) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -248,7 +250,7 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, String pNature, String pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, String pConcienseORconviction, String pSelfControlORinstinct) {
+    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, String pConcienseORconviction, String pSelfControlORinstinct) {
         name = pName;
         generation = pGeneration;
         sire = pSire;
@@ -357,19 +359,19 @@ public class Role implements NamedIdentifiable {
         clan = pClan;
     }
 
-    public String getNature() {
+    public Archetype getNature() {
         return nature;
     }
 
-    public void setNature(String pNature) {
+    public void setNature(Archetype pNature) {
         nature = pNature;
     }
 
-    public String getDemeanor() {
+    public Archetype getDemeanor() {
         return demeanor;
     }
 
-    public void setDemeanor(String pDemeanor) {
+    public void setDemeanor(Archetype pDemeanor) {
         demeanor = pDemeanor;
     }
 
