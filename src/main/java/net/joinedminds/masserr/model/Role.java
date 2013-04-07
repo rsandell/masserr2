@@ -81,11 +81,11 @@ public class Role implements NamedIdentifiable {
     private List<DottedType<Path>> necromancyPaths;
     //private List mNecromanticRituals;
     @Embedded
-    private List<DottedType<Ability>> physicalAbilities;
+    private List<DottedNotedType<Ability>> physicalAbilities;
     @Embedded
-    private List<DottedType<Ability>> socialAbilities;
+    private List<DottedNotedType<Ability>> socialAbilities;
     @Embedded
-    private List<DottedType<Ability>> mentalAbilities;
+    private List<DottedNotedType<Ability>> mentalAbilities;
     @Embedded
     private List<DottedType<OtherTrait>> otherTraits;
     @Reference
@@ -335,27 +335,27 @@ public class Role implements NamedIdentifiable {
         rituals = pRituals;
     }
 
-    public void setPhysicalAbilities(List<DottedType<Ability>> pAbilities) {
+    public void setPhysicalAbilities(List<DottedNotedType<Ability>> pAbilities) {
         physicalAbilities = pAbilities;
     }
 
-    public List<DottedType<Ability>> getPhysicalAbilities() {
+    public List<DottedNotedType<Ability>> getPhysicalAbilities() {
         return physicalAbilities;
     }
 
-    public List<DottedType<Ability>> getSocialAbilities() {
+    public List<DottedNotedType<Ability>> getSocialAbilities() {
         return socialAbilities;
     }
 
-    public void setSocialAbilities(List<DottedType<Ability>> pSocialAbilities) {
+    public void setSocialAbilities(List<DottedNotedType<Ability>> pSocialAbilities) {
         socialAbilities = pSocialAbilities;
     }
 
-    public List<DottedType<Ability>> getMentalAbilities() {
+    public List<DottedNotedType<Ability>> getMentalAbilities() {
         return mentalAbilities;
     }
 
-    public void setMentalAbilities(List<DottedType<Ability>> pMentalAbilities) {
+    public void setMentalAbilities(List<DottedNotedType<Ability>> pMentalAbilities) {
         mentalAbilities = pMentalAbilities;
     }
 
