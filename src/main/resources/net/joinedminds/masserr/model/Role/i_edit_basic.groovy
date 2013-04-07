@@ -33,6 +33,7 @@ import net.joinedminds.masserr.model.DottedType
 import net.joinedminds.masserr.model.FightOrFlight
 import net.joinedminds.masserr.model.Generation
 import net.joinedminds.masserr.model.Morality
+import net.joinedminds.masserr.model.Player
 import net.joinedminds.masserr.model.Role
 import net.joinedminds.masserr.model.Virtues
 import net.joinedminds.masserr.model.Vitals
@@ -71,8 +72,22 @@ div(class: "row") {
         }
         div(class: "row") {
             div(class: "span1", _("Player"))
-            div(class: "span3") {
-                input(class: "span3", type: "text", name: "player")
+            div(class: "span3 input-append") {
+                select(id: "playerSelect", class: "span3", name: "player") {
+                    option(value: "", "")
+                    module.players.each {Player player ->
+                        if(role.getPlayer()?.id == player.id) {
+                            option(value: player.id, selected: true, player.name)
+                        } else {
+                            option(value: player.id, player.name)
+                        }
+                    }
+                }
+                button(type: "button", class: "btn", id: "newPlayerBtn",
+                        role: "button", href: "#playerModal", 'data-toggle': "modal",
+                        style: "padding-left: 0.5em; padding-right: 0.5em") {
+                    i(class: "icon-plus")
+                }
             }
         }
         div(class: "row") {
@@ -111,7 +126,7 @@ div(class: "row") {
                 }
                 button(type: "button", class: "btn", id: "newSireBtn",
                         role: "button", href: "#quickRoleModal", 'data-toggle': "modal",
-                        style: "padding-left: 6px; padding-right: 6px") {
+                        style: "padding-left: 0.5em; padding-right: 0.5em") {
                     i(class: "icon-plus")
                 }
             }

@@ -64,11 +64,6 @@ div(class: "form-horizontal", id: "playerForm") {
             textarea(id: "inputPlayerAddress", name: "address", placeholder: _(""), rows: 3)
         }
     }
-    div(class: "control-group") {
-        div(class: "controls") {
-            button(class: "btn", _("Save"), onclick: "savePlayer()")
-        }
-    }
 }
 
 

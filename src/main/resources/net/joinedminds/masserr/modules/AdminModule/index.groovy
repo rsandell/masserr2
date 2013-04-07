@@ -73,8 +73,8 @@ l.layout(title: _("Admin") + " " + Masserr.getInstance().getAppName()) {
         }
         div(class: "span3") {
             div(class: "well") {
-                h3(_("Config"))
-                p(_("Change global configuration properties"))
+                a(href: "players") {h3(_("Players"))}
+                p(_("Add and edit your players"))
             }
         }
         div(class: "span3") {

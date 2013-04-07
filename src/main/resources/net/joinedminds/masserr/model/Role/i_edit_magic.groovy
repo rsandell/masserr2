@@ -36,7 +36,39 @@ RolesModule module = Masserr.getInstance().getRoles();
 Functions f = h;
 
 div(class: "row") {
-    div(class: "span5 msr-region-bordered", regionlabel: _("Thaumaturgy Paths")) {
+    List<Path> thaumaPaths = module.getPaths(Path.Type.Thaumaturgy)
+    List<Path> necromancyPaths = module.getPaths(Path.Type.Necromancy)
+    script(type: "template", id: "t_thaumaSelect") {
+        div(class: "row") {
+            div(class: "span4") {
+                select(class: "span4", name: "thaumaturgicalPaths[][id]") {
+                    option(value: "", "")
+                    thaumaPaths.each { Path p ->
+                        option(value: p.id, p.getName())
+                    }
+                }
+            }
+            div(class: "span1") {
+                input(type: "number", class: "span1", min: 0, max: 5, name: "thaumaturgicalPaths[][dots]")
+            }
+        }
+    }
+    script(type: "template", id: "t_necromancySelect") {
+        div(class: "row") {
+            div(class: "span4") {
+                select(class: "span4", name: "necromancyPaths[][id]") {
+                    option(value: "", "")
+                    necromancyPaths.each { Path p ->
+                        option(value: p.id, p.getName())
+                    }
+                }
+            }
+            div(class: "span1") {
+                input(type: "number", class: "span1", min: 0, max: 5, name: "necromancyPaths[][dots]")
+            }
+        }
+    }
+    div(id: "thaumaPathsDiv", class: "span5 msr-region-bordered", regionlabel: _("Thaumaturgy Paths")) {
         button(class: "btn btn-mini region-btn", onclick: "addThaumaPath()") {
             i(class: "icon-plus")
         }
@@ -47,20 +79,20 @@ div(class: "row") {
         }
         div(class: "row") {
             div(class: "span4") {
-                select(class: "span4") {
+                select(class: "span4", name: "thaumaturgicalPaths[][id]") {
                     option(value: "", "")
-                    module.getPaths(Path.Type.Thaumaturgy).each { Path p ->
+                    thaumaPaths.each { Path p ->
                         option(value: p.id, p.getName())
                     }
                 }
             }
             div(class: "span1") {
-                input(type: "number", class: "span1")
+                input(type: "number", class: "span1", min: 0, max: 5, name: "thaumaturgicalPaths[][dots]")
             }
         }
     }
-    div(class: "span5 msr-region-bordered", regionlabel: _("Necromancy Paths")) {
-        button(class: "btn btn-mini region-btn", onclick: "addNectromancyPath()") {
+    div(id: "necromancyPathsDiv", class: "span5 msr-region-bordered", regionlabel: _("Necromancy Paths")) {
+        button(class: "btn btn-mini region-btn", onclick: "addNecromancyPath()") {
             i(class: "icon-plus")
         }
         div(class: "row") {
@@ -70,15 +102,15 @@ div(class: "row") {
         }
         div(class: "row") {
             div(class: "span4") {
-                select(class: "span4") {
+                select(class: "span4", name: "necromancyPaths[][id]") {
                     option(value: "", "")
-                    module.getPaths(Path.Type.Necromancy).each { Path p ->
+                    necromancyPaths.each { Path p ->
                         option(value: p.id, p.getName())
                     }
                 }
             }
             div(class: "span1") {
-                input(type: "number", class: "span1")
+                input(type: "number", class: "span1", min: 0, max: 5, name: "necromancyPaths[][dots]")
             }
         }
     }

@@ -65,6 +65,13 @@ l.layout(title: _("Players") + " " + Masserr.getInstance().getAppName()) {
             div(class: "span10") {
                 //content
                 st.include(class: Player.class, page: "i_playerForm.groovy")
+                div(class: "form-horizontal") {
+                    div(class: "control-group") {
+                        div(class: "controls") {
+                            button(class: "btn btn-primary", onclick: "savePlayer()", _("Save"))
+                        }
+                    }
+                }
             }
         }
     }

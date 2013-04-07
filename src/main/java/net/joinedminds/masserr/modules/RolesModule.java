@@ -53,11 +53,13 @@ public class RolesModule implements NavItem {
 
     private ManipulationDB manipulationDB;
     private AdminDB adminDB;
+    private AdminModule adminModule;
 
     @Inject
-    public RolesModule(ManipulationDB manipulationDB, AdminDB adminDB) {
+    public RolesModule(ManipulationDB manipulationDB, AdminDB adminDB, AdminModule adminModule) {
         this.manipulationDB = manipulationDB;
         this.adminDB = adminDB;
+        this.adminModule = adminModule;
     }
 
     @JavaScriptMethod
@@ -183,5 +185,15 @@ public class RolesModule implements NavItem {
 
     public List<Archetype> getArchetypes() {
         return manipulationDB.getArchetypes();
+    }
+
+    public List<Player> getPlayers() {
+        //TODO list players in the campaigns that the user has access to.
+        return adminDB.getPlayers(adminDB.getCampaigns().get(0));
+    }
+
+    @JavaScriptMethod
+    public SubmitResponse<Player> savePlayer(JSONObject jsonPlayer) {
+        return adminModule.savePlayer(jsonPlayer);
     }
 }

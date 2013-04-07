@@ -27,10 +27,42 @@
  */
 var t_option = _.template("<option value='{{ id }}'>{{ name }}</option>");
 var t_disciplinesSelect = _.template($("#t_DisciplinesSelect").html());
+var t_thaumaSelect = _.template($("#t_thaumaSelect").html());
+var t_necromancySelect = _.template($("#t_necromancySelect").html());
 
 function addDiscipline() {
     "use strict";
     $("#disciplinesDiv").append(t_disciplinesSelect());
+}
+
+function addThaumaPath() {
+    "use strict";
+    $("#thaumaPathsDiv").append(t_thaumaSelect());
+}
+
+function addNecromancyPath() {
+    "use strict";
+    $("#necromancyPathsDiv").append(t_necromancySelect());
+}
+
+function updatePlayers(player) {
+    "use strict";
+    $("#playerSelect").prepend(t_option(player));
+    $("#playerSelect").val(player.id);
+}
+
+function savePlayer() {
+    "use strict";
+    var player = $("#playerForm :input").serializeObject();
+    module.savePlayer(player, function(t) {
+        var res = t.responseObject();
+        if (res.ok) {
+            $("#playerModal").modal('hide');
+            updatePlayers(res.data);
+        } else {
+            window.alert(res.message);
+        }
+    });
 }
 
 /**
@@ -89,7 +121,11 @@ $(document).ready(function() {
     "use strict";
     var clanWidth = $("#clanSelect").width();
     var sireBtnWidth = $("#newSireBtn").width();
-    $("#sireSelect").width(clanWidth - sireBtnWidth - 12);
+    $("#sireSelect").width(clanWidth - sireBtnWidth - 15);
+
+    var playerWidth = $("#playerSelect").width();
+    var playerBtnWidth = $("#newPlayerBtn").width();
+    $("#playerSelect").width(playerWidth - playerBtnWidth - 14);
 });
 
 /**

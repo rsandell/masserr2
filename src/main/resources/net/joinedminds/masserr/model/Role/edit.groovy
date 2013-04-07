@@ -37,6 +37,19 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
     raw(f.bind(module, "module"))
     st.include(page: "quickRole.groovy", class: RolesModule.class, it: module)
+    div(id: "playerModal", class: "modal hide fade", tabindex: "-1", role: "dialog", 'aria-labelledby': "playerModalLabel", 'aria-hidden': "true") {
+        div(class: "modal-header") {
+            button(type: "button", class: "close", 'data-dismiss': "modal", 'aria-hidden': "true", '×')
+            h3(id: "playerModalLabel", _("New Player"))
+        }
+        div(class: "modal-body") {
+            st.include(class: Player.class, page: "i_playerForm.groovy")
+        }
+        div(class: "modal-footer") {
+            button(class: "btn", 'data-dismiss': "modal", 'aria-hidden': "true", _("Close"))
+            button(class: "btn btn-primary", onclick: "savePlayer()", _("Save"))
+        }
+    }
     script(type: "template", id: "t_DisciplinesSelect") {
         div(class: "row") {
             div(class: "span3") {
