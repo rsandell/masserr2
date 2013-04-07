@@ -118,6 +118,11 @@ public class RolesModule implements NavItem {
         return manipulationDB.getMoralityPaths();
     }
 
+    @JavaScriptMethod
+    public Morality getMoralityPath(String id) {
+        return manipulationDB.getMoralityPath(id);
+    }
+
     public List<Clan> getClans() {
         return manipulationDB.getClans();
     }

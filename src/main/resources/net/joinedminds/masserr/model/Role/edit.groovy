@@ -175,7 +175,7 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                             div(class: "row") {
                                 div(class: "span1", _("Morality"))
                                 div(class: "span2") {
-                                    select(name: "morality[type][id]", class: "span2") {
+                                    select(name: "morality[type][id]", id: "moralitySelect", class: "span2") {
                                         module.getMoralityPaths().each {Morality morality ->
                                             if (role.morality?.type?.id == morality.id) {
                                                 option(value: morality.id, selected: true, morality.name)

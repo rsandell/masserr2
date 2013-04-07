@@ -73,6 +73,15 @@ $("#clanSelect").change(function sireUpdate(event) {
     }
 });
 
+$("#moralitySelect").change(function moralityUpdate(event) {
+    "use strict";
+    module.getMoralityPath($("#moralitySelect").val(), function(t) {
+        var res = t.responseObject();
+        $("#adherenceSelect").val(res.adherenceTeachings);
+        $("#resistanceSelect").val(res.resistanceTeachings);
+    });
+});
+
 /**
  * Adjust the width of combined select and button inputs.
  */

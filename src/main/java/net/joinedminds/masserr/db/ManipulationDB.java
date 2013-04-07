@@ -198,4 +198,6 @@ public interface ManipulationDB extends BasicDB {
     Morality saveMorality(Morality morality);
 
     List<Morality> getMoralityPaths();
+
+    Morality getMoralityPath(String id);
 }

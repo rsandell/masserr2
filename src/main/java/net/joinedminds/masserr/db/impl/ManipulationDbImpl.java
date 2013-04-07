@@ -318,6 +318,14 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
     }
 
     @Override
+    public Morality getMoralityPath(String id) {
+        if (id == null) {
+            return null;
+        }
+        return db.get().get(Morality.class, new ObjectId(id));
+    }
+
+    @Override
     public Role getRole(String id) {
         if (id == null || id.isEmpty()) {
             return null;
