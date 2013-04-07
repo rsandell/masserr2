@@ -24,7 +24,9 @@
 
 package net.joinedminds.masserr.db;
 
+import net.joinedminds.masserr.model.Campaign;
 import net.joinedminds.masserr.model.Domain;
+import net.joinedminds.masserr.model.Player;
 import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.model.mgm.User;
 
@@ -58,4 +60,20 @@ public interface AdminDB extends BasicDB {
     void updateDomain(Domain pDomain) throws SQLException, RemoteException;
 
     boolean changePassword(String pCurrentPassword, String pNewPassword) throws SQLException, RemoteException;
+
+    Campaign newCampaign();
+
+    Campaign saveCampaign(Campaign campaign);
+
+    List<Campaign> getCampaigns();
+
+    List<Player> getPlayers(Campaign campaign);
+
+    boolean isPlayerEmailTaken(String email, String exceptPlayerId);
+
+    Player savePlayer(Player player);
+
+    Player getPlayer(String id);
+
+    Player newPlayer();
 }

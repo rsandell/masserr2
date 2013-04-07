@@ -64,6 +64,7 @@ public class Importer {
     private HashMap<String, Generation> generations;
     private HashMap<String, RitualType> ritualTypes;
     private Domain domain;
+    private Campaign campaign;
 
     @Inject
     public Importer(ManipulationDB manipulationDB, CreateRulesDB createRulesDB, InfluenceDB influenceDB,
@@ -79,6 +80,9 @@ public class Importer {
         Domain d = manipulationDB.newDomain();
         d.setName("World");
         domain = manipulationDB.saveDomain(d);
+        Campaign c = adminDB.newCampaign();
+        c.setName("Masserr");
+        campaign = adminDB.saveCampaign(c);
         //======ABILITIES======
         importAbilities();
         //======CREATE RULES======

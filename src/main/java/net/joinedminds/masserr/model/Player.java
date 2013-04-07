@@ -30,6 +30,7 @@ import com.github.jmkgreen.morphia.annotations.Indexed;
 import com.github.jmkgreen.morphia.annotations.Reference;
 import net.joinedminds.masserr.Functions;
 import org.bson.types.ObjectId;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.List;
 
@@ -47,20 +48,13 @@ public class Player implements NamedIdentifiable {
     private String name;
     private String address;
     private String phone;
-    @Indexed
+    @Indexed(unique = true)
     private String email;
+    @Reference
+    private Campaign campaign;
     private int xp;
     @Reference
-    private List<Role> roles;
-    @Reference
     private List<Experience> experienceList;
-
-    public Player(String pName, String pAddress, String pPhone, String pEmail) {
-        name = pName;
-        address = pAddress;
-        phone = pPhone;
-        email = pEmail;
-    }
 
     public Player(String pName) {
         name = pName;
@@ -114,20 +108,20 @@ public class Player implements NamedIdentifiable {
         return name;
     }
 
-    public int getXP() {
+    public int getXp() {
         return xp;
     }
 
-    public void setXP(int pXP) {
+    public void setXp(int pXP) {
         xp = pXP;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public Campaign getCampaign() {
+        return campaign;
     }
 
-    public void setRoles(List<Role> pRoles) {
-        roles = pRoles;
+    public void setCampaign(Campaign campaign) {
+        this.campaign = campaign;
     }
 
     public List<Experience> getExperienceList() {

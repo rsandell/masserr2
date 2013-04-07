@@ -128,7 +128,7 @@ public class Functions {
     }
 
     public static ObjectId toObjectId(String id) {
-        if(id == null) {
+        if(id == null || id.isEmpty()) {
             return null;
         } else if(id.startsWith("new")) {
             return null;

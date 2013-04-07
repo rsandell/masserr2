@@ -37,12 +37,14 @@ import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
+import net.sf.json.JSONObject;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -237,6 +239,64 @@ public class AdminModule implements NavItem {
     }
 
     private AdminWiki wiki = new AdminWiki();
+
+    public List<Campaign> getCampaigns() {
+        return adminDb.getCampaigns();
+    }
+
+    public List<Player> getPlayers(Campaign campaign) {
+        return adminDb.getPlayers(campaign);
+    }
+
+    @JavaScriptMethod
+    public List<Player> getPlayers(String campaignId) {
+        Campaign c = Campaign.idRef(campaignId);
+        if(c != null) {
+            return adminDb.getPlayers(c);
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    @JavaScriptMethod
+    public Player getPlayer(String id) {
+        return adminDb.getPlayer(id);
+    }
+
+    @JavaScriptMethod
+    public SubmitResponse<Player> savePlayer(JSONObject jsonPlayer) {
+        String id = jsonPlayer.optString("id");
+        String name = jsonPlayer.optString("name");
+        if(name == null || name.isEmpty()) {
+            return new SubmitResponse<>(null, false, "No name!");
+        }
+        String email = jsonPlayer.optString("email");
+        if(email == null || email.isEmpty()) {
+            return new SubmitResponse<>(null, false, "No email!");
+        } else {
+
+            if(adminDb.isPlayerEmailTaken(email, id)) {
+                return new SubmitResponse<>(null, false, "Email taken!");
+            }
+        }
+        Player player;
+        if(id != null && !id.isEmpty()) {
+            player = adminDb.getPlayer(id);
+        } else {
+            player = adminDb.newPlayer();
+        }
+        if (player != null) {
+            player.setName(jsonPlayer.getString("name"));
+            player.setAddress(jsonPlayer.getString("address"));
+            player.setCampaign(Campaign.idRef(jsonPlayer.getString("campaign")));
+            player.setEmail(jsonPlayer.getString("email"));
+            player.setPhone(jsonPlayer.getString("phone"));
+            Player saved = adminDb.savePlayer(player);
+            return new SubmitResponse<>(saved);
+        } else {
+            return SubmitResponse.idNotFound(id);
+        }
+    }
 
     public class AdminWiki extends Wiki {
         public void doAbilities(StaplerRequest request, StaplerResponse response) throws IOException {
