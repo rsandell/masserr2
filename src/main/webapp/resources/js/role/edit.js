@@ -29,6 +29,17 @@ var t_option = _.template("<option value='{{ id }}'>{{ name }}</option>");
 var t_disciplinesSelect = _.template($("#t_DisciplinesSelect").html());
 var t_thaumaSelect = _.template($("#t_thaumaSelect").html());
 var t_necromancySelect = _.template($("#t_necromancySelect").html());
+var t_ritualRow = _.template($("#t_ritualRow").html());
+
+function addRitual() {
+    "use strict";
+    var rId = $("#ritualsSelect").val();
+    module.getRitual(rId, function(t){
+        var ritual = t.responseObject();
+        var tr = {id: ritual.id, type: ritual.ritualType.name, name: ritual.name, level: ritual.level};
+        $("#ritualsTable").append(t_ritualRow(tr));
+    });
+}
 
 function addDiscipline() {
     "use strict";
@@ -64,6 +75,18 @@ function savePlayer() {
         }
     });
 }
+
+$("#ritualTypesSelect").change(function(event) {
+    "use strict";
+    var typeId = $("#ritualTypesSelect").val();
+    module.getRituals(typeId, function(t){
+        var list = t.responseObject();
+        $("#ritualsSelect option").remove();
+        _.each(list, function(ritual){
+            $("#ritualsSelect").append(t_option(ritual));
+        });
+    });
+});
 
 /**
  * Updates the sires select when the clan is changed.

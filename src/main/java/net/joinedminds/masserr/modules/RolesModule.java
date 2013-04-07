@@ -154,6 +154,11 @@ public class RolesModule implements NavItem {
         return manipulationDB.getRituals(typeId);
     }
 
+    @JavaScriptMethod
+    public Ritual getRitual(String id) {
+        return manipulationDB.getRitual(id);
+    }
+
     public List<Ability> getAbilities(Ability.Type type) {
         return manipulationDB.getAbilities(type);
     }

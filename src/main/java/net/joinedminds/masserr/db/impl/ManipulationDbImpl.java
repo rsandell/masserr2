@@ -326,6 +326,11 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
     }
 
     @Override
+    public Ritual getRitual(String id) {
+        return get(Ritual.class, id);
+    }
+
+    @Override
     public Role getRole(String id) {
         if (id == null || id.isEmpty()) {
             return null;

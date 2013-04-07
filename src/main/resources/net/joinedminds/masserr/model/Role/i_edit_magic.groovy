@@ -118,8 +118,16 @@ div(class: "row") {
 div(class: "row") {
     div(class: "span10 msr-region-bordered", regionlabel: _("Rituals")) {
         div(class: "row") {
+            script(type: "template", id: "t_ritualRow") {
+                tr {
+                    input(type: "hidden", name: "rituals[]", value: "{{ id }}")
+                    td("{{ type }}")
+                    td("{{ name }}")
+                    td(width: "10%", "{{ level }}")
+                }
+            }
             div(class: "span7") {
-                table(class: "table table-condensed span6") {
+                table(id: "ritualsTable", class: "table table-condensed span6") {
                     tr {
                         td(raw("&nbsp;"))
                         td(raw("&nbsp;"))
@@ -128,10 +136,11 @@ div(class: "row") {
                 }
             }
             div(class: "span3") {
+                List<RitualType> ritualTypes = module.getRitualTypes()
                 div(class: "row") {
                     div(class: "span3") {
                         select(class: "span3", id: "ritualTypesSelect") {
-                            module.getRitualTypes().each { RitualType t ->
+                            ritualTypes.each { RitualType t ->
                                 option(value: t.getId(), t.getName())
                             }
                         }
@@ -140,7 +149,7 @@ div(class: "row") {
                 div(class: "row") {
                     div(class: "span3") {
                         select(class: "span3", id: "ritualsSelect") {
-                            module.getRituals(module.getRitualTypes().get(0).getId()).each { Ritual ritual ->
+                            module.getRituals(ritualTypes.get(0).getId()).each { Ritual ritual ->
                                 option(value: ritual.getId(), ritual.getName())
                             }
                         }
