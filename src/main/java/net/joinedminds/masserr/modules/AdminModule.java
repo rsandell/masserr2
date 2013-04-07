@@ -37,6 +37,7 @@ import net.joinedminds.masserr.model.mgm.Config;
 import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
@@ -224,7 +225,11 @@ public class AdminModule implements NavItem {
         Config config = getConfig();
         request.bindParameters(config);
         adminDb.saveConfig(config);
-        response.sendRedirect2("../");
+        response.sendRedirect2("./");
+    }
+
+    public List<Morality> getMoralityPaths() {
+        return manipulationDb.getMoralityPaths();
     }
 
     public AdminWiki getWiki() {

@@ -192,4 +192,10 @@ public interface ManipulationDB extends BasicDB {
     Archetype saveArchetype(Archetype archetype);
 
     List<Archetype> getArchetypes();
+
+    Morality newMorality();
+
+    Morality saveMorality(Morality morality);
+
+    List<Morality> getMoralityPaths();
 }

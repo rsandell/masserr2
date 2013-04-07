@@ -63,12 +63,11 @@ public class Role implements NamedIdentifiable {
     private Archetype nature;
     @Reference
     private Archetype demeanor;
-    private int courage;
-    private int conscience;
-    private int selfControl;
+    @Embedded
+    private Virtues virtues;
     private int willpower;
-    private int pathDots;
-    private String path;
+    @Embedded
+    private DottedType<Morality> morality;
     private int physical;
     private int social;
     private int mental;
@@ -149,141 +148,6 @@ public class Role implements NamedIdentifiable {
         rituals = new LinkedList<>();
     }
 
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury) {
-        name = pName;
-        generation = pGeneration;
-        sire = pSire;
-        embraced = pEmbraced;
-        clan = pClan;
-        nature = pNature;
-        demeanor = pDemeanor;
-        courage = pCourage;
-        conscience = pConcience;
-        selfControl = pSelfControl;
-        willpower = pWillpower;
-        pathDots = pPathDots;
-        path = pPath;
-        physical = pPhysical;
-        social = pSocial;
-        mental = pMental;
-        extraHealthLevels = pExtraHealthLevels;
-        sufferesOfInjury = pSufferesOfInjury;
-        disciplines = emptyList();
-        thaumaturgicalPaths = emptyList();
-        necromancyPaths = emptyList();
-        physicalAbilities = emptyList();
-        socialAbilities = emptyList();
-        mentalAbilities = emptyList();
-        merits = emptyList();
-        flaws = emptyList();
-        derangements = emptyList();
-        otherTraits = emptyList();
-        rituals = new LinkedList<>();
-    }
-
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul) {
-        name = pName;
-        generation = pGeneration;
-        sire = pSire;
-        embraced = pEmbraced;
-        clan = pClan;
-        nature = pNature;
-        demeanor = pDemeanor;
-        courage = pCourage;
-        conscience = pConcience;
-        selfControl = pSelfControl;
-        willpower = pWillpower;
-        pathDots = pPathDots;
-        path = pPath;
-        physical = pPhysical;
-        social = pSocial;
-        mental = pMental;
-        extraHealthLevels = pExtraHealthLevels;
-        sufferesOfInjury = pSufferesOfInjury;
-        ghoul = pGhoul;
-        disciplines = emptyList();
-        thaumaturgicalPaths = emptyList();
-        necromancyPaths = emptyList();
-        physicalAbilities = emptyList();
-        socialAbilities = emptyList();
-        mentalAbilities = emptyList();
-        merits = emptyList();
-        flaws = emptyList();
-        derangements = emptyList();
-        otherTraits = emptyList();
-        rituals = new LinkedList<>();
-    }
-
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, boolean pGhoul, int pExtraMonthlyIncome, String pConcienseORconviction, String pSelfControlORinstinct) {
-        name = pName;
-        generation = pGeneration;
-        sire = pSire;
-        embraced = pEmbraced;
-        clan = pClan;
-        nature = pNature;
-        demeanor = pDemeanor;
-        courage = pCourage;
-        conscience = pConcience;
-        selfControl = pSelfControl;
-        willpower = pWillpower;
-        pathDots = pPathDots;
-        path = pPath;
-        physical = pPhysical;
-        social = pSocial;
-        mental = pMental;
-        extraHealthLevels = pExtraHealthLevels;
-        sufferesOfInjury = pSufferesOfInjury;
-        ghoul = pGhoul;
-        extraMonthlyIncome = pExtraMonthlyIncome;
-        conscienceOrConviction = pConcienseORconviction;
-        selfControlOrInstinct = pSelfControlORinstinct;
-        disciplines = emptyList();
-        thaumaturgicalPaths = emptyList();
-        necromancyPaths = emptyList();
-        physicalAbilities = emptyList();
-        socialAbilities = emptyList();
-        mentalAbilities = emptyList();
-        merits = emptyList();
-        flaws = emptyList();
-        derangements = emptyList();
-        otherTraits = emptyList();
-        rituals = new LinkedList<>();
-    }
-
-    public Role(String pName, Generation pGeneration, Role pSire, Date pEmbraced, Clan pClan, Archetype pNature, Archetype pDemeanor, int pCourage, int pConcience, int pSelfControl, int pWillpower, int pPathDots, String pPath, int pPhysical, int pSocial, int pMental, int pExtraHealthLevels, boolean pSufferesOfInjury, String pConcienseORconviction, String pSelfControlORinstinct) {
-        name = pName;
-        generation = pGeneration;
-        sire = pSire;
-        embraced = pEmbraced;
-        clan = pClan;
-        nature = pNature;
-        demeanor = pDemeanor;
-        courage = pCourage;
-        conscience = pConcience;
-        selfControl = pSelfControl;
-        willpower = pWillpower;
-        pathDots = pPathDots;
-        path = pPath;
-        physical = pPhysical;
-        social = pSocial;
-        mental = pMental;
-        extraHealthLevels = pExtraHealthLevels;
-        sufferesOfInjury = pSufferesOfInjury;
-        conscienceOrConviction = pConcienseORconviction;
-        selfControlOrInstinct = pSelfControlORinstinct;
-        disciplines = emptyList();
-        thaumaturgicalPaths = emptyList();
-        necromancyPaths = emptyList();
-        physicalAbilities = emptyList();
-        socialAbilities = emptyList();
-        mentalAbilities = emptyList();
-        merits = emptyList();
-        flaws = emptyList();
-        derangements = emptyList();
-        otherTraits = emptyList();
-        rituals = new LinkedList<>();
-    }
-
     public List<Resource> getResources() {
         return resources;
     }
@@ -313,10 +177,6 @@ public class Role implements NamedIdentifiable {
             return "";
         }
     }
-
-    /*public void setPlayerName(String pPlayerName) {
-        playerName = pPlayerName;
-    }*/
 
     public Generation getGeneration() {
         return generation;
@@ -375,28 +235,12 @@ public class Role implements NamedIdentifiable {
         demeanor = pDemeanor;
     }
 
-    public int getCourage() {
-        return courage;
+    public Virtues getVirtues() {
+        return virtues;
     }
 
-    public void setCourage(int pCourage) {
-        courage = pCourage;
-    }
-
-    public int getConscience() {
-        return conscience;
-    }
-
-    public void setConscience(int pConcience) {
-        conscience = pConcience;
-    }
-
-    public int getSelfControl() {
-        return selfControl;
-    }
-
-    public void setSelfControl(int pSelfControl) {
-        selfControl = pSelfControl;
+    public void setVirtues(Virtues virtues) {
+        this.virtues = virtues;
     }
 
     public int getWillpower() {
@@ -407,20 +251,12 @@ public class Role implements NamedIdentifiable {
         willpower = pWillpower;
     }
 
-    public int getPathDots() {
-        return pathDots;
+    public DottedType<Morality> getMorality() {
+        return morality;
     }
 
-    public void setPathDots(int pPathDots) {
-        pathDots = pPathDots;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String pPath) {
-        path = pPath;
+    public void setMorality(DottedType<Morality> morality) {
+        this.morality = morality;
     }
 
     public int getPhysical() {
@@ -483,14 +319,6 @@ public class Role implements NamedIdentifiable {
         thaumaturgicalPaths = pThaumaturgicalPaths;
     }
 
-    /*public List getThaumaturgicalRituals() {
-        return mThaumaturgicalRituals;
-    }
-
-    public void setThaumaturgicalRituals(List pThaumaturgicalRituals) {
-        mThaumaturgicalRituals = pThaumaturgicalRituals;
-    }*/
-
     public List<DottedType<Path>> getNecromancyPaths() {
         return necromancyPaths;
     }
@@ -498,14 +326,6 @@ public class Role implements NamedIdentifiable {
     public void setNecromancyPaths(List<DottedType<Path>> pNecromancyPaths) {
         necromancyPaths = pNecromancyPaths;
     }
-
-    /*public List getNecromanticRituals() {
-        return mNecromanticRituals;
-    }
-
-    public void setNecromanticRituals(List pNecromanticRituals) {
-        mNecromanticRituals = pNecromanticRituals;
-    }*/
 
     public List<Ritual> getRituals() {
         return rituals;

@@ -173,12 +173,67 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
                                 }
                             }
                             div(class: "row") {
-                                div(class: "span1", _("Path/Road"))
+                                div(class: "span1", _("Morality"))
                                 div(class: "span2") {
-                                    input(type: "text", name: "path[name]", class: "span2")
+                                    select(name: "morality[type][id]", class: "span2") {
+                                        module.getMoralityPaths().each {Morality morality ->
+                                            if (role.morality?.type?.id == morality.id) {
+                                                option(value: morality.id, selected: true, morality.name)
+                                            } else {
+                                                option(value: morality.id, morality.name)
+                                            }
+                                        }
+                                    }
                                 }
                                 div(class: "span1") {
-                                    input(type: "number", class: "span1", name: "path[dots]", value: 1, max: 10, min: 1)
+                                    input(type: "number", class: "span1", name: "morality[dots]", value: 1, max: 5, min: 1)
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1") {
+                                    raw("&nbsp;")
+                                }
+                                div(class: "span2") {
+                                    select(class: "span2", id: "adherenceSelect", name: "virtues[adherence]") {
+                                        Virtues.Adherence.values().each {Virtues.Adherence ad ->
+                                            if(role.virtues?.adherence == ad) {
+                                                option(value: ad.name(), selected: true, ad.name())
+                                            } else {
+                                                option(value: ad.name(), ad.name())
+                                            }
+                                        }
+                                    }
+                                }
+                                div(class: "span1") {
+                                    input(type: "number", class: "span1", name: "virtues[adherenceDots]", value: 1, max: 5, min: 1)
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1") {
+                                    raw("&nbsp;")
+                                }
+                                div(class: "span2") {
+                                    select(class: "span2", id: "resistanceSelect", name: "virtues[resistance]") {
+                                        Virtues.Resistance.values().each {Virtues.Resistance re ->
+                                            if(role.virtues?.resistance == re) {
+                                                option(value: re.name(), selected: true, re.name())
+                                            } else {
+                                                option(value: re.name(), re.name())
+                                            }
+                                        }
+                                    }
+                                }
+                                div(class: "span1") {
+                                    input(type: "number", class: "span1", name: "virtues[resistanceDots]", value: 1, max: 5, min: 1)
+                                }
+                            }
+                            div(class: "row") {
+                                div(class: "span1") {
+                                    raw("&nbsp;")
+                                }
+                                div(class: "span2", _("Courage"))
+                                div(class: "span1") {
+                                    input(type: "number", class: "span1", name: "virtues[courageDots]", value: 1, max: 5, min: 1)
                                 }
                             }
                         }

@@ -25,11 +25,9 @@
 package net.joinedminds.masserr.dataimport;
 
 import com.google.inject.Inject;
-import net.joinedminds.masserr.db.BankingDB;
-import net.joinedminds.masserr.db.CreateRulesDB;
-import net.joinedminds.masserr.db.InfluenceDB;
-import net.joinedminds.masserr.db.ManipulationDB;
+import net.joinedminds.masserr.db.*;
 import net.joinedminds.masserr.model.*;
+import net.joinedminds.masserr.model.mgm.Config;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -59,6 +57,7 @@ public class Importer {
     private CreateRulesDB createRulesDB;
     private InfluenceDB influenceDB;
     private BankingDB bankingDB;
+    private AdminDB adminDB;
     private Map<String, Ability> abilities;
     private HashMap<String, Clan> clans;
     private HashMap<String, Discipline> disciplines;
@@ -67,11 +66,13 @@ public class Importer {
     private Domain domain;
 
     @Inject
-    public Importer(ManipulationDB manipulationDB, CreateRulesDB createRulesDB, InfluenceDB influenceDB, BankingDB bankingDB) {
+    public Importer(ManipulationDB manipulationDB, CreateRulesDB createRulesDB, InfluenceDB influenceDB,
+                    BankingDB bankingDB, AdminDB adminDB) {
         this.manipulationDB = manipulationDB;
         this.createRulesDB = createRulesDB;
         this.influenceDB = influenceDB;
         this.bankingDB = bankingDB;
+        this.adminDB = adminDB;
     }
 
     public void importAll() throws IOException, SAXException, ParserConfigurationException {
@@ -109,9 +110,57 @@ public class Importer {
         //=======Starting Money=======
         importStarterMoneyRules();
         importArchetypes();
+        importMoralityPaths();
+    }
+
+    private void importMoralityPaths() throws IOException, SAXException, ParserConfigurationException {
+        logger.info("Importing Morality Paths");
+        importFromResource(getClass().getResourceAsStream("/import/morality_paths.xml"), "Query2", "path", null,
+                new Creator<Morality>() {
+                    @Override
+                    public Morality create() {
+                        return manipulationDB.newMorality();
+                    }
+                }, new Saver<Morality>() {
+                    @Override
+                    public Morality save(Morality entity) {
+                        Morality morality = manipulationDB.saveMorality(entity);
+                        if(morality.getName().equals("Humanity")) {
+                            Config config = adminDB.getConfig();
+                            config.setDefaultMorality(morality);
+                            adminDB.saveConfig(config);
+                        }
+                        return morality;
+                    }
+                }, moralityHandlers()
+        );
+    }
+
+    private Map<String, AttributeHandler<Morality>> moralityHandlers() {
+        Map<String, AttributeHandler<Morality>> map = new HashMap<>();
+        map.put("path", new AttributeHandler<Morality>() {
+            @Override
+            public void handle(Node node, Morality entity) {
+                entity.setName(node.getTextContent());
+            }
+        });
+        map.put("adherence", new AttributeHandler<Morality>() {
+            @Override
+            public void handle(Node node, Morality entity) {
+                entity.setAdherenceTeachings(Virtues.Adherence.valueOf(node.getTextContent()));
+            }
+        });
+        map.put("resistance", new AttributeHandler<Morality>() {
+            @Override
+            public void handle(Node node, Morality entity) {
+                entity.setResistanceTeachings(Virtues.Resistance.valueOf(node.getTextContent()));
+            }
+        });
+        return map;
     }
 
     private void importArchetypes() throws IOException, SAXException, ParserConfigurationException {
+        logger.info("Importing Archetypes");
         importFromResource(getClass().getResourceAsStream("/import/archetypes.xml"), "Query2", "nature", null, new Creator<Archetype>() {
                     @Override
                     public Archetype create() {

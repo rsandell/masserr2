@@ -26,6 +26,7 @@ package net.joinedminds.masserr.modules;
 
 import com.google.inject.Inject;
 import net.joinedminds.masserr.Messages;
+import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.ui.NavItem;
@@ -51,10 +52,12 @@ public class RolesModule implements NavItem {
     private Logger logger = Logger.getLogger(RolesModule.class.getName());
 
     private ManipulationDB manipulationDB;
+    private AdminDB adminDB;
 
     @Inject
-    public RolesModule(ManipulationDB manipulationDB) {
+    public RolesModule(ManipulationDB manipulationDB, AdminDB adminDB) {
         this.manipulationDB = manipulationDB;
+        this.adminDB = adminDB;
     }
 
     @JavaScriptMethod
@@ -98,11 +101,21 @@ public class RolesModule implements NavItem {
 
     public Role getNewRole() {
         logger.info("New Role!!");
-        return new Role();
+        Role role = new Role();
+        Morality morality = adminDB.getConfig().getDefaultMorality();
+        if(morality != null) {
+            role.setMorality(new DottedType<>(morality, 1));
+            role.setVirtues(new Virtues(morality, 1, 1, 1));
+        }
+        return role;
     }
 
     public List<Generation> getGenerations() {
         return manipulationDB.getGenerations(false);
+    }
+
+    public List<Morality> getMoralityPaths() {
+        return manipulationDB.getMoralityPaths();
     }
 
     public List<Clan> getClans() {
