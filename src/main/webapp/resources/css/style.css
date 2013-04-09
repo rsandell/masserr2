@@ -45,3 +45,14 @@
     padding: 1px 7px;
     padding-bottom: 2px;
 }
+
+input.attribute-input {
+    margin: 0;
+    padding: 0 0.2em;
+    width: 100%;
+    font-size: 10pt;
+}
+
+input.attribute-input[type="number"] {
+    text-align: right;
+}

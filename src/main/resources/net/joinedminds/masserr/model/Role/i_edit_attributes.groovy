@@ -45,9 +45,17 @@ div(class: "row") {
                 table(class: "table table-condensed", style: "width: 100%") {
                     module.getAbilities(Ability.Type.Physical).each { Ability ability ->
                         tr {
-                            td(ability.getName())
-                            td(raw("&nbsp;"))
-                            td("0")
+                            td {
+                                raw(ability.getName())
+                                input(type: "hidden", name: "ability[][id]", value: ability.getId())
+                                input(type: "hidden", name: "ability[][type]", value: ability.type.name())
+                            }
+                            td {
+                                input(type: "text", class: "attribute-input", name: "ability[][notes]")
+                            }
+                            td {
+                                input(type: "number", class: "attribute-input", name: "ability[][dots]", min: 0, max: 9)
+                            }
                         }
                     }
                 }
@@ -65,9 +73,17 @@ div(class: "row") {
                 table(class: "table table-condensed", style: "width: 100%") {
                     module.getAbilities(Ability.Type.Social).each { Ability ability ->
                         tr {
-                            td(ability.getName())
-                            td(raw("&nbsp;"))
-                            td("0")
+                            td {
+                                raw(ability.getName())
+                                input(type: "hidden", name: "ability[][id]", value: ability.getId())
+                                input(type: "hidden", name: "ability[][type]", value: ability.type.name())
+                            }
+                            td {
+                                input(type: "text", class: "attribute-input", name: "ability[][notes]")
+                            }
+                            td {
+                                input(type: "number", class: "attribute-input", name: "ability[][dots]", min: 0, max: 9)
+                            }
                         }
                     }
                 }
@@ -85,9 +101,17 @@ div(class: "row") {
                 table(class: "table table-condensed", style: "width: 100%") {
                     module.getAbilities(Ability.Type.Mental).each { Ability ability ->
                         tr {
-                            td(ability.getName())
-                            td(raw("&nbsp;"))
-                            td("0")
+                            td {
+                                raw(ability.getName())
+                                input(type: "hidden", name: "ability[][id]", value: ability.getId())
+                                input(type: "hidden", name: "ability[][type]", value: ability.type.name())
+                            }
+                            td {
+                                input(type: "text", class: "attribute-input", name: "ability[][notes]")
+                            }
+                            td {
+                                input(type: "number", class: "attribute-input", name: "ability[][dots]", min: 0, max: 9)
+                            }
                         }
                     }
                 }
