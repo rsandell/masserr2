@@ -111,8 +111,6 @@ public class Role implements NamedIdentifiable {
     private Domain domain;
     @Reference
     private List<Ritual> rituals;
-    private String selfControlOrInstinct = "Self-Control";
-    private String conscienceOrConviction = "Conciense";
     private String thaumaType = "";
     private String necromancyType = "";
     @Reference
@@ -629,22 +627,6 @@ public class Role implements NamedIdentifiable {
         domain = pDomain;
     }
 
-    public String getSelfControlOrInstinct() {
-        return selfControlOrInstinct;
-    }
-
-    public void setSelfControlOrInstinct(String pSelfControlORinstinct) {
-        selfControlOrInstinct = pSelfControlORinstinct;
-    }
-
-    public String getConscienceOrConviction() {
-        return conscienceOrConviction;
-    }
-
-    public void setConscienceOrConviction(String pConcienseORconviction) {
-        conscienceOrConviction = pConcienseORconviction;
-    }
-
     public String getThaumaType() {
         return thaumaType;
     }
@@ -715,5 +697,16 @@ public class Role implements NamedIdentifiable {
 
     public void setPlayer(Player pPlayer) {
         player = pPlayer;
+    }
+
+    public static Role idRef(String stringId) {
+        ObjectId id = Functions.toObjectId(stringId);
+        if (id != null) {
+            Role r = new Role();
+            r.objectId = id;
+            return r;
+        } else {
+            return null;
+        }
     }
 }

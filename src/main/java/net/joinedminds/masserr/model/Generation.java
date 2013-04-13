@@ -159,4 +159,10 @@ public class Generation implements Identifiable {
     public String getId() {
         return String.valueOf(getGeneration());
     }
+
+    public static Generation idRef(int generation) {
+        Generation g = new Generation();
+        g.generation = generation;
+        return g;
+    }
 }

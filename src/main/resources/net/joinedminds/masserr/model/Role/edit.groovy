@@ -99,7 +99,7 @@ l.layout(title: _(title) + " " + Functions.emptyIfNull(Masserr.getInstance().get
                                 }
                             }
                             div(class: "span3") {
-                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn btn-primary", style: "margin-right: 1em", onclick: "saveRole()", _("OK"))
                                 button(class: "btn", _("Cancel"))
                             }
                         }
@@ -118,7 +118,7 @@ l.layout(title: _(title) + " " + Functions.emptyIfNull(Masserr.getInstance().get
                                 }
                             }
                             div(class: "span3") {
-                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn btn-primary", style: "margin-right: 1em", onclick: "saveRole()", _("OK"))
                                 button(class: "btn", _("Cancel"))
                             }
                         }
@@ -137,7 +137,7 @@ l.layout(title: _(title) + " " + Functions.emptyIfNull(Masserr.getInstance().get
                                 }
                             }
                             div(class: "span3") {
-                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn btn-primary", style: "margin-right: 1em", onclick: "saveRole()", _("OK"))
                                 button(class: "btn", _("Cancel"))
                             }
                         }
@@ -156,7 +156,7 @@ l.layout(title: _(title) + " " + Functions.emptyIfNull(Masserr.getInstance().get
                                 }
                             }
                             div(class: "span3") {
-                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn btn-primary", style: "margin-right: 1em", onclick: "saveRole()", _("OK"))
                                 button(class: "btn", _("Cancel"))
                             }
                         }

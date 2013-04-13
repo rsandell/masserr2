@@ -217,6 +217,21 @@ function calcMeritsFlawsStats() {
     window.alert(sum);
 }
 
+function saveRole() {
+    "use strict";
+    var roleForm = $("#roleTabContent :input").serializeObject();
+    if (validateQuickRole(roleForm, function(heading, text){window.alert(heading + "\n" + text);})) {
+        module.saveRole(roleForm, function(t) {
+            var resp = t.responseObject();
+            if(resp.ok) {
+                window.location = rootURL + "/roles";
+            } else {
+                window.alert(resp.message);
+            }
+        });
+    }
+}
+
 
 /**
  * Left side stats popover.

@@ -85,4 +85,15 @@ public class FightOrFlight implements NamedIdentifiable {
     public String toString() {
         return getName();
     }
+
+    public static FightOrFlight idRef(String fId) {
+        ObjectId id = Functions.toObjectId(fId);
+        if(id != null) {
+            FightOrFlight ff = new FightOrFlight();
+            ff.objectId = id;
+            return ff;
+        } else {
+            return null;
+        }
+    }
 }

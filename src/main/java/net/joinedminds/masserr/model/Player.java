@@ -131,4 +131,15 @@ public class Player implements NamedIdentifiable {
     public void setExperienceList(List<Experience> pExperienceList) {
         experienceList = pExperienceList;
     }
+
+    public static Player idRef(String playerId) {
+        ObjectId id = Functions.toObjectId(playerId);
+        if(id != null) {
+            Player p = new Player();
+            p.objectId = id;
+            return p;
+        } else {
+            return null;
+        }
+    }
 }

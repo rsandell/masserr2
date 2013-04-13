@@ -25,6 +25,9 @@
         <head>
             <title>${h.appendIfNotNull(title, ' [Masserr]', 'Masserr')}</title>
             <!--<st:adjunct includes="org.kohsuke.stapler.bind"/>-->
+            <script type="text/javascript">
+                var rootURL = '${rootURL}';
+            </script>
             <st:adjunct includes="org.kohsuke.stapler.underscore"/>
             <st:adjunct includes="org.kohsuke.stapler.jquery"/>
             <st:adjunct includes="org.kohsuke.stapler.bootstrap-responsive"/>

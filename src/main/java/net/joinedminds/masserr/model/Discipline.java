@@ -113,4 +113,15 @@ public class Discipline implements NamedIdentifiable {
     public void setDocUrl(String docUrl) {
         this.docUrl = docUrl;
     }
+
+    public static Discipline idRef(String id) {
+        ObjectId oId = Functions.toObjectId(id);
+        if (oId != null) {
+            Discipline d = new Discipline();
+            d.objectId = oId;
+            return d;
+        } else {
+            return null;
+        }
+    }
 }

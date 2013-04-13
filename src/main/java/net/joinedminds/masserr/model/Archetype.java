@@ -75,4 +75,15 @@ public class Archetype implements NamedIdentifiable {
     public String getId() {
         return Functions.toString(objectId);
     }
+
+    public static Archetype idRef(String sId) {
+        ObjectId id = Functions.toObjectId(sId);
+        if (id == null) {
+            return null;
+        } else {
+            Archetype t = new Archetype();
+            t.objectId = id;
+            return t;
+        }
+    }
 }

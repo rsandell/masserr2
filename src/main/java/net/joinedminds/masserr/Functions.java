@@ -145,6 +145,10 @@ public class Functions {
         }
     }
 
+    public static boolean isEmpty(String str) {
+        return str == null || str.isEmpty();
+    }
+
     public static class Breadcrumb {
         private String url;
         private Localizable localizableDisplay;

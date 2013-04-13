@@ -83,4 +83,15 @@ public class Domain implements NamedIdentifiable {
     public String toString() {
         return name;
     }
+
+    public static Domain idRef(String dId) {
+        ObjectId id = Functions.toObjectId(dId);
+        if(id != null) {
+            Domain d = new Domain();
+            d.objectId = id;
+            return d;
+        } else {
+            return null;
+        }
+    }
 }

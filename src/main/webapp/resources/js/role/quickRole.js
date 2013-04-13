@@ -31,30 +31,30 @@ function getQuickRoleObj() {
     return $("#quickRoleModal :input").serializeObject();
 }
 
-function validateQuickRole(role) {
+function validateQuickRole(role, alertMethod) {
     "use strict";
     if (role.name === null || role.name.length <= 0) {
-        alertQuickRole(quickRoleMsgs.noName.heading, quickRoleMsgs.noName.message);
+        alertMethod(quickRoleMsgs.noName.heading, quickRoleMsgs.noName.message);
         return false;
     }
     if (role.embraced !== null && role.embraced.match(/\d{3,4}(-\d{2}(-\d{2}){0,1}){0,1}/g)) {
         var parts = role.embraced.split("-");
         if(parts.length > 1) {
-            var month = parseInt(parts[1]);
+            var month = parseInt(parts[1], 10);
             if (month < 1 || month > 12) {
-                alertQuickRole(quickRoleMsgs.embraced.heading, quickRoleMsgs.embraced.message);
+                alertMethod(quickRoleMsgs.embraced.heading, quickRoleMsgs.embraced.message);
                 return false;
             }
             if(parts.length > 2) {
-                var day = parseInt(parts[2]);
+                var day = parseInt(parts[2], 10);
                 if (day < 1 || day > 31) {
-                    alertQuickRole(quickRoleMsgs.embraced.heading, quickRoleMsgs.embraced.message);
+                    alertMethod(quickRoleMsgs.embraced.heading, quickRoleMsgs.embraced.message);
                     return false;
                 }
             }
         }
     } else {
-        alertQuickRole(quickRoleMsgs.embraced.heading, quickRoleMsgs.embraced.message);
+        alertMethod(quickRoleMsgs.embraced.heading, quickRoleMsgs.embraced.message);
         return false;
     }
     return true;
@@ -68,7 +68,7 @@ function alertQuickRole(errHeading, errMessage) {
 function saveQuickRole() {
     "use strict";
     var role = getQuickRoleObj();
-    if (validateQuickRole(role)) {
+    if (validateQuickRole(role, alertQuickRole)) {
         qrModule.submitQuickRole(role, function(t) {
             var resp = t.responseObject();
             if (resp.ok) {
