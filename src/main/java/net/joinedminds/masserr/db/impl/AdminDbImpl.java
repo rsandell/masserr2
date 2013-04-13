@@ -3,8 +3,12 @@ package net.joinedminds.masserr.db.impl;
 import com.github.jmkgreen.morphia.Datastore;
 import com.github.jmkgreen.morphia.query.FieldCriteria;
 import com.github.jmkgreen.morphia.query.Query;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.model.Campaign;
@@ -17,22 +21,34 @@ import org.bson.types.ObjectId;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * Description
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
+@Singleton
 public class AdminDbImpl extends BasicDbImpl implements AdminDB {
+    private static Logger logger = Logger.getLogger(AdminDbImpl.class.getName());
 
+    private LoadingCache<String, Config> configCache;
 
     @Inject
     public AdminDbImpl(Provider<Datastore> db) {
         super(db);
+        configCache = CacheBuilder.newBuilder().
+                refreshAfterWrite(10, TimeUnit.MINUTES).build(new CacheLoader<String, Config>() {
+            @Override
+            public Config load(String s) throws Exception {
+                return _getConfig();
+            }
+        });
     }
 
-    @Override
-    public Config getConfig() {
+    public Config _getConfig() {
         Config config = db.get().find(Config.class).get();
         if (config == null) {
             config = new Config();
@@ -43,8 +59,19 @@ public class AdminDbImpl extends BasicDbImpl implements AdminDB {
     }
 
     @Override
+    public Config getConfig() {
+        try {
+            return configCache.get("");
+        } catch (ExecutionException e) {
+            throw new RuntimeException("Failed to get Config from cache! ", e);
+        }
+    }
+
+    @Override
     public Config saveConfig(Config config) {
-        return save(config);
+        Config save = save(config);
+        configCache.put("", save);
+        return save;
     }
 
     @Override

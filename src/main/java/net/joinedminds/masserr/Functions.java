@@ -84,6 +84,14 @@ public class Functions {
         }
     }
 
+    public static String emptyIfNull(String str) {
+        if (str == null) {
+            return "";
+        } else {
+            return str;
+        }
+    }
+
     public static String fromNavId(String id) {
         return id;
     }

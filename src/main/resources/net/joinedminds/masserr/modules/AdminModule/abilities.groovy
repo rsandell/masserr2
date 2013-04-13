@@ -6,7 +6,7 @@ import net.sf.json.JSONObject
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
-l.layout(title: _("Abilities") + " " + Masserr.getInstance().getAppName()) {
+l.layout(title: _("Abilities") + " " + Functions.emptyIfNull(Masserr.getInstance().getAppName())) {
     Functions f = h;
     raw(f.bind(my, 'admin'))
     script() {

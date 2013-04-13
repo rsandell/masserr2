@@ -33,8 +33,12 @@ import net.joinedminds.masserr.modules.RolesModule
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
-l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
-    Role role = my;
+Role role = my;
+String title = "Edit Role"
+if (role.getId() == null) {
+    title = "New Role"
+}
+l.layout(title: _(title) + " " + Functions.emptyIfNull(Masserr.getInstance().getAppName())) {
     RolesModule module = Masserr.getInstance().getRoles();
     Functions f = h;
     raw(f.bind(module, "module"))

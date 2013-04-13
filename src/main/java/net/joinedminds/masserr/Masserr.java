@@ -84,7 +84,7 @@ public class Masserr implements NavItem {
     }
 
     public String getAppName() {
-        return adminDb.getConfig().getAppName();
+        return Functions.emptyIfNull(adminDb.getConfig().getAppName());
     }
 
     @Override

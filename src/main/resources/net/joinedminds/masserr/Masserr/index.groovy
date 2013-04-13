@@ -23,12 +23,13 @@
  */
 package net.joinedminds.masserr.Masserr
 
+import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
 
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
-l.layout(title: _("Masserr") + " " + Masserr.getInstance().getAppName()) {
+l.layout(title: _("Masserr") + " " + Functions.emptyIfNull(Masserr.getInstance().getAppName())) {
     h1(_("Masserr") + " " + Masserr.getInstance().getAppName())
 
     for (i in 1..115) {
