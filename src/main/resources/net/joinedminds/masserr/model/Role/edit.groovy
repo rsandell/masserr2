@@ -25,7 +25,9 @@ package net.joinedminds.masserr.model.Role
 
 import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.*
+import net.joinedminds.masserr.model.Discipline
+import net.joinedminds.masserr.model.Player
+import net.joinedminds.masserr.model.Role
 import net.joinedminds.masserr.modules.RolesModule
 
 def l = namespace(lib.LayoutTagLib)
@@ -73,24 +75,88 @@ l.layout(title: _("Edit Role") + " " + Masserr.getInstance().getAppName()) {
         }
         div(class: "span11") {
             ul(class: "nav nav-tabs", id: "roleTab") {
-                li(class: "active") { a(href: "#basic", _("Basic")) }
-                li { a(href: "#magic", _("Magic")) }
-                li { a(href: "#attributes", _("Attributes")) }
-                li { a(href: "#misc", _("Misc")) }
+                li(class: "active") { a(href: "#basic", id: "aBasicTabLink", _("Basic")) }
+                li { a(href: "#magic", id: "aMagicTabLink", _("Magic")) }
+                li { a(href: "#attributes", id: "aAttributesTabLink", _("Attributes")) }
+                li { a(href: "#misc", id: "aMiscTabLink", _("Misc")) }
             }
 
             div(id: "roleTabContent", class: "tab-content") {
                 div(class: "tab-pane active", id: "basic") {
                     st.include(page: "i_edit_basic.groovy")
+                    div(class: "row") {
+                        div(class: "span11") {
+                            div(class: "span2 offset3") {
+                                button(class: "btn btn-small", onclick: "activateTab('#aMiscTabLink')") {
+                                    i(class: "icon-chevron-left")
+                                }
+                                button(class: "btn btn-small", onclick: "activateTab('#aMagicTabLink')") {
+                                    i(class: "icon-chevron-right")
+                                }
+                            }
+                            div(class: "span3") {
+                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn", _("Cancel"))
+                            }
+                        }
+                    }
                 }
                 div(class: "tab-pane", id: "magic") {
                     st.include(page: "i_edit_magic.groovy")
+                    div(class: "row") {
+                        div(class: "span11") {
+                            div(class: "span2 offset3") {
+                                button(class: "btn btn-small", onclick: "activateTab('#aBasicTabLink')") {
+                                    i(class: "icon-chevron-left")
+                                }
+                                button(class: "btn btn-small", onclick: "activateTab('#aAttributesTabLink')") {
+                                    i(class: "icon-chevron-right")
+                                }
+                            }
+                            div(class: "span3") {
+                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn", _("Cancel"))
+                            }
+                        }
+                    }
                 }
                 div(class: "tab-pane", id: "attributes") {
                     st.include(page: "i_edit_attributes.groovy")
+                    div(class: "row") {
+                        div(class: "span11") {
+                            div(class: "span2 offset3") {
+                                button(class: "btn btn-small", onclick: "activateTab('#aMagicTabLink')") {
+                                    i(class: "icon-chevron-left")
+                                }
+                                button(class: "btn btn-small", onclick: "activateTab('#aMiscTabLink')") {
+                                    i(class: "icon-chevron-right")
+                                }
+                            }
+                            div(class: "span3") {
+                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn", _("Cancel"))
+                            }
+                        }
+                    }
                 }
                 div(class: "tab-pane", id: "misc") {
                     st.include(page: "i_edit_misc.groovy")
+                    div(class: "row") {
+                        div(class: "span11") {
+                            div(class: "span2 offset3") {
+                                button(class: "btn btn-small", onclick: "activateTab('#aAttributesTabLink')") {
+                                    i(class: "icon-chevron-left")
+                                }
+                                button(class: "btn btn-small", onclick: "activateTab('#aBasicTabLink')") {
+                                    i(class: "icon-chevron-right")
+                                }
+                            }
+                            div(class: "span3") {
+                                button(class: "btn btn-primary", style: "margin-right: 1em", _("OK"))
+                                button(class: "btn", _("Cancel"))
+                            }
+                        }
+                    }
                 }
             }
             script(type: "template", id: "statsContent") {

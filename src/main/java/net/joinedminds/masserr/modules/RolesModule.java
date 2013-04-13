@@ -192,6 +192,10 @@ public class RolesModule implements NavItem {
         return manipulationDB.getArchetypes();
     }
 
+    public List<OtherTrait> getOtherTraits() {
+        return manipulationDB.getOtherTraits();
+    }
+
     public List<Player> getPlayers() {
         //TODO list players in the campaigns that the user has access to.
         return adminDB.getPlayers(adminDB.getCampaigns().get(0));
@@ -200,5 +204,13 @@ public class RolesModule implements NavItem {
     @JavaScriptMethod
     public SubmitResponse<Player> savePlayer(JSONObject jsonPlayer) {
         return adminModule.savePlayer(jsonPlayer);
+    }
+
+    public List<MeritOrFlaw> getMerits(MeritOrFlaw.Type type) {
+        return manipulationDB.getMerits(type);
+    }
+
+    public List<MeritOrFlaw> getFlaws(MeritOrFlaw.Type type) {
+        return manipulationDB.getFlaws(type);
     }
 }

@@ -30,6 +30,12 @@ var t_disciplinesSelect = _.template($("#t_DisciplinesSelect").html());
 var t_thaumaSelect = _.template($("#t_thaumaSelect").html());
 var t_necromancySelect = _.template($("#t_necromancySelect").html());
 var t_ritualRow = _.template($("#t_ritualRow").html());
+var t_otherTraitSelect = _.template($("#t_otherTraitSelect").html());
+var t_derangementRow = _.template($("#t_derangementRow").html());
+var t_beastTraitRow = _.template($("#t_beastTraitRow").html());
+var t_meritRow = _.template($("#t_meritRow").html());
+var t_flawRow = _.template($("#t_flawRow").html());
+
 
 function addRitual() {
     "use strict";
@@ -168,6 +174,49 @@ $('#roleTab a').click(function (e) {
     e.preventDefault();
     $(this).tab('show');
 });
+
+function activateTab(linkId) {
+    "use strict";
+    $(linkId).tab('show');
+}
+
+
+function addOtherTrait() {
+    "use strict";
+    $("#otherTraitsBox").append(t_otherTraitSelect());
+}
+
+function addDerangement() {
+    "use strict";
+    $("#derangementsBox").append(t_derangementRow());
+}
+
+function addBeastTrait() {
+    "use strict";
+    $("#beastTraitsBox").append(t_beastTraitRow());
+}
+
+function addMerit() {
+    "use strict";
+    $("#meritsBox").append(t_meritRow());
+}
+
+function addFlaw() {
+    "use strict";
+    $("#flawsBox").append(t_flawRow());
+}
+
+function calcMeritsFlawsStats() {
+    "use strict";
+    var sum = 0;
+    var cb = function(index,element){
+        sum = sum + parseInt($(this).attr("points"), 10);
+    };
+    $("#meritsBox select option:selected").each(cb);
+    $("#flawsBox select option:selected").each(cb);
+    window.alert(sum);
+}
+
 
 /**
  * Left side stats popover.
