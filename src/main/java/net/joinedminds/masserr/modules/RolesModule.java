@@ -121,6 +121,10 @@ public class RolesModule implements NavItem {
         return role;
     }
 
+    public Role getRole(String id) {
+        return manipulationDB.getRole(id);
+    }
+
     @JavaScriptMethod
     public SubmitResponse<String> saveRole(JSONObject formObject) {
         Role role;
