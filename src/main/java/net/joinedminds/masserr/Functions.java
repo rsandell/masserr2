@@ -33,6 +33,8 @@ import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.WebApp;
 import org.kohsuke.stapler.bind.Bound;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -45,6 +47,7 @@ public class Functions {
 
     public static final String RESOURCE_PATH = "/resources";
     public static final String IMAGES_PATH = RESOURCE_PATH + "/images";
+    public static final SimpleDateFormat ISO_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final Breadcrumb[] MAIN_MENU = {
             new Breadcrumb("/", Messages._nav_Home()),
@@ -203,5 +206,12 @@ public class Functions {
             str.append("</script>");
         }
         return str.toString();
+    }
+
+    public static String isoDate(Date date) {
+        if (date == null) {
+            return "";
+        }
+        return ISO_DATE_FORMAT.format(date);
     }
 }

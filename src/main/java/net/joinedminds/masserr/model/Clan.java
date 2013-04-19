@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Description
@@ -97,5 +98,16 @@ public class Clan implements NamedIdentifiable {
         Clan c = new Clan();
         c.objectId = new ObjectId(id);
         return c;
+    }
+
+    public String getLogoPath(String resUrl, String dim) {
+        if(!"64".equals(dim) && !"48".equals(dim)) {
+            throw new IllegalArgumentException("Illegal dimension " + dim);
+        }
+        StringBuffer str = new StringBuffer(resUrl);
+        str.append("/logo/").append(dim).append("/");
+        String n = getName();
+        n = n.replaceAll("\\s", "");
+        return str.append(n.toLowerCase(Locale.US)).append(".png").toString();
     }
 }

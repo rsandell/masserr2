@@ -196,15 +196,6 @@ public class Role implements NamedIdentifiable {
         return embraced;
     }
 
-    public String getEmbracedString() {
-        if (embraced != null) {
-            DateFormat format = DateFormat.getDateInstance(DateFormat.SHORT);
-            return format.format(embraced);
-        } else {
-            return null;
-        }
-    }
-
     public void setEmbraced(Date pEmbraced) {
         embraced = pEmbraced;
     }

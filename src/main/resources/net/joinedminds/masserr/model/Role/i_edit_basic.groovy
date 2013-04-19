@@ -39,6 +39,8 @@ import net.joinedminds.masserr.model.Virtues
 import net.joinedminds.masserr.model.Vitals
 import net.joinedminds.masserr.modules.RolesModule
 
+import static net.joinedminds.masserr.Functions.ifNull
+
 Role role = my;
 RolesModule module = Masserr.getInstance().getRoles();
 Functions f = h;
@@ -47,19 +49,32 @@ div(class: "row") {
     div(class: "span4") {
         div(class: "row") {
             div(class: "span1") {
-                input(type: "hidden", name: "id", value: "")
+                input(type: "hidden", name: "id", value: role.id)
                 p ( _("NPC") )
             }
             div(class: "span3") {
-                input(type: "checkbox", name: "npc")
+                if(role?.npc) {
+                    input(type: "checkbox", name: "npc", checked: true)
+                } else {
+                    input(type: "checkbox", name: "npc")
+                }
             }
         }
         div(class: "row") {
             div(class: "span1", _("Domain"))
             div(class: "span3") {
                 select(name: "domain", class: "span3") {
+                    boolean foundD = false
                     module.getDomains().each { Domain domain ->
-                        option(value: domain.getId(), domain.getName())
+                        if (role?.domain?.id == domain.id) {
+                            option(value: domain.getId(), domain.getName(), selected: true)
+                            foundD = true
+                        } else {
+                            option(value: domain.getId(), domain.getName())
+                        }
+                    }
+                    if (!foundD && role.domain != null) {
+                        option(value: role.domain.getId(), role.domain.getName(), selected: true)
                     }
                 }
             }
@@ -67,7 +82,8 @@ div(class: "row") {
         div(class: "row") {
             div(class: "span1", _("Name"))
             div(class: "span3") {
-                input(type: "text", class: "span3", name: "name", required: "true", placeholder: _("Name"))
+                input(type: "text", class: "span3", name: "name", required: "true",
+                        placeholder: _("Name"), value: role?.name)
             }
         }
         div(class: "row") {
@@ -95,7 +111,11 @@ div(class: "row") {
             div(class: "span3") {
                 select(class: "span3", id: "generationSelect", name: "generation") {
                     module.getGenerations().each { Generation gen ->
-                        option(value: gen.getId(), gen.getGeneration())
+                        if (role?.generation?.id == gen.id) {
+                            option(value: gen.getId(), gen.getGeneration(), selected: true)
+                        } else {
+                            option(value: gen.getId(), gen.getGeneration())
+                        }
                     }
                 }
             }
@@ -105,7 +125,7 @@ div(class: "row") {
             div(class: "span3") {
                 input(type: "text", class: "span3", name: "embraced",
                         required: "true", pattern: "\\d{3,4}(-\\d{2}(-\\d{2}){0,1}){0,1}",
-                        placeholder: "YYYY[-MM[-DD]]")
+                        placeholder: "YYYY[-MM[-DD]]", value: Functions.isoDate(role.embraced))
             }
         }
         div(class: "row") {
@@ -113,7 +133,11 @@ div(class: "row") {
             div(class: "span3") {
                 select(name: "clan", class: "span3", id: "clanSelect") {
                     module.getClans().each { Clan clan ->
-                        option(value: clan.getId(), clan.getName())
+                        if (role?.clan?.id == clan.id) {
+                            option(value: clan.getId(), clan.getName(), selected: true)
+                        } else {
+                            option(value: clan.getId(), clan.getName())
+                        }
                     }
                 }
             }
@@ -176,7 +200,8 @@ div(class: "row") {
                 }
             }
             div(class: "span1") {
-                input(type: "number", class: "span1", name: "morality[dots]", value: 1, max: 5, min: 1)
+                input(type: "number", class: "span1", name: "morality[dots]",
+                        value: ifNull(role?.morality?.dots, 1), max: 5, min: 1)
             }
         }
         div(class: "row") {
@@ -195,7 +220,8 @@ div(class: "row") {
                 }
             }
             div(class: "span1") {
-                input(type: "number", class: "span1", name: "virtues[adherenceDots]", value: 1, max: 5, min: 1)
+                input(type: "number", class: "span1", name: "virtues[adherenceDots]",
+                        value: ifNull(role?.virtues?.adherenceDots, 1), max: 5, min: 1)
             }
         }
         div(class: "row") {
@@ -214,7 +240,8 @@ div(class: "row") {
                 }
             }
             div(class: "span1") {
-                input(type: "number", class: "span1", name: "virtues[resistanceDots]", value: 1, max: 5, min: 1)
+                input(type: "number", class: "span1", name: "virtues[resistanceDots]",
+                        value: ifNull(role?.virtues?.resistanceDots, 1), max: 5, min: 1)
             }
         }
         div(class: "row") {
@@ -223,7 +250,8 @@ div(class: "row") {
             }
             div(class: "span2", _("Courage"))
             div(class: "span1") {
-                input(type: "number", class: "span1", name: "virtues[courageDots]", value: 1, max: 5, min: 1)
+                input(type: "number", class: "span1", name: "virtues[courageDots]",
+                        value: ifNull(role?.virtues?.courageDots, 1), max: 5, min: 1)
             }
         }
     }
