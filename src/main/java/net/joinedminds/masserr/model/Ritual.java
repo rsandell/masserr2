@@ -115,4 +115,14 @@ public class Ritual implements NamedIdentifiable {
     public void setRitualType(RitualType pRitualType) {
         ritualType = pRitualType;
     }
+
+    public static Ritual idRef(String id) {
+        ObjectId oId = Functions.toObjectId(id);
+        if (oId != null) {
+            Ritual r = new Ritual();
+            r.objectId = oId;
+            return r;
+        }
+        return null;
+    }
 }

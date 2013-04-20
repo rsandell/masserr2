@@ -202,4 +202,6 @@ public interface ManipulationDB extends BasicDB {
     Morality getMoralityPath(String id);
 
     Ritual getRitual(String id);
+
+    List<Discipline> getDisciplinesWithRetestAbility(String[] disciplineIds);
 }

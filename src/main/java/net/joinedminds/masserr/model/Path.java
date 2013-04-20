@@ -111,6 +111,16 @@ public class Path implements NamedIdentifiable {
         this.docUrl = docUrl;
     }
 
+    public static Path idRef(String id) {
+        ObjectId oId = Functions.toObjectId(id);
+        if(oId != null) {
+            Path p = new Path();
+            p.objectId = oId;
+            return p;
+        }
+        return null;
+    }
+
     public static enum Type {
         Necromancy, Thaumaturgy
     }

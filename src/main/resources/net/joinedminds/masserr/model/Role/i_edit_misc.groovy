@@ -25,10 +25,10 @@ package net.joinedminds.masserr.model.Role
 
 import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.MeritOrFlaw
-import net.joinedminds.masserr.model.OtherTrait
-import net.joinedminds.masserr.model.Role
+import net.joinedminds.masserr.model.*
 import net.joinedminds.masserr.modules.RolesModule
+
+import static net.joinedminds.masserr.Functions.ifNull
 
 Role role = my;
 RolesModule module = Masserr.getInstance().getRoles()
@@ -43,6 +43,10 @@ Map<MeritOrFlaw.Type, List<MeritOrFlaw>> flaws = new HashMap<>()
 MeritOrFlaw.Type.values().each { MeritOrFlaw.Type type ->
     flaws.put(type, module.getFlaws(type))
 }
+Generation roleGen = role?.generation
+if (roleGen == null) {
+    roleGen = module.defaultGeneration
+}
 
 script(type: "template", id: "t_otherTraitSelect") {
     div(class: "row") {
@@ -55,7 +59,7 @@ script(type: "template", id: "t_otherTraitSelect") {
             }
         }
         div(class: "span1") {
-            input(type: "number", name: "otherTraits[][dots]", class: "span1", max: 9, min: 0, value: 0)
+            input(type: "number", name: "otherTraits[][dots]", class: "span1", max: "{{ max }}", min: 0, value: 0)
         }
     }
 }
@@ -81,7 +85,7 @@ script(type: "template", id: "t_meritRow") {
                 MeritOrFlaw.Type.values().each { MeritOrFlaw.Type type ->
                     optgroup(label: type.name()) {
                         merits.get(type).each { MeritOrFlaw merit ->
-                            option(value: merit.getId(), points: merit.getPoints(), merit.getName() + " ("+merit.getPoints()+")")
+                            option(value: merit.getId(), points: merit.getPoints(), merit.getName() + " (" + merit.getPoints() + ")")
                         }
                     }
                 }
@@ -100,7 +104,7 @@ script(type: "template", id: "t_flawRow") {
                 MeritOrFlaw.Type.values().each { MeritOrFlaw.Type type ->
                     optgroup(label: type.name()) {
                         flaws.get(type).each { MeritOrFlaw flaw ->
-                            option(value: flaw.getId(), points: flaw.getPoints(), flaw.getName() + " ("+flaw.getPoints()+")")
+                            option(value: flaw.getId(), points: flaw.getPoints(), flaw.getName() + " (" + flaw.getPoints() + ")")
                         }
                     }
                 }
@@ -121,18 +125,51 @@ div(class: "row") {
                     button(class: "btn btn-mini region-btn", onclick: "addDerangement()") {
                         i(class: "icon-plus")
                     }
+                    if (role?.derangements != null && !role.derangements.empty) {
+                        role.derangements.each { String d ->
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    input(type: "text", class: "span4", name: "derangements[]", value: d)
+                                }
+                            }
+                        }
+                    }
                     div(class: "row") {
                         div(class: "span4") {
                             input(type: "text", class: "span4", name: "derangements[]")
                         }
                     }
-
                 }
             }
             td(width: "50%", valign: "top") {
                 div(class: "msr-region-bordered", id: "meritsBox", regionlabel: _("Merits")) {
                     button(class: "btn btn-mini region-btn", onclick: "addMerit()") {
                         i(class: "icon-plus")
+                    }
+                    role?.merits?.each { NotedType<MeritOrFlaw> m ->
+                        div(class: "row") {
+                            div(class: "span2") {
+                                select(class: "span2", name: "merits[][id]", onchange: "calcMeritsFlawsStats()") {
+                                    option(value: "", points: 0, "")
+                                    MeritOrFlaw.Type.values().each { MeritOrFlaw.Type type ->
+                                        optgroup(label: type.name()) {
+                                            merits.get(type).each { MeritOrFlaw merit ->
+                                                if (merit.id == m.type.id) {
+                                                    option(value: merit.getId(), points: merit.getPoints(), selected: true,
+                                                            merit.getName() + " (" + merit.getPoints() + ")")
+                                                } else {
+                                                    option(value: merit.getId(), points: merit.getPoints(),
+                                                            merit.getName() + " (" + merit.getPoints() + ")")
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            div(class: "span2") {
+                                input(type: "text", class: "span2", name: "merits[][notes]", value: ifNull(m.notes, ""))
+                            }
+                        }
                     }
                 }
             }
@@ -143,13 +180,51 @@ div(class: "row") {
                     button(class: "btn btn-mini region-btn", onclick: "addBeastTrait()") {
                         i(class: "icon-plus")
                     }
-                    input(type: "text", class: "span4")
+                    if (role?.beastTraits != null && !role.beastTraits.empty) {
+                        role.beastTraits.each { String t ->
+                            div(class: "row") {
+                                div(class: "span4") {
+                                    input(type: "text", class: "span4", name: "beastTraits[]", value: t)
+                                }
+                            }
+                        }
+                    }
+                    div(class: "row") {
+                        div(class: "span4") {
+                            input(type: "text", class: "span4", name: "beastTraits[]")
+                        }
+                    }
                 }
             }
             td(width: "50%", valign: "top") {
                 div(class: "msr-region-bordered", id: "flawsBox", regionlabel: _("Flaws")) {
                     button(class: "btn btn-mini region-btn", onclick: "addFlaw()") {
                         i(class: "icon-plus")
+                    }
+                    role?.flaws?.each { NotedType<MeritOrFlaw> mf ->
+                        div(class: "row") {
+                            div(class: "span2") {
+                                select(class: "span2", name: "flaws[][id]", onchange: "calcMeritsFlawsStats()") {
+                                    option(value: "", points: 0, "")
+                                    MeritOrFlaw.Type.values().each { MeritOrFlaw.Type type ->
+                                        optgroup(label: type.name()) {
+                                            flaws.get(type).each { MeritOrFlaw flaw ->
+                                                if (flaw.id == mf.type.id) {
+                                                    option(value: flaw.getId(), points: flaw.getPoints(), selected: true,
+                                                            flaw.getName() + " (" + flaw.getPoints() + ")")
+                                                } else {
+                                                    option(value: flaw.getId(), points: flaw.getPoints(),
+                                                            flaw.getName() + " (" + flaw.getPoints() + ")")
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            div(class: "span2") {
+                                input(type: "text", class: "span2", name: "flaws[][notes]", value: ifNull(mf.notes, ""))
+                            }
+                        }
                     }
                 }
             }
@@ -159,6 +234,28 @@ div(class: "row") {
                 div(class: "msr-region-bordered", id: "otherTraitsBox", regionlabel: _("Other Traits")) {
                     button(class: "btn btn-mini region-btn", onclick: "addOtherTrait()") {
                         i(class: "icon-plus")
+                    }
+                    if (role?.otherTraits != null && !role.otherTraits.empty) {
+                        role.otherTraits.each { DottedType<OtherTrait> rt ->
+                            div(class: "row") {
+                                div(class: "span3") {
+                                    select(class: "span3", name: "otherTraits[][id]") {
+                                        option(value: "", "")
+                                        otherTraits.each { OtherTrait ot ->
+                                            if (ot.id == rt.type.id) {
+                                                option(value: ot.getId(), selected: true, ot.getName())
+                                            } else {
+                                                option(value: ot.getId(), ot.getName())
+                                            }
+                                        }
+                                    }
+                                }
+                                div(class: "span1") {
+                                    input(type: "number", name: "otherTraits[][dots]", class: "span1",
+                                            max: roleGen.abilitiesMax, min: 0, value: rt.dots)
+                                }
+                            }
+                        }
                     }
                     div(class: "row") {
                         div(class: "span3") {
@@ -170,7 +267,8 @@ div(class: "row") {
                             }
                         }
                         div(class: "span1") {
-                            input(type: "number", name: "otherTraits[][dots]", class: "span1", max: 9, min: 0, value: 0)
+                            input(type: "number", name: "otherTraits[][dots]", class: "span1",
+                                    max: roleGen.abilitiesMax, min: 0, value: 0)
                         }
                     }
                 }

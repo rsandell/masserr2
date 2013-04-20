@@ -114,6 +114,16 @@ public class MeritOrFlaw implements NamedIdentifiable {
         return getName() + " (" + getPoints() + ")";
     }
 
+    public static MeritOrFlaw idRef(String id) {
+        ObjectId oId = Functions.toObjectId(id);
+        if (oId != null) {
+            MeritOrFlaw m = new MeritOrFlaw();
+            m.objectId = oId;
+            return m;
+        }
+        return null;
+    }
+
     public static enum Type {
         Physical('P'), Social('S'), Mental('M'), Supernatural('U');
         private char sign;

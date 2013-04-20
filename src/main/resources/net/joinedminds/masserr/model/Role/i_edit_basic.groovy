@@ -45,6 +45,12 @@ Role role = my;
 RolesModule module = Masserr.getInstance().getRoles();
 Functions f = h;
 
+List<Clan> clans = module.getClans()
+Generation roleGen = role?.generation
+if(roleGen == null) {
+    roleGen = module.defaultGeneration
+}
+
 div(class: "row") {
     div(class: "span4") {
         div(class: "row") {
@@ -111,7 +117,7 @@ div(class: "row") {
             div(class: "span3") {
                 select(class: "span3", id: "generationSelect", name: "generation") {
                     module.getGenerations().each { Generation gen ->
-                        if (role?.generation?.id == gen.id) {
+                        if (roleGen.id == gen.id) {
                             option(value: gen.getId(), gen.getGeneration(), selected: true)
                         } else {
                             option(value: gen.getId(), gen.getGeneration())
@@ -132,7 +138,7 @@ div(class: "row") {
             div(class: "span1", _("Clan"))
             div(class: "span3") {
                 select(name: "clan", class: "span3", id: "clanSelect") {
-                    module.getClans().each { Clan clan ->
+                    clans.each { Clan clan ->
                         if (role?.clan?.id == clan.id) {
                             option(value: clan.getId(), clan.getName(), selected: true)
                         } else {
@@ -263,11 +269,11 @@ div(class: "row") {
                 }
                 List<DottedType<Discipline>> myDisciplines = role.getDisciplines()
                 if (myDisciplines == null || myDisciplines.isEmpty()) {
-                    List<Discipline> clanDisciplines = null;
+                    List<Discipline> clanDisciplines;
                     if(role.getClan() != null) {
                         clanDisciplines = role.getClan().getClanDisciplines()
                     } else {
-                        clanDisciplines = module.getClans().get(0).getClanDisciplines()
+                        clanDisciplines = clans.get(0).getClanDisciplines()
                     }
                     myDisciplines = new LinkedList<>();
                     clanDisciplines.each { Discipline aD ->
@@ -290,7 +296,7 @@ div(class: "row") {
                         }
                         div(class: "span1") {
                             input(name: "discipline[][dots]", type: "number", class: "span1",
-                                    value: discipline.getDots(), min: 0, max: 9)
+                                    value: discipline.getDots(), min: 0, max: roleGen.disciplinesMax)
                         }
                     }
                 }
@@ -299,10 +305,15 @@ div(class: "row") {
         div(class: "row") {
             div(class: "span1", _("+Health"))
             div(class: "span1") {
-                input(type: "number", class: "span1", value: 0, name: "extraHealthLevels")
+                input(type: "number", class: "span1", min: 0,
+                        value: ifNull(role?.extraHealthLevels, 0), name: "extraHealthLevels")
             }
             div(class: "span2") {
-                input(type: "checkbox", class: "span1", name: "suffersOfInjury")
+                if (role?.sufferesOfInjury) {
+                    input(type: "checkbox", class: "span1", name: "suffersOfInjury", checked: true)
+                } else {
+                    input(type: "checkbox", class: "span1", name: "suffersOfInjury")
+                }
                 span(_("-Injury"))
             }
         }
@@ -313,7 +324,11 @@ div(class: "row") {
                 select(name: "fightForm", class: "span3") {
                     option(value: '', '')
                     forms.each { FightOrFlight ff ->
-                        option(value: ff.getId(), ff.getName())
+                        if (ff.id == role?.fightForm?.id) {
+                            option(value: ff.getId(), ff.getName(), selected: true)
+                        } else {
+                            option(value: ff.getId(), ff.getName())
+                        }
                     }
                 }
             }
@@ -324,7 +339,11 @@ div(class: "row") {
                 select(name: "flightForm", class: "span3") {
                     option(value: '', '')
                     forms.each { FightOrFlight ff ->
-                        option(value: ff.getId(), ff.getName())
+                        if (ff.id == role?.flightForm?.id) {
+                            option(value: ff.getId(), ff.getName(), selected: true)
+                        } else {
+                            option(value: ff.getId(), ff.getName())
+                        }
                     }
                 }
             }
@@ -332,7 +351,7 @@ div(class: "row") {
         div(class: "row") {
             div(class: "span1", _("Quote"))
             div(class: "span3") {
-                input(type: "text", name: "quote", class: "span3")
+                input(type: "text", name: "quote", class: "span3", value: role?.quote)
             }
         }
         div(class: "row") {
@@ -340,7 +359,11 @@ div(class: "row") {
             div(class: "span3") {
                 select(name: "vitals", class: 'span3') {
                     Vitals.values().each { Vitals v ->
-                        option(value: v.name(), v.toString())
+                        if (v == role?.vitals) {
+                            option(value: v.name(), v.toString(), selected: true)
+                        } else {
+                            option(value: v.name(), v.toString())
+                        }
                     }
                 }
             }

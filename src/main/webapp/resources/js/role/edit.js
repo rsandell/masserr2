@@ -35,7 +35,49 @@ var t_derangementRow = _.template($("#t_derangementRow").html());
 var t_beastTraitRow = _.template($("#t_beastTraitRow").html());
 var t_meritRow = _.template($("#t_meritRow").html());
 var t_flawRow = _.template($("#t_flawRow").html());
+var t_retestInfo = _.template($("#t_retestInfo").html());
 
+
+var currentGeneration;
+
+function updateGeneration() {
+    "use strict";
+    var selGen = $("#generationSelect").val();
+    module.getGeneration(selGen, function(t){
+        var res = t.responseObject();
+        if(res !== null) {
+            currentGeneration = res;
+            updateGenerationLimits();
+        }
+    });
+}
+
+function initGeneration() {
+    "use strict";
+    var selGen = $("#generationSelect").val();
+    module.getGeneration(selGen, function(t){
+        var res = t.responseObject();
+        if(res !== null) {
+            currentGeneration = res;
+        }
+    });
+}
+
+function updateGenerationLimits() {
+    "use strict";
+    $("#disciplinesDiv").find("input[name='discipline[][dots]']").attr("max", currentGeneration.disciplinesMax);
+    var div = $("#attributes");
+    div.find("input[name='physical']").attr("max", currentGeneration.traitsMax);
+    div.find("input[name='social']").attr("max", currentGeneration.traitsMax);
+    div.find("input[name='mental']").attr("max", currentGeneration.traitsMax);
+    div.find("input[name='ability[][dots]']").attr("max", currentGeneration.abilitiesMax);
+    $("#misc").find("input[name='otherTraits[][dots]']").attr("max", currentGeneration.abilitiesMax);
+}
+
+$("#generationSelect").change(function(event) {
+    "use strict";
+    updateGeneration();
+});
 
 function addRitual() {
     "use strict";
@@ -47,9 +89,14 @@ function addRitual() {
     });
 }
 
+function removeRitual(id) {
+    "use strict";
+    $("#ritualsTable tr[ritual='"+id+"']").remove();
+}
+
 function addDiscipline() {
     "use strict";
-    $("#disciplinesDiv").append(t_disciplinesSelect());
+    $("#disciplinesDiv").append(t_disciplinesSelect({max: currentGeneration.disciplinesMax}));
 }
 
 function addThaumaPath() {
@@ -180,10 +227,29 @@ function activateTab(linkId) {
     $(linkId).tab('show');
 }
 
+$("#aAttributesTabLink").on("show", function(e){
+    "use strict";
+    var idsObj = $("#disciplinesDiv :input[name='discipline[][id]']").serializeObject();
+    var disciplineIds = [];
+    _.each(idsObj.discipline, function(d) {
+        disciplineIds.push(d.id);
+    });
+    module.getRetestAbilities(disciplineIds, function(t) {
+        var ret = t.responseObject();
+        var content = "";
+        if(_.isArray(ret)) {
+            _.each(ret, function(d) {
+                content += t_retestInfo({discipline: d.name, ability: d.retestAbility.name});
+            });
+        }
+        $("#retestInfo").html(content);
+    });
+});
+
 
 function addOtherTrait() {
     "use strict";
-    $("#otherTraitsBox").append(t_otherTraitSelect());
+    $("#otherTraitsBox").append(t_otherTraitSelect({max: currentGeneration.abilitiesMax}));
 }
 
 function addDerangement() {
@@ -214,7 +280,7 @@ function calcMeritsFlawsStats() {
     };
     $("#meritsBox select option:selected").each(cb);
     $("#flawsBox select option:selected").each(cb);
-    window.alert(sum);
+    //window.alert(sum);
 }
 
 function saveRole() {
@@ -238,3 +304,5 @@ function saveRole() {
  */
 $('#roleTabContent').popover({placement: 'left', html: true, title: 'Stats', container: 'body', trigger: 'manual', content: $('#statsContent').html()});
 $('#roleTabContent').popover('show');
+
+initGeneration();

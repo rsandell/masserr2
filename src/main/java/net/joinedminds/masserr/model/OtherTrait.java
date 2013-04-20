@@ -93,4 +93,14 @@ public class OtherTrait implements NamedIdentifiable {
     public String toString() {
         return name;
     }
+
+    public static OtherTrait idRef(String id) {
+        ObjectId oId = Functions.toObjectId(id);
+        if(oId != null) {
+            OtherTrait o = new OtherTrait();
+            o.objectId = oId;
+            return o;
+        }
+        return null;
+    }
 }

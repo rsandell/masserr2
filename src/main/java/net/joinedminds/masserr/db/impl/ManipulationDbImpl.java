@@ -25,18 +25,22 @@
 package net.joinedminds.masserr.db.impl;
 
 import com.github.jmkgreen.morphia.Datastore;
-import com.github.jmkgreen.morphia.Key;
 import com.github.jmkgreen.morphia.query.Query;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.mongodb.DBRef;
 import com.mongodb.WriteResult;
+import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.db.ManipulationDB;
 import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.util.RoleClanComparator;
 import org.bson.types.ObjectId;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Database for manipulating base elements like Roles, Players etc.
@@ -46,10 +50,17 @@ import java.util.*;
 public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
 
     public static final RoleClanComparator ROLE_CLAN_COMPARATOR = new RoleClanComparator();
+    private LoadingCache<Integer, Generation> generationLoadingCache;
 
     @Inject
     public ManipulationDbImpl(Provider<Datastore> db) {
         super(db);
+        generationLoadingCache = CacheBuilder.newBuilder().refreshAfterWrite(10, TimeUnit.MINUTES).build(new CacheLoader<Integer, Generation>() {
+            @Override
+            public Generation load(Integer id) throws Exception {
+                return _getGeneration(id);
+            }
+        });
     }
 
     @Override
@@ -147,9 +158,17 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
         return db.get().find(Generation.class, "ghoulLevel", ghoulGenerations).order("-generation").asList();
     }
 
+    protected Generation _getGeneration(int generation) {
+        return db.get().get(Generation.class, generation);
+    }
+
     @Override
     public Generation getGeneration(int generation) {
-        return db.get().get(Generation.class, generation);
+        try {
+            return generationLoadingCache.get(generation);
+        } catch (ExecutionException e) {
+            return _getGeneration(generation);
+        }
     }
 
     @Override
@@ -328,6 +347,25 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
     @Override
     public Ritual getRitual(String id) {
         return get(Ritual.class, id);
+    }
+
+    @Override
+    public List<Discipline> getDisciplinesWithRetestAbility(String[] disciplineIds) {
+        Set<ObjectId> ids = new TreeSet<>();
+        for (String disciplineId : disciplineIds) {
+            ObjectId objectId = Functions.toObjectId(disciplineId);
+            if (objectId != null) {
+                ids.add(objectId);
+            }
+        }
+        if (ids.size() > 0) {
+            Query<Discipline> query = db.get().createQuery(Discipline.class);
+            query.field("objectId").in(ids);
+            query.field("retestAbility").exists();
+            return query.asList();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     @Override

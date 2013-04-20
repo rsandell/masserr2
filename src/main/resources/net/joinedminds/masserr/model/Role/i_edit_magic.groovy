@@ -25,10 +25,7 @@ package net.joinedminds.masserr.model.Role
 
 import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.Path
-import net.joinedminds.masserr.model.Ritual
-import net.joinedminds.masserr.model.RitualType
-import net.joinedminds.masserr.model.Role
+import net.joinedminds.masserr.model.*
 import net.joinedminds.masserr.modules.RolesModule
 
 Role role = my;
@@ -74,20 +71,44 @@ div(class: "row") {
         }
         div(class: "row") {
             div(class: "span5") {
-                input(type: "text", name: "thaumaSchoolName", placeholder: "School", class: "span5")
+                input(type: "text", name: "thaumaSchoolName", placeholder: "School", class: "span5", value: role?.thaumaType)
             }
         }
-        div(class: "row") {
-            div(class: "span4") {
-                select(class: "span4", name: "thaumaturgicalPaths[][id]") {
-                    option(value: "", "")
-                    thaumaPaths.each { Path p ->
-                        option(value: p.id, p.getName())
+        List<DottedType<Path>> roleThaumaPaths = role?.thaumaturgicalPaths
+        if (roleThaumaPaths != null && !roleThaumaPaths.isEmpty()) {
+            roleThaumaPaths.each { DottedType<Path> rp ->
+                div(class: "row") {
+                    div(class: "span4") {
+                        select(class: "span4", name: "thaumaturgicalPaths[][id]") {
+                            option(value: "", "")
+                            thaumaPaths.each { Path p ->
+                                if (rp.type.id == p.id) {
+                                    option(value: p.id, p.getName(), selected: true)
+                                } else {
+                                    option(value: p.id, p.getName())
+                                }
+                            }
+                        }
+                    }
+                    div(class: "span1") {
+                        input(type: "number", class: "span1", min: 0, max: 5,
+                                name: "thaumaturgicalPaths[][dots]", value: rp.dots)
                     }
                 }
             }
-            div(class: "span1") {
-                input(type: "number", class: "span1", min: 0, max: 5, name: "thaumaturgicalPaths[][dots]")
+        } else {
+            div(class: "row") {
+                div(class: "span4") {
+                    select(class: "span4", name: "thaumaturgicalPaths[][id]") {
+                        option(value: "", "")
+                        thaumaPaths.each { Path p ->
+                            option(value: p.id, p.getName())
+                        }
+                    }
+                }
+                div(class: "span1") {
+                    input(type: "number", class: "span1", min: 0, max: 5, name: "thaumaturgicalPaths[][dots]")
+                }
             }
         }
     }
@@ -97,20 +118,44 @@ div(class: "row") {
         }
         div(class: "row") {
             div(class: "span5") {
-                input(type: "text", name: "necromancySchoolName", placeholder: "School", class: "span5")
+                input(type: "text", name: "necromancySchoolName", placeholder: "School", class: "span5", value: role?.necromancyType)
             }
         }
-        div(class: "row") {
-            div(class: "span4") {
-                select(class: "span4", name: "necromancyPaths[][id]") {
-                    option(value: "", "")
-                    necromancyPaths.each { Path p ->
-                        option(value: p.id, p.getName())
+        List<DottedType<Path>> roleNecroPaths = role?.necromancyPaths
+        if (roleNecroPaths != null && !roleNecroPaths.isEmpty()) {
+            roleNecroPaths.each { DottedType<Path> rp ->
+                div(class: "row") {
+                    div(class: "span4") {
+                        select(class: "span4", name: "necromancyPaths[][id]") {
+                            option(value: "", "")
+                            necromancyPaths.each { Path p ->
+                                if (rp.type.id == p.id) {
+                                    option(value: p.id, p.getName(), selected: true)
+                                } else {
+                                    option(value: p.id, p.getName())
+                                }
+                            }
+                        }
+                    }
+                    div(class: "span1") {
+                        input(type: "number", class: "span1", min: 0, max: 5,
+                                name: "necromancyPaths[][dots]", value: rp.dots)
                     }
                 }
             }
-            div(class: "span1") {
-                input(type: "number", class: "span1", min: 0, max: 5, name: "necromancyPaths[][dots]")
+        } else {
+            div(class: "row") {
+                div(class: "span4") {
+                    select(class: "span4", name: "necromancyPaths[][id]") {
+                        option(value: "", "")
+                        necromancyPaths.each { Path p ->
+                            option(value: p.id, p.getName())
+                        }
+                    }
+                }
+                div(class: "span1") {
+                    input(type: "number", class: "span1", min: 0, max: 5, name: "necromancyPaths[][dots]")
+                }
             }
         }
     }
@@ -119,11 +164,16 @@ div(class: "row") {
     div(class: "span10 msr-region-bordered", regionlabel: _("Rituals")) {
         div(class: "row") {
             script(type: "template", id: "t_ritualRow") {
-                tr {
+                tr(ritual: "{{ id }}") {
                     input(type: "hidden", name: "rituals[]", value: "{{ id }}")
                     td("{{ type }}")
                     td("{{ name }}")
-                    td(width: "10%", "{{ level }}")
+                    td(width: "7%", "{{ level }}")
+                    td(width: "5%") {
+                        button(class: "btn btn-mini", onclick: "removeRitual('{{ id }}')") {
+                            i(class: "icon-remove-circle")
+                        }
+                    }
                 }
             }
             div(class: "span7") {
@@ -131,7 +181,21 @@ div(class: "row") {
                     tr {
                         td(raw("&nbsp;"))
                         td(raw("&nbsp;"))
-                        td(width: "10%", raw("&nbsp;"))
+                        td(width: "7%", raw("&nbsp;"))
+                        td(width: "5%", raw("&nbsp;"))
+                    }
+                    role?.rituals?.each {Ritual ritual ->
+                        tr(ritual: ritual.id) {
+                            input(type: "hidden", name: "rituals[]", value: ritual.id)
+                            td(ritual.ritualType.name)
+                            td(ritual.name)
+                            td(width: "7%", ritual.level)
+                            td(width: "5%") {
+                                button(class: "btn btn-mini", onclick: "removeRitual('"+ritual.id+"')") {
+                                    i(class: "icon-remove-circle")
+                                }
+                            }
+                        }
                     }
                 }
             }

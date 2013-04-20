@@ -134,6 +134,16 @@ public class Ability implements NamedIdentifiable {
         return getName();
     }
 
+    public static Ability idRef(String id) {
+        ObjectId oId = Functions.toObjectId(id);
+        if(oId != null) {
+            Ability a = new Ability();
+            a.objectId = oId;
+            return a;
+        }
+        return null;
+    }
+
     public static enum Type {
         Physical('P'),
         Social('S'),

@@ -45,6 +45,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static net.joinedminds.masserr.Functions.isEmpty;
+import static net.joinedminds.masserr.util.RoleFormFunctions.*;
 
 /**
  * Description
@@ -53,6 +54,7 @@ import static net.joinedminds.masserr.Functions.isEmpty;
  */
 public class RolesModule implements NavItem {
 
+    public static final int DEFAULT_GENERATION = 10;
     private Logger logger = Logger.getLogger(RolesModule.class.getName());
 
     private ManipulationDB manipulationDB;
@@ -92,19 +94,7 @@ public class RolesModule implements NavItem {
         }
     }
 
-    private Calendar calcEmbraced(JSONObject jsonRole) {
-        String embr = jsonRole.getString("embraced");
-        String[] parts = embr.split("-");
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, Integer.parseInt(parts[0]));
-        if (parts.length > 1) {
-            c.set(Calendar.MONTH, Integer.parseInt(parts[1]) - 1);
-        }
-        if (parts.length > 2) {
-            c.set(Calendar.DAY_OF_MONTH, Integer.parseInt(parts[2]));
-        }
-        return c;
-    }
+
 
     public List<Role> getRoles() {
         return manipulationDB.getRoles();
@@ -137,7 +127,19 @@ public class RolesModule implements NavItem {
         if (role == null) {
             return SubmitResponse.idNotFound(id);
         }
-        String message = setRoleBasics(role, formObject);
+        String message = setRoleBasics(role, formObject, manipulationDB);
+        if (message != null) {
+            return new SubmitResponse<>(null, false, message);
+        }
+        message = setRoleMagic(role, formObject, manipulationDB);
+        if (message != null) {
+            return new SubmitResponse<>(null, false, message);
+        }
+        message = setRoleAttributes(role, formObject, manipulationDB);
+        if (message != null) {
+            return new SubmitResponse<>(null, false, message);
+        }
+        message = setRoleMisc(role, formObject, manipulationDB);
         if (message != null) {
             return new SubmitResponse<>(null, false, message);
         }
@@ -145,74 +147,17 @@ public class RolesModule implements NavItem {
         return new SubmitResponse<>(role.getId());
     }
 
-    private String setRoleBasics(Role role, JSONObject formObject) {
-        role.setNpc(formObject.has("npc"));
-        role.setDomain(Domain.idRef(formObject.getString("domain")));
-        if (isEmpty(formObject.optString("name"))) {
-            return Messages.QuickRoles_Msg_NoName_Msg();
-        }
-        role.setName(formObject.getString("name"));
-        role.setPlayer(Player.idRef(formObject.optString("player")));
-        role.setGeneration(manipulationDB.getGeneration(formObject.getInt("generation")));
-        Calendar c = calcEmbraced(formObject);
-        role.setEmbraced(c.getTime());
-        role.setClan(Clan.idRef(formObject.getString("clan")));
-        role.setSire(Role.idRef(formObject.optString("sire")));
-        if (isEmpty(formObject.optString("nature"))) {
-            return "Missing Nature";
-        }
-        if (isEmpty(formObject.optString("demeanor"))) {
-            return "Missing Demeanor";
-        }
-        role.setNature(Archetype.idRef(formObject.getString("nature")));
-        role.setDemeanor(Archetype.idRef(formObject.getString("demeanor")));
-        JSONObject jsonMorality = formObject.optJSONObject("morality");
-        if (jsonMorality != null && jsonMorality.optJSONObject("type") != null &&
-                !isEmpty(jsonMorality.getJSONObject("type").optString("id"))) {
-            DottedType<Morality> morality = new DottedType<>(
-                    Morality.idRef(jsonMorality.getJSONObject("type").getString("id")), jsonMorality.getInt("dots"));
-            role.setMorality(morality);
-        } else {
-            return "Missing Morality";
-        }
-        JSONObject jsonVirtues = formObject.optJSONObject("virtues");
-        if (jsonVirtues != null) {
-            Virtues virtues = new Virtues(
-                    Virtues.Adherence.valueOf(jsonVirtues.getString("adherence")),
-                    jsonVirtues.getInt("adherenceDots"),
-                    Virtues.Resistance.valueOf(jsonVirtues.getString("resistance")),
-                    jsonVirtues.getInt("resistanceDots"),
-                    jsonVirtues.getInt("courageDots"));
-            role.setVirtues(virtues);
-        } else {
-            return "Missing Virtues";
-        }
-        setDisciplines(role, formObject);
-        role.setExtraHealthLevels(formObject.getInt("extraHealthLevels"));
-        role.setSufferesOfInjury(formObject.has("suffersOfInjury"));
-        role.setFightForm(FightOrFlight.idRef(formObject.optString("fightForm")));
-        role.setFlightForm(FightOrFlight.idRef(formObject.optString("flightForm")));
-        role.setQuote(Functions.emptyIfNull(formObject.optString("quote")));
-        role.setVitals(Vitals.valueOf(formObject.getString("vitals")));
-        return null;
-    }
-
-    private void setDisciplines(Role role, JSONObject formObject) {
-        JSONArray jDisciplines = formObject.getJSONArray("discipline");
-        List<DottedType<Discipline>> disciplines = new LinkedList<>();
-        for (int i = 0; i < jDisciplines.size(); i++) {
-            JSONObject d = jDisciplines.getJSONObject(i);
-            if (!isEmpty(d.optString("id")) && d.has("dots") && d.getInt("dots") > 0) {
-                disciplines.add(new DottedType<>(
-                        Discipline.idRef(d.getString("id")),
-                        d.getInt("dots")));
-            }
-        }
-        role.setDisciplines(disciplines);
-    }
-
     public List<Generation> getGenerations() {
         return manipulationDB.getGenerations(false);
+    }
+
+    @JavaScriptMethod
+    public Generation getGeneration(int id) {
+        return manipulationDB.getGeneration(id);
+    }
+
+    public Generation getDefaultGeneration() {
+        return getGeneration(DEFAULT_GENERATION);
     }
 
     public List<Morality> getMoralityPaths() {
@@ -230,6 +175,15 @@ public class RolesModule implements NavItem {
 
     public List<Discipline> getDisciplines() {
         return manipulationDB.getDisciplines();
+    }
+
+    @JavaScriptMethod
+    public List<Discipline> getRetestAbilities(String[] disciplineIds) {
+        if(disciplineIds == null || disciplineIds.length <= 0) {
+            return Collections.emptyList();
+        } else {
+            return manipulationDB.getDisciplinesWithRetestAbility(disciplineIds);
+        }
     }
 
     public List<FightOrFlight> getFightOrFlights() {

@@ -67,7 +67,7 @@ l.layout(title: _(title) + " " + Functions.emptyIfNull(Masserr.getInstance().get
                 }
             }
             div(class: "span1") {
-                input(name: "discipline[][dots]", type: "number", class: "span1", value: 0, min: 0, max: 9)
+                input(name: "discipline[][dots]", type: "number", class: "span1", value: 0, min: 0, max: "{{ max }}")
             }
         }
     }

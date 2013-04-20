@@ -88,10 +88,10 @@ public class Role implements NamedIdentifiable {
     private List<DottedNotedType<Ability>> mentalAbilities;
     @Embedded
     private List<DottedType<OtherTrait>> otherTraits;
-    @Reference
-    private List<MeritOrFlaw> merits;
-    @Reference
-    private List<MeritOrFlaw> flaws;
+    @Embedded
+    private List<NotedType<MeritOrFlaw>> merits;
+    @Embedded
+    private List<NotedType<MeritOrFlaw>> flaws;
     private List<String> derangements;
     @Indexed
     private boolean ghoul = false;
@@ -348,20 +348,20 @@ public class Role implements NamedIdentifiable {
         mentalAbilities = pMentalAbilities;
     }
 
-    public List<MeritOrFlaw> getMerits() {
+    public List<NotedType<MeritOrFlaw>> getMerits() {
         return merits;
     }
 
-    public void setMerits(List<MeritOrFlaw> pMerits) {
-        merits = pMerits;
+    public void setMerits(List<NotedType<MeritOrFlaw>> merits) {
+        this.merits = merits;
     }
 
-    public List<MeritOrFlaw> getFlaws() {
+    public List<NotedType<MeritOrFlaw>> getFlaws() {
         return flaws;
     }
 
-    public void setFlaws(List<MeritOrFlaw> pFlaws) {
-        flaws = pFlaws;
+    public void setFlaws(List<NotedType<MeritOrFlaw>> flaws) {
+        this.flaws = flaws;
     }
 
     public List<String> getDerangements() {
