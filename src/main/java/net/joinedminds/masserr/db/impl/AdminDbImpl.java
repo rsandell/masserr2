@@ -1,7 +1,6 @@
 package net.joinedminds.masserr.db.impl;
 
 import com.github.jmkgreen.morphia.Datastore;
-import com.github.jmkgreen.morphia.query.FieldCriteria;
 import com.github.jmkgreen.morphia.query.Query;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -14,8 +13,8 @@ import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.model.Campaign;
 import net.joinedminds.masserr.model.Domain;
 import net.joinedminds.masserr.model.Player;
-import net.joinedminds.masserr.model.mgm.Config;
-import net.joinedminds.masserr.model.mgm.User;
+import net.joinedminds.masserr.model.Config;
+import net.joinedminds.masserr.model.auth.User;
 import org.bson.types.ObjectId;
 
 import java.rmi.RemoteException;

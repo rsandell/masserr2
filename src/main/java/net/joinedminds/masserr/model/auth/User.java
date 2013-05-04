@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.model.mgm;
+package net.joinedminds.masserr.model.auth;
 
 import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Id;

@@ -27,7 +27,7 @@ package net.joinedminds.masserr.dataimport;
 import com.google.inject.Inject;
 import net.joinedminds.masserr.db.*;
 import net.joinedminds.masserr.model.*;
-import net.joinedminds.masserr.model.mgm.Config;
+import net.joinedminds.masserr.model.Config;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

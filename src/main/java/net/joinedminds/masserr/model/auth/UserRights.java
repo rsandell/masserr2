@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.model.mgm;
+package net.joinedminds.masserr.model.auth;
 
 import java.io.Serializable;
 import java.util.BitSet;

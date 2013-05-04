@@ -26,7 +26,7 @@ package net.joinedminds.masserr.model;
 
 import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Reference;
-import net.joinedminds.masserr.model.mgm.User;
+import net.joinedminds.masserr.model.auth.User;
 
 import java.io.Serializable;
 import java.util.Date;

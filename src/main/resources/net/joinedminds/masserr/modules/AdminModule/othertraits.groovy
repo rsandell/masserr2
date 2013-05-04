@@ -1,8 +1,3 @@
-import net.joinedminds.masserr.Functions
-import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.OtherTrait
-import net.sf.json.JSONObject
-
 /*
  * The MIT License
  *
@@ -26,6 +21,12 @@ import net.sf.json.JSONObject
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
+import net.joinedminds.masserr.Functions
+import net.joinedminds.masserr.Masserr
+import net.joinedminds.masserr.model.OtherTrait
+import net.sf.json.JSONObject
+
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 

@@ -27,8 +27,8 @@ package net.joinedminds.masserr.db;
 import net.joinedminds.masserr.model.Campaign;
 import net.joinedminds.masserr.model.Domain;
 import net.joinedminds.masserr.model.Player;
-import net.joinedminds.masserr.model.mgm.Config;
-import net.joinedminds.masserr.model.mgm.User;
+import net.joinedminds.masserr.model.Config;
+import net.joinedminds.masserr.model.auth.User;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
