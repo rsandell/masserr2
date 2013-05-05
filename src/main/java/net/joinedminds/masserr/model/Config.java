@@ -5,6 +5,7 @@ import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Id;
 import com.github.jmkgreen.morphia.annotations.Reference;
 import org.bson.types.ObjectId;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
  * Central configuration.
@@ -23,6 +24,12 @@ public class Config {
     private OAuthKeysConfig yahooKeys;
     @Embedded
     private OAuthKeysConfig googleKeys;
+    private String applicationUrl;
+
+    public Config() {
+        yahooKeys = new OAuthKeysConfig(false, "", "");
+        googleKeys = new OAuthKeysConfig(false, "", "");
+    }
 
     public String getAppName() {
         return appName;
@@ -48,14 +55,40 @@ public class Config {
         return googleKeys;
     }
 
+    public String getApplicationUrl() {
+        return applicationUrl;
+    }
+
+    public void setYahooKeys(OAuthKeysConfig yahooKeys) {
+        this.yahooKeys = yahooKeys;
+    }
+
+    public void setGoogleKeys(OAuthKeysConfig googleKeys) {
+        this.googleKeys = googleKeys;
+    }
+
+    public void setApplicationUrl(String applicationUrl) {
+        this.applicationUrl = applicationUrl;
+    }
+
     @Embedded
     public static class OAuthKeysConfig {
+        private boolean enabled = false;
         private String apiKey;
         private String apiSecret;
 
-        public OAuthKeysConfig(String apiKey, String apiSecret) {
+        @DataBoundConstructor
+        public OAuthKeysConfig(boolean enabled, String apiKey, String apiSecret) {
+            this.enabled = enabled;
             this.apiKey = apiKey;
             this.apiSecret = apiSecret;
+        }
+
+        public OAuthKeysConfig() {
+        }
+
+        public boolean isEnabled() {
+            return enabled;
         }
 
         public String getApiKey() {
@@ -64,6 +97,18 @@ public class Config {
 
         public String getApiSecret() {
             return apiSecret;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public void setApiKey(String apiKey) {
+            this.apiKey = apiKey;
+        }
+
+        public void setApiSecret(String apiSecret) {
+            this.apiSecret = apiSecret;
         }
     }
 }

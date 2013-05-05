@@ -24,15 +24,23 @@
 
 package net.joinedminds.masserr;
 
+import com.google.common.base.Joiner;
+import net.joinedminds.masserr.model.Config;
+import net.joinedminds.masserr.modules.AuthModule;
+import net.joinedminds.masserr.oauth.OAuthAuthentication;
+import net.joinedminds.masserr.oauth.OAuthType;
 import net.joinedminds.masserr.ui.NavItem;
+import net.sf.json.JSONObject;
 import org.apache.commons.jelly.JellyContext;
 import org.bson.types.ObjectId;
 import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.WebApp;
 import org.kohsuke.stapler.bind.Bound;
 
+import javax.servlet.ServletException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -58,7 +66,7 @@ public class Functions {
     };
 
     public static void initPageVariables(JellyContext context) {
-        String rootURL = Stapler.getCurrentRequest().getContextPath();
+        String rootURL = getRootUrl();
 
         Functions h = new Functions();
         context.setVariable("h", h);
@@ -69,6 +77,19 @@ public class Functions {
         context.setVariable("resURL", rootURL + RESOURCE_PATH);
         context.setVariable("imagesURL", rootURL + IMAGES_PATH);
         context.setVariable("selectedMainMenuItem", getParentMainMenu());
+
+        OAuthAuthentication authentication = AuthModule.getAuthentication();
+        if (authentication != null && authentication.isSignedIn()) {
+            context.setVariable("authentication", authentication);
+        }
+    }
+
+    public static String getRootUrl() {
+        StaplerRequest request = Stapler.getCurrentRequest();
+        if (request == null) {
+            throw new IllegalStateException("Needs to be called from a http request thread.");
+        }
+        return request.getContextPath();
     }
 
     public static String toString(Object o) {
@@ -139,9 +160,9 @@ public class Functions {
     }
 
     public static ObjectId toObjectId(String id) {
-        if(id == null || id.isEmpty()) {
+        if (id == null || id.isEmpty()) {
             return null;
-        } else if(id.startsWith("new")) {
+        } else if (id.startsWith("new")) {
             return null;
         } else {
             return new ObjectId(id);
@@ -150,6 +171,94 @@ public class Functions {
 
     public static boolean isEmpty(String str) {
         return str == null || str.isEmpty();
+    }
+
+    public static boolean isTrimmedEmpty(String str) {
+        return str == null || (str.isEmpty() || str.trim().isEmpty());
+    }
+
+    public static String ifNullOrEmpty(String str, String thenValue) {
+        if (isEmpty(str)) {
+            return thenValue;
+        } else {
+            return str;
+        }
+    }
+
+    public static String constructPath(String... items) {
+        StringBuilder str = new StringBuilder();
+        for (String it : items) {
+            if (!isEmpty(it)) {
+                if (str.length() > 0 && str.charAt(str.length() - 1) != '/') {
+                    str.append('/');
+                }
+                str.append(it.trim());
+            }
+        }
+        return str.toString();
+    }
+
+    public static String constructApplicationUrl(String... items) {
+        Config config = Masserr.getInstance().getAdmin().getConfig();
+        String[] nItems = new String[items.length+1];
+        nItems[0] = config.getApplicationUrl();
+        System.arraycopy(items, 0, nItems, 1, items.length);
+        return constructPath(nItems);
+    }
+
+    public static JSONObject getSubmittedForm(StaplerRequest request) throws ServletException {
+        JSONObject form = request.getSubmittedForm();
+        return massageSubmittedForm(form);
+    }
+
+    private static JSONObject massageSubmittedForm(JSONObject form) {
+        JSONObject j = new JSONObject();
+        for(Object key: form.keySet()) {
+            Object val = form.get((String)key);
+            if(val instanceof JSONObject) {
+                j.put((String)key, massageSubmittedForm((JSONObject)val));
+            } else if("staplerClass".equals(key)) {
+                j.put("stapler-class", val);
+            } else {
+                Boolean bVal = toBoolean(val);
+                if (bVal != null) {
+                    j.put((String)key, bVal);
+                } else {
+                    j.put((String)key, val);
+                }
+            }
+        }
+        return j;
+    }
+
+    private static Boolean toBoolean(Object val) {
+        if(val == null) {
+            return null;
+        } else {
+            String s = val.toString().toLowerCase();
+            if("on".equals(s) || "true".equals(s)) {
+                return true;
+            } else if("false".equals(s)) {
+                return false;
+            } else {
+                return null;
+            }
+        }
+    }
+
+    public static boolean isSignedIn() {
+        OAuthAuthentication authentication = AuthModule.getAuthentication();
+        return authentication != null && authentication.isSignedIn();
+    }
+
+    public static List<OAuthType> getSignInProviders() {
+        List<OAuthType> types = new LinkedList<>();
+        for(OAuthType t : OAuthType.values()) {
+            if (t.getProvider().isEnabled()) {
+                types.add(t);
+            }
+        }
+        return types;
     }
 
     public static class Breadcrumb {

@@ -16,6 +16,8 @@ import net.joinedminds.masserr.model.Player;
 import net.joinedminds.masserr.model.Config;
 import net.joinedminds.masserr.model.auth.User;
 import org.bson.types.ObjectId;
+import org.kohsuke.stapler.Stapler;
+import org.kohsuke.stapler.StaplerRequest;
 
 import java.rmi.RemoteException;
 import java.sql.SQLException;
@@ -23,6 +25,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
+import static net.joinedminds.masserr.Functions.isEmpty;
 
 /**
  * Description
@@ -51,6 +55,10 @@ public class AdminDbImpl extends BasicDbImpl implements AdminDB {
         Config config = db.get().find(Config.class).get();
         if (config == null) {
             config = new Config();
+            StaplerRequest request = Stapler.getCurrentRequest();
+            if (request != null) {
+                config.setApplicationUrl(request.getRootPath());
+            }
             return save(config);
         } else {
             return config;
@@ -60,7 +68,11 @@ public class AdminDbImpl extends BasicDbImpl implements AdminDB {
     @Override
     public Config getConfig() {
         try {
-            return configCache.get("");
+            Config config = configCache.get("");
+            if (isEmpty(config.getApplicationUrl()) && Stapler.getCurrentRequest() != null) {
+                config.setApplicationUrl(Stapler.getCurrentRequest().getRootPath());
+            }
+            return config;
         } catch (ExecutionException e) {
             throw new RuntimeException("Failed to get Config from cache! ", e);
         }

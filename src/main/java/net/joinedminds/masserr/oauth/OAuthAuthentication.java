@@ -37,6 +37,7 @@ public class OAuthAuthentication implements Serializable {
     private String name;
     private String nickname;
     private String email;
+    private String picture;
 
     // type
     private OAuthType oAuthType;
@@ -49,6 +50,7 @@ public class OAuthAuthentication implements Serializable {
 
     // result
     private String oAuthAuthorizationUrl;
+    private boolean signedIn = false;
 
     public String getProviderUserId() {
         return providerUserId;
@@ -128,5 +130,21 @@ public class OAuthAuthentication implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public void signedIn() {
+        this.signedIn = true;
+    }
+
+    public boolean isSignedIn() {
+        return signedIn;
     }
 }

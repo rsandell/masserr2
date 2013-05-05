@@ -7,6 +7,18 @@
     text-align: right
 }
 
+.auth-picture {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 2px;
+    margin-right: 7px;
+    margin-top: -3px;
+}
+
 /* Base class */
 .msr-region-bordered {
     position: relative;

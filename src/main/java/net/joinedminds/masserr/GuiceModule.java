@@ -31,6 +31,7 @@ import net.joinedminds.masserr.dataimport.Importer;
 import net.joinedminds.masserr.db.*;
 import net.joinedminds.masserr.db.impl.*;
 import net.joinedminds.masserr.modules.AdminModule;
+import net.joinedminds.masserr.modules.AuthModule;
 import net.joinedminds.masserr.modules.RolesModule;
 
 import javax.servlet.ServletContext;

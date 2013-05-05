@@ -40,6 +40,9 @@ import java.lang.reflect.InvocationTargetException;
 public class IdentifiableBeanConverter implements Converter {
     @Override
     public Object convert(Class type, Object value) {
+        if (type.isAssignableFrom(value.getClass())) {
+            return value;
+        }
         Constructor constructor;
         try {
             try {

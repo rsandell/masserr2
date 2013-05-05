@@ -24,6 +24,7 @@
 
 package net.joinedminds.masserr.oauth;
 
+import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.Masserr;
 import net.joinedminds.masserr.model.Config;
 import org.scribe.model.Token;
@@ -56,8 +57,11 @@ public abstract class Provider {
 
     protected abstract OAuthService buildService();
 
+    public abstract boolean isEnabled();
+
     protected String getCallbackUrl() {
-        return "http://localhost:8080/callbackoauth";
+        return Functions.constructApplicationUrl("auth", "callback");
+        //return "http://localhost:8080/callbackoauth";
     }
 
     protected Config getConfig() {

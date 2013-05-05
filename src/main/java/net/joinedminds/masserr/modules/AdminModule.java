@@ -28,6 +28,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.dataimport.Wiki;
 import net.joinedminds.masserr.db.AdminDB;
@@ -38,10 +39,12 @@ import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
 
+import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -222,9 +225,12 @@ public class AdminModule implements NavItem {
     }
 
     @SuppressWarnings("unused") //Form post
-    public void doConfigSubmit(StaplerRequest request, StaplerResponse response) throws IOException {
+    public void doConfigSubmit(StaplerRequest request, StaplerResponse response) throws IOException, ServletException {
         Config config = getConfig();
-        request.bindParameters(config);
+        //request.bindJSON();
+        JSONObject form = Functions.getSubmittedForm(request);
+        request.bindJSON(config, form);
+
         adminDb.saveConfig(config);
         response.sendRedirect2("./");
     }

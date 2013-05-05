@@ -126,4 +126,10 @@ public class YahooProvider extends Provider {
                 .callback(getCallbackUrl())
                 .build();
     }
+
+    @Override
+    public boolean isEnabled() {
+        Config.OAuthKeysConfig keys = getConfig().getYahooKeys();
+        return keys != null && keys.isEnabled();
+    }
 }

@@ -1,6 +1,6 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
-         xmlns:l="/lib/layout" xmlns:i="jelly:fmt" xmlns:x="jelly:xml">
+         xmlns:x="jelly:xml">
     <st:documentation>
         Outer-most tag for a normal (non-AJAX) HTML rendering.
         <st:attribute name="title" use="required">
@@ -67,35 +67,53 @@
                                 </j:forEach>
                             </ul>
                         </div>
+                        <j:choose>
+                            <j:when test="${h.isSignedIn()}">
+                                <ul class="nav pull-right">
+                                    <li id="userCombo" class="dropdown">
+                                        <a id="userCombo-toggle" class="dropdown-toggle" data-toggle="dropdown"
+                                           href="#">
+                                            <j:if test="${not empty authentication.picture}">
+                                                <img src="${authentication.picture}" alt="${%Me}"
+                                                     class="pull-left auth-picture"/>
+                                            </j:if>
+                                            ${authentication.name}
+                                            <b class="caret"></b>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="userCombo-toggle">
+                                            <li>
+                                                <a tabindex="1" href="${rootURL}/auth/logout">
+                                                    ${%Sign Out}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </j:when>
+                            <j:otherwise>
+                                <ul class="nav pull-right">
+                                    <li id="signInCombo" class="dropdown">
+                                        <a id="signInCombo-toggle" class="dropdown-toggle" data-toggle="dropdown"
+                                           href="#">
+                                            ${%Sign In}
+                                            <b class="caret"></b>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="signInCombo-toggle">
+                                            <j:forEach var="pr" items="${h.getSignInProviders()}" indexVar="pi">
+                                                <li>
+                                                    <a tabindex="${pi}"
+                                                       href="${rootURL}/auth/login?provider=${pr.getName()}">
+                                                        <st:include it="${pr}" page="${pr.getName()}.groovy"/>
+                                                    </a>
+                                                </li>
+                                            </j:forEach>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </j:otherwise>
+                        </j:choose>
                         <j:if test="${not empty contextMenu}">
-                            <ul class="nav pull-right">
-                                <li id="${contextMenu.id}" class="dropdown">
-                                    <a id="${contextMenu.id}-toggle" class="dropdown-toggle" data-toggle="dropdown"
-                                       href="#">
-                                        ${contextMenu.displayName}
-                                        <b class="caret"></b>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="${contextMenu.id}-toggle">
-                                        <j:forEach var="mItem" items="${contextMenu.menuItems}">
-                                            <j:choose>
-                                                <j:when test="${mItem.isDivider()}">
-                                                    <li class="divider"/>
-                                                </j:when>
-                                                <j:otherwise>
-                                                    <li>
-                                                        <a tabindex="${mItem.tabIndex}" href="${mItem.href}">
-                                                            <j:if test="${not empty mItem.icon}">
-                                                                <i class="${mItem.icon}"/>
-                                                            </j:if>
-                                                            ${mItem.displayName}
-                                                        </a>
-                                                    </li>
-                                                </j:otherwise>
-                                            </j:choose>
-                                        </j:forEach>
-                                    </ul>
-                                </li>
-                            </ul>
+
                         </j:if>
                     </div>
                 </div>
@@ -110,8 +128,14 @@
                         <div class="row">
                             <div class="span6">
                                 <small>
-                                    <em><strong>Copyright © 2004,2012-</strong> Robert Sandell. All rights reserved.</em><br/>
-                                    <em>Mind's Eye Theatre (MET) Game and Artwork is <strong>© 2012 CCP hf. All rights reserved.</strong></em>
+                                    <em>
+                                        <strong>Copyright © 2004,2012-</strong>
+                                        Robert Sandell. All rights reserved.
+                                    </em>
+                                    <br/>
+                                    <em>Mind's Eye Theatre (MET) Game and Artwork is
+                                        <strong>© 2012 CCP hf. All rights reserved.</strong>
+                                    </em>
                                 </small>
                             </div>
                             <div class="span6">

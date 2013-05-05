@@ -24,10 +24,14 @@
 
 package net.joinedminds.masserr.oauth.providers;
 
+import net.joinedminds.masserr.Functions;
 import net.joinedminds.masserr.model.Config;
 import net.joinedminds.masserr.oauth.OAuthAuthentication;
 import net.joinedminds.masserr.oauth.OAuthProviderException;
 import net.joinedminds.masserr.oauth.Provider;
+import net.sf.json.JSON;
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.GoogleApi;
 import org.scribe.model.OAuthRequest;
@@ -39,6 +43,8 @@ import org.scribe.oauth.OAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
+
+import static net.joinedminds.masserr.Functions.isEmpty;
 
 /**
  * Description
@@ -57,53 +63,72 @@ public class GoogleProvider extends Provider {
         Token accessToken = service.getAccessToken(token, verifier);
 
 
-        OAuthRequest request = new OAuthRequest(Verb.GET, "http://www.google.com/m8/feeds/contacts/default/full"); //TODO Really?!
+        //OAuthRequest request = new OAuthRequest(Verb.GET, "http://www.google.com/m8/feeds/contacts/default/full"); //TODO Really?!
+        OAuthRequest request = new OAuthRequest(Verb.GET, "https://www.googleapis.com/oauth2/v2/userinfo");
         service.signRequest(accessToken, request);
         request.addHeader("GData-Version", "3.0");
+
 
         Response response = request.send();
 
         checkResponseCode(response.getCode());
 
-        String xml = response.getBody();
-        logger.debug("XML response: {}", xml);
+        String json = response.getBody();
+        logger.debug("Response: {}", json);
 
-        Document doc = null;
+        JSONObject jRes = null;
         try {
-            doc = parseDocument(xml);
+            jRes = JSONObject.fromObject(json);
         } catch (Exception e) {
-            logger.error("Unable to parse XML: " + xml, e);
-            throw new OAuthProviderException("Unable to parse XML: " + xml, e);
-        }
-        //TODO user Id
-        String xPathExpressionName = "/feed/author/name/text()";
-        try {
-            String authorName = evaluateXPath(doc, xPathExpressionName);
-            user.setName(authorName);
-        } catch (Exception e) {
-            logger.error("Can't find expression: " + xPathExpressionName + " => XML: " + xml, e);
-            throw new OAuthProviderException("Can't find expression: " + xPathExpressionName, e);
+            logger.error("Cannot parse to JSON: " + json, e);
+            throw new OAuthProviderException("Unable to parse JSON: " + json, e);
         }
 
-        String xPathExpressionEMail = "/feed/author/email/text()";
-        try {
-            String authorEMail = evaluateXPath(doc, xPathExpressionEMail);
-            user.setEmail(authorEMail);
-        } catch (Exception e) {
-            logger.error("Can't find expression: " + xPathExpressionEMail + " => XML: " + xml, e);
-            throw new OAuthProviderException("Can't find expression: " + xPathExpressionEMail, e);
+        if(jRes.has("id") && !isEmpty(jRes.optString("id"))) {
+            user.setProviderUserId(jRes.getString("id"));
+        } else {
+            throw new OAuthProviderException("Could not get id from response");
         }
+
+        if (jRes.has("name")&& !isEmpty(jRes.optString("name"))) {
+            user.setName(jRes.getString("name"));
+        } else {
+            throw new OAuthProviderException("Could not get name from response");
+        }
+
+        if (jRes.has("email") && !isEmpty(jRes.optString("email"))) {
+            if (jRes.has("verified_email") && jRes.getBoolean("verified_email")) {
+                user.setEmail(jRes.getString("email"));
+            } else {
+                throw new OAuthProviderException("The account has not verified it's email address.");
+            }
+        } else {
+            throw new OAuthProviderException("Could not get email from response");
+        }
+
+        user.setPicture(jRes.optString("picture"));
+
+        user.signedIn();
     }
 
     @Override
     protected OAuthService buildService() {
         Config.OAuthKeysConfig keys = getConfig().getGoogleKeys();
+        if (keys == null) {
+            throw new IllegalStateException("Google is not a configured provider.");
+        }
         return new ServiceBuilder()
                 .provider(GoogleApi.class)
                 .apiKey(keys.getApiKey())
                 .apiSecret(keys.getApiSecret())
-                .scope("http://www.google.com/m8/feeds/")
+                .scope("https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
                 .callback(getCallbackUrl())
                 .build();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        Config.OAuthKeysConfig keys = getConfig().getGoogleKeys();
+        return keys != null && keys.isEnabled();
     }
 }
