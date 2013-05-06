@@ -32,6 +32,10 @@ st = namespace("jelly:stapler")
 l.layout(title: _("Masserr") + " " + Functions.emptyIfNull(Masserr.getInstance().getAppName())) {
     h1(_("Masserr") + " " + Masserr.getInstance().getAppName())
 
+    p {
+        i(class: "icon-4x icon-facebook-sign", style: "color: #5b76b3")
+        i(class: "icon-4x icon-google-plus", style: "color: #dd4b39")
+    }
     for (i in 1..115) {
         p("Hello")
     }

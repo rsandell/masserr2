@@ -24,6 +24,7 @@
 
 package net.joinedminds.masserr.oauth;
 
+import net.joinedminds.masserr.oauth.providers.FacebookProvider;
 import net.joinedminds.masserr.oauth.providers.GoogleProvider;
 import net.joinedminds.masserr.oauth.providers.YahooProvider;
 
@@ -35,6 +36,7 @@ import net.joinedminds.masserr.oauth.providers.YahooProvider;
 public enum OAuthType {
     GOOGLE("google", new GoogleProvider()),
     YAHOO("yahoo", new YahooProvider()),
+    FACEBOOK("facebook", new FacebookProvider()),
     //Twitter doesn't expose the user's email so we have nothing to map to.
     ;
 

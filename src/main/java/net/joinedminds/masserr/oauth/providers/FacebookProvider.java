@@ -29,11 +29,9 @@ import net.joinedminds.masserr.model.Config;
 import net.joinedminds.masserr.oauth.OAuthAuthentication;
 import net.joinedminds.masserr.oauth.OAuthProviderException;
 import net.joinedminds.masserr.oauth.Provider;
-import net.sf.json.JSON;
 import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 import org.scribe.builder.ServiceBuilder;
-import org.scribe.builder.api.GoogleApi;
+import org.scribe.builder.api.FacebookApi;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Token;
@@ -42,7 +40,6 @@ import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 
 import static net.joinedminds.masserr.Functions.isEmpty;
 
@@ -51,9 +48,14 @@ import static net.joinedminds.masserr.Functions.isEmpty;
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public class GoogleProvider extends Provider {
+public class FacebookProvider extends Provider {
 
-    private static final Logger logger = LoggerFactory.getLogger(GoogleProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(FacebookProvider.class);
+
+    @Override
+    protected String getCallbackUrl() {
+        return Functions.constructApplicationUrl("auth", "callback2");
+    }
 
     @Override
     public void readUserData(OAuthAuthentication user) throws OAuthProviderException {
@@ -62,11 +64,8 @@ public class GoogleProvider extends Provider {
         Token token = new Token(user.getOAuthToken(), user.getOAuthSecret(), user.getOAuthRawResponse());
         Token accessToken = service.getAccessToken(token, verifier);
 
-
-        //OAuthRequest request = new OAuthRequest(Verb.GET, "http://www.google.com/m8/feeds/contacts/default/full"); //TODO Really?!
-        OAuthRequest request = new OAuthRequest(Verb.GET, "https://www.googleapis.com/oauth2/v2/userinfo");
+        OAuthRequest request = new OAuthRequest(Verb.GET, "https://graph.facebook.com/me?fields=id,name,email,picture.type(small)");
         service.signRequest(accessToken, request);
-        request.addHeader("GData-Version", "3.0");
 
 
         Response response = request.send();
@@ -97,16 +96,14 @@ public class GoogleProvider extends Provider {
         }
 
         if (jRes.has("email") && !isEmpty(jRes.optString("email"))) {
-            if (jRes.has("verified_email") && jRes.getBoolean("verified_email")) {
                 user.setEmail(jRes.getString("email"));
-            } else {
-                throw new OAuthProviderException("The account has not verified it's email address.");
-            }
         } else {
             throw new OAuthProviderException("Could not get email from response");
         }
 
-        user.setPicture(jRes.optString("picture"));
+        if (jRes.has("picture") && jRes.getJSONObject("picture").has("data")) {
+            user.setPicture(jRes.getJSONObject("picture").getJSONObject("data").optString("url"));
+        }
 
         user.signedIn();
     }
@@ -115,26 +112,26 @@ public class GoogleProvider extends Provider {
     protected OAuthService buildService() {
         Config.OAuthKeysConfig keys = getKeys();
         return new ServiceBuilder()
-                .provider(GoogleApi.class)
+                .provider(FacebookApi.class)
                 .apiKey(keys.getApiKey())
                 .apiSecret(keys.getApiSecret())
-                .scope("https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile")
+                .scope("email")
                 .callback(getCallbackUrl())
                 .build();
     }
 
     @Override
     protected Config.OAuthKeysConfig getKeys() {
-        Config.OAuthKeysConfig keys = getConfig().getGoogleKeys();
+        Config.OAuthKeysConfig keys = getConfig().getFacebookKeys();
         if (keys == null) {
-            throw new IllegalStateException("Google is not a configured provider.");
+            throw new IllegalStateException("Facebook is not a configured provider.");
         }
         return keys;
     }
 
     @Override
     public boolean isEnabled() {
-        Config.OAuthKeysConfig keys = getConfig().getGoogleKeys();
+        Config.OAuthKeysConfig keys = getConfig().getFacebookKeys();
         return keys != null && keys.isEnabled();
     }
 }

@@ -57,6 +57,8 @@ public abstract class Provider {
 
     protected abstract OAuthService buildService();
 
+    protected abstract Config.OAuthKeysConfig getKeys();
+
     public abstract boolean isEnabled();
 
     protected String getCallbackUrl() {
@@ -70,13 +72,22 @@ public abstract class Provider {
 
     public void buildRedirectUrl(OAuthAuthentication user) {
         OAuthService service = buildService();
-        Token token = service.getRequestToken();
+        if ("2.0".equals(service.getVersion())) {
+            String redirect = service.getAuthorizationUrl(null);
+            user.setOAuthAuthorizationUrl(redirect);
+            Config.OAuthKeysConfig keys = getKeys();
+            user.setOAuthToken(keys.getApiKey());
+            user.setOAuthSecret(keys.getApiSecret());
+            user.setOAuthRawResponse("");
+        } else {
+            Token token = service.getRequestToken();
 
-        String redirect = service.getAuthorizationUrl(token);
-        user.setOAuthAuthorizationUrl(redirect);
-        user.setOAuthToken(token.getToken());
-        user.setOAuthSecret(token.getSecret());
-        user.setOAuthRawResponse(token.getRawResponse());
+            String redirect = service.getAuthorizationUrl(token);
+            user.setOAuthAuthorizationUrl(redirect);
+            user.setOAuthToken(token.getToken());
+            user.setOAuthSecret(token.getSecret());
+            user.setOAuthRawResponse(token.getRawResponse());
+        }
     }
 
     protected void checkResponseCode(int code) throws OAuthProviderException {

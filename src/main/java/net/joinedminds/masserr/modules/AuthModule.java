@@ -84,6 +84,11 @@ public class AuthModule implements NavItem {
         response.sendRedirect(user.getOAuthAuthorizationUrl());
     }
 
+    public void doCallback2(@QueryParameter(value = "code") String code,
+                            StaplerRequest request, StaplerResponse response) throws IOException, OAuthProviderException {
+        doCallback(code, "", request, response);
+    }
+
     /**
      * Callback from the OAuth provider after login is done.
      *

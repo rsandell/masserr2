@@ -31,6 +31,7 @@
             <st:adjunct includes="org.kohsuke.stapler.underscore"/>
             <st:adjunct includes="org.kohsuke.stapler.jquery"/>
             <st:adjunct includes="org.kohsuke.stapler.bootstrap-responsive"/>
+            <st:adjunct includes="org.kohsuke.stapler.fontawesome"/>
             <script src="${resURL}/js/jQuery/serialize/jquery.serialize-object.compiled.js"></script>
             <!--<script src="${resURL}/js/jquery.serializeObject.min.js"></script>-->
             <script src="${resURL}/js/utils.js"></script>
@@ -101,7 +102,7 @@
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="signInCombo-toggle">
                                             <j:forEach var="pr" items="${h.getSignInProviders()}" indexVar="pi">
                                                 <li>
-                                                    <a tabindex="${pi}"
+                                                    <a tabindex="${pi}" class="signin-link"
                                                        href="${rootURL}/auth/login?provider=${pr.getName()}">
                                                         <st:include it="${pr}" page="${pr.getName()}.groovy"/>
                                                     </a>

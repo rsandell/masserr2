@@ -118,13 +118,22 @@ public class YahooProvider extends Provider {
 
     @Override
     protected OAuthService buildService() {
-        Config.OAuthKeysConfig keys = getConfig().getYahooKeys();
+        Config.OAuthKeysConfig keys = getKeys();
         return new ServiceBuilder()
                 .provider(YahooApi.class)
                 .apiKey(keys.getApiKey())
                 .apiSecret(keys.getApiSecret())
                 .callback(getCallbackUrl())
                 .build();
+    }
+
+    @Override
+    protected Config.OAuthKeysConfig getKeys() {
+        Config.OAuthKeysConfig keys = getConfig().getYahooKeys();
+        if (keys == null) {
+            throw new IllegalStateException("Yahoo is not a configured provider.");
+        }
+        return keys;
     }
 
     @Override

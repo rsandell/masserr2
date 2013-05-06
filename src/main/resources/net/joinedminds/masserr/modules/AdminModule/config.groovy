@@ -90,7 +90,7 @@ l.layout(title: _("Config") + " " + Masserr.getInstance().getAppName()) {
             }
         }
         div(class: "control-group") {
-            label(class: "control-label", for: "inputProviderGoogleEnabled", _("Yahoo"))
+            label(class: "control-label", for: "inputProviderYahooEnabled", _("Yahoo"))
             div(class: "controls") {
                 if (config.getYahooKeys() != null && config.yahooKeys.enabled) {
                     input(type: "checkbox", id: "inputProviderYahooEnabled", name: "yahooKeys[enabled]", checked: true)
@@ -109,6 +109,28 @@ l.layout(title: _("Config") + " " + Masserr.getInstance().getAppName()) {
             label(class: "control-label", for: "inputProviderYahooSecret", _("API Secret"))
             div(class: "controls") {
                 input(type: "text", id: "inputProviderYahooSecret", name: "yahooKeys[apiSecret]", value: config.yahooKeys?.apiSecret)
+            }
+        }
+        div(class: "control-group") {
+            label(class: "control-label", for: "inputProviderFacebookEnabled", _("Facebook"))
+            div(class: "controls") {
+                if (config.getFacebookKeys() != null && config.facebookKeys.enabled) {
+                    input(type: "checkbox", id: "inputProviderFacebookEnabled", name: "facebookKeys[enabled]", checked: true)
+                } else {
+                    input(type: "checkbox", id: "inputProviderFacebookEnabled", name: "facebookKeys[enabled]")
+                }
+            }
+        }
+        div(class: "control-group") {
+            label(class: "control-label", for: "inputProviderFacebookApi", _("API Key"))
+            div(class: "controls") {
+                input(type: "text", id: "inputProviderFacebookApi", name: "facebookKeys[apiKey]", value: config.facebookKeys?.apiKey)
+            }
+        }
+        div(class: "control-group") {
+            label(class: "control-label", for: "inputProviderFacebookSecret", _("API Secret"))
+            div(class: "controls") {
+                input(type: "text", id: "inputProviderFacebookSecret", name: "facebookKeys[apiSecret]", value: config.facebookKeys?.apiSecret)
             }
         }
         div(class: "control-group") {

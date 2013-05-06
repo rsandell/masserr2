@@ -25,10 +25,12 @@ public class Config {
     @Embedded
     private OAuthKeysConfig googleKeys;
     private String applicationUrl;
+    private OAuthKeysConfig facebookKeys;
 
     public Config() {
         yahooKeys = new OAuthKeysConfig(false, "", "");
         googleKeys = new OAuthKeysConfig(false, "", "");
+        facebookKeys = new OAuthKeysConfig(false, "", "");
     }
 
     public String getAppName() {
@@ -69,6 +71,14 @@ public class Config {
 
     public void setApplicationUrl(String applicationUrl) {
         this.applicationUrl = applicationUrl;
+    }
+
+    public OAuthKeysConfig getFacebookKeys() {
+        return facebookKeys;
+    }
+
+    public void setFacebookKeys(OAuthKeysConfig facebookKeys) {
+        this.facebookKeys = facebookKeys;
     }
 
     @Embedded

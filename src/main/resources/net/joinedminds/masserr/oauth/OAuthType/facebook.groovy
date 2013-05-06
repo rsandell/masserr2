@@ -21,7 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-i(class: "icon-2x icon-google-plus google-signin")
-//img(src: "$resURL/signin/google.png", style: "width: 120px; height: 40px;", alt: "Google")
-
+i(class: "icon-3x icon-facebook-sign facebook-signin")
