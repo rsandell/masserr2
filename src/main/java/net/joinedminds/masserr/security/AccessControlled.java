@@ -24,10 +24,17 @@
 
 package net.joinedminds.masserr.security;
 
+import net.joinedminds.masserr.model.security.ACL;
+import net.joinedminds.masserr.model.security.Principal;
+
 /**
  * Description
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
 public interface AccessControlled {
+
+    boolean hasPermission(Principal principal, Permission permission);
+
+    ACL getACL();
 }
