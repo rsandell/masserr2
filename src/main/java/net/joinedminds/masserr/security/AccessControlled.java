@@ -22,15 +22,12 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.model.auth;
-
-import com.github.jmkgreen.morphia.annotations.Embedded;
+package net.joinedminds.masserr.security;
 
 /**
  * Description
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-@Embedded
-public class OAuthIdentity {
+public interface AccessControlled {
 }

@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2004-2012-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
+ * Copyright (c) 2013-, Robert Sandell-sandell.robert@gmail.com. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,84 +22,76 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.model.auth;
+package net.joinedminds.masserr.model.security;
 
-import com.github.jmkgreen.morphia.annotations.Embedded;
 import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Id;
+import com.github.jmkgreen.morphia.annotations.Indexed;
 import com.github.jmkgreen.morphia.annotations.Reference;
 import net.joinedminds.masserr.Functions;
-import net.joinedminds.masserr.model.Campaign;
-import net.joinedminds.masserr.model.security.Principal;
+import net.joinedminds.masserr.model.NamedIdentifiable;
 import org.bson.types.ObjectId;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
- * Description.
- * <p/>
- * Created: 2004-mar-15 18:00:46
+ * Description
  *
- * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
+ * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
 @Entity
-public class User extends Principal implements Serializable {
-
+public class UserGroup extends Principal implements NamedIdentifiable {
     @Id
     private ObjectId objectId;
-    @Reference
-    private Campaign campaign;
-    private String fullName;
-    private Set<String> emails;
+    @Indexed(unique = true)
+    private String name;
     private String description;
-    private Date lastLogin = null;
-    @Embedded
-    private List<OAuthIdentity> identities;
+    @Reference(lazy = true)
+    private Set<Principal> members;
 
-    /**
-     * For serialization
-     */
-    public User() {
+    public UserGroup() {
     }
 
-    public User(Campaign campaign, String fullName, Set<String> emails, String description, List<OAuthIdentity> identities) {
-        this.campaign = campaign;
-        this.fullName = fullName;
-        this.emails = emails;
+    public UserGroup(String name, String description, Set<Principal> members) {
+        this.name = name;
         this.description = description;
-        this.identities = identities;
+        this.members = members;
     }
 
     public String getId() {
         return Functions.toString(objectId);
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String pFullName) {
-        fullName = pFullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String pDescription) {
-        description = pDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-
-    public Date getLastLogin() {
-        return lastLogin;
+    public Set<Principal> getMembers() {
+        return members;
     }
 
-    public void setLastLogin(Date pLastLogin) {
-        lastLogin = pLastLogin;
+    public void setMembers(Set<Principal> members) {
+        this.members = members;
+        for (Principal p : members) {
+            p.addMemberOf(this);
+        }
     }
 
+    public boolean addMember(Principal p) {
+        boolean added = members.add(p);
+        p.addMemberOf(this);
+        return added;
+    }
 }

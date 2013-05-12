@@ -34,6 +34,7 @@ import java.util.BitSet;
  * 
  * @author <a href="mailto:sandell.robert@gmail.com>Robert Sandell</a>"
  */
+@Deprecated
 public class UserRights implements Serializable, Cloneable {
 
     private BitSet bitSet;

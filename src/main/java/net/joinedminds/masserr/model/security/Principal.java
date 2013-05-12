@@ -22,15 +22,30 @@
  * THE SOFTWARE.
  */
 
-package net.joinedminds.masserr.model.auth;
+package net.joinedminds.masserr.model.security;
 
-import com.github.jmkgreen.morphia.annotations.Embedded;
+import com.github.jmkgreen.morphia.annotations.Reference;
+
+import java.util.Set;
 
 /**
- * Description
+ * Base class for Users and Groups
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-@Embedded
-public class OAuthIdentity {
+public abstract class Principal {
+    @Reference(lazy = true)
+    private Set<UserGroup> memberOf;
+
+    public Set<UserGroup> getMemberOf() {
+        return memberOf;
+    }
+
+    public boolean addMemberOf(UserGroup group) {
+        return getMemberOf().add(group);
+    }
+
+    public boolean isMemberOf(UserGroup group) {
+        return getMemberOf().contains(group);
+    }
 }
