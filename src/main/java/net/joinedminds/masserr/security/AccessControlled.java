@@ -32,9 +32,9 @@ import net.joinedminds.masserr.model.security.Principal;
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-public interface AccessControlled {
+public interface AccessControlled<T extends AccessControlled> {
 
     boolean hasPermission(Principal principal, Permission permission);
 
-    ACL getACL();
+    ACL<T> getACL();
 }

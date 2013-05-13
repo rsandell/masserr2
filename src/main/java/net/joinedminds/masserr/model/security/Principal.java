@@ -48,4 +48,17 @@ public abstract class Principal {
     public boolean isMemberOf(UserGroup group) {
         return getMemberOf().contains(group);
     }
+
+    public static final Principal ANONYMOUS = new Principal() {
+        @Override
+        public String toString() {
+            return "anonymous";
+        }
+    };
+    public static final Principal SYSTEM = new Principal() {
+        @Override
+        public String toString() {
+            return "system";
+        }
+    };
 }

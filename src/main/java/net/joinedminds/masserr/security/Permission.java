@@ -62,7 +62,11 @@ public final class Permission {
     }
 
     public Permission(PermissionGroup group, Localizable name) {
-        this(group, name, null);
+        this(group, name, null, null);
+    }
+
+    public Permission(PermissionGroup group, Localizable name, Permission inferredBy) {
+        this(group, name, null, inferredBy);
     }
 
     public PermissionGroup getGroup() {

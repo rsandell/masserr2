@@ -24,10 +24,18 @@
 
 package net.joinedminds.masserr.model;
 
+import com.github.jmkgreen.morphia.annotations.Embedded;
 import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Id;
 import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.github.jmkgreen.morphia.annotations.Reference;
 import net.joinedminds.masserr.Functions;
+import net.joinedminds.masserr.Messages;
+import net.joinedminds.masserr.model.security.ACL;
+import net.joinedminds.masserr.model.security.Principal;
+import net.joinedminds.masserr.security.AccessControlled;
+import net.joinedminds.masserr.security.Permission;
+import net.joinedminds.masserr.security.PermissionGroup;
 import org.bson.types.ObjectId;
 
 /**
@@ -38,13 +46,15 @@ import org.bson.types.ObjectId;
  * @author <a href="mailto:sandell.robert@gmail.com">Robert "Bobby" Sandell</a>
  */
 @Entity
-public class Domain implements NamedIdentifiable {
+public class Domain implements NamedIdentifiable, AccessControlled<Domain> {
 
     @Id
     private ObjectId objectId;
     @Indexed
     private String name;
     private String history;
+    @Embedded
+    private ACL<Domain> acl;
 
     public Domain() {
     }
@@ -52,10 +62,12 @@ public class Domain implements NamedIdentifiable {
     public Domain(String pName, String pHistory) {
         name = pName;
         history = pHistory;
+        acl = new ACL<>(this);
     }
 
     public Domain(String pName) {
         name = pName;
+        acl = new ACL<>(this);
     }
 
     @Override
@@ -94,4 +106,26 @@ public class Domain implements NamedIdentifiable {
             return null;
         }
     }
+
+    @Override
+    public boolean hasPermission(Principal principal, Permission permission) {
+        return getACL().hasPermission(principal, permission);
+    }
+
+    @Override
+    public synchronized ACL<Domain> getACL() {
+        if (acl == null) {
+            acl = new ACL<>(this);
+        }
+        return acl;
+    }
+
+    public static final PermissionGroup PGROUP_GENERAL = new PermissionGroup(Domain.class, Messages._Domain_Permission_General());
+    public static final Permission ADMINISTER = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_Administer(), Messages._Domain_Permission_General_Administer_Description());
+    public static final Permission CHANGE_NAME = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_ChangeName(), ADMINISTER);
+    public static final Permission EDIT_HISTORY = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_EditHistory(), ADMINISTER);
+
+    public static final PermissionGroup PGROUP_ROLES = new PermissionGroup(Domain.class, Messages._Domain_Permission_Role());
+    public static final Permission ROLE_CREATE = new Permission(PGROUP_ROLES, Messages._Domain_Permission_Role_Create(), ADMINISTER);
+    public static final Permission ROLE_LIST = new Permission(PGROUP_ROLES, Messages._Domain_Permission_Role_List(), Role.READ);
 }

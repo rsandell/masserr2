@@ -28,6 +28,12 @@ package net.joinedminds.masserr.model;
 import com.github.jmkgreen.morphia.annotations.*;
 import com.google.common.collect.ImmutableList;
 import net.joinedminds.masserr.Functions;
+import net.joinedminds.masserr.Messages;
+import net.joinedminds.masserr.model.security.ACL;
+import net.joinedminds.masserr.model.security.Principal;
+import net.joinedminds.masserr.security.AccessControlled;
+import net.joinedminds.masserr.security.Permission;
+import net.joinedminds.masserr.security.PermissionGroup;
 import org.bson.types.ObjectId;
 
 import java.text.DateFormat;
@@ -44,7 +50,7 @@ import static java.util.Collections.emptyList;
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
 @Entity
-public class Role implements NamedIdentifiable {
+public class Role implements NamedIdentifiable, AccessControlled<Role> {
     public static final int GHOUL_GENERATION = 17;
 
     @Id
@@ -126,6 +132,8 @@ public class Role implements NamedIdentifiable {
     @Indexed
     @Reference
     private Player player = null;
+    @Embedded
+    private ACL<Role> acl;
 
     public Role() {
     }
@@ -144,6 +152,7 @@ public class Role implements NamedIdentifiable {
         derangements = emptyList();
         otherTraits = emptyList();
         rituals = new LinkedList<>();
+        acl = new ACL<>(this);
     }
 
     public List<Resource> getResources() {
@@ -700,4 +709,27 @@ public class Role implements NamedIdentifiable {
             return null;
         }
     }
+
+    @Override
+    public boolean hasPermission(Principal principal, Permission permission) {
+        if (getACL().hasPermission(principal, permission)) {
+            return true;
+        } else {
+            Domain d = getDomain();
+            return d != null && d.hasPermission(principal, permission);
+        }
+    }
+
+    @Override
+    public synchronized ACL<Role> getACL() {
+        if (acl == null) {
+            acl = new ACL<>(this);
+        }
+        return acl;
+    }
+
+    public static final PermissionGroup PGROUP_GENERAL = new PermissionGroup(Role.class, Messages._Role_Permission_General());
+    public static final Permission ADMINISTER = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Administer(), Messages._Role_Permission_General_Administer_Description(), Domain.ADMINISTER);
+    public static final Permission EDIT = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Edit(), Domain.ROLE_CREATE);
+    public static final Permission READ = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Read(), EDIT);
 }

@@ -32,10 +32,12 @@ import com.github.jmkgreen.morphia.annotations.Reference;
 import com.github.jmkgreen.morphia.annotations.Transient;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import net.joinedminds.masserr.security.AccessControlled;
 import net.joinedminds.masserr.security.Permission;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -46,19 +48,25 @@ import static com.google.common.base.Preconditions.checkNotNull;
  *
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
-@Entity
-public abstract class ACL {
+@Embedded
+public class ACL<T extends AccessControlled> {
     private static final Logger logger = LoggerFactory.getLogger(ACL.class);
 
     @Embedded
     private Set<PrincipalAccess> matrix;
+    @Reference
+    private T target;
 
     protected ACL() {
     }
 
-    protected ACL(Set<PrincipalAccess> matrix) {
-        checkNotNull(matrix);
-        this.matrix = matrix;
+    public ACL(T target, Set<PrincipalAccess> matrix) {
+        this.target = checkNotNull(target);
+        this.matrix = checkNotNull(matrix);
+    }
+
+    public ACL(T target) {
+        this(target, Collections.<PrincipalAccess>emptySet());
     }
 
     protected PrincipalAccess find(Principal principal) {
