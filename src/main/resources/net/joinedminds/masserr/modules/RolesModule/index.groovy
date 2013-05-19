@@ -55,11 +55,17 @@ l.layout(title: _("Roles") + " " + Masserr.getInstance().getAppName()) {
                 div(class: "rolewell") {
                     img(class: "clan", src: role.getClan().getLogoPath(resURL, "48"),
                             alt: role.getClan().getName(), title: role.getClan().getName())
-                    h5(role.getName())
+                    a(href: "role/" + role.getId()) {h5(role.getName()) }
                     div(class: "toolbar") {
                         a(class: "btn btn-mini", href: "role/" + role.getId() + "/edit") {
                             i(class: "icon-edit")
                         }
+                    }
+                    if (role.ghoul) {
+                        div(class: "ghoul")
+                    }
+                    if (role.npc) {
+                        div(class: "npc")
                     }
                 }
 

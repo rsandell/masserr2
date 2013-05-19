@@ -41,6 +41,7 @@ import org.kohsuke.stapler.WebApp;
 import org.kohsuke.stapler.bind.Bound;
 
 import javax.servlet.ServletException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -259,6 +260,17 @@ public class Functions {
             }
         }
         return types;
+    }
+
+    public static String formatDate(Date dateTime) {
+        StaplerRequest request = Stapler.getCurrentRequest();
+        DateFormat format;
+        if (request != null) {
+            format = DateFormat.getDateInstance(DateFormat.MEDIUM, request.getLocale());
+        } else {
+            format = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        }
+        return format.format(dateTime);
     }
 
     public static class Breadcrumb {
