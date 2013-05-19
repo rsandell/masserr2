@@ -109,6 +109,7 @@ input.attribute-input[type="number"] {
 .rolewell .toolbar .btn {
     padding-left: 3px;
     padding-right: 3px;
+    line-height: 1.5;
 }
 
 .rolewell .ghoul {
@@ -177,4 +178,10 @@ input.attribute-input[type="number"] {
     -moz-border-radius: 4px;
     border-radius: 4px;
     margin: 2px;*/
+}
+
+.abilities-table td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

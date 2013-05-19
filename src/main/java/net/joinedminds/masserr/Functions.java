@@ -273,6 +273,21 @@ public class Functions {
         return format.format(dateTime);
     }
 
+    public static int max(int... values) {
+        if (values.length <= 1) {
+            throw new IllegalArgumentException("values length must be >= 2");
+        }
+        if (values.length == 2) {
+            return Math.max(values[0], values[1]);
+        } else {
+            int current = values[0];
+            for (int i = 1; i < values.length; i++) {
+                current = Math.max(current, values[i]);
+            }
+            return current;
+        }
+    }
+
     public static class Breadcrumb {
         private String url;
         private Localizable localizableDisplay;

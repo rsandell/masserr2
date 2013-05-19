@@ -184,4 +184,34 @@ public class FunctionsTest {
         c.set(Calendar.DAY_OF_MONTH, 8);
         assertEquals("1981-07-08", Functions.isoDate(c.getTime()));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testMaxJustOne() {
+        Functions.max(1);
+    }
+
+    @Test
+    public void testMaxOfTwo() {
+        assertEquals(2, Functions.max(1, 2));
+    }
+
+    @Test
+    public void testMaxOfThree() {
+        assertEquals(3, Functions.max(1, 2, 3));
+    }
+
+    @Test
+    public void testMaxOfFive() {
+        assertEquals(5, Functions.max(1, 2, 3, 4, 5));
+    }
+
+    @Test
+    public void testMaxOfFiveMiddle() {
+        assertEquals(5, Functions.max(1, 2, 5, -4, -5));
+    }
+
+    @Test
+    public void testMaxOfFiveFirst() {
+        assertEquals(10, Functions.max(10, 2, 5, -4, -5));
+    }
 }

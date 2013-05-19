@@ -34,6 +34,7 @@ import net.joinedminds.masserr.model.security.Principal;
 import net.joinedminds.masserr.security.AccessControlled;
 import net.joinedminds.masserr.security.Permission;
 import net.joinedminds.masserr.security.PermissionGroup;
+import net.joinedminds.masserr.ui.NavItem;
 import org.bson.types.ObjectId;
 
 import java.text.DateFormat;
@@ -50,7 +51,7 @@ import static java.util.Collections.emptyList;
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
 @Entity
-public class Role implements NamedIdentifiable, AccessControlled<Role> {
+public class Role implements NamedIdentifiable, AccessControlled<Role>, NavItem {
     public static final int GHOUL_GENERATION = 17;
 
     @Id
@@ -338,10 +339,16 @@ public class Role implements NamedIdentifiable, AccessControlled<Role> {
     }
 
     public List<DottedNotedType<Ability>> getPhysicalAbilities() {
+        if (physicalAbilities == null) {
+            return Collections.emptyList();
+        }
         return physicalAbilities;
     }
 
     public List<DottedNotedType<Ability>> getSocialAbilities() {
+        if (socialAbilities == null) {
+            return Collections.emptyList();
+        }
         return socialAbilities;
     }
 
@@ -350,6 +357,9 @@ public class Role implements NamedIdentifiable, AccessControlled<Role> {
     }
 
     public List<DottedNotedType<Ability>> getMentalAbilities() {
+        if (mentalAbilities == null) {
+            return Collections.emptyList();
+        }
         return mentalAbilities;
     }
 
@@ -382,6 +392,9 @@ public class Role implements NamedIdentifiable, AccessControlled<Role> {
     }
 
     public List<DottedType<OtherTrait>> getOtherTraits() {
+        if (otherTraits == null) {
+            return Collections.emptyList();
+        }
         return otherTraits;
     }
 
@@ -711,6 +724,11 @@ public class Role implements NamedIdentifiable, AccessControlled<Role> {
     }
 
     @Override
+    public String getNavDisplay() {
+        return getName();
+    }
+
+    @Override
     public boolean hasPermission(Principal principal, Permission permission) {
         if (getACL().hasPermission(principal, permission)) {
             return true;
@@ -732,4 +750,5 @@ public class Role implements NamedIdentifiable, AccessControlled<Role> {
     public static final Permission ADMINISTER = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Administer(), Messages._Role_Permission_General_Administer_Description(), Domain.ADMINISTER);
     public static final Permission EDIT = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Edit(), Domain.ROLE_CREATE);
     public static final Permission READ = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Read(), EDIT);
+
 }

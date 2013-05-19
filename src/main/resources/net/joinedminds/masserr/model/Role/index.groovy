@@ -37,180 +37,24 @@ l.layout(title: _("Role") + " " + role.name + " " + Functions.emptyIfNull(Masser
         img(src: role.clan.getLogoPath(resURL, "48"))
         raw("&nbsp;")
     }
-    div(class: "row") {
-        table(class: "span3 table table-condensed table-hover table-bordered") {
-            tr {
-                td {
-                    strong(_("Player"))
-                }
-                td {
-                    if (role.player != null) {
-                        span(role.player.name)
-                    } else {
-                        _("NPC")
-                    }
-                }
+    div(class: "accordion", id: "accordion2") {
+        div(class: "accordion-group") {
+            div(class: "accordion-heading") {
+                a(class: "accordion-toggle", "data-toggle": "collapse", "data-parent": "#accordion2", href: "#collapseGeneral", _("General"))
             }
-            tr {
-                if (role.ghoul) {
-                    td(colspan: "2") {strong(_("Ghoul"))}
-                } else {
-                    td {
-                        strong(_("Generation"))
-                    }
-                    td {
-                        span(role.generation.generation)
-                    }
-                }
-            }
-            tr {
-                td {
-                    strong(_("Embraced"))
-                }
-                td {
-                    raw(Functions.formatDate(role.embraced))
-                }
-            }
-            tr {
-                td {
-                    strong(_("Age"))
-                }
-                td {
-                    raw(role.age)
-                }
-            }
-            tr {
-                td {
-                    strong(_("Clan"))
-                }
-                td {
-                    span(role.clan.name)
-                }
-            }
-            tr {
-                td {
-                    strong(_("Nature"))
-                }
-                td {
-                    span(role.nature.name)
-                }
-            }
-            tr {
-                td {
-                    strong(_("Demeanor"))
-                }
-                td {
-                    span(role.demeanor.name)
+            div(id: "collapseGeneral", class: "accordion-body collapse in") {
+                div(class: "accordion-inner") {
+                    st.include(page: "i_index_general.groovy")
                 }
             }
         }
-        table(class: "span3 offset1 table table-condensed table-hover table-bordered") {
-            tr {
-                td {
-                    strong(_("Domain"))
-                }
-                td {
-                    span(role.domain.name)
-                }
+        div(class: "accordion-group") {
+            div(class: "accordion-heading") {
+                a(class: "accordion-toggle", "data-toggle": "collapse", "data-parent": "#accordion2", href: "#collapseAbilities", _("Abilities"))
             }
-            tr {
-                td {
-                    strong(_("Courage"))
-                }
-                td {
-                    raw(role.virtues.courageDots)
-                }
-            }
-            tr {
-                td {
-                    strong(_(role.virtues.adherence.name()))
-                }
-                td {
-                    raw(role.virtues.adherenceDots)
-                }
-            }
-            tr {
-                td {
-                    strong(_(role.virtues.resistance.name()))
-                }
-                td {
-                    raw(role.virtues.resistanceDots)
-                }
-            }
-            tr {
-                td {
-                    strong(_("Willpower"))
-                }
-                td {
-                    raw(role.willpower)
-                }
-            }
-            tr {
-                td {
-                    strong(_("Bloodpool"))
-                }
-                td {
-                    raw(role.generation.bloodPool)
-                    if (role.generation.humanBlood > 0) {
-                        raw("/")
-                        raw(role.generation.humanBlood)
-                    }
-                    raw("/")
-                    raw(role.generation.spendBlood)
-                }
-            }
-            tr {
-                td {
-                    strong(role.morality.type.name)
-                }
-                td {
-                    raw(role.morality.dots)
-                }
-            }
-        }
-        table(class: "span3 offset1 table table-condensed table-hover table-bordered") {
-            int emptyRows = 7
-            if (role.derangements?.size() > 0) {
-                emptyRows = emptyRows - role.derangements.size()
-                tr {
-                    td {
-                        strong(_("Derangements"))
-                    }
-                }
-                role.derangements.each { String der ->
-                    tr {
-                        td(der)
-                    }
-                }
-                if(role.beastTraits?.size() > 0) {
-                    emptyRows -= 1
-                    tr {
-                        td {
-                            raw("&nbsp;")
-                        }
-                    }
-                }
-            }
-            if(role.beastTraits?.size() > 0) {
-                emptyRows = emptyRows - role.beastTraits.size()
-                tr {
-                    td {
-                        strong(_("Beast Traits"))
-                    }
-                }
-                role.beastTraits.each {String bt ->
-                    tr {
-                        td(bt)
-                    }
-                }
-            }
-            if (emptyRows > 0) {
-                for (i in 1..emptyRows) {
-                    tr {
-                        td {
-                            raw("&nbsp;")
-                        }
-                    }
+            div(id: "collapseAbilities", class: "accordion-body collapse") {
+                div(class: "accordion-inner") {
+                    st.include(page: "i_index_abilities.groovy")
                 }
             }
         }
