@@ -33,6 +33,7 @@ import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.dataimport.Wiki;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
+import net.joinedminds.masserr.intercept.JsonFiltered;
 import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.model.Config;
 import net.joinedminds.masserr.ui.NavItem;
@@ -264,6 +265,7 @@ public class AdminModule implements NavItem {
     }
 
     @JavaScriptMethod
+    @JsonFiltered(excludes = {"acl"})
     public Player getPlayer(String id) {
         return adminDb.getPlayer(id);
     }
