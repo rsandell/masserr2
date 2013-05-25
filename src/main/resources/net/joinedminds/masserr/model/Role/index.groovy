@@ -58,5 +58,15 @@ l.layout(title: _("Role") + " " + role.name + " " + Functions.emptyIfNull(Masser
                 }
             }
         }
+        div(class: "accordion-group") {
+            div(class: "accordion-heading") {
+                a(class: "accordion-toggle", "data-toggle": "collapse", "data-parent": "#accordion2", href: "#collapseDisciplines", _("Disciplines & Magic"))
+            }
+            div(id: "collapseDisciplines", class: "accordion-body collapse") {
+                div(class: "accordion-inner") {
+                    st.include(page: "i_index_disciplines.groovy")
+                }
+            }
+        }
     }
 }

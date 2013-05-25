@@ -122,6 +122,10 @@ public class Functions {
         return text == null ? nullText : text + suffix;
     }
 
+    public static String prependIfNotNullOrEmpty(String text, String prefix, String nullText) {
+        return text == null || text.isEmpty() ? nullText : prefix + text;
+    }
+
     /*public static Object ifNull(Object obj, Object thenVal) {
         return obj == null ? thenVal : obj;
     }*/

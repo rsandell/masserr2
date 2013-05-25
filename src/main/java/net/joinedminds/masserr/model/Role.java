@@ -302,7 +302,7 @@ public class Role implements NamedIdentifiable, AccessControlled<Role>, NavItem 
         return name;
     }
 
-    public List getDisciplines() {
+    public List<DottedType<Discipline>> getDisciplines() {
         return disciplines;
     }
 
