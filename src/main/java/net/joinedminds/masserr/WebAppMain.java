@@ -24,19 +24,13 @@
 
 package net.joinedminds.masserr;
 
-import com.google.common.base.Preconditions;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.kohsuke.stapler.HttpResponseRenderer;
 import org.kohsuke.stapler.Stapler;
-import org.kohsuke.stapler.WebApp;
-import org.kohsuke.stapler.framework.adjunct.AdjunctManager;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -55,10 +49,6 @@ public class WebAppMain implements ServletContextListener {
 
         Injector injector = Guice.createInjector(new GuiceModule(context, dbHost, dbName, dbUser, dbPasswd));
         Stapler.setRoot(sce, injector.getInstance(Masserr.class));
-
-        //Replace the default renderer with one that can filter json output for js proxied methods
-        CopyOnWriteArrayList<HttpResponseRenderer> renderers = WebApp.get(context).getResponseRenderers();
-        renderers.set(0, new net.joinedminds.masserr.intercept.HttpResponseRenderer());
     }
 
     @Override

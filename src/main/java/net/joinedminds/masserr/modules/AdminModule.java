@@ -33,17 +33,25 @@ import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.dataimport.Wiki;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
-import net.joinedminds.masserr.intercept.JsonFiltered;
-import net.joinedminds.masserr.model.*;
+import net.joinedminds.masserr.model.Ability;
+import net.joinedminds.masserr.model.Campaign;
 import net.joinedminds.masserr.model.Config;
+import net.joinedminds.masserr.model.Discipline;
+import net.joinedminds.masserr.model.MeritOrFlaw;
+import net.joinedminds.masserr.model.Morality;
+import net.joinedminds.masserr.model.OtherTrait;
+import net.joinedminds.masserr.model.Path;
+import net.joinedminds.masserr.model.Player;
+import net.joinedminds.masserr.model.Ritual;
+import net.joinedminds.masserr.model.RitualType;
 import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
 import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
+import org.kohsuke.stapler.interceptor.JsonOutputFilter;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -265,12 +273,13 @@ public class AdminModule implements NavItem {
     }
 
     @JavaScriptMethod
-    @JsonFiltered(excludes = {"acl"})
+    @JsonOutputFilter(excludes = {"acl"})
     public Player getPlayer(String id) {
         return adminDb.getPlayer(id);
     }
 
     @JavaScriptMethod
+    @JsonOutputFilter(excludes = {"acl"})
     public SubmitResponse<Player> savePlayer(JSONObject jsonPlayer) {
         String id = jsonPlayer.optString("id");
         String name = jsonPlayer.optString("name");
