@@ -33,7 +33,7 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Merits & Flaws") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
-    raw(f.bind(my, 'admin'))
+    st.bind(value: my, var: 'admin')
     script {
         raw("var mfTypes =[")
         MeritOrFlaw.Type.values().each { type ->

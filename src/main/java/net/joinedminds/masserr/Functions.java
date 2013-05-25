@@ -24,7 +24,6 @@
 
 package net.joinedminds.masserr;
 
-import com.google.common.base.Joiner;
 import net.joinedminds.masserr.model.Config;
 import net.joinedminds.masserr.modules.AuthModule;
 import net.joinedminds.masserr.oauth.OAuthAuthentication;
@@ -37,8 +36,6 @@ import org.jvnet.localizer.Localizable;
 import org.kohsuke.stapler.Ancestor;
 import org.kohsuke.stapler.Stapler;
 import org.kohsuke.stapler.StaplerRequest;
-import org.kohsuke.stapler.WebApp;
-import org.kohsuke.stapler.bind.Bound;
 
 import javax.servlet.ServletException;
 import java.text.DateFormat;
@@ -201,7 +198,7 @@ public class Functions {
 
     public static String constructApplicationUrl(String... items) {
         Config config = Masserr.getInstance().getAdmin().getConfig();
-        String[] nItems = new String[items.length+1];
+        String[] nItems = new String[items.length + 1];
         nItems[0] = config.getApplicationUrl();
         System.arraycopy(items, 0, nItems, 1, items.length);
         return constructPath(nItems);
@@ -214,11 +211,11 @@ public class Functions {
 
     private static JSONObject massageSubmittedForm(JSONObject form) {
         JSONObject j = new JSONObject();
-        for(Object key: form.keySet()) {
+        for (Object key : form.keySet()) {
             Object val = form.get((String)key);
-            if(val instanceof JSONObject) {
+            if (val instanceof JSONObject) {
                 j.put((String)key, massageSubmittedForm((JSONObject)val));
-            } else if("staplerClass".equals(key)) {
+            } else if ("staplerClass".equals(key)) {
                 j.put("stapler-class", val);
             } else {
                 Boolean bVal = toBoolean(val);
@@ -233,13 +230,13 @@ public class Functions {
     }
 
     private static Boolean toBoolean(Object val) {
-        if(val == null) {
+        if (val == null) {
             return null;
         } else {
             String s = val.toString().toLowerCase();
-            if("on".equals(s) || "true".equals(s)) {
+            if ("on".equals(s) || "true".equals(s)) {
                 return true;
-            } else if("false".equals(s)) {
+            } else if ("false".equals(s)) {
                 return false;
             } else {
                 return null;
@@ -254,7 +251,7 @@ public class Functions {
 
     public static List<OAuthType> getSignInProviders() {
         List<OAuthType> types = new LinkedList<>();
-        for(OAuthType t : OAuthType.values()) {
+        for (OAuthType t : OAuthType.values()) {
             if (t.getProvider().isEnabled()) {
                 types.add(t);
             }
@@ -316,32 +313,6 @@ public class Functions {
             }
             return display;
         }
-    }
-
-    /**
-     * Replacement for stapler's bind that doesn't require prototype.js to work.
-     *
-     * @param javaObject the object to bind
-     * @param varName    the name of the js variable to bind to
-     * @return the html/js code
-     */
-    public static String bind(Object javaObject, String varName) {
-        StringBuilder str = new StringBuilder("");
-        String expr;
-        if (javaObject == null) {
-            expr = "null";
-        } else {
-            Bound h = WebApp.getCurrent().boundObjectTable.bind(javaObject);
-            expr = h.getProxyScript();
-        }
-        if (varName == null) {
-            str.append(expr);
-        } else {
-            str.append("<script>");
-            str.append(varName).append("=").append(expr).append(";");
-            str.append("</script>");
-        }
-        return str.toString();
     }
 
     public static String isoDate(Date date) {

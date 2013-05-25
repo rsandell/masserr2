@@ -30,7 +30,7 @@ import net.joinedminds.masserr.model.Domain
 import net.joinedminds.masserr.model.Generation
 import net.joinedminds.masserr.modules.RolesModule
 
-//alert
+st = namespace("jelly:stapler")
 
 // Modal
 div(id: "quickRoleModal", class: "modal hide fade", tabindex: "-1", role: "dialog", 'aria-labelledby': "quickRoleModalLabel", 'aria-hidden': "true") {
@@ -43,7 +43,7 @@ div(id: "quickRoleModal", class: "modal hide fade", tabindex: "-1", role: "dialo
         raw("quickRoleMsgs.embraced.heading = '" + Messages.QuickRoles_Msg_Embraced_h() + "';\n")
         raw("quickRoleMsgs.embraced.message = '" + Messages.QuickRoles_Msg_Embraced_Msg() + "';\n")
     }
-    raw(h.bind(Masserr.getInstance().getRoles(), 'qrModule'))
+    st.bind(value: Masserr.getInstance().getRoles(), var: 'qrModule')
     div(class: "modal-header") {
         button(type: "button", class: "close", 'data-dismiss': "modal", 'aria-hidden': "true", '×')
         h3(id: "quickRoleModalLabel", _("New Quick NPC"))

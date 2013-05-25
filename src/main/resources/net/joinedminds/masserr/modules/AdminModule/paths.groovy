@@ -36,7 +36,7 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Paths") + " " + Masserr.getInstance().getAppName()) {
     Functions f = h;
-    raw(f.bind(my, 'admin'))
+    st.bind(value: my, var: 'admin')
 
     script() {
         raw("var paths = [")

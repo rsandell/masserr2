@@ -36,7 +36,7 @@ l.layout(title: _("Players") + " " + Masserr.getInstance().getAppName()) {
     legend(_("Players"))
     AdminModule admin = my;
     Functions f = h;
-    raw(f.bind(my, 'admin'))
+    st.bind(value: my, var: 'admin')
     div(class: "container-fluid") {
         Campaign first = null
         div(class: "row-fluid") {

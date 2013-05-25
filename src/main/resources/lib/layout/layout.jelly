@@ -24,7 +24,6 @@
     <html>
         <head>
             <title>${h.appendIfNotNull(title, ' [Masserr]', 'Masserr')}</title>
-            <!--<st:adjunct includes="org.kohsuke.stapler.bind"/>-->
             <script type="text/javascript">
                 var rootURL = '${rootURL}';
             </script>
@@ -35,7 +34,7 @@
             <script src="${resURL}/js/jQuery/serialize/jquery.serialize-object.compiled.js"></script>
             <!--<script src="${resURL}/js/jquery.serializeObject.min.js"></script>-->
             <script src="${resURL}/js/utils.js"></script>
-            <script src="${resURL}/js/bind.js"></script>
+            <st:adjunct includes="org.kohsuke.stapler.bind"/>
             <!-- Custom if any -->
             <link rel="stylesheet" href="${resURL}/css/style.css" type="text/css"/>
             <style>

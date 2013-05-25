@@ -41,7 +41,7 @@ if (role.getId() == null) {
 l.layout(title: _(title) + " " + Functions.emptyIfNull(Masserr.getInstance().getAppName())) {
     RolesModule module = Masserr.getInstance().getRoles();
     Functions f = h;
-    raw(f.bind(module, "module"))
+    st.bind(value: module, var: "module")
     st.include(page: "quickRole.groovy", class: RolesModule.class, it: module)
     div(id: "playerModal", class: "modal hide fade", tabindex: "-1", role: "dialog", 'aria-labelledby': "playerModalLabel", 'aria-hidden': "true") {
         div(class: "modal-header") {

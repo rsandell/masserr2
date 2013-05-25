@@ -32,7 +32,7 @@ st = namespace("jelly:stapler")
 
 l.layout(title: _("Abilities") + " " + Functions.emptyIfNull(Masserr.getInstance().getAppName())) {
     Functions f = h;
-    raw(f.bind(my, 'admin'))
+    st.bind(value: my, var: 'admin')
     script() {
         raw("var abilities = [")
         my.getAbilities().each() { Ability ability ->
