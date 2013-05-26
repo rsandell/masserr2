@@ -185,3 +185,13 @@ input.attribute-input[type="number"] {
     white-space: nowrap;
     overflow: hidden;
 }
+
+a.documented {
+    color: #333333;
+    text-decoration: none;
+    cursor: help;
+}
+
+a.documented:hover {
+    border-bottom: 1px dotted #999999
+}

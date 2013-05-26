@@ -68,5 +68,15 @@ l.layout(title: _("Role") + " " + role.name + " " + Functions.emptyIfNull(Masser
                 }
             }
         }
+        div(class: "accordion-group") {
+            div(class: "accordion-heading") {
+                a(class: "accordion-toggle", "data-toggle": "collapse", "data-parent": "#accordion2", href: "#collapseMeritsFlaws", _("Merits & Flaws"))
+            }
+            div(id: "collapseMeritsFlaws", class: "accordion-body collapse") {
+                div(class: "accordion-inner") {
+                    st.include(page: "i_index_meritsflaws.groovy")
+                }
+            }
+        }
     }
 }

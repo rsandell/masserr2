@@ -25,9 +25,17 @@
 
 
 
-import net.joinedminds.masserr.Functions
-import net.joinedminds.masserr.model.*
 
+import lib.LayoutTagLib
+import net.joinedminds.masserr.Functions
+import net.joinedminds.masserr.model.Discipline
+import net.joinedminds.masserr.model.DottedType
+import net.joinedminds.masserr.model.Path
+import net.joinedminds.masserr.model.Ritual
+import net.joinedminds.masserr.model.Role
+
+
+LayoutTagLib l = namespace(LayoutTagLib)
 Role role = my
 Functions f = h;
 
@@ -40,7 +48,9 @@ table(style: "width: 100%") {
                 }
                 role.disciplines.each { DottedType<Discipline> discipline ->
                     tr {
-                        td(discipline.type.name)
+                        td {
+                            l.doc(it: discipline.type)
+                        }
                         td(discipline.dots)
                     }
                 }
@@ -55,7 +65,9 @@ table(style: "width: 100%") {
                     }
                     role.thaumaturgicalPaths.each { DottedType<Path> path ->
                         tr {
-                            td(path.type.name)
+                            td {
+                                l.doc(it: path.type)
+                            }
                             td(path.dots)
                         }
                     }
@@ -70,7 +82,9 @@ table(style: "width: 100%") {
                     }
                     role.necromancyPaths.each { DottedType<Path> path ->
                         tr {
-                            td(path.type.name)
+                            td {
+                                l.doc(it: path.type)
+                            }
                             td(path.dots)
                         }
                     }
@@ -89,7 +103,9 @@ if (role.rituals != null && !role.rituals.empty) {
         .each { Ritual ritual ->
             tr {
                 td(ritual.ritualType.name)
-                td(ritual.name)
+                td {
+                    l.doc(it: ritual)
+                }
                 td(ritual.level)
             }
         }

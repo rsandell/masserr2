@@ -29,6 +29,59 @@ import net.joinedminds.masserr.model.*
 
 Role role = my
 
+table(style: "width: 100%") {
+    tr {
+        td(width: "33%", align: "right") {
+            table(class: "table table-hover table-bordered abilities-table", style: "width: 50%") {
+                tr {
+                    td {
+                        strong(_("Physical"))
+                        raw("&nbsp;")
+                        small {
+                            em("Max: " + role.generation.traitsMax)
+                        }
+                    }
+                    td {
+                        strong(role.physical)
+                    }
+                }
+            }
+        }
+        td(width: "33%", align: "center") {
+            table(class: "table table-hover table-bordered abilities-table", style: "width: 50%") {
+                tr {
+                    td {
+                        strong(_("Social"))
+                        raw("&nbsp;")
+                        small {
+                            em("Max: " + role.generation.traitsMax)
+                        }
+                    }
+                    td {
+                        strong(role.social)
+                    }
+                }
+            }
+        }
+        td(width: "33%", align: "left") {
+            table(class: "table table-hover table-bordered abilities-table", style: "width: 50%") {
+                tr {
+                    td {
+                        strong(_("Mental"))
+                        raw("&nbsp;")
+                        small {
+                            em("Max: " + role.generation.traitsMax)
+                        }
+                    }
+                    td {
+                        strong(role.mental)
+                    }
+                }
+            }
+        }
+    }
+}
+
 int rowCount = Functions.max(role.physicalAbilities.size(), role.socialAbilities.size(), role.mentalAbilities.size())
 table(class: "table table-condensed table-hover table-bordered abilities-table", style: "width: 100%") {
     for (int i = 0; i < rowCount; i++) {
@@ -107,58 +160,6 @@ if (role.otherTraits.size() > 0) {
                         td(width: "3%") {
                             raw("&nbsp")
                         }
-                    }
-                }
-            }
-        }
-    }
-}
-table(style: "width: 100%") {
-    tr {
-        td(width: "33%", align: "right") {
-            table(class: "table table-hover table-bordered abilities-table", style: "width: 50%") {
-                tr {
-                    td {
-                        strong(_("Physical"))
-                        raw("&nbsp;")
-                        small {
-                            em("Max: " + role.generation.traitsMax)
-                        }
-                    }
-                    td {
-                        strong(role.physical)
-                    }
-                }
-            }
-        }
-        td(width: "33%", align: "center") {
-            table(class: "table table-hover table-bordered abilities-table", style: "width: 50%") {
-                tr {
-                    td {
-                        strong(_("Social"))
-                        raw("&nbsp;")
-                        small {
-                            em("Max: " + role.generation.traitsMax)
-                        }
-                    }
-                    td {
-                        strong(role.social)
-                    }
-                }
-            }
-        }
-        td(width: "33%", align: "left") {
-            table(class: "table table-hover table-bordered abilities-table", style: "width: 50%") {
-                tr {
-                    td {
-                        strong(_("Mental"))
-                        raw("&nbsp;")
-                        small {
-                            em("Max: " + role.generation.traitsMax)
-                        }
-                    }
-                    td {
-                        strong(role.mental)
                     }
                 }
             }

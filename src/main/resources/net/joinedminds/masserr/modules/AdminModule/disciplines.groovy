@@ -90,16 +90,42 @@ l.layout(title: _("Disciplines") + " " + Masserr.getInstance().getAppName()) {
             }
         }
     }
+    div(id: "batchDisciplinesDocModal", class: "modal hide fade", tabindex: "-1", role: "dialog",
+            "aria-labelledby": "batchDisciplinesModalLabel", "aria-hidden": "true") {
+        div(class: "modal-header") {
+            button(type: "button", class: "close", "data-dismiss": "modal", "aria-hidden": "true", "×")
+            h3(id: "batchDisciplinesModalLabel", _("Batch update Disciplines documentation URLs"))
+        }
+        div(class: "modal-body") {
+            form(id: "batchSetDisciplinesDocForm", action: "batchSetDisciplinesDoc", method: "POST") {
+                label(_("Prefix"))
+                input(type:"text", name: "prefix", placeholder: "URL", value: "http://wiki.nos.lajva.nu/index.php/Disciplines#")
+                span(class: "help-block", _("Provide the URL part before the name of the discipline."))
+                label(class: "checkbox", _("Set only the missing urls")) {
+                    input(type: "checkbox", name: "emptyOnly", checked: true)
+                }
+            }
+        }
+        div(class: "modal-footer") {
+            button(class: "btn", "data-dismiss": "modal", "aria-hidden": "true", _("Close"))
+            button(class: "btn btn-primary", onclick: "\$('#batchSetDisciplinesDocForm').submit();", _("Run"))
+        }
+    }
     legend(_("Disciplines"))
-    table(class: "table table-hover", id:"disciplinesTable") {
+    table(class: "table table-hover", id: "disciplinesTable") {
         tr(class: "heading") {
             th(width: "10%", _("Id"))
             th(width: "30%", _("Name"))
             th(width: "25%", _("Retest Ability"))
             th(width: "25%", _("Doc URL"))
             th(width: "10%") {
-                button(class: "btn btn-mini", onclick: "newDiscipline()") {
+                button(class: "btn btn-mini", onclick: "newDiscipline()", title: _("New Discipline")) {
                     i(class: "icon-plus")
+                }
+                raw("&nbsp;")
+                a(role: "button", class: "btn btn-mini", href: "#batchDisciplinesDocModal", "data-toggle": "modal",
+                        title: _("Batch Update Documentation links")) {
+                    i(class: "icon-quote-right")
                 }
             }
         }

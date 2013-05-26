@@ -48,6 +48,7 @@ import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
 import net.sf.json.JSONObject;
+import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 import org.kohsuke.stapler.StaplerResponse;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
@@ -61,6 +62,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static net.joinedminds.masserr.Functions.fromNavId;
+import static net.joinedminds.masserr.Functions.isEmpty;
 
 /**
  * Description
@@ -103,6 +105,19 @@ public class AdminModule implements NavItem {
 
     public List<Path> getPaths() {
         return manipulationDb.getPaths();
+    }
+
+    public void doBatchSetDisciplinesDoc(@QueryParameter String prefix, @QueryParameter boolean emptyOnly, StaplerResponse response) throws Exception {
+        for (Discipline discipline : manipulationDb.getDisciplines()) {
+            if(emptyOnly && isEmpty(discipline.getDocUrl())) {
+                discipline.setDocUrl(prefix + discipline.getName());
+                manipulationDb.saveDiscipline(discipline);
+            } else if(!emptyOnly) {
+                discipline.setDocUrl(prefix + discipline.getName());
+                manipulationDb.saveDiscipline(discipline);
+            }
+        }
+        response.sendRedirect2("./disciplines");
     }
 
     @JavaScriptMethod
