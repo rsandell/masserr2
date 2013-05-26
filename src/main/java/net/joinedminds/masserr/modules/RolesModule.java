@@ -36,6 +36,7 @@ import net.joinedminds.masserr.ui.dto.SubmitResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.bind.JavaScriptMethod;
+import org.kohsuke.stapler.interceptor.JsonOutputFilter;
 
 import java.util.Calendar;
 import java.util.Collections;
@@ -73,6 +74,7 @@ public class RolesModule implements NavItem {
         return "Hello " + what;
     }
 
+    @JsonOutputFilter(excludes = {"acl", "ACL"})
     @JavaScriptMethod
     public SubmitResponse<Role> submitQuickRole(JSONObject jsonRole) {
         try {

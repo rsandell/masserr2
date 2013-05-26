@@ -746,9 +746,9 @@ public class Role implements NamedIdentifiable, AccessControlled<Role>, NavItem 
         return acl;
     }
 
-    public static final PermissionGroup PGROUP_GENERAL = new PermissionGroup(Role.class, Messages._Role_Permission_General());
-    public static final Permission ADMINISTER = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Administer(), Messages._Role_Permission_General_Administer_Description(), Domain.ADMINISTER);
-    public static final Permission EDIT = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Edit(), Domain.ROLE_CREATE);
-    public static final Permission READ = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Read(), EDIT);
+    public static transient final PermissionGroup PGROUP_GENERAL = new PermissionGroup(Role.class, Messages._Role_Permission_General());
+    public static transient final Permission ADMINISTER = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Administer(), Messages._Role_Permission_General_Administer_Description(), Domain.ADMINISTER);
+    public static transient final Permission EDIT = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Edit(), Domain.ROLE_CREATE);
+    public static transient final Permission READ = new Permission(PGROUP_GENERAL, Messages._Role_Permission_General_Read(), EDIT);
 
 }

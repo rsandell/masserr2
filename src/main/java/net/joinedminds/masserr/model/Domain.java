@@ -120,12 +120,12 @@ public class Domain implements NamedIdentifiable, AccessControlled<Domain> {
         return acl;
     }
 
-    public static final PermissionGroup PGROUP_GENERAL = new PermissionGroup(Domain.class, Messages._Domain_Permission_General());
-    public static final Permission ADMINISTER = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_Administer(), Messages._Domain_Permission_General_Administer_Description());
-    public static final Permission CHANGE_NAME = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_ChangeName(), ADMINISTER);
-    public static final Permission EDIT_HISTORY = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_EditHistory(), ADMINISTER);
+    public static transient final PermissionGroup PGROUP_GENERAL = new PermissionGroup(Domain.class, Messages._Domain_Permission_General());
+    public static transient final Permission ADMINISTER = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_Administer(), Messages._Domain_Permission_General_Administer_Description());
+    public static transient final Permission CHANGE_NAME = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_ChangeName(), ADMINISTER);
+    public static transient final Permission EDIT_HISTORY = new Permission(PGROUP_GENERAL, Messages._Domain_Permission_General_EditHistory(), ADMINISTER);
 
-    public static final PermissionGroup PGROUP_ROLES = new PermissionGroup(Domain.class, Messages._Domain_Permission_Role());
-    public static final Permission ROLE_CREATE = new Permission(PGROUP_ROLES, Messages._Domain_Permission_Role_Create(), ADMINISTER);
-    public static final Permission ROLE_LIST = new Permission(PGROUP_ROLES, Messages._Domain_Permission_Role_List(), Role.READ);
+    public static transient final PermissionGroup PGROUP_ROLES = new PermissionGroup(Domain.class, Messages._Domain_Permission_Role());
+    public static transient final Permission ROLE_CREATE = new Permission(PGROUP_ROLES, Messages._Domain_Permission_Role_Create(), ADMINISTER);
+    public static transient final Permission ROLE_LIST = new Permission(PGROUP_ROLES, Messages._Domain_Permission_Role_List(), Role.READ);
 }
