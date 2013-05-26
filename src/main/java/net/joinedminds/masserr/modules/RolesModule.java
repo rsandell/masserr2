@@ -117,6 +117,7 @@ public class RolesModule implements NavItem {
         return manipulationDB.getRole(id);
     }
 
+    @JsonOutputFilter(excludes = {"acl", "ACL"})
     @JavaScriptMethod
     public SubmitResponse<String> saveRole(JSONObject formObject) {
         Role role;
@@ -256,6 +257,7 @@ public class RolesModule implements NavItem {
         return adminDB.getPlayers(adminDB.getCampaigns().get(0));
     }
 
+    @JsonOutputFilter(excludes = {"acl", "ACL"})
     @JavaScriptMethod
     public SubmitResponse<Player> savePlayer(JSONObject jsonPlayer) {
         return adminModule.savePlayer(jsonPlayer);
