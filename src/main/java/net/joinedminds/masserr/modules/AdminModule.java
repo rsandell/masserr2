@@ -33,17 +33,7 @@ import net.joinedminds.masserr.Messages;
 import net.joinedminds.masserr.dataimport.Wiki;
 import net.joinedminds.masserr.db.AdminDB;
 import net.joinedminds.masserr.db.ManipulationDB;
-import net.joinedminds.masserr.model.Ability;
-import net.joinedminds.masserr.model.Campaign;
-import net.joinedminds.masserr.model.Config;
-import net.joinedminds.masserr.model.Discipline;
-import net.joinedminds.masserr.model.MeritOrFlaw;
-import net.joinedminds.masserr.model.Morality;
-import net.joinedminds.masserr.model.OtherTrait;
-import net.joinedminds.masserr.model.Path;
-import net.joinedminds.masserr.model.Player;
-import net.joinedminds.masserr.model.Ritual;
-import net.joinedminds.masserr.model.RitualType;
+import net.joinedminds.masserr.model.*;
 import net.joinedminds.masserr.ui.NavItem;
 import net.joinedminds.masserr.ui.dto.NameId;
 import net.joinedminds.masserr.ui.dto.SubmitResponse;
@@ -105,6 +95,11 @@ public class AdminModule implements NavItem {
 
     public List<Path> getPaths() {
         return manipulationDb.getPaths();
+    }
+
+    @JavaScriptMethod
+    public List<Clan> getClans() {
+        return manipulationDb.getClans();
     }
 
     public void doBatchSetDisciplinesDoc(@QueryParameter String prefix, @QueryParameter boolean emptyOnly, StaplerResponse response) throws Exception {

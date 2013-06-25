@@ -31,6 +31,11 @@ String.prototype.endsWith = function(suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
+String.prototype.replaceAll = function(find, replace) {
+    "use strict";
+    return this.replace(new RegExp(find, 'g'), replace);
+};
+
 function toNavId(id) {
     "use strict";
     if (id.indexOf("#") === 0) {
