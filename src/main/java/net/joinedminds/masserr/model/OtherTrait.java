@@ -40,7 +40,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
  * @author <a href="sandell.robert@gmail.com"> Robert Sandell</a>
  */
 @Entity
-public class OtherTrait implements NamedIdentifiable {
+public class OtherTrait implements NamedIdentifiable, Documented {
 
     @Id
     private ObjectId objectId;

@@ -20,7 +20,7 @@ import java.util.Locale;
  * @author <a href="sandell.robert@gmail.com">Robert Sandell</a>
  */
 @Entity
-public class Clan implements NamedIdentifiable {
+public class Clan implements NamedIdentifiable, Documented {
 
     @Id
     private ObjectId objectId;
@@ -28,6 +28,7 @@ public class Clan implements NamedIdentifiable {
     private String name;
     private int baseIncome;
     private String weaknesses = "";
+    private String docUrl;
     @Reference
     private List<Discipline> clanDisciplines;
 
@@ -109,5 +110,13 @@ public class Clan implements NamedIdentifiable {
         String n = getName();
         n = n.replaceAll("\\s", "");
         return str.append(n.toLowerCase(Locale.US)).append(".png").toString();
+    }
+
+    public String getDocUrl() {
+        return docUrl;
+    }
+
+    public void setDocUrl(String docUrl) {
+        this.docUrl = docUrl;
     }
 }

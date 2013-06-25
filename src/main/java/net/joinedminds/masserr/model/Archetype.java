@@ -37,7 +37,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
  * @author Robert Sandell &lt;sandell.robert@gmail.com&gt;
  */
 @Entity
-public class Archetype implements NamedIdentifiable {
+public class Archetype implements NamedIdentifiable, Documented {
     @Id
     private ObjectId objectId;
     @Indexed(unique = true)
