@@ -36,6 +36,7 @@ l.layout(title: _("Clans & Bloodlines") + " " + Masserr.getInstance().getAppName
         raw("var logoUrlBase = '$resURL/logo/48/';")
     }
 
+
     script(type: "template", id: "t_cRow") {
         tr(clan: "{{ navId }}") {
             td {
@@ -47,7 +48,7 @@ l.layout(title: _("Clans & Bloodlines") + " " + Masserr.getInstance().getAppName
             td("{{ name }}")
             td("{{ baseIncome }}")
             td("{{ weaknesses }}")
-            td("{{ clanDisciplines }}")
+            td("{{ disciplinesUl }}")
             td("{{ urlPart }}")
             td {
                 a(class: "btn btn-mini",  href: "javascript:editRow('{{ navId }}')") {

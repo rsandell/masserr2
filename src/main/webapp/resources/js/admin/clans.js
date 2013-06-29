@@ -30,6 +30,12 @@ var templateForm = _.template($("#t_cForm").html());
 var clans = null;
 
 
+function generateDisciplinesUl(clan) {
+    "use strict"
+    var lis = _.reduce(clan.clanDisciplines, function(memo, d) { return memo + "<li>"+ d.name+ "</li>"}, "");
+    return "<ul>"+lis+"</ul>";
+}
+
 function generateForm(mf) {
     mf.navId = toNavId(mf.id);
     mf.generatedTypesSelect = generateTypesSelect(mf.type);
@@ -49,6 +55,7 @@ function generateRow(a) {
     a.urlPart = urlPart;
     a.navId = toNavId(a.id);
     a.logo = getLogoPathFor(a.name);
+    a.disciplinesUl = generateDisciplinesUl(a)
     return templateRow(a);
 }
 

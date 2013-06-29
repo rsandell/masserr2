@@ -79,8 +79,8 @@ l.layout(title: _("Admin") + " " + Masserr.getInstance().getAppName()) {
         }
         div(class: "span3") {
             div(class: "well") {
-                h3(_("Config"))
-                p(_("Change global configuration properties"))
+                a(href: "clans") {h3(_("Clans & Bloodlines"))}
+                p(_("Add and edit your Clans & Bloodlines"))
             }
         }
     }
