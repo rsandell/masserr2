@@ -36,10 +36,10 @@ function generateDisciplinesUl(clan) {
     return "<ul>"+lis+"</ul>";
 }
 
-function generateForm(mf) {
-    mf.navId = toNavId(mf.id);
-    mf.generatedTypesSelect = generateTypesSelect(mf.type);
-    return templateForm(mf);
+function generateForm(clan) {
+    clan.navId = toNavId(clan.id);
+    clan.disciplinesUl = generateDisciplinesUl(clan)
+    return templateForm(clan);
 }
 
 function editRow(theId) {
@@ -55,7 +55,7 @@ function generateRow(a) {
     a.urlPart = urlPart;
     a.navId = toNavId(a.id);
     a.logo = getLogoPathFor(a.name);
-    a.disciplinesUl = generateDisciplinesUl(a)
+    a.disciplinesUl = generateDisciplinesUl(a);
     return templateRow(a);
 }
 
@@ -82,8 +82,8 @@ function submitClan(theId) {
             if (id.indexOf("new") == 0) {
                 location.reload(true);
             } else {
-                $('tr[clan~="'+ mfId +'"]').replaceWith(generateRow(resp.data));
                 replaceByObjectId(resp.data, clans);
+                $('tr[clan~="'+ id +'"]').replaceWith(generateRow(resp.data));
             }
         } else {
             alert(resp.message);

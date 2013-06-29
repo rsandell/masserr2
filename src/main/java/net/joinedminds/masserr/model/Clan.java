@@ -6,6 +6,7 @@ import com.github.jmkgreen.morphia.annotations.Indexed;
 import com.github.jmkgreen.morphia.annotations.Reference;
 import net.joinedminds.masserr.Functions;
 import org.bson.types.ObjectId;
+import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -48,6 +49,15 @@ public class Clan implements NamedIdentifiable, Documented {
         name = pName;
         baseIncome = pBaseIncome;
         weaknesses = pWeaknesses;
+    }
+
+    @DataBoundConstructor
+    public Clan(String id, String name, int baseIncome, String weaknesses, String docUrl) {
+        this.objectId = Functions.toObjectId(id);
+        this.name = name;
+        this.baseIncome = baseIncome;
+        this.weaknesses = weaknesses;
+        this.docUrl = docUrl;
     }
 
     @Override

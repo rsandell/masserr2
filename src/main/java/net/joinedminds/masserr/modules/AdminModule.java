@@ -116,6 +116,28 @@ public class AdminModule implements NavItem {
     }
 
     @JavaScriptMethod
+    public SubmitResponse<Clan> submitClan(Clan submit) {
+        String id = submit.getId();
+        Clan clan;
+        if (id == null || id.startsWith("new")) {
+            clan = manipulationDb.newClan();
+        } else {
+            clan = manipulationDb.getClan(fromNavId(id));
+        }
+
+        if (clan != null) {
+            clan.setName(submit.getName());
+            clan.setBaseIncome(submit.getBaseIncome());
+            clan.setWeaknesses(submit.getWeaknesses());
+            clan.setDocUrl(submit.getDocUrl());
+            clan = manipulationDb.saveClan(clan);
+            return new SubmitResponse<>(clan);
+        } else {
+            return SubmitResponse.idNotFound(id);
+        }
+    }
+
+    @JavaScriptMethod
     public SubmitResponse<Path> submitPath(Path submit) {
         String id = submit.getId();
         Path path;

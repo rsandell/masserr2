@@ -67,17 +67,17 @@ l.layout(title: _("Clans & Bloodlines") + " " + Masserr.getInstance().getAppName
                 img(src: '{{ logo }}', alt: 'logo', width: '48', height: '48')
             }
             td {
-                input(type: 'text', name: 'name', value: '{{ name }}', required: "true")
+                input(type: 'text', name: 'name', value: '{{ name }}', required: "true", style: "width: 100%")
             }
             td {
-                input(type: 'number', min: 0, name: 'baseIncome', value: '{{ baseIncome }}')
+                input(type: 'number', min: 0, name: 'baseIncome', value: '{{ baseIncome }}', style: "width: 100%")
             }
             td {
-                input(type: 'text', name: 'weaknesses', value: '{{ weaknesses }}', required: "true")
+                input(type: 'text', name: 'weaknesses', value: '{{ weaknesses }}', required: "true", style: "width: 100%")
             }
-            td("{{ clanDisciplines }}")
+            td("{{ disciplinesUl }}")
             td {
-                input(type: 'url', name: 'docUrl', value: '{{ docUrl }}')
+                input(type: 'url', name: 'docUrl', value: '{{ docUrl }}', style: "width: 100%")
             }
             td {
                 button(type: 'button', class: 'btn btn-mini btn-primary', onclick: "submitClan('{{ navId }}')") {
