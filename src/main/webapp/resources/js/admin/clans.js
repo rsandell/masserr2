@@ -31,25 +31,28 @@ var clans = null;
 
 
 function generateDisciplinesUl(clan) {
-    "use strict"
+    "use strict";
     var lis = _.reduce(clan.clanDisciplines, function(memo, d) { return memo + "<li>"+ d.name+ "</li>"}, "");
     return "<ul>"+lis+"</ul>";
 }
 
 function generateForm(clan) {
+    "use strict";
     clan.navId = toNavId(clan.id);
-    clan.disciplinesUl = generateDisciplinesUl(clan)
+    clan.disciplinesUl = generateDisciplinesUl(clan);
     return templateForm(clan);
 }
 
 function editRow(theId) {
-    var clan = findById(theId, clans)
+    "use strict";
+    var clan = findById(theId, clans);
     $('tr[clan~="'+ theId +'"]').replaceWith(generateForm(clan));
 }
 
 function generateRow(a) {
+    "use strict";
     var urlPart = "";
-    if (a.docUrl != null && a.docUrl.length > 0) {
+    if (a.docUrl !== null && a.docUrl.length > 0) {
         urlPart = "<a href='"+a.docUrl+"'>"+a.docUrl+"</a>";
     }
     a.urlPart = urlPart;
@@ -60,6 +63,7 @@ function generateRow(a) {
 }
 
 function generateTable() {
+    "use strict";
     var html = "";
     for (var i = 0; i < clans.length; i++) {
         var a = clans[i];
@@ -69,24 +73,26 @@ function generateTable() {
 }
 
 function newClan() {
-    var newClan = {id: "new" + (newClanCounter++), name: "", weaknesses: "", docUrl: "", baseIncome: 0, logo: ""};
-    $("#clansTable tr.heading").after(generateForm(newClan));
+    "use strict";
+    var newC = {id: "new" + (newClanCounter++), name: "", weaknesses: "", docUrl: "", baseIncome: 0, logo: ""};
+    $("#clansTable tr.heading").after(generateForm(newC));
 }
 
 function submitClan(theId) {
+    "use strict";
     var id = toNavId(theId);
     var formObj = $("tr[clan~='"+id+"'] :input").serializeObject();
     admin.submitClan(formObj, function(t) {
         var resp = t.responseObject();
         if (resp.ok) {
-            if (id.indexOf("new") == 0) {
+            if (id.indexOf("new") === 0) {
                 location.reload(true);
             } else {
                 replaceByObjectId(resp.data, clans);
                 $('tr[clan~="'+ id +'"]').replaceWith(generateRow(resp.data));
             }
         } else {
-            alert(resp.message);
+            window.alert(resp.message);
         }
     });
 }
@@ -95,10 +101,11 @@ function getLogoPathFor(name) {
     "use strict";
     var n = name.replaceAll("\\s+", "");
     n = n.toLowerCase();
-    return logoUrlBase + n + ".png"
+    return logoUrlBase + n + ".png";
 }
 
 admin.getClans(function(t) {
+    "use strict";
     clans = t.responseObject();
     $("#clansTable tr.heading").after(generateTable());
 });
