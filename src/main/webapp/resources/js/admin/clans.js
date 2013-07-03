@@ -26,13 +26,43 @@ var newClanCounter = 0;
 
 var templateRow = _.template($("#t_cRow").html());
 var templateForm = _.template($("#t_cForm").html());
+var templateOption = _.template("<option value='{{ id }}'>{{ name }}</option>");
 
 var clans = null;
 
+function isClanDiscipline(d, clan) {
+    "use strict";
+    for(var i = 0; i < clan.clanDisciplines.length; i++) {
+        var cd = clan.clanDisciplines[i];
+        if(cd.id === d.id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function editDisciplines(theId) {
+    "use strict";
+    var clan = findById(theId, clans);
+    $("#disciplinesModalClanLabel").html(clan.name);
+    $("#disciplinesModalClanId").val(clan.id);
+    var filteredDisciplines = _.filter(disciplines, function(d){ return !isClanDiscipline(d, clan); });
+    var allSelect = $("#allDisciplinesSelect");
+    allSelect.html("");
+    _.each(filteredDisciplines, function(d) {
+        allSelect.append(templateOption(d));
+    });
+    var clanSelect = $("#clanDisciplinesSelect");
+    clanSelect.html("");
+    _.each(clan.clanDisciplines, function(d) {
+        clanSelect.append(templateOption(d));
+    });
+    $("#disciplinesModal").modal();
+}
 
 function generateDisciplinesUl(clan) {
     "use strict";
-    var lis = _.reduce(clan.clanDisciplines, function(memo, d) { return memo + "<li>"+ d.name+ "</li>"}, "");
+    var lis = _.reduce(clan.clanDisciplines, function(memo, d) { return memo + "<li>" + asDocumented(d) + "</li>"}, "");
     return "<ul>"+lis+"</ul>";
 }
 

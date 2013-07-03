@@ -195,3 +195,24 @@ a.documented {
 a.documented:hover {
     border-bottom: 1px dotted #999999
 }
+
+.top-labelled-div {
+    position: relative;
+    margin-top: 19px;
+}
+
+.top-labelled-div:after {
+    content: attr(divlabel);
+    position: absolute;
+    top: -19px;
+    left: 0px;
+    padding: 0px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #9da0a4;
+    -webkit-border-radius: 4px 4px 4px 0;
+    -moz-border-radius: 4px 4px 4px 0;
+    border-radius: 4px 4px 4px 0;
+}

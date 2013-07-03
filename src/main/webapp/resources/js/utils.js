@@ -72,3 +72,22 @@ function replaceByObjectId(newNeedle, haystack) {
     return false;
 }
 
+//A template for an object with a name and a docUrl attribute.
+var templateDocumented = _.template("<a class='documented' href='{{ docUrl }}' target='_blank'>{{ name }}</a>");
+
+/**
+ * Renders a "documented" link if the object contains a docUrl attribute.
+ * Just returns obj.name if there is no docUrl attribute.
+ *
+ * @param obj the object that might be documented.
+ * @returns a html link or plain text.
+ */
+function asDocumented(obj) {
+    "use strict";
+    if (obj.docUrl !== null && obj.docUrl.length > 0) {
+        return templateDocumented(obj);
+    } else {
+        return obj.name;
+    }
+}
+
