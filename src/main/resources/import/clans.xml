@@ -30,7 +30,7 @@
 <base_income>6000000</base_income>
 <symbol_font>WoD2</symbol_font>
 <symbol_char>E</symbol_char>
-<weaknesses>Cast no reflection, double dammage from sunlight</weaknesses>
+<weaknesses>Cast no reflection, double damage from sunlight</weaknesses>
 </clans>
 <clans>
 <id>5</id>
@@ -70,7 +70,7 @@
 <base_income>300000</base_income>
 <symbol_font>WoD</symbol_font>
 <symbol_char>m</symbol_char>
-<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+<weaknesses>Appearance 0, Cannot initiate social challenges</weaknesses>
 </clans>
 <clans>
 <id>10</id>
@@ -78,7 +78,7 @@
 <base_income>6000000</base_income>
 <symbol_font>WoD2</symbol_font>
 <symbol_char>5</symbol_char>
-<weaknesses>The kiss is not pleasurable (1 aggrevated per blood-point)</weaknesses>
+<weaknesses>The kiss is not pleasurable (1 aggravated per blood-point)</weaknesses>
 </clans>
 <clans>
 <id>11</id>
@@ -86,7 +86,7 @@
 <base_income>50000</base_income>
 <symbol_font>WoD</symbol_font>
 <symbol_char>f</symbol_char>
-<weaknesses>Must commit criminal acts when need arrises</weaknesses>
+<weaknesses>Must commit criminal acts when need arises</weaknesses>
 </clans>
 <clans>
 <id>12</id>
@@ -102,7 +102,7 @@
 <base_income>2000</base_income>
 <symbol_font>WoD</symbol_font>
 <symbol_char>h</symbol_char>
-<weaknesses>Corpse-like appearence</weaknesses>
+<weaknesses>Corpse-like appearance</weaknesses>
 </clans>
 <clans>
 <id>14</id>
@@ -110,13 +110,13 @@
 <base_income>5000</base_income>
 <symbol_font>WoD</symbol_font>
 <symbol_char>¡</symbol_char>
-<weaknesses>Cannot feed from unwilling viktims</weaknesses>
+<weaknesses>Cannot feed from unwilling victims</weaknesses>
 </clans>
 <clans>
 <id>15</id>
 <name>Baali</name>
 <base_income>2000</base_income>
-<weaknesses>Effected by religous symbols, double dammage from True Faith</weaknesses>
+<weaknesses>Effected by religious symbols, double damage from True Faith</weaknesses>
 </clans>
 <clans>
 <id>16</id>
@@ -124,15 +124,15 @@
 <base_income>4000000</base_income>
 <symbol_font>WoD</symbol_font>
 <symbol_char>g</symbol_char>
-<weaknesses>Takes dammage from bright light</weaknesses>
+<weaknesses>Takes damage from bright light</weaknesses>
 </clans>
 <clans>
 <id>17</id>
-<name>Harbringers of Skulls</name>
+<name>Harbingers of Skulls</name>
 <base_income>2000</base_income>
 <symbol_font>WoD3</symbol_font>
 <symbol_char>*</symbol_char>
-<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+<weaknesses>Appearance 0, Cannot initiate social challenges</weaknesses>
 </clans>
 <clans>
 <id>18</id>
@@ -140,7 +140,7 @@
 <base_income>0</base_income>
 <symbol_font>WoD2</symbol_font>
 <symbol_char>D</symbol_char>
-<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+<weaknesses>Appearance 0, Cannot initiate social challenges</weaknesses>
 </clans>
 <clans>
 <id>19</id>
@@ -160,7 +160,7 @@
 <base_income>6000000</base_income>
 <symbol_font>WoD2</symbol_font>
 <symbol_char>p</symbol_char>
-<weaknesses>Takes aggrevated dammage from pure iron</weaknesses>
+<weaknesses>Takes aggravated damage from pure iron</weaknesses>
 </clans>
 <clans>
 <id>22</id>
@@ -173,7 +173,7 @@
 <base_income>2000</base_income>
 <symbol_font>WoD</symbol_font>
 <symbol_char>¹</symbol_char>
-<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+<weaknesses>Appearance 0, Cannot initiate social challenges</weaknesses>
 </clans>
 <clans>
 <id>25</id>
@@ -188,7 +188,7 @@
 <base_income>2000</base_income>
 <symbol_font>WoD2</symbol_font>
 <symbol_char>m</symbol_char>
-<weaknesses>Appearence 0, Cannot initiate social challenges</weaknesses>
+<weaknesses>Appearance 0, Cannot initiate social challenges</weaknesses>
 </clans>
 <clans>
 <id>27</id>
@@ -204,7 +204,7 @@
 <base_income>2000</base_income>
 <symbol_font>WoD2</symbol_font>
 <symbol_char>o</symbol_char>
-<weaknesses>Cannot feed from unwilling viktims</weaknesses>
+<weaknesses>Cannot feed from unwilling victims</weaknesses>
 </clans>
 <clans>
 <id>29</id>
@@ -244,7 +244,7 @@
 <base_income>50000</base_income>
 <symbol_font>WoD2</symbol_font>
 <symbol_char>v</symbol_char>
-<weaknesses>Must commit criminal acts when need arrises</weaknesses>
+<weaknesses>Must commit criminal acts when need arises</weaknesses>
 </clans>
 <clans>
 <id>34</id>
