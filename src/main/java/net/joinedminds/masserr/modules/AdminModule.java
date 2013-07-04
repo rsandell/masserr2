@@ -97,6 +97,7 @@ public class AdminModule implements NavItem {
         return manipulationDb.getPaths();
     }
 
+    @JsonOutputFilter(excludes = {"acl, ACL"})
     @JavaScriptMethod
     public List<Clan> getClans() {
         return manipulationDb.getClans();
@@ -115,6 +116,7 @@ public class AdminModule implements NavItem {
         response.sendRedirect2("./disciplines");
     }
 
+    @JsonOutputFilter(excludes = {"acl, ACL"})
     @JavaScriptMethod
     public SubmitResponse<Clan> submitClan(Clan submit) {
         String id = submit.getId();
@@ -134,6 +136,20 @@ public class AdminModule implements NavItem {
             return new SubmitResponse<>(clan);
         } else {
             return SubmitResponse.idNotFound(id);
+        }
+    }
+
+    @JsonOutputFilter(excludes = {"acl, ACL"})
+    @JavaScriptMethod
+    public SubmitResponse<Clan> submitClanDisciplines(String clanId, String[] disciplineIds) {
+        Clan clan = manipulationDb.getClan(fromNavId(clanId));
+        if (clan != null) {
+            List<Discipline> disciplines = manipulationDb.getDisciplines(disciplineIds);
+            clan.setClanDisciplines(disciplines);
+            clan = manipulationDb.saveClan(clan);
+            return new SubmitResponse<>(clan);
+        } else {
+            return SubmitResponse.idNotFound(clanId);
         }
     }
 
@@ -294,6 +310,7 @@ public class AdminModule implements NavItem {
         return adminDb.getPlayers(campaign);
     }
 
+    @JsonOutputFilter(excludes = {"acl, ACL"})
     @JavaScriptMethod
     public List<Player> getPlayers(String campaignId) {
         Campaign c = Campaign.idRef(campaignId);

@@ -369,6 +369,23 @@ public class ManipulationDbImpl extends BasicDbImpl implements ManipulationDB {
     }
 
     @Override
+    public List<Discipline> getDisciplines(String[] disciplineIds) {
+        Set<ObjectId> ids = new TreeSet<>();
+        for (String disciplineId : disciplineIds) {
+            ObjectId objectId = Functions.toObjectId(disciplineId);
+            if (objectId != null) {
+                ids.add(objectId);
+            }
+        }
+        if (ids.size() > 0) {
+            Query<Discipline> query = db.get().createQuery(Discipline.class);
+            query.field("objectId").in(ids);
+            return query.asList();
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
     public Role getRole(String id) {
         if (id == null || id.isEmpty()) {
             return null;

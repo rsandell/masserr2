@@ -204,4 +204,6 @@ public interface ManipulationDB extends BasicDB {
     Ritual getRitual(String id);
 
     List<Discipline> getDisciplinesWithRetestAbility(String[] disciplineIds);
+
+    List<Discipline> getDisciplines(String[] ids);
 }

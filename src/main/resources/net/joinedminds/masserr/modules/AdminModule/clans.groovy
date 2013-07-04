@@ -119,11 +119,11 @@ l.layout(title: _("Clans & Bloodlines") + " " + Masserr.getInstance().getAppName
                         }
                     }
                     td(width: "10%", align: "center") {
-                        button(class: "btn btn-mini", onclick: "addClanDiscipline()", title: _("Add Clan Discipline")) {
+                        button(class: "btn btn-mini", onclick: "addClanDisciplines()", title: _("Add Clan Discipline")) {
                             i(class: "icon-double-angle-right")
                         }
                         br()
-                        button(class: "btn btn-mini", onclick: "removeClanDiscipline()", title: _("Remove Clan Discipline")) {
+                        button(class: "btn btn-mini", onclick: "removeClanDisciplines()", title: _("Remove Clan Discipline")) {
                             i(class: "icon-double-angle-left")
                         }
                     }
