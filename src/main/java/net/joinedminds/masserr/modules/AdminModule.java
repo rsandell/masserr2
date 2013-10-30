@@ -85,6 +85,8 @@ public class AdminModule implements NavItem {
         return manipulationDb.getMeritOrFlaws();
     }
 
+    @JsonOutputFilter(excludes = {"acl, ACL"})
+    @JavaScriptMethod
     public List<OtherTrait> getOtherTraits() {
         return manipulationDb.getOtherTraits();
     }

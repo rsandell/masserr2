@@ -31,65 +31,68 @@ def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
 l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
+    st.adjunct(includes: "org.kohsuke.stapler.angularjs")
     Functions f = h;
     st.bind(value: my, var: 'admin')
-    script() {
-        raw("var traits = [")
-        my.getOtherTraits().each() { OtherTrait trait ->
-            raw("jQuery.parseJSON( '" + JSONObject.fromObject(new OtherTrait(trait)).toString() + "' ), ")
-        }
-        raw("];\n")
-    }
-
-    script(type: "template", id: "t_traitRow") {
-        tr(ability: "{{ navId }}") {
-            td {
-                small("{{ id }}")
-            }
-            td("{{ name }}")
-            td("{{ urlPart }}")
-            td {
-                a(class: "btn btn-mini",  href: "javascript:editTraitsRow('{{ navId }}')") {
-                    i(class: 'icon-edit')
-                }
-            }
-        }
-    }
-    script(type: "template", id: "t_traitForm") {
-        tr(ability: "{{ navId }}") {
-            td {
-                input(type: 'hidden', name: 'id', value: "{{ id }}") {
+    div('ng-app': "") {
+        script(src: "${resURL}/js/angular/admin/other-traits/controller.js")
+        /*script(type: "template", id: "t_traitRow") {
+            tr(ability: "{{ navId }}") {
+                td {
                     small("{{ id }}")
                 }
-            }
-            td {
-                input(type: 'text', name: 'name', value: '{{ name }}', required: "true")
-            }
-            td {
-                input(type: 'url', name: 'docUrl', value: '{{ docUrl }}')
-            }
-            td {
-                button(type: 'button', class: 'btn btn-mini btn-primary', onclick: "submitTrait('{{ navId }}')") {
-                    i(class: 'icon-check icon-white')
+                td("{{ name }}")
+                td("{{ urlPart }}")
+                td {
+                    a(class: "btn btn-mini",  href: "javascript:editTraitsRow('{{ navId }}')") {
+                        i(class: 'icon-edit')
+                    }
                 }
             }
         }
-    }
+        script(type: "template", id: "t_traitForm") {
+            tr(ability: "{{ navId }}") {
+                td {
+                    input(type: 'hidden', name: 'id', value: "{{ id }}") {
+                        small("{{ id }}")
+                    }
+                }
+                td {
+                    input(type: 'text', name: 'name', value: '{{ name }}', required: "true")
+                }
+                td {
+                    input(type: 'url', name: 'docUrl', value: '{{ docUrl }}')
+                }
+                td {
+                    button(type: 'button', class: 'btn btn-mini btn-primary', onclick: "submitTrait('{{ navId }}')") {
+                        i(class: 'icon-check icon-white')
+                    }
+                }
+            }
+        }*/
 
-    legend(_("Other Traits"))
-    table(class: "table table-hover", id:"otherTraitsTable") {
-        tr(class: "heading") {
-            th(width: "10%", _("Id"))
-            th(width: "40%", _("Name"))
-            th(width: "40%", _("Doc URL"))
-            th(width: "10%") {
-                button(class: "btn btn-mini", onclick: "newTrait()") {
-                    i(class: "icon-plus")
+        legend(_("Other Traits"))
+        table(class: "table table-hover", id:"otherTraitsTable", "ng-controller": "OtherTraitsCtrl") {
+            tr(class: "heading") {
+                th(width: "10%", _("Id"))
+                th(width: "40%", _("Name"))
+                th(width: "40%", _("Doc URL"))
+                th(width: "10%") {
+                    button(class: "btn btn-mini", onclick: "newTrait()") {
+                        i(class: "icon-plus")
+                    }
                 }
+            }
+            tr("ng-repeat": "trait in traits") {
+                td {
+                    small("{{ trait.id }}")
+                }
+                td(_("{{ trait.name }}"))
+                td(_("{{ trait.docUrl }}"))
+                td(raw("&nbsp;"))
             }
         }
     }
-    script(src: "${resURL}/js/admin/otherTraits.js")
 }
 
 

@@ -43,7 +43,7 @@
                 padding-bottom: 40px; /* 60px to make the container go all the way to the bottom of the topbar */
                 }
             </style>
-            <link rel="shortcut icon" href="${resURL}/cube_yellow.ico" type="image/vnd.microsoft.icon"/>
+            <!--<link rel="shortcut icon" href="${resURL}/cube_yellow.ico" type="image/vnd.microsoft.icon"/>-->
             <meta name="ROBOTS" content="INDEX,NOFOLLOW"/>
             <!--<j:set var="mode" value="header"/>
             <d:invokeBody/>-->
