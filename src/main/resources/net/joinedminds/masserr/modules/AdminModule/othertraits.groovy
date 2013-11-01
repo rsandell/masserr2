@@ -22,10 +22,9 @@
  * THE SOFTWARE.
  */
 
+
 import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.OtherTrait
-import net.sf.json.JSONObject
 
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
@@ -72,7 +71,7 @@ l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
         }*/
 
         legend(_("Other Traits"))
-        table(class: "table table-hover", id:"otherTraitsTable", "ng-controller": "OtherTraitsCtrl") {
+        table(class: "table table-hover", id: "otherTraitsTable", "ng-controller": "OtherTraitsCtrl") {
             tr(class: "heading") {
                 th(width: "10%", _("Id"))
                 th(width: "40%", _("Name"))
@@ -83,13 +82,41 @@ l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
                     }
                 }
             }
-            tr("ng-repeat": "trait in traits") {
-                td {
-                    small("{{ trait.id }}")
+            tbody("ng-repeat": "trait in traits") {
+                tr("ng-if": "!isEditing(trait)") {
+                    td {
+                        small("{{ trait.id }}")
+                    }
+                    td(_("{{ trait.name }}"))
+                    td {
+                        a("ng-if": "trait.docUrl", href: "{{ trait.docUrl }}", target: "_new", _("{{ trait.docUrl }}"))
+                    }
+                    td {
+                        button(type: 'button', class: 'btn btn-mini btn-primary', "ng-click": "edit(trait)") {
+                            i(class: 'icon-edit')
+                        }
+                    }
                 }
-                td(_("{{ trait.name }}"))
-                td(_("{{ trait.docUrl }}"))
-                td(raw("&nbsp;"))
+                tr("ng-if": "isEditing(trait)") {
+                    td {
+                        small("{{ trait.id }}")
+                    }
+                    td {
+                        input(type: 'text', "ng-model": 'trait.name', required: "true")
+                    }
+                    td {
+                        input(type: 'url', "ng-model": 'trait.docUrl')
+                    }
+                    td {
+                        button(type: 'button', class: 'btn btn-mini btn-primary', "ng-click": "save(trait)") {
+                            i(class: 'icon-check icon-white')
+                        }
+                        st.nbsp()
+                        button(type: 'button', class: 'btn btn-mini', "ng-click": "stopEdit(trait)") {
+                            i(class: 'icon-minus')
+                        }
+                    }
+                }
             }
         }
     }

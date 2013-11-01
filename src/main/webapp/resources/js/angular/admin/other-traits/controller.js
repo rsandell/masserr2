@@ -23,7 +23,44 @@
  */
 
 function OtherTraitsCtrl($scope) {
+    "use strict";
     $scope.traits = [];
+    $scope.editingTraits = [];
+
+    $scope.edit = function(trait) {
+        if (!$scope.isEditing(trait)) {
+            $scope.editingTraits.push(_.clone(trait));
+        }
+    };
+
+    $scope.stopEdit = function(trait) {
+        var i = $scope.findEditing(trait);
+        if (i !== undefined) {
+            $scope.editingTraits = _.reject($scope.editingTraits, function(t) {return t.id === i.id;});
+            _.extend(trait, i);
+        }
+    };
+
+    $scope.save = function(trait) {
+        admin.submitOtherTrait(trait, function(t) {
+            var resp = t.responseObject();
+            if (resp.ok) {
+                $scope.editingTraits = _.reject($scope.editingTraits, function(i) {return i.id === trait.id;});
+                _.extend(trait, resp.data);
+                $scope.$digest();
+            } else {
+                window.alert(resp.message);
+            }
+        });
+    };
+
+    $scope.findEditing = function(trait) {
+        return _.find($scope.editingTraits, function(t) {return t.id === trait.id;});
+    };
+
+    $scope.isEditing = function(trait) {
+        return  $scope.findEditing(trait) !== undefined;
+    };
 
     admin.getOtherTraits(function(t){
         $scope.traits = t.responseObject();
