@@ -82,7 +82,7 @@ l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
                 th(width: "40%", _("Name"))
                 th(width: "40%", _("Doc URL"))
                 th(width: "10%") {
-                    button(class: "btn btn-mini", onclick: "newTrait()") {
+                    button(class: "btn btn-mini", "ng-click": "newTrait()") {
                         i(class: "icon-plus")
                     }
                 }

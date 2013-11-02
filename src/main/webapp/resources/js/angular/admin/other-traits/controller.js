@@ -54,12 +54,18 @@ function OtherTraitsCtrl($scope) {
         });
     };
 
+    $scope.newTrait = function() {
+        var obj = {id: "new", name: "", docUrl: ""};
+        $scope.traits.unshift(obj);
+        $scope.edit(obj);
+    };
+
     $scope.findEditing = function(trait) {
         return _.find($scope.editingTraits, function(t) {return t.id === trait.id;});
     };
 
     $scope.isEditing = function(trait) {
-        return  $scope.findEditing(trait) !== undefined;
+        return $scope.findEditing(trait) !== undefined;
     };
 
     admin.getOtherTraits(function(t){
