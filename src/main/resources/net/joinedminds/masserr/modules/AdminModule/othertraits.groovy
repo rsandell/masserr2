@@ -89,7 +89,7 @@ l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
                     }
                     td(_("{{ trait.name }}"))
                     td {
-                        a("ng-if": "trait.docUrl", href: "{{ trait.docUrl }}", target: "_new", _("{{ trait.docUrl }}"))
+                        a("ng-if": "trait.docUrl", "ng-href": "{{ trait.docUrl }}", target: "_new", _("{{ trait.docUrl }}"))
                     }
                     td {
                         button(type: 'button', class: 'btn btn-mini btn-primary', "ng-click": "edit(trait)") {
