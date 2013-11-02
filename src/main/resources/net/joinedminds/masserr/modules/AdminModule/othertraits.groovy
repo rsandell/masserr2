@@ -70,7 +70,12 @@ l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
             }
         }*/
 
-        legend(_("Other Traits"))
+        legend {
+            span(_("Other Traits"))
+            form(class: "pull-right") {
+                input(type: "text", "ng-model": "query", placeholder: _("Filter"), class: "input-medium search-query")
+            }
+        }
         table(class: "table table-hover", id: "otherTraitsTable", "ng-controller": "OtherTraitsCtrl") {
             tr(class: "heading") {
                 th(width: "10%", _("Id"))
@@ -82,7 +87,7 @@ l.layout(title: _("Other Traits") + " " + Masserr.getInstance().getAppName()) {
                     }
                 }
             }
-            tbody("ng-repeat": "trait in traits") {
+            tbody("ng-repeat": "trait in traits | filter:query") {
                 tr("ng-if": "!isEditing(trait)") {
                     td {
                         small("{{ trait.id }}")
