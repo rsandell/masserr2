@@ -80,9 +80,15 @@ public class AdminModule implements NavItem {
         return manipulationDb.getAbilities();
     }
 
+    @JsonOutputFilter(excludes = {"acl, ACL"})
     @JavaScriptMethod
     public List<MeritOrFlaw> getMeritOrFlaws() {
         return manipulationDb.getMeritOrFlaws();
+    }
+
+    @JavaScriptMethod
+    public MeritOrFlaw.Type[] getMeritTypes() {
+        return MeritOrFlaw.Type.values();
     }
 
     @JsonOutputFilter(excludes = {"acl, ACL"})

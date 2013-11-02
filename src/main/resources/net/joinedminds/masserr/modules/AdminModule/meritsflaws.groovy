@@ -22,83 +22,93 @@
  * THE SOFTWARE.
  */
 
+
 import net.joinedminds.masserr.Functions
 import net.joinedminds.masserr.Masserr
-import net.joinedminds.masserr.model.Ability
-import net.joinedminds.masserr.model.MeritOrFlaw
-import net.sf.json.JSONObject
 
 def l = namespace(lib.LayoutTagLib)
 st = namespace("jelly:stapler")
 
 l.layout(title: _("Merits & Flaws") + " " + Masserr.getInstance().getAppName()) {
+    st.adjunct(includes: "org.kohsuke.stapler.angularjs")
     Functions f = h;
     st.bind(value: my, var: 'admin')
-    script {
-        raw("var mfTypes =[")
-        MeritOrFlaw.Type.values().each { type ->
-            raw("'"+type.name()+"',")
-        }
-        raw("];\n")
-    }
+
     script(type: "template", id: "t_mfsRow") {
-        tr(mf: "{{ navId }}") {
-            td {
-                small("{{ id }}")
-            }
-            td {
-                small("{{ type }}")
-            }
-            td("{{ name }}")
-            td("{{ points }}")
-            td("{{ urlPart }}")
-            td {
-                a(class: "btn btn-mini",  href: "javascript:editRow('{{ navId }}')") {
-                    i(class: 'icon-edit')
-                }
-            }
-        }
+
     }
     script(type: "template", id: "t_mfsForm") {
-        tr(mf: "{{ navId }}") {
-            td {
-                input(type: 'hidden', name: 'id', value: "{{ id }}")
-                small("{{ id }}")
-            }
-            td("{{ generatedTypesSelect }}")
-            td {
-                input(type: 'text', name: 'name', value: '{{ name }}', required: "true")
-            }
-            td {
-                input(type: 'number', max: 10, min: -10, name: 'points', value: '{{ points }}')
-            }
-            td {
-                input(type: 'url', name: 'docUrl', value: '{{ docUrl }}')
-            }
-            td {
-                button(type: 'button', class: 'btn btn-mini btn-primary', onclick: "submitMf('{{ navId }}')") {
-                    i(class: 'icon-check icon-white')
-                }
-            }
-        }
-    }
 
-    legend(_("Merit & Flaws"))
-    table(class: "table table-hover", id:"mfsTable") {
-        tr(class: "heading") {
-            th(width: "10%", _("Id"))
-            th(width: "15%", _("Type"))
-            th(width: "25%", _("Name"))
-            th(width: "10%", _("Points"))
-            th(width: "30%", _("Doc URL"))
-            th(width: "10%") {
-                button(class: "btn btn-mini", onclick: "newMf()") {
-                    i(class: "icon-plus")
+    }
+    div("ng-app": "") {
+        script(src: "${resURL}/js/angular/admin/meritsflaws/controller.js")
+        legend {
+            span(_("Merit & Flaws"))
+            form(class: "pull-right") {
+                input(type: "text", "ng-model": "query", placeholder: _("Filter"), class: "input-medium search-query")
+            }
+        }
+        table(class: "table table-hover", id: "mfsTable", "ng-controller": "MeritsFlawsCtrl") {
+            tr(class: "heading") {
+                th(width: "10%", _("Id"))
+                th(width: "15%", _("Type"))
+                th(width: "25%", _("Name"))
+                th(width: "10%", _("Points"))
+                th(width: "30%", _("Doc URL"))
+                th(width: "10%") {
+                    button(class: "btn btn-mini", "ng-click": "newMerit()") {
+                        i(class: "icon-plus")
+                    }
+                }
+            }
+            tbody("ng-repeat": "trait in merits | filter:query") {
+                tr(mf: "{{ trait.id }}", "ng-if": "!isEditing(trait)") {
+                    td {
+                        small("{{ trait.id }}")
+                    }
+                    td {
+                        small("{{ trait.type }}")
+                    }
+                    td("{{ trait.name }}")
+                    td(aligh: "right", "{{ trait.points }}")
+                    td {
+                        a("ng-if": "trait.docUrl", "ng-href": "{{ trait.docUrl }}", target: "_new", _("{{ trait.docUrl }}"))
+                    }
+                    td {
+                        button(type: 'button', class: 'btn btn-mini btn-primary', "ng-click": "edit(trait)") {
+                            i(class: 'icon-edit')
+                        }
+                    }
+                }
+                tr(mf: "{{ trait.id }}", "ng-if": "isEditing(trait)") {
+                    td {
+                        small("{{ trait.id }}")
+                    }
+                    td {
+                        select("ng-model": "trait.type", "ng-options": "type for type in types")
+                    }
+                    td {
+                        input(type: 'text', "ng-model": "trait.name", required: "true")
+                    }
+                    td(aligh: "right") {
+                        input(type: 'number', max: 10, min: -10, "ng-model": 'trait.points', class: "input-mini")
+                    }
+                    td {
+                        input(type: 'url', "ng-model": 'trait.docUrl')
+                    }
+                    td {
+                        button(type: 'button', class: 'btn btn-mini btn-primary', "ng-click": "save(trait)") {
+                            i(class: 'icon-check icon-white')
+                        }
+                        st.nbsp()
+                        button(type: 'button', class: 'btn btn-mini', "ng-click": "stopEdit(trait)") {
+                            i(class: 'icon-minus')
+                        }
+                    }
                 }
             }
         }
     }
-    script(src: "${resURL}/js/admin/meritflaws.js")
 
 }
 
