@@ -34,12 +34,6 @@ l.layout(title: _("Merits & Flaws") + " " + Masserr.getInstance().getAppName()) 
     Functions f = h;
     st.bind(value: my, var: 'admin')
 
-    script(type: "template", id: "t_mfsRow") {
-
-    }
-    script(type: "template", id: "t_mfsForm") {
-
-    }
     div("ng-app": "") {
         script(src: "${resURL}/js/angular/admin/meritsflaws/controller.js")
         legend {
