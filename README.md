@@ -17,7 +17,7 @@ It is now time to space it up for the latest world of ever connected laptops and
 # Build
 Just run with maven.
 
-    mvn package
+`mvn package`
     
 # Misc
 Mind's Eye Theatre (MET) Game and Artwork is © 2012 CCP hf. All rights reserved.
