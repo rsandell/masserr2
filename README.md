@@ -11,7 +11,7 @@ It is now time to space it up for the latest world of ever connected laptops and
 
 # Environments
 * `linux`
-    * `java-1.6`
+    * `java-1.7`
         * `maven-3.0.4`
         
 # Build
