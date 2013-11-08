@@ -7,7 +7,10 @@ Version one of the system was a mix of local java app and a web app with jsp and
 with a ms access database in the backend.
 It is now time to space it up for the latest world of ever connected laptops and spartphones.
 
-
+# Environments
+* `linux`
+    * `java-1.7`
+        * `maven-3.0.4`
 
 
 # Build
