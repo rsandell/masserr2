@@ -27,6 +27,7 @@ package net.joinedminds.masserr.model;
 import com.github.jmkgreen.morphia.annotations.Entity;
 import com.github.jmkgreen.morphia.annotations.Id;
 import com.github.jmkgreen.morphia.annotations.Indexed;
+import com.google.gson.annotations.SerializedName;
 import net.joinedminds.masserr.Functions;
 import org.bson.types.ObjectId;
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -42,6 +43,7 @@ import org.kohsuke.stapler.DataBoundConstructor;
 @Entity
 public class Ability implements NamedIdentifiable, Documented {
     @Id
+    @SerializedName("id")
     private ObjectId objectId;
     @Indexed
     private String name;
